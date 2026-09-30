@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TRPG活動履歴管理Webサービス（仮）｜企画提案書</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+<header class="hero">
+  <div class="eyebrow">Web制作総合演習1 / Web Service Proposal</div>
+  <h1>TRPG活動履歴管理Webサービス（仮）</h1>
+  <p class="subtitle">オンラインTRPGを継続的に遊ぶユーザーの「すでにある情報を、また入力する」負担を減らすレスポンシブWebサービス企画</p>
+  <div class="meta">
+    <span class="pill">企画提案書</span><span class="pill">提出用</span><span class="pill">2026年9月10日</span>
+  </div>
+  <div class="hero-quote">「すでに存在するTRPG情報を、何度も入力させない。」</div>
+</header>
+
+<nav class="toc">
+<h2>Contents</h2>
+<ol>
+<li><a href="#background">企画背景</a></li><li><a href="#problem">課題設定</a></li><li><a href="#target">ターゲットユーザー</a></li><li><a href="#persona">ペルソナ</a></li><li><a href="#market">市場・ユーザー分析</a></li><li><a href="#c3">3C分析</a></li><li><a href="#swot">SWOT分析</a></li><li><a href="#stp">STP分析</a></li><li><a href="#competitors">競合・代替手段分析</a></li><li><a href="#concept">サービスコンセプト</a></li><li><a href="#overview">サービス概要</a></li><li><a href="#journey">カスタマージャーニー</a></li><li><a href="#features">主要機能</a></li><li><a href="#value">提供価値</a></li><li><a href="#positioning">差別化・ポジショニング</a></li><li><a href="#scope">制作範囲</a></li><li><a href="#future">今後の検討事項</a></li><li><a href="#summary">まとめ</a></li><li><a href="#sources">参考資料・出典</a></li><li><a href="#check">最終確認メモ</a></li>
+</ol>
+</nav>
+
+<section class="section" id="background">
+<div class="section-head"><div class="section-no">01</div><div><h2>企画背景</h2><p class="lead">TRPGを継続して遊ぶほど、シナリオ・PC・卓・同卓者など、残しておきたい活動情報は増えていく。</p></div></div>
+<div class="note fact"><strong>調査で確認できる事実</strong>TRPGの通過記録や卓記録、シナリオ管理、プレイ履歴などを扱う既存サービス・ツールが複数存在する。たとえばScenario Tukerは通過シナリオの管理・共有を掲げ、卓ログは卓の日付・メンバー・感想等を記録できる。TRPG書斎や卓ハコはシナリオ等の情報を取り込んで管理する機能を提供している。</div>
+<p>このことから、TRPG活動を「遊んで終わり」にせず、後から参照できる形で記録・整理する用途が存在していることは確認できる。一方で、履歴の持ち方は専用サービスだけに限らず、Notionやスプレッドシート、SNS、キャラクターシート、頒布ページなど複数の場所に分散し得る。</p>
+<div class="note hypothesis"><strong>本企画の課題仮説</strong>ユーザーにとって負担なのは「項目数が多いこと」だけではなく、すでに別の場所に存在するシナリオ情報・PC情報・卓情報等を、管理のためにもう一度入力・整理・関連付けする作業ではないか。</div>
+<div class="note decision"><strong>企画上の判断</strong>そこで本企画では、活動履歴管理を広く扱うのではなく、「すでに存在する情報の再入力」を減らすことを中心課題として設定する。</div>
+</section>
+
+<section class="section" id="problem">
+<div class="section-head"><div class="section-no">02</div><div><h2>課題設定</h2><p class="lead">「入力が多い」ではなく、「同じ情報を、場所を変えて何度も入力する」ことに焦点を当てる。</p></div></div>
+<div class="flow"><div class="step">情報はすでに存在</div><div class="step">別の管理先で再入力</div><div class="step">卓・PC・シナリオを関連付け</div><div class="step">履歴が増えるほど整理量も増加</div><div class="step">管理作業が継続負担になり得る</div></div>
+<p>TRPG活動では、シナリオ名、PC、KP／PL、同卓者、日付などが卓を構成する基本情報になる。これらがキャラクターシート、購入・配布ページ、過去の管理表などに存在していても、別の履歴管理先では再度入力する場面がある。</p>
+<div class="concept"><div class="main">中心課題：すでに存在する情報を、再度入力・整理すること</div><div class="sub">入力項目そのものを極端に減らすのではなく、「一度ある情報は再利用する」ことで重複作業を減らす。</div></div>
+</section>
+
+<section class="section" id="target">
+<div class="section-head"><div class="section-no">03</div><div><h2>ターゲットユーザー</h2><p class="lead">オンラインTRPGを継続的に遊び、すでに活動履歴を何らかの方法で管理している中〜ヘビーユーザー。</p></div></div>
+<div class="grid-2">
+<div class="card"><h3>中心ターゲット</h3><ul><li>卓数・PC数・通過シナリオが増えている</li><li>TRPG歴があり、継続的にオンラインで遊ぶ</li><li>KP・PLの双方を経験する場合がある</li><li>固定メンバー以外とも遊ぶ</li></ul></div>
+<div class="card"><h3>管理行動の特徴</h3><ul><li>X、Notion、スプレッドシート、既存サービス等に履歴を持つ</li><li>活動を記録する価値は感じている</li><li>管理作業自体には、なるべく時間を使いたくない</li><li>過去情報を新しい管理先へ移す負担が発生し得る</li></ul></div>
+</div>
+<p class="small">※「KP・PLの両方を行う人のみ」に限定することは確定していない。</p>
+</section>
+
+<section class="section" id="persona">
+<div class="section-head"><div class="section-no">04</div><div><h2>ペルソナ</h2><p class="lead">属性よりも「記録はしたいが、管理作業は減らしたい」という行動特性を重視する。</p></div></div>
+<div class="grid-3">
+<div class="card"><div class="kpi">27歳</div><strong>佐藤 美咲</strong><p>会社員。TRPG歴数年、オンライン中心で継続的に遊ぶ。</p></div>
+<div class="card"><div class="kpi">KP / PL</div><strong>双方の経験あり</strong><p>固定メンバーだけでなく、複数の相手と卓を遊ぶことがある。</p></div>
+<div class="card"><div class="kpi">Notion / X</div><strong>既に履歴を持つ</strong><p>卓・PC・通過シナリオを残しているが、管理作業は最小化したい。</p></div>
+</div>
+<div class="concept"><div class="main" style="font-size:21px">ペルソナのゴール</div><div class="sub" style="font-size:16px;color:#334155">「自分のTRPG活動をきちんと残しておきたいが、そのための管理作業はできるだけ減らしたい。」</div></div>
+</section>
+
+<section class="section page-start" id="market">
+<div class="section-head"><div class="section-no">05</div><div><h2>市場・ユーザー分析</h2><p class="lead">本課題では、統計的な需要証明ではなく、既存サービスと公開機能から企画の成立可能性を整理する。</p></div></div>
+<div class="note fact"><strong>確認できること</strong>TRPG／マーダーミステリー向けに、通過記録、卓記録、シナリオ管理、録音・リプレイ化、部屋・キャラクターシート管理など異なる主目的のサービスが存在する。つまり「TRPGに関する情報を残す・整理する」という行動を支援する複数のアプローチがすでにある。</div>
+<div class="note hypothesis"><strong>ここからは仮説</strong>複数の管理手段を併用するユーザーでは、同じ情報がサービス間で重複する可能性がある。継続利用者ほど履歴件数が増えるため、再入力・名寄せ・修正の負担が顕在化しやすいと考える。</div>
+<div class="grid-2"><div class="card"><h3>既存の管理先になり得るもの</h3><p>専用TRPGサービス、Notion、スプレッドシート、SNS、キャラクターシート、頒布・配布ページなど。</p></div><div class="card"><h3>今回の着眼点</h3><p>「どこで管理するか」より、「すでにある情報を次の管理でも再利用できるか」に焦点を置く。</p></div></div>
+</section>
+
+<section class="section" id="c3">
+<div class="section-head"><div class="section-no">06</div><div><h2>3C分析</h2></div></div>
+<div class="grid-3">
+<div class="card"><span class="tag">Customer</span><h3>顧客</h3><p>活動履歴を残す習慣があり、卓・PC・通過シナリオが蓄積している中〜ヘビーユーザー。記録価値は感じる一方、再入力や整理には時間をかけたくない。</p></div>
+<div class="card"><span class="tag">Competitor</span><h3>競合・代替</h3><p>通過記録、卓記録、シナリオ管理、部屋管理など、それぞれ異なる軸を持つ専用サービスに加え、Notion・スプレッドシートなど汎用管理手段がある。</p></div>
+<div class="card"><span class="tag">Company</span><h3>本企画</h3><p>実在企業ではなく今回制作するサービス企画。「既存履歴の取り込み」と「登録済み情報の再利用」を一貫した設計原則として、重複入力を減らす。</p></div>
+</div>
+<div class="note decision"><strong>3Cからの整理</strong>既存サービスと正面から「機能数」で競うのではなく、記録を続ける際の入力フローそのものを軽くする位置を狙う。</div>
+</section>
+
+<section class="section" id="swot">
+<div class="section-head"><div class="section-no">07</div><div><h2>SWOT分析</h2></div></div>
+<div class="table-wrap"><table><thead><tr><th style="width:18%">区分</th><th>内容</th><th style="width:26%">企画への意味</th></tr></thead><tbody>
+<tr><td><strong>Strength<br>強み</strong></td><td>「情報の再利用」という中心原則が、導入時のインポートと継続時の卓登録の両方を貫いている。</td><td>機能の寄せ集めにならず、UX方針を統一しやすい。</td></tr>
+<tr><td><strong>Weakness<br>弱み</strong></td><td>取り込み元・形式、自動取得方法、重複判定など、中心価値を成立させる詳細仕様が未確定。</td><td>実装範囲によっては中心価値が十分に体験できないリスクがある。</td></tr>
+<tr><td><strong>Opportunity<br>機会</strong></td><td>既存の専用サービスや汎用ツールが複数あり、TRPG情報をデジタルで管理する選択肢がすでに存在する。</td><td>既存データを「移行・再利用する」発想と接続しやすい。</td></tr>
+<tr><td><strong>Threat<br>脅威</strong></td><td>既存ツールにもインポート、検索、履歴、分析等の機能があり、機能単位では重複が起きる。</td><td>「その機能があるか」ではなく、サービス全体の重点と操作設計で差を示す必要がある。</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="section" id="stp">
+<div class="section-head"><div class="section-no">08</div><div><h2>STP分析</h2></div></div>
+<h3>Segmentation｜セグメンテーション</h3>
+<div class="axis"><div class="axis-label">利用頻度・蓄積量</div><div>単発・ライト利用者 / 継続利用者 / 多数の卓・PC・通過履歴を持つ利用者</div></div>
+<div class="axis"><div class="axis-label">記録習慣</div><div>記録しない / 一部だけ記録 / 複数の管理先で継続的に記録</div></div>
+<div class="axis"><div class="axis-label">遊び方</div><div>PL中心 / KP中心 / 双方を経験、固定卓中心 / 複数コミュニティ</div></div>
+<h3>Targeting｜ターゲティング</h3>
+<p>今回対象とするのは、活動情報がすでに蓄積し、管理の必要性を感じている中〜ヘビーユーザーである。記録の価値を一から説明するより、すでに記録行動を持つユーザーの「再入力・整理」の負担へ直接アプローチできるためである。</p>
+<h3>Positioning｜ポジショニング</h3>
+<div class="concept"><div class="main">既存履歴の再利用 ＋ 一度登録した卓情報の再利用</div><div class="sub">TRPG活動履歴を「入力する箱」ではなく、「一度ある情報を何度も使う場所」として設計する。</div></div>
+</section>
+
+<section class="section page-start" id="competitors">
+<div class="section-head"><div class="section-no">09</div><div><h2>競合・代替手段分析</h2><p class="lead">比較対象を否定せず、「何を主目的にしているか」と「本企画が何を最優先するか」を分ける。</p></div></div>
+<div class="table-wrap"><table><thead><tr><th style="width:18%">サービス / 手段</th><th style="width:32%">公式・配布元から確認できる主な特徴</th><th>本企画との重なり</th><th style="width:24%">本企画の重点</th></tr></thead><tbody>
+<tr><td><strong>TRPG書斎</strong></td><td>シナリオ・カレンダー管理。BOOTH等の情報を貼り付けてシナリオ情報をまとめて登録する機能を案内。</td><td>シナリオ情報の取り込み・管理という点で近い。</td><td rowspan="5">個別機能の有無ではなく、<strong>「過去履歴を取り込む」→「一度登録した卓・PC・シナリオ情報を次回以降も再利用する」</strong>という一連の入力削減体験をサービス全体の中心にする。</td></tr>
+<tr><td><strong>Scenario Tuker</strong></td><td>マーダーミステリーやTRPGの通過シナリオ管理・共有、所持シナリオ・ルールブック管理、データベース、ランキング等。</td><td>通過履歴・シナリオ管理で重なる。</td></tr>
+<tr><td><strong>卓ログ</strong></td><td>TRPG／マーダーミステリーの卓記録。日付・メンバー・メモ、同卓履歴、シナリオ体験リスト等。</td><td>卓単位の活動履歴管理で近い。</td></tr>
+<tr><td><strong>ころログ</strong></td><td>Discord上のセッション録音を起点に、文字起こし・台本・小説等へ変換。通過卓の共有や録音・ログ持ち込みも案内。</td><td>「卓を残す」点は共通するが、主軸は音声・ログの記録と変換。</td></tr>
+<tr><td><strong>卓ハコ</strong></td><td>部屋・キャラクターシート・シナリオ・プレイ履歴等をローカルで整理。Notion／CSVからのプレイ履歴インポートを案内。</td><td>既存履歴の取り込み、PC・シナリオ・履歴管理で重なる部分が大きい。</td></tr>
+<tr><td><strong>Notion / スプレッドシート</strong></td><td>汎用的に項目・表・関係を自由設計できる管理手段。</td><td>履歴を柔軟に持てる一方、TRPG向けの構造や再利用フローは利用者側で設計する。</td><td>TRPG活動に必要な関連付けを前提として、入力再利用の操作を標準化する。</td></tr>
+</tbody></table></div>
+<div class="note hold"><strong>今回の再確認範囲</strong>これまで検討対象に挙がった「takuhoko」「R'lyeh Wallet」等については、この企画書作成時点で公式・一次情報を十分に再確認できていないため、機能比較の断定材料には使用していない。</div>
+</section>
+
+<section class="section" id="concept">
+<div class="section-head"><div class="section-no">10</div><div><h2>サービスコンセプト</h2></div></div>
+<div class="concept"><div class="main">「すでに存在するTRPG情報を、何度も入力させない。」</div></div>
+<div class="split-concept">
+<div class="phase"><div class="phase-title">導入時</div><div class="big">過去に入力済みの活動履歴を、もう一度入力させない。</div><p>Notion、スプレッドシート、既存サービス等にある履歴を取り込み、新しい管理先へ移るための初期負担を減らす。</p></div>
+<div class="phase"><div class="phase-title">継続利用時</div><div class="big">一度登録した新しい卓情報を、関連する履歴へ何度も入力させない。</div><p>一回の卓として登録した情報を、シナリオ・PC・KP／PL・同卓者・日付等と関連付けて再利用する。</p></div>
+</div>
+</section>
+
+<section class="section" id="overview">
+<div class="section-head"><div class="section-no">11</div><div><h2>サービス概要</h2></div></div>
+<p class="lead">すでに活動履歴を持つTRPGユーザーに向けて、既存の履歴を再入力せず取り込み、今後の卓についても一度登録した情報をシナリオ・PC・KP／PL・同卓者などの関連する履歴へ再利用することで、TRPG活動を記録する際の重複入力を減らすレスポンシブWebサービス。</p>
+<h3>サービス構造</h3>
+<div class="grid-2"><div class="card"><span class="tag core">UI</span><h3>シナリオ中心</h3><p>シナリオを入口に、そのシナリオに紐づく過去の複数卓を確認する。同じシナリオを複数回遊んだ場合も、それぞれ別の一回の卓として扱う。</p></div><div class="card"><span class="tag core">Data Unit</span><h3>卓単位</h3><p>内部では一回の卓をひとまとまりとして、シナリオ、PC、KP／PL、同卓者、日付などと関連付ける。</p></div></div>
+<div class="note decision"><strong>採用済み構造</strong>「シナリオ中心のUI」＋「卓単位のデータ管理」。詳細DB設計はこの企画段階では行わない。</div>
+</section>
+
+<section class="section page-start" id="journey">
+<div class="section-head"><div class="section-no">12</div><div><h2>カスタマージャーニー</h2><p class="lead">一つの大きな体験を「導入」と「継続利用」に分ける。</p></div></div>
+<h3>導入フェーズ｜過去の情報を再入力しない</h3>
+<div class="journey"><div class="head">段階</div><div class="head">ユーザー行動・状況</div><div class="head">課題</div><div class="head">サービス価値</div>
+<div class="stage">1. 現在の管理</div><div>Notion、表計算、既存サービス等で履歴を持つ</div><div>情報がすでに複数箇所にある</div><div>既存情報を前提にできる</div>
+<div class="stage">2. 負担を感じる</div><div>履歴が増え、整理や更新が続く</div><div>同じ情報を再入力しやすい</div><div>重複入力削減という価値を提示</div>
+<div class="stage">3. サービスを知る</div><div>新しい履歴管理手段を検討</div><div>移行作業そのものが障壁</div><div>「取り込める」ことが導入理由になる</div>
+<div class="stage">4. 過去履歴を取り込む</div><div>既存データを入力元として利用</div><div>エラー・重複・欠損の確認が必要</div><div>結果確認と修正ができる</div>
+<div class="stage">5. 履歴を確認する</div><div>取り込んだ卓・シナリオ・PC等を確認</div><div>過去と新規が別管理になると分かりにくい</div><div>一つの活動履歴として扱う</div>
+<div class="stage">6. 継続利用へ</div><div>次の卓から新規登録を行う</div><div>再び入力負担が増える可能性</div><div>登録済み情報を次回以降も再利用</div></div>
+
+<h3>継続利用フェーズ｜一度入力した情報を重複入力しない</h3>
+<div class="journey"><div class="head">段階</div><div class="head">ユーザー行動・状況</div><div class="head">課題</div><div class="head">サービス価値</div>
+<div class="stage">1. 新しい卓を遊ぶ</div><div>新しい活動履歴が発生</div><div>記録は必要だが作業は増やしたくない</div><div>卓単位で記録する</div>
+<div class="stage">2. 卓情報を登録</div><div>シナリオ、PC、役割、同卓者、日付等を記録</div><div>過去と同じ情報の再入力</div><div>登録済み情報を選択・再利用</div>
+<div class="stage">3. 関連履歴へ利用</div><div>シナリオ・PCなどと卓を紐付ける</div><div>別画面で同内容を再登録すると重複</div><div>一回の登録結果を関連情報へ反映</div>
+<div class="stage">4. 記録を重ねる</div><div>卓が増える</div><div>重複・表記揺れ・整理が発生し得る</div><div>重複データ整理・一括編集</div>
+<div class="stage">5. 振り返る</div><div>過去の卓・PC・シナリオを探す</div><div>件数が増えるほど見つけにくい</div><div>詳細検索・活動サマリー</div>
+<div class="stage">6. 次の卓でも利用</div><div>既存情報を使って新しい卓を記録</div><div>毎回ゼロからの登録は継続負担</div><div>最近使った情報などを再利用</div></div>
+</section>
+
+<section class="section" id="features">
+<div class="section-head"><div class="section-no">13</div><div><h2>主要機能</h2><p class="lead">中心課題を直接解決する6つのコア機能と、履歴が蓄積した後の使いやすさを支える7つの付加機能。</p></div></div>
+<h3><span class="tag core">CORE</span>コア機能 6</h3>
+<div class="feature-list">
+<div class="feature"><h4>既存履歴の取り込み</h4><p>新しく一から入力し直さずに過去履歴を取り込む。結果確認、エラー・未反映情報の確認を含む。取り込み形式・対応サービスは未確定。</p></div>
+<div class="feature"><h4>卓情報の登録</h4><p>新しく遊んだ一回の卓を、一つの活動履歴として登録する。継続利用時の中心となる入力単位。</p></div>
+<div class="feature"><h4>登録済み情報の再利用</h4><p>一度登録したシナリオ、PC、その他関連情報を、新しい卓で入力し直さず利用する。</p></div>
+<div class="feature"><h4>シナリオ情報の管理</h4><p>シナリオ情報を保持し、そのシナリオに関連する複数の卓履歴を確認できるようにする。</p></div>
+<div class="feature"><h4>PC情報の管理</h4><p>PC情報を保持し、過去・今後の卓で再利用できるようにする。</p></div>
+<div class="feature"><h4>活動履歴の閲覧・管理</h4><p>取り込み履歴と新規履歴をまとめて閲覧・編集・削除・修正できるようにする。</p></div>
+</div>
+<h3><span class="tag add">PLUS</span>あると良い機能 7</h3>
+<div class="feature-list">
+<div class="feature"><h4>卓ごとの共有</h4><p>一回の卓単位で活動履歴を他者と共有する。共有方法・公開範囲・権限は未確定。</p></div>
+<div class="feature"><h4>詳細検索</h4><p>蓄積した履歴を、卓・シナリオ・PCなどから検索する。</p></div>
+<div class="feature"><h4>活動サマリー・振り返り</h4><p>卓数、シナリオ数、使用PC、KP／PLとしての活動等をまとめて振り返る。具体的集計項目は未確定。</p></div>
+<div class="feature"><h4>卓へのメモ・感想記録</h4><p>一回の卓にメモや感想を任意で残す。記録負担を増やさないため必須入力にはしない方向。</p></div>
+<div class="feature"><h4>重複データの整理</h4><p>取り込み・継続利用で同じシナリオやPCが重複した場合に整理する。</p></div>
+<div class="feature"><h4>最近使ったシナリオ・PCの再利用</h4><p>卓登録時に、最近利用した情報をすぐ選びやすくし、再入力をさらに減らす。</p></div>
+<div class="feature"><h4>複数履歴の一括編集</h4><p>複数の卓や取り込み履歴をまとめて編集・整理する。</p></div>
+</div>
+<div class="note hold"><strong>保留</strong>活動履歴のエクスポートは不採用ではなく保留。今後の企画・制作範囲を見て判断し、現時点では採用済み機能として扱わない。</div>
+</section>
+
+<section class="section" id="value">
+<div class="section-head"><div class="section-no">14</div><div><h2>提供価値</h2></div></div>
+<div class="flow"><div class="step">過去履歴の移行負担を減らす</div><div class="step">重複入力を減らす</div><div class="step">履歴を継続蓄積</div><div class="step">必要な履歴を探す</div><div class="step">活動を振り返る</div></div>
+<div class="grid-2"><div class="card"><h3>導入価値</h3><p>すでに持っている履歴を前提にできるため、「新しいサービスを使うために過去を全部入れ直す」という移行障壁を小さくする。</p></div><div class="card"><h3>継続価値</h3><p>シナリオ・PCなどを一度登録した後も再利用し、履歴が増えても毎回ゼロから同じ情報を入力する必要を減らす。</p></div></div>
+<p>さらに履歴が蓄積した後は、詳細検索や活動サマリーによって「記録した情報を使う価値」を高める。ここでも主目的は分析機能を増やすことではなく、入力負担を抑えながら記録を続けた結果として振り返りやすくすることである。</p>
+</section>
+
+<section class="section" id="positioning">
+<div class="section-head"><div class="section-no">15</div><div><h2>差別化・ポジショニング</h2></div></div>
+<div class="note decision"><strong>差別化の中心</strong>「TRPG管理機能が多いこと」ではなく、<strong>情報の再利用による入力負担の削減</strong>をサービス全体の優先順位として設計すること。</div>
+<p>既存サービスにも通過履歴、シナリオ管理、インポート、検索、分析など類似機能は確認できる。そのため、本企画は「他サービスにはない機能」を無理に主張しない。代わりに、導入時の過去履歴取り込みと、継続時の卓・シナリオ・PC情報の再利用を一つの体験としてつなぎ、重複入力を減らすことを最上位の設計原則にする。</p>
+<div class="grid-2"><div class="card"><h3>競争しない軸</h3><p>シナリオ検索の網羅性、ランキング、レコメンド、日程調整、Discordの置き換え、キャラクター作成支援など。</p></div><div class="card"><h3>集中する軸</h3><p>既存情報を持ち込み、卓を一回登録し、その情報を今後の履歴でも使い回せること。</p></div></div>
+</section>
+
+<section class="section" id="scope">
+<div class="section-head"><div class="section-no">16</div><div><h2>制作範囲</h2><p class="lead">学校制作として、活動履歴管理の中心体験に集中し、周辺機能を広げすぎない。</p></div></div>
+<h3>今回の中心</h3>
+<ul><li>レスポンシブWebアプリとして、PC・タブレット・スマートフォンから履歴を確認できること</li><li>既存履歴の取り込み</li><li>卓単位の新規記録</li><li>シナリオ・PC等の登録済み情報の再利用</li><li>シナリオ中心の閲覧と、卓単位の履歴管理</li><li>過去履歴と新規履歴を分断しない管理体験</li></ul>
+<h3>中心企画から外すもの</h3>
+<div class="grid-2"><div class="card"><ul><li>キャラクター作成支援</li><li>ココフォリアの部屋・素材作成</li><li>一般的なシナリオ検索</li></ul></div><div class="card"><ul><li>日程調整</li><li>長期卓の詳細な前回内容復元</li><li>Discord等の既存運営ツールの置き換え</li></ul></div></div>
+<div class="note decision"><strong>既存ツールとの関係</strong>日程調整、卓連絡、会話、参加確認等は、Discord等ですでに便利に行われている行動を無理に移さない。Discord連携・卓招待・参加承認・共同管理なども現時点の前提にしない。</div>
+</section>
+
+<section class="section page-start" id="future">
+<div class="section-head"><div class="section-no">17</div><div><h2>今後の検討事項</h2><p class="lead">ここに記載する項目は未確定であり、採用済み仕様ではない。</p></div></div>
+<div class="grid-3">
+<div class="card"><h3>取り込み</h3><ul><li>具体的な取り込み元</li><li>CSV / JSON等の形式</li><li>API連携</li><li>シナリオ情報の自動取得方法</li></ul></div>
+<div class="card"><h3>共有・公開</h3><ul><li>卓共有の具体的方法</li><li>共有URL</li><li>公開範囲</li><li>公開プロフィール</li><li>フォロー・通知</li></ul></div>
+<div class="card"><h3>設計・実装</h3><ul><li>画面遷移・ワイヤーフレーム</li><li>デザイン</li><li>技術構成</li><li>DB / API設計</li><li>認証方式</li></ul></div>
+</div>
+<div class="grid-2"><div class="card"><h3>追加判断が必要</h3><ul><li>活動履歴のエクスポート（保留）</li><li>PWA</li><li>カレンダー</li><li>ランキング</li><li>レコメンド</li></ul></div><div class="card"><h3>今回の前提にしない</h3><ul><li>Discord連携</li><li>共同編集</li><li>参加承認</li><li>他ユーザー履歴への自動反映</li><li>収益化方法</li></ul></div></div>
+</section>
+
+<section class="section" id="summary">
+<div class="section-head"><div class="section-no">18</div><div><h2>まとめ</h2></div></div>
+<p>本企画は、オンラインTRPGを継続的に遊び、すでに何らかの形で活動履歴を持つ中〜ヘビーユーザーを中心対象とする。TRPG活動では、シナリオ・PC・卓・同卓者など多くの情報が別々の場所に存在し得るため、新たな管理先で同じ情報を再入力・整理する負担が生じる可能性がある。</p>
+<p>そこで中心コンセプトを<strong>「すでに存在するTRPG情報を、何度も入力させない。」</strong>と定める。導入時には過去履歴を取り込み、継続利用時には一度登録した卓・シナリオ・PC等の情報を再利用する。ユーザーからはシナリオを入口に履歴を確認しつつ、内部では一回の卓を活動単位として関連情報を持つ。</p>
+<p>必要機能は、既存履歴の取り込み、卓登録、登録済み情報の再利用、シナリオ・PC管理、活動履歴管理をコアとし、検索・振り返り・共有・重複整理・一括編集等を付加価値として位置付ける。競合との差は機能数ではなく、<strong>「既存情報の持ち込みから継続的な再利用まで、重複入力を減らすことを一貫して最優先する」</strong>点に置く。</p>
+<div class="concept"><div class="main" style="font-size:21px">課題 → ターゲット → コンセプト → 解決方法 → 機能 → 提供価値</div><div class="sub">すでに記録している人が、記録を続けるための作業量を減らす。</div></div>
+</section>
+
+<section class="section" id="sources">
+<div class="section-head"><div class="section-no">19</div><div><h2>参考資料・出典</h2><p class="lead">競合・代替手段の事実確認では、公式サイトまたは配布元の公開情報を優先した。</p></div></div>
+<ol class="source-list">
+<li><strong>TRPG書斎 - ぽこやま（BOOTH）</strong><br><a href="https://pokoyama.booth.pm/items/8674167">https://pokoyama.booth.pm/items/8674167</a><br><span class="small">シナリオ・カレンダー管理、BOOTH等からの貼り付け登録、情報補完等の説明を確認。</span></li>
+<li><strong>Scenario Tuker</strong><br><a href="https://wolfort.dev/scenario-tuker">https://wolfort.dev/scenario-tuker</a><br><span class="small">通過シナリオ管理・共有、所持シナリオ・ルールブック管理、データベース等を確認。</span></li>
+<li><strong>卓ログ</strong><br><a href="https://takulog.app/">https://takulog.app/</a><br><span class="small">卓記録、日付・メンバー・感想、同卓履歴、シナリオ体験リスト等を確認。</span></li>
+<li><strong>ころログ</strong><br><a href="https://corolog.com/">https://corolog.com/</a><br><span class="small">Discordセッション録音、文字起こし・台本・小説化、通過卓共有等を確認。</span></li>
+<li><strong>卓ハコ - 遊び場出張所（BOOTH）</strong><br><a href="https://booth.pm/ja/items/8709668">https://booth.pm/ja/items/8709668</a><br><span class="small">部屋・キャラクターシート・シナリオ・プレイ履歴管理、Notion／CSVからのプレイ履歴インポート等を確認。</span></li>
+</ol>
+<p class="small">参照日：2026年9月10日。Notion・スプレッドシートについては、今回の比較では固有機能の優劣ではなく「汎用的な管理手段」という位置付けで扱った。市場規模・利用者比率等の統計的な需要検証は本課題の範囲では実施していない。</p>
+</section>
+
+<section class="section" id="check">
+<div class="section-head"><div class="section-no">20</div><div><h2>最終確認メモ</h2></div></div>
+<h3>採用済み内容から変更していないか</h3>
+<div class="checklist"><div class="check">中心課題は「すでに存在する情報の再入力・整理」で統一</div><div class="check">中心コンセプトは「すでに存在するTRPG情報を、何度も入力させない。」で統一</div><div class="check">UIはシナリオ中心、内部単位は一回の卓</div><div class="check">コア6機能・付加7機能を採用済みとして整理</div><div class="check">エクスポートは保留のまま</div><div class="check">Discord等の既存運営ツールを置き換える前提を追加していない</div></div>
+<h3>未確定事項を勝手に補完していないか</h3>
+<p>サービス名、キャッチコピー、インポート形式、API、共有方法、公開範囲、DB設計、技術構成、認証方式などは未確定として本文から分離した。</p>
+<h3>調査不足で断定を避けた箇所</h3>
+<p>「利用者の多くが再入力を負担と感じている」などの需要規模は証明していないため仮説として記載した。また、公式・一次情報を十分に再確認できなかった競合候補については、機能比較の断定材料に使用していない。</p>
+<h3>今後検討が必要な箇所</h3>
+<p>中心価値を実際のUXとして成立させるため、次工程では「何を、どの形式から、どこまで取り込むか」「重複をどう整理するか」「卓登録時に既存情報をどう自然に再利用させるか」を、画面設計・データ設計と合わせて具体化する必要がある。</p>
+<div class="footer-note">本資料は、提供された企画決定事項を基礎に、提出資料として再構成したもの。外部事実は参考資料記載の公開情報で再確認し、未確認事項は断定していない。</div>
+</section>
+</div>
+</body></html>

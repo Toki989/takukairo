@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TRPG Activity Library — PC Focus v5.6</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="focus-view" aria-label="卓詳細 PCフォーカスビュー v5.6">
+    <img class="main-decoration" src="assets/v5-main-decoration.png" alt="" aria-hidden="true" />
+
+    <header class="topbar">
+      <div class="session-title">
+        <span class="eyebrow">SESSION</span>
+        <span class="divider" aria-hidden="true"></span>
+        <span class="scenario-name">夏の終わりに</span>
+      </div>
+      <div class="top-actions">
+        <button class="icon-button" type="button" aria-label="参加者一覧">♙ <span>4/4</span></button>
+        <span class="mini-divider" aria-hidden="true"></span>
+        <button class="icon-button icon-only" type="button" aria-label="設定">⚙</button>
+        <button class="icon-button icon-only menu-icon" type="button" aria-label="メニュー"><span></span><span></span><span></span></button>
+      </div>
+    </header>
+
+    <section class="stage">
+      <div class="spotlight" aria-hidden="true">
+        <span class="spotlight-ho">HO</span>
+        <span class="spotlight-copy">猟犬</span>
+      </div>
+
+      <div class="portrait-zone" aria-live="polite">
+        <img id="mainPortrait" class="main-portrait" src="assets/pcs/pc-1.png" alt="選択中PCの立ち絵" />
+        <div class="portrait-baseline" aria-hidden="true"></div>
+      </div>
+
+      <div class="center-lane">
+        <article class="pc-info" aria-labelledby="pcName">
+          <div class="pc-heading">
+            <p class="section-kicker">CHARACTER</p>
+            <h1 id="pcName">五色 探</h1>
+            <p id="pcReading" class="pc-reading">ごしき たん</p>
+            <p class="player"><span>PL</span><strong id="plName">PLAYER 01</strong></p>
+          </div>
+
+          <div class="status" aria-label="卓終了時ステータス">
+            <div class="status-item"><span>SAN</span><strong id="sanValue">65</strong><small>/ 99</small></div>
+            <div class="status-item"><span>HP</span><strong id="hpValue">12</strong><small>/ 16</small></div>
+            <div class="status-item"><span>MP</span><strong id="mpValue">8</strong><small>/ 12</small></div>
+          </div>
+
+          <div class="ending">
+            <span class="ending-label">結末</span>
+            <div class="ending-value"><span class="ending-notch" aria-hidden="true"></span><strong id="endingValue">生還</strong></div>
+          </div>
+        </article>
+
+        <div class="view-nav" aria-label="PC切り替え補助">
+          <button id="prevPc" class="round-nav" type="button" aria-label="前のPC">‹</button>
+          <div class="dots" aria-hidden="true"><i class="active"></i><i></i><i></i><i></i></div>
+          <button id="nextPc" class="round-nav" type="button" aria-label="次のPC">›</button>
+        </div>
+      </div>
+
+      <div class="selector-area" aria-label="PCを切り替える">
+        <div class="selector-rail" role="listbox" aria-label="参加PC">
+          <button class="selector-card is-active" type="button" role="option" aria-selected="true" data-index="0">
+            <img src="assets/pcs/pc-1.png" alt="五色 探" />
+          </button>
+          <button class="selector-card" type="button" role="option" aria-selected="false" data-index="1">
+            <img src="assets/pcs/pc-2.png" alt="火守 蓮" />
+          </button>
+          <button class="selector-card" type="button" role="option" aria-selected="false" data-index="2">
+            <img src="assets/pcs/pc-3.png" alt="黒瀬 真" />
+          </button>
+          <button class="selector-card" type="button" role="option" aria-selected="false" data-index="3">
+            <img src="assets/pcs/pc-4.png" alt="赤城 迅" />
+          </button>
+          <button class="selector-card selector-add" type="button" aria-label="参加者を追加">
+            <span class="plus">＋</span><span>参加者を追加</span>
+          </button>
+        </div>
+      </div>
+
+      <button class="memory-action" type="button"><span class="dice">◇</span><span>卓の情報を見る</span><span class="arrow">→</span></button>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

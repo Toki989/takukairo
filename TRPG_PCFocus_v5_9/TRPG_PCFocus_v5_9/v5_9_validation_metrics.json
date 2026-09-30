@@ -1,0 +1,662 @@
+[
+  {
+    "viewport": [
+      1672,
+      941
+    ],
+    "pc": 1,
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1672,
+      "height": 78
+    },
+    "portrait": {
+      "x": -6.69,
+      "y": 78,
+      "width": 735.67,
+      "height": 863
+    },
+    "center_lane": {
+      "x": 749.05,
+      "y": 194.5,
+      "width": 317.67,
+      "height": 697.31
+    },
+    "pc_info": {
+      "x": 749.05,
+      "y": 194.5,
+      "width": 317.67,
+      "height": 477.59
+    },
+    "ending": {
+      "x": 749.05,
+      "y": 614.09,
+      "width": 270.02,
+      "height": 58
+    },
+    "nav": {
+      "x": 749.05,
+      "y": 843.81,
+      "width": 317.67,
+      "height": 48
+    },
+    "selector_area": {
+      "x": 1120.23,
+      "y": 84.03,
+      "width": 514.98,
+      "height": 707.66
+    },
+    "active_selector": {
+      "x": 1066.89,
+      "y": 90.03,
+      "width": 214.68,
+      "height": 673.58
+    },
+    "ending_nav_vertical_overlap": 0,
+    "pc_to_active_selector_horizontal_gap": 0.17,
+    "center_selector_vertical_overlap": 597.19,
+    "scrollWidth": 1672,
+    "clientWidth": 1672,
+    "scrollHeight": 941,
+    "clientHeight": 941
+  },
+  {
+    "viewport": [
+      1672,
+      941
+    ],
+    "pc": 2,
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1672,
+      "height": 78
+    },
+    "portrait": {
+      "x": -6.69,
+      "y": 78,
+      "width": 735.67,
+      "height": 863
+    },
+    "center_lane": {
+      "x": 749.05,
+      "y": 194.5,
+      "width": 317.67,
+      "height": 697.31
+    },
+    "pc_info": {
+      "x": 749.05,
+      "y": 194.5,
+      "width": 317.67,
+      "height": 477.59
+    },
+    "ending": {
+      "x": 749.05,
+      "y": 614.09,
+      "width": 270.02,
+      "height": 58
+    },
+    "nav": {
+      "x": 749.05,
+      "y": 843.81,
+      "width": 317.67,
+      "height": 48
+    },
+    "selector_area": {
+      "x": 1120.23,
+      "y": 84.03,
+      "width": 514.98,
+      "height": 707.66
+    },
+    "active_selector": {
+      "x": 1173.89,
+      "y": 97.7,
+      "width": 202.46,
+      "height": 635.95
+    },
+    "ending_nav_vertical_overlap": 0,
+    "pc_to_active_selector_horizontal_gap": 107.17,
+    "center_selector_vertical_overlap": 597.19,
+    "scrollWidth": 1672,
+    "clientWidth": 1672,
+    "scrollHeight": 941,
+    "clientHeight": 941
+  },
+  {
+    "viewport": [
+      1672,
+      941
+    ],
+    "keyboard_after_arrow_right": "1",
+    "focused_index": "1"
+  },
+  {
+    "viewport": [
+      1680,
+      800
+    ],
+    "pc": 1,
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1680,
+      "height": 78
+    },
+    "portrait": {
+      "x": -2.69,
+      "y": 78,
+      "width": 735.67,
+      "height": 722
+    },
+    "center_lane": {
+      "x": 753.05,
+      "y": 161.02,
+      "width": 317.67,
+      "height": 602.17
+    },
+    "pc_info": {
+      "x": 753.05,
+      "y": 161.02,
+      "width": 317.67,
+      "height": 423.3
+    },
+    "ending": {
+      "x": 753.05,
+      "y": 530.31,
+      "width": 270.02,
+      "height": 54
+    },
+    "nav": {
+      "x": 753.05,
+      "y": 717.19,
+      "width": 317.67,
+      "height": 46
+    },
+    "selector_area": {
+      "x": 1124.23,
+      "y": 83.05,
+      "width": 514.98,
+      "height": 592.03
+    },
+    "active_selector": {
+      "x": 1079.68,
+      "y": 89.05,
+      "width": 197.1,
+      "height": 562.58
+    },
+    "ending_nav_vertical_overlap": 0,
+    "pc_to_active_selector_horizontal_gap": 8.96,
+    "center_selector_vertical_overlap": 514.06,
+    "scrollWidth": 1680,
+    "clientWidth": 1680,
+    "scrollHeight": 800,
+    "clientHeight": 800
+  },
+  {
+    "viewport": [
+      1680,
+      800
+    ],
+    "pc": 2,
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1680,
+      "height": 78
+    },
+    "portrait": {
+      "x": -2.69,
+      "y": 78,
+      "width": 735.67,
+      "height": 722
+    },
+    "center_lane": {
+      "x": 753.05,
+      "y": 161.02,
+      "width": 317.67,
+      "height": 602.17
+    },
+    "pc_info": {
+      "x": 753.05,
+      "y": 161.02,
+      "width": 317.67,
+      "height": 423.3
+    },
+    "ending": {
+      "x": 753.05,
+      "y": 530.31,
+      "width": 270.02,
+      "height": 54
+    },
+    "nav": {
+      "x": 753.05,
+      "y": 717.19,
+      "width": 317.67,
+      "height": 46
+    },
+    "selector_area": {
+      "x": 1124.23,
+      "y": 83.05,
+      "width": 514.98,
+      "height": 592.03
+    },
+    "active_selector": {
+      "x": 1188.72,
+      "y": 100.49,
+      "width": 182.58,
+      "height": 522.0
+    },
+    "ending_nav_vertical_overlap": 0,
+    "pc_to_active_selector_horizontal_gap": 118.0,
+    "center_selector_vertical_overlap": 514.06,
+    "scrollWidth": 1680,
+    "clientWidth": 1680,
+    "scrollHeight": 800,
+    "clientHeight": 800
+  },
+  {
+    "viewport": [
+      1680,
+      800
+    ],
+    "keyboard_after_arrow_right": "1",
+    "focused_index": "1"
+  },
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "pc": 1,
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 78
+    },
+    "portrait": {
+      "x": -5.75,
+      "y": 78,
+      "width": 633.59,
+      "height": 822
+    },
+    "center_lane": {
+      "x": 645.11,
+      "y": 188.97,
+      "width": 300,
+      "height": 664.19
+    },
+    "pc_info": {
+      "x": 645.11,
+      "y": 188.97,
+      "width": 300,
+      "height": 477.59
+    },
+    "ending": {
+      "x": 645.11,
+      "y": 608.56,
+      "width": 255,
+      "height": 58
+    },
+    "nav": {
+      "x": 645.11,
+      "y": 805.16,
+      "width": 300,
+      "height": 48
+    },
+    "selector_area": {
+      "x": 1004.39,
+      "y": 82.11,
+      "width": 421.22,
+      "height": 682.25
+    },
+    "active_selector": {
+      "x": 957.03,
+      "y": 90.11,
+      "width": 183.98,
+      "height": 633.78
+    },
+    "ending_nav_vertical_overlap": 0,
+    "pc_to_active_selector_horizontal_gap": 11.92,
+    "center_selector_vertical_overlap": 575.39,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "scrollHeight": 900,
+    "clientHeight": 900
+  },
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "pc": 2,
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 78
+    },
+    "portrait": {
+      "x": -5.75,
+      "y": 78,
+      "width": 633.59,
+      "height": 822
+    },
+    "center_lane": {
+      "x": 645.11,
+      "y": 188.97,
+      "width": 300,
+      "height": 664.19
+    },
+    "pc_info": {
+      "x": 645.11,
+      "y": 188.97,
+      "width": 300,
+      "height": 477.59
+    },
+    "ending": {
+      "x": 645.11,
+      "y": 608.56,
+      "width": 255,
+      "height": 58
+    },
+    "nav": {
+      "x": 645.11,
+      "y": 805.16,
+      "width": 300,
+      "height": 48
+    },
+    "selector_area": {
+      "x": 1004.39,
+      "y": 82.11,
+      "width": 421.22,
+      "height": 682.25
+    },
+    "active_selector": {
+      "x": 1042.18,
+      "y": 97.91,
+      "width": 179.48,
+      "height": 603.62
+    },
+    "ending_nav_vertical_overlap": 0,
+    "pc_to_active_selector_horizontal_gap": 97.07,
+    "center_selector_vertical_overlap": 575.39,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "scrollHeight": 900,
+    "clientHeight": 900
+  },
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "keyboard_after_arrow_right": "1",
+    "focused_index": "1"
+  },
+  {
+    "viewport": [
+      1366,
+      768
+    ],
+    "pc": 1,
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1366,
+      "height": 78
+    },
+    "portrait": {
+      "x": -5.45,
+      "y": 78,
+      "width": 601.03,
+      "height": 690
+    },
+    "center_lane": {
+      "x": 611.95,
+      "y": 150.44,
+      "width": 300,
+      "height": 587.2
+    },
+    "pc_info": {
+      "x": 611.95,
+      "y": 150.44,
+      "width": 300,
+      "height": 394
+    },
+    "ending": {
+      "x": 611.95,
+      "y": 492.44,
+      "width": 255,
+      "height": 52
+    },
+    "nav": {
+      "x": 611.95,
+      "y": 691.64,
+      "width": 300,
+      "height": 46
+    },
+    "selector_area": {
+      "x": 952.78,
+      "y": 81.44,
+      "width": 399.56,
+      "height": 572.69
+    },
+    "active_selector": {
+      "x": 913.12,
+      "y": 89.44,
+      "width": 164.02,
+      "height": 530.8
+    },
+    "ending_nav_vertical_overlap": 0,
+    "pc_to_active_selector_horizontal_gap": 1.17,
+    "center_selector_vertical_overlap": 503.69,
+    "scrollWidth": 1366,
+    "clientWidth": 1366,
+    "scrollHeight": 768,
+    "clientHeight": 768
+  },
+  {
+    "viewport": [
+      1366,
+      768
+    ],
+    "pc": 2,
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1366,
+      "height": 78
+    },
+    "portrait": {
+      "x": -5.45,
+      "y": 78,
+      "width": 601.03,
+      "height": 690
+    },
+    "center_lane": {
+      "x": 611.95,
+      "y": 150.44,
+      "width": 300,
+      "height": 587.2
+    },
+    "pc_info": {
+      "x": 611.95,
+      "y": 150.44,
+      "width": 300,
+      "height": 394
+    },
+    "ending": {
+      "x": 611.95,
+      "y": 492.44,
+      "width": 255,
+      "height": 52
+    },
+    "nav": {
+      "x": 611.95,
+      "y": 691.64,
+      "width": 300,
+      "height": 46
+    },
+    "selector_area": {
+      "x": 952.78,
+      "y": 81.44,
+      "width": 399.56,
+      "height": 572.69
+    },
+    "active_selector": {
+      "x": 993.83,
+      "y": 97.22,
+      "width": 160.24,
+      "height": 505.56
+    },
+    "ending_nav_vertical_overlap": 0,
+    "pc_to_active_selector_horizontal_gap": 81.88,
+    "center_selector_vertical_overlap": 503.69,
+    "scrollWidth": 1366,
+    "clientWidth": 1366,
+    "scrollHeight": 768,
+    "clientHeight": 768
+  },
+  {
+    "viewport": [
+      1366,
+      768
+    ],
+    "keyboard_after_arrow_right": "1",
+    "focused_index": "1"
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "pc": 1,
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 72
+    },
+    "portrait": {
+      "x": -27.3,
+      "y": 94,
+      "width": 265.19,
+      "height": 390
+    },
+    "center_lane": {
+      "x": 23.39,
+      "y": 502,
+      "width": 343.22,
+      "height": 483.09
+    },
+    "pc_info": {
+      "x": 23.39,
+      "y": 502,
+      "width": 343.22,
+      "height": 409.09
+    },
+    "ending": {
+      "x": 23.39,
+      "y": 853.09,
+      "width": 247.11,
+      "height": 58
+    },
+    "nav": {
+      "x": 23.39,
+      "y": 939.09,
+      "width": 340,
+      "height": 46
+    },
+    "selector_area": {
+      "x": 206.72,
+      "y": 188,
+      "width": 179.39,
+      "height": 320
+    },
+    "active_selector": {
+      "x": 231.95,
+      "y": 196,
+      "width": 52.02,
+      "height": 293.27
+    },
+    "ending_nav_vertical_overlap": 0,
+    "pc_to_active_selector_horizontal_gap": -134.66,
+    "center_selector_vertical_overlap": 6,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "scrollHeight": 1112,
+    "clientHeight": 844
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "pc": 2,
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 72
+    },
+    "portrait": {
+      "x": -27.3,
+      "y": 94,
+      "width": 265.19,
+      "height": 390
+    },
+    "center_lane": {
+      "x": 23.39,
+      "y": 502,
+      "width": 343.22,
+      "height": 483.09
+    },
+    "pc_info": {
+      "x": 23.39,
+      "y": 502,
+      "width": 343.22,
+      "height": 409.09
+    },
+    "ending": {
+      "x": 23.39,
+      "y": 853.09,
+      "width": 247.11,
+      "height": 58
+    },
+    "nav": {
+      "x": 23.39,
+      "y": 939.09,
+      "width": 340,
+      "height": 46
+    },
+    "selector_area": {
+      "x": 206.72,
+      "y": 188,
+      "width": 179.39,
+      "height": 320
+    },
+    "active_selector": {
+      "x": 266,
+      "y": 199.7,
+      "width": 52.02,
+      "height": 282.67
+    },
+    "ending_nav_vertical_overlap": 0,
+    "pc_to_active_selector_horizontal_gap": -100.61,
+    "center_selector_vertical_overlap": 6,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "scrollHeight": 1112,
+    "clientHeight": 844
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "keyboard_after_arrow_right": "1",
+    "focused_index": "1"
+  }
+]
