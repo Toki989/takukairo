@@ -1,0 +1,1879 @@
+# Web制作総合演習1
+
+# TRPG活動履歴管理Webサービス
+
+## Import・横断UI Visual Design再設計フェーズ 確定事項まとめ
+
+### 2026-09-25
+
+---
+
+# 0. この資料の位置づけ
+
+本資料は、TRPG活動履歴管理Webサービスにおける、
+
+- Import画面 Visual Design再設計
+- Dialog / Error / Empty / Loading等の横断UI・State Design整理
+
+で確定した事項を、今後のFigma・実装・引継ぎ・設計確認用の情報源としてまとめるものである。
+
+本フェーズは、既存のデータ構造・UC・CRUD・認証／認可・Import処理仕様・保存／削除ルールを変更するものではない。
+
+Importについては、旧来の詳細設計ですでに、
+
+- Import基本フロー
+- 入力
+- 解析
+- 結果確認
+- Scenario / Person / PC照合
+- 一括適用
+- 確認状態
+- 詳細修正
+- Table重複候補
+- ImportSession途中保存
+- ImportSession再開
+- 保持期間
+- 一部登録
+- 完了
+
+まで詳細に確定している。
+
+したがって今回の基本原則は、
+
+> **既存Import UX / 機能仕様を作り直すのではなく、現在のTRPG GAME LIBRARY / Personal Gallery系Design SystemへVisual / Interactionを統合する。**
+
+とする。
+
+また、アプリ全体について引き続き、
+
+> **見た目は各画面で確定したVisual Design。中身は既存の確定済み設計。**
+
+を維持する。
+
+Mock・試作コード・Visual Design上の都合だけを理由として、新しいデータ属性・Entity・状態・業務ルールを正式仕様へ追加しない。
+
+---
+
+# 1. 今回の対象範囲
+
+今回確定した対象は以下。
+
+## 1.1 Import
+
+- Import全体のVisual Concept
+- Import共通骨格
+- STEP Indicator
+- 途中Session再開
+- STEP01 INPUT
+- 解析中
+- STEP02 REVIEW
+- Candidate Card
+- Scenario / Person / PC照合
+- 一括適用
+- Auto Save
+- STEP03 DETAIL
+- 元データ比較
+- 未割当処理
+- Table分割／統合
+- Table重複候補
+- STEP04 REGISTER
+- 一部登録
+- 登録中／登録失敗
+- Import完了
+- Desktop / Mobile
+- Keyboard / Focus / Reduced Motion
+
+## 1.2 横断UI / State Design
+
+- Dialog
+- Confirmation
+- Destructive Action
+- 未保存離脱
+- Validation
+- Error
+- Warning
+- Success
+- Saving
+- Loading
+- Disabled
+- Empty State
+- Placeholder
+- Network Error
+- Toast
+- Danger Zone
+- Tooltip
+- Hover
+- Focus
+- Keyboard
+- Reduced Motion
+- Mobileでの状態表現
+
+---
+
+# 2. 今回保留した画面
+
+以下は今回のVisual Design対象から外し、後続工程へ保留する。
+
+- Googleログイン
+- 初回SelfPerson設定
+- アカウント周辺UI
+- アカウント設定
+- アカウント削除等のアカウント固有Visual Design
+
+既存の機能・認証・規約・プライバシー等の確定仕様自体を保留する意味ではない。
+
+あくまで、
+
+> **現在のVisual Designへ再設計する工程を後回しにする**
+
+という意味である。
+
+---
+
+# 3. Import既存確定仕様の位置づけ
+
+ImportはUC01〜UC03を中心とする。
+
+基本構造は、
+
+```text
+UC01 既存履歴を取り込む
+↓
+UC02 取り込み結果を確認する
+↓
+必要ならUC03 欠損・不明箇所を修正する
+↓
+ユーザーが登録対象を確定
+↓
+UC01として正式登録
+```
+
+とする。
+
+確認・修正中の候補データは、原則として正式9エンティティではなくImport中の一時データとして扱う。
+
+正式登録前のCandidateを、正式なTable / Scenario / Person / PC等として扱わない。
+
+---
+
+# 4. Import既存基本フロー
+
+既存仕様の基本フローは以下。
+
+1. データ入力
+2. 結果確認
+3. 必要時のみ詳細修正
+4. 正式登録
+
+STEP表示は上部常設。
+
+STEP3は必須ではないことが分かる表現とする。
+
+MVP入力対象：
+
+- CSV
+- Markdown
+- HTML
+- TXT等のテキスト
+- テキスト直接貼り付け
+
+PDFはMVP対象外。
+
+基本処理構造：
+
+```text
+入力
+↓
+形式別構造解析
+↓
+共通中間構造
+↓
+共通推定
+↓
+卓候補
+↓
+確認・修正
+↓
+正式登録
+```
+
+---
+
+# 5. Import Visual Concept【今回確定】
+
+ImportのVisual Conceptを、
+
+> **ARCHIVE INTAKE**
+
+とする。
+
+意味は、
+
+> **外部に残っている過去のTRPG記録を読み取り、確認・整理して、自分のGAME LIBRARYへ収蔵する作業空間**
+
+である。
+
+ただし、物流・倉庫等を直接的なモチーフとして画面装飾へ使用するものではない。
+
+Importの主役は「ファイルアップロード」ではなく、
+
+> **すでに存在するTRPG活動履歴を再利用可能な記録としてLibraryへ取り込むこと**
+
+とする。
+
+サービス全体の中心コンセプト、
+
+> **すでに存在するTRPG情報を、何度も入力させない**
+
+と直接接続する。
+
+---
+
+# 6. Importと他画面の役割分担
+
+現在のVisual Design上の役割を以下のように整理する。
+
+- Home：Scenario Collection / Gallery
+- Scenario View：1作品を見る展示空間
+- PL / PC：Portrait Gallery / Character Catalogue
+- Desktop卓詳細：Character Select的な記憶閲覧
+- Scenario / Table / PC登録編集：静かなEntry Form
+- Import：Archive Intake
+
+Importは閲覧画面ほど演出を強くせず、通常フォームより情報密度を高くする。
+
+位置づけとしては、
+
+> **Galleryと業務UIの中間**
+
+とする。
+
+---
+
+# 7. Import Navigation
+
+Importは、
+
+```text
+HOME
+PL / PC
+IMPORT
+```
+
+のトップレベルNavigationの一つとして扱う。
+
+Desktop卓詳細v5.9のような完全没入型画面にはしない。
+
+Importでは途中保存・再開・通常Navigationとの行き来が存在するため、基本的に通常App Shellを維持する。
+
+---
+
+# 8. Import共通Header
+
+全STEP共通で、
+
+```text
+IMPORT
+過去の活動履歴を取り込む
+```
+
+を基本Headerとする。
+
+その下にSTEP Indicatorを配置する。
+
+```text
+01 INPUT
+02 REVIEW
+03 DETAIL
+04 REGISTER
+```
+
+STEP03には、
+
+```text
+OPTIONAL
+```
+
+を補助表示し、全Candidateが通過する必須工程ではないことを明示する。
+
+---
+
+# 9. STEP Indicator
+
+一般的な巨大Wizard Cardや、大きな丸数字＋太いProgress Barには寄せない。
+
+現在のDesign Systemに合わせ、
+
+- Typography
+- Number
+- Rule
+- Accent
+- Spacing
+
+を中心に構成する。
+
+状態：
+
+## Current
+
+- Text Primary
+- Accent Strongによる細いRule
+- 現在位置が明確に分かる
+
+## Completed
+
+- Accent Teal等による完了表現
+- 必要に応じて小さなCheck
+
+## Future
+
+- Decorative / Inactive
+
+## STEP03
+
+- `OPTIONAL` をText Secondary等で補助表示
+
+ゲームHUDにも一般的SaaS Wizardにも寄せすぎない。
+
+---
+
+# 10. Import Typography
+
+既存原則、
+
+> **見る文字 = Shippori Mincho**
+>
+> **操作する文字 = Noto Sans JP**
+
+を維持する。
+
+Importは作業画面の比率が高いため、Noto Sans JPを主体とする。
+
+Shippori Minchoは必要に応じて、
+
+- IMPORT等のDisplay
+- Scenario名
+- 完了画面の成果表示
+
+等へ限定的に使用する。
+
+STEP、Filter、Button、Status、Error、保存状態、操作説明等はNoto Sans JPを基本とする。
+
+---
+
+# 11. Import Desktop共通Layout
+
+Importは、
+
+> **1つの広い作業Canvas**
+
+として扱う。
+
+Cardを大量に積み重ねて画面全体をSaaS Dashboard化しない。
+
+Backgroundを広く使い、
+
+- Typography
+- Grid
+- Spacing
+- Rule
+- 必要な場所のみSurface
+
+で構成する。
+
+---
+
+# 12. Import入口：進行中Sessionなし
+
+進行中ImportSessionが存在しない場合、別途「Importトップ画面」を増やさず、そのままSTEP01 INPUTを表示する。
+
+不要な、
+
+```text
+インポートを開始
+↓
+入力画面
+```
+
+という1段階を追加しない。
+
+---
+
+# 13. Import入口：進行中Sessionあり
+
+既存仕様どおり、進行中Sessionは1 Userにつき最大1件。
+
+保存済みSessionが存在する場合は、新規INPUTを直接表示せず、
+
+```text
+前回の途中データがあります
+
+現在STEP
+確認済み件数
+保存期限
+
+[ 続きから再開 ]
+
+新しくインポート
+```
+
+を表示する。
+
+Visual優先順位：
+
+1. 続きから再開
+2. 現在Session情報
+3. 新しくインポート
+
+`新しくインポート` をPrimary Actionにしない。
+
+---
+
+# 14. 新規Import開始時の既存Session破棄
+
+保存済みSessionが存在する状態で `新しくインポート` を選択した場合は、既存確定仕様どおり破棄確認を行う。
+
+ユーザーが明示的に破棄した場合のみ新規Importを開始する。
+
+Dialog例：
+
+```text
+途中のインポートを破棄しますか？
+
+確認・修正した内容や、
+登録対象の選択内容は失われます。
+
+[ 続きを再開 ]
+[ 破棄して新しく開始 ]
+```
+
+破棄ActionのみDangerとして扱う。
+
+---
+
+# 15. STEP01 INPUTの役割
+
+STEP01は、
+
+> **何を取り込むかを指定する工程**
+
+とする。
+
+解析結果の確認はまだ行わない。
+
+---
+
+# 16. STEP01 ファイル入力
+
+Desktop：
+
+- Drag & Drop
+- ファイル選択
+
+Mobile：
+
+- 通常のファイル選択を中心とする
+
+1 ImportSession内で、
+
+- 複数ファイル
+- 直接貼り付けテキスト
+
+を同時に扱える既存仕様を維持する。
+
+ファイルと直接貼り付けをRadio Buttonで二者択一にしない。
+
+---
+
+# 17. ファイル選択後
+
+ファイル選択後は選択済みファイル一覧を表示する。
+
+例：
+
+```text
+3 FILES
+
+session_01.md
+records.csv
+old_log.html
+
+＋ ファイルを追加
+```
+
+ファイル単位で削除可能。
+
+追加済み一覧を表示した後も、ファイル追加導線を維持する。
+
+---
+
+# 18. テキスト直接貼り付け
+
+ファイル入力とは別に、
+
+```text
+TEXT INPUT
+
+過去ログなどを直接貼り付ける
+```
+
+としてText Areaを用意する。
+
+ファイル入力との併用を可能とする。
+
+---
+
+# 19. STEP01 Primary Action
+
+入力元が存在する場合、
+
+```text
+解析を開始
+```
+
+をPrimary Actionとする。
+
+入力元0件の場合はDisabled。
+
+Disabledだけで理由を伝えず、
+
+```text
+ファイルを追加するか、テキストを入力してください。
+```
+
+等の補助説明を表示できる。
+
+---
+
+# 20. Import解析中
+
+実進捗を取得可能な場合：
+
+- %
+- 処理済み / 全件数
+- 現在処理工程
+
+を表示する。
+
+例：
+
+```text
+ANALYZING
+
+72%
+
+18 / 25
+
+人物・PC候補を確認しています
+```
+
+実進捗を取得できない場合は、偽の%を表示しない。
+
+```text
+ANALYZING
+
+活動履歴を解析しています…
+```
+
+等の処理中表示とする。
+
+安全に停止できる処理のみ `解析を中止` を表示する。
+
+解析中に画面全体を不透明Overlayで覆わず、現在何を処理しているか確認可能な状態を維持する。
+
+---
+
+# 21. STEP02 REVIEWの役割
+
+STEP02はImportの中心画面とする。
+
+意味は、
+
+> **解析された活動履歴候補を、人間が確認する場所**
+
+である。
+
+解析技術そのものを主役にしない。
+
+---
+
+# 22. REVIEW Summary
+
+上部で、
+
+- Candidate総数
+- 登録可能
+- 要確認
+- 修正必要
+- 確認済み / 全件
+- Auto Save状態
+
+を把握できるようにする。
+
+例：
+
+```text
+IMPORT CANDIDATES
+
+20件の活動履歴候補
+
+登録可能      12
+要確認         5
+修正必要       3
+
+確認済み      14 / 20
+
+✓ 保存済み
+```
+
+`確認済み 14 / 20` は解析進捗とは別概念として扱う。
+
+---
+
+# 23. REVIEW Filter
+
+既存仕様のFilter：
+
+- すべて
+- 登録可能
+- 要確認
+- 修正必要
+- 未確認
+- 確認済み
+
+を維持する。
+
+Visualは大量のButton Cardではなく、Text Tab / Filterに近い軽い表現を基本とする。
+
+Active状態はUnderline等で明示する。
+
+---
+
+# 24. Candidate Card
+
+既存仕様どおり、Import CandidateはTable Cardに近いVisual Languageを持たせる。
+
+ただし、Scenario Viewの閲覧用Table Cardそのものをコピーしない。
+
+位置づけは、
+
+> **閲覧用Table Cardから派生した、確認・編集可能なImport Candidate**
+
+とする。
+
+基本表示：
+
+- Scenario
+- TableDate
+- KP
+- PL / PC
+- Candidate Status
+- 登録対象ON/OFF
+- 確認状態
+
+---
+
+# 25. Candidate Status
+
+既存3状態：
+
+- 登録可能
+- 要確認
+- 修正必要
+
+を維持する。
+
+状態は、
+
+- Color
+- Icon
+- Text
+
+を組み合わせ、色だけに依存しない。
+
+`修正必要` は削除等のDangerとは意味が異なるため、Danger UIと安易に同一視しない。
+
+---
+
+# 26. 登録対象と確認状態
+
+以下は別状態として扱う。
+
+## 登録対象
+
+正式登録するかどうか。
+
+Checkbox等で表現する。
+
+既存仕様：
+
+- 登録可能 → 初期ON
+- 要確認 / 修正必要 → 初期OFF
+
+## 確認状態
+
+ユーザーがCandidate内容を確認済みかどうか。
+
+- 未確認
+- 確認済み
+
+登録対象ON/OFFと確認済み状態をVisual上でも混同しない。
+
+---
+
+# 27. 軽微修正
+
+日付・Person・PC等の軽微修正は既存仕様どおりCandidate上で可能とする。
+
+ただしCandidate全体を常時大量のInputで埋めない。
+
+通常は表示状態とし、必要箇所だけInline Edit等へ切り替える。
+
+---
+
+# 28. Scenario照合
+
+同名Scenarioが存在しても自動統合しない。
+
+判断材料として既存Scenario情報を提示し、
+
+- 既存Scenarioを使う
+- 新規Scenarioとして登録
+
+をユーザーが選択する。
+
+既存Scenarioを使用した場合でも、Import Candidateの情報で既存Scenario本体を上書きしない。
+
+取り込むTableが既存Scenarioを参照するだけとする。
+
+---
+
+# 29. Person照合
+
+同名Personが1件しか存在しなくても自動統合しない。
+
+判断材料として、
+
+- 表示名
+- 使用PC
+- 過去Table数等
+
+を提示できる。
+
+既存Personを使用するか、新しいPersonとして扱うかをユーザーが判断する。
+
+---
+
+# 30. PC照合
+
+強い照合材料は既存仕様どおり、
+
+> **PC名 + Person候補**
+
+とする。
+
+PC画像が存在する場合は判断材料として表示可能。
+
+PC名が同じでもPerson候補が異なる場合は要確認とする。
+
+---
+
+# 31. 一括適用
+
+Scenario / Person / PC照合で同一条件Candidateが複数存在する場合、
+
+> **1回の判断を同じCandidateへ一括適用**
+
+できる。
+
+ただし、
+
+- 自動適用しない
+- ユーザー明示操作必須
+- 対象件数を事前表示
+- 正式登録前なら取り消し可能
+
+を維持する。
+
+---
+
+# 32. Auto Save
+
+STEP02 / STEP03では既存仕様どおり自動保存する。
+
+状態：
+
+```text
+保存しています…
+```
+
+```text
+✓ 保存済み
+```
+
+```text
+保存できませんでした
+再試行
+```
+
+等を使用する。
+
+毎回Toastを発生させず、Header付近の静かなPersistent Statusを基本とする。
+
+保存失敗時も現在の画面入力・修正状態を保持する。
+
+---
+
+# 33. STEP03 DETAILの役割
+
+STEP03はOPTIONAL。
+
+意味は、
+
+> **単純なCandidate上の修正では解決できない候補を整理する場所**
+
+とする。
+
+対象：
+
+- Table分割
+- Table統合
+- PL / PC複雑対応
+- 未割当
+- 既存データ矛盾
+
+全CandidateをSTEP03へ通さない。
+
+---
+
+# 34. DETAIL Desktop Layout
+
+Desktopでは、
+
+> **解析結果 / 元データ**
+
+を比較しやすい2 Column Layoutを基本候補とする。
+
+左：
+
+- Candidate
+- 解析結果
+- 修正操作
+
+右：
+
+- 元データ
+- 元ファイル名
+- 元位置等
+
+元データは編集対象ではなく、判断材料として扱う。
+
+---
+
+# 35. DETAIL Mobile Layout
+
+Mobileでは左右比較を無理に縮小せず、
+
+```text
+解析結果
+↓
+元データ
+```
+
+の縦積みを基本とする。
+
+機能自体はDesktopから削除しない。
+
+---
+
+# 36. 未割当データ
+
+未割当値をシステム判断で勝手に破棄しない。
+
+既存仕様どおり、
+
+- PLへ設定
+- PCへ設定
+- HOへ設定
+- 今回は使用しない
+
+等をユーザーが選択する。
+
+---
+
+# 37. Table分割／統合
+
+Table分割・統合は、
+
+> **明示操作 + 結果Preview**
+
+とする。
+
+分割・統合結果を確認してから一時Candidateへ適用する。
+
+正式登録前の一時状態として扱う。
+
+---
+
+# 38. STEP03からの復帰
+
+DETAIL修正後は、基本的にREVIEWへ戻し、全Candidate状態を再確認できる導線とする。
+
+STEP03から無条件でSTEP04へ直行することを基本導線にはしない。
+
+---
+
+# 39. Table重複候補
+
+類似する既存Tableが存在しても自動統合しない。
+
+判断材料：
+
+- Scenario
+- TableDate
+- Person
+- Role
+- PC
+- TableName
+- 録画URL等
+
+選択：
+
+- 今回は登録しない
+- 別Tableとして登録
+
+大量の類似Tableについては既存仕様どおりユーザー操作による一括登録対象外が可能。
+
+---
+
+# 40. STEP04 REGISTERの役割
+
+STEP04は、
+
+> **一時Candidateを正式データへ移す直前の最終確認**
+
+とする。
+
+ここまでCandidateは正式9エンティティではない。
+
+正式登録操作によって初めて正式データへ反映する。
+
+---
+
+# 41. REGISTER Summary
+
+登録直前に、
+
+- 登録対象Table数
+- 新規Scenario
+- 新規Person
+- 新規PC
+- 再利用Scenario
+- 再利用Person
+- 再利用PC
+
+等のSummaryを表示する方向とする。
+
+全Candidate Cardを再び大量表示するのではなく、必要ならREVIEWへ戻って内容確認できる構造とする。
+
+---
+
+# 42. REGISTER Primary Action
+
+Primary Actionは、
+
+```text
+18件を登録
+```
+
+等、正式登録であることが分かる文言とする。
+
+単なる `保存` としない。
+
+登録中は二重送信を防止する。
+
+---
+
+# 43. Import一部登録
+
+既存仕様どおり、登録可能Candidateだけ先に正式登録できる。
+
+未処理Candidateが残る場合はImportSessionを継続する。
+
+正式登録済みCandidateはImportSession側から再編集しない。
+
+修正が必要な場合は正式データ側の編集機能を利用する。
+
+---
+
+# 44. 登録中
+
+長時間処理となる場合、
+
+```text
+REGISTERING
+
+18件の活動履歴を登録しています…
+```
+
+等を表示する。
+
+実進捗が取得できる場合のみProgressを表示する。
+
+取得できない場合は偽の%を表示しない。
+
+---
+
+# 45. 登録失敗
+
+登録失敗時もImportSessionの確認・修正内容を失わせない。
+
+再試行または内容確認へ戻れるようにする。
+
+具体的なDB Transaction単位や部分成功時の内部処理方式は、Visual Designだけを根拠として新たに確定しない。
+
+---
+
+# 46. Import完了
+
+専用Complete UIを使用する。
+
+既存仕様の表示対象：
+
+- 登録Table数
+- 新規Scenario数
+- 新規Person数
+- 新規PC数
+- 再利用Scenario数
+- 再利用Person数
+- 再利用PC数
+
+CTA：
+
+- ホームで確認
+- 続けてインポート
+
+---
+
+# 47. Import完了画面の意味
+
+単なる、
+
+```text
+成功しました
+```
+
+では終わらせない。
+
+Importのサービス価値として、
+
+> **どれだけ既存情報を再利用できたか**
+
+を成果として見せる。
+
+ただし、
+
+```text
+○分節約しました
+```
+
+等、根拠のない推定値は表示しない。
+
+実際の再利用件数を事実として表示する。
+
+Complete UIではCollection側へ戻る意味も含め、他STEPよりShippori Minchoをやや強く使用可能とする。
+
+---
+
+# 48. Import Mobile共通方針
+
+Desktopを単純縮小しない。
+
+ただし機能を勝手に削除しない。
+
+## STEP
+
+狭幅では現在位置を、
+
+```text
+02 / 04
+REVIEW
+```
+
+等で明確化できる。
+
+全STEPはCompact表示または横Scroll等で確認可能とする。
+
+## INPUT
+
+Drag & Dropを主操作にせず、ファイル選択を中心とする。
+
+## REVIEW
+
+Candidateを縦積みする。
+
+## DETAIL
+
+2 Column比較を縦積みに変換する。
+
+## REGISTER
+
+Summaryを縦積みにする。
+
+---
+
+# 49. Import Accessibility
+
+Import全体で、
+
+- File Select
+- Filter
+- Candidate選択
+- Checkbox
+- Inline Edit
+- Dialog
+- 一括適用
+- Register
+
+等の主要操作をKeyboardで完結可能にする。
+
+Hoverだけに重要情報を依存させない。
+
+状態を色だけで表現しない。
+
+Reduced Motionを維持する。
+
+---
+
+# 50. 横断UI Visual Concept【今回確定】
+
+Dialog / Error / Empty / Loading等の横断UIについて、
+
+> **Quiet System Feedback**
+
+を基本思想とする。
+
+意味は、
+
+> **システム状態は明確に伝えるが、Scenario・PC・Table等のコンテンツより前へ出すぎない**
+
+ことである。
+
+通常閲覧画面は世界観を持たせる一方、
+
+- Error
+- Delete
+- Warning
+- Saving
+- Loading
+- Validation
+
+等は、世界観演出より、
+
+- 明確
+- 静か
+- 短い
+- 安全
+
+を優先する。
+
+ErrorやDialogをゲームHUD化しない。
+
+---
+
+# 51. 横断State Color
+
+既存Design Tokenを使用する。
+
+- Success：`#5F7D62`
+- Warning：`#D97A2B`
+- Danger：`#C14343`
+- Accent Strong：`#3F7D79`
+- Decorative / Inactive：`#B3B8B8`
+- Lost Burgundy：`#8A4C55`
+
+重要：
+
+> **DangerとLost Burgundyを混同しない。**
+
+Lost BurgundyはキャラクターのLOST等を表現するための色であり、System Error / Delete用Colorではない。
+
+---
+
+# 52. Dialog分類
+
+横断Dialogを大きく以下へ整理する。
+
+## Confirmation Dialog
+
+状態変更等の確認。
+
+例：
+
+- PC変更によるEndPcState削除
+- ImportSession破棄
+- Participation削除
+
+## Destructive Dialog
+
+正式データ削除。
+
+例：
+
+- Scenario削除
+- PC削除
+- Table削除
+
+## Unsaved Changes Dialog
+
+未保存変更を破棄して移動する場合。
+
+画面ごとに無関係なDialog Designを作らず、共通Design Systemを使用する。
+
+---
+
+# 53. Dialog Visual
+
+Dialog全体をDanger Colorで塗らない。
+
+Danger ActionのみDangerとして明確化する。
+
+Desktopでは適切な狭めの幅を基本とし、
+
+- 過剰なShadow
+- 過剰なRadius
+- 大きな装飾
+
+を避ける。
+
+TypographyはNoto Sans JPを主体とする。
+
+Mobileでは必要に応じてActionを縦積みにする。
+
+---
+
+# 54. Dialog Focus
+
+Dialogを開いた場合はFocusをDialog内へ移す。
+
+キャンセル時は起点となったActionへFocusを戻す。
+
+削除成功等により起点が消滅する場合は、遷移先の適切な位置へFocusを移す。
+
+Keyboard利用者が現在位置を失わないようにする。
+
+---
+
+# 55. 未保存離脱
+
+未保存離脱確認は、
+
+> **初期状態から変更が存在する場合のみ**
+
+表示する。
+
+変更には画像位置・Zoom等、フォーム値以外の編集状態も含める。
+
+変更が存在しない場合に不要な確認Dialogを出さない。
+
+---
+
+# 56. Inline Validation
+
+Validation Errorは対象Input直下のInline Errorを基本とする。
+
+Errorは、
+
+- Danger Color
+- Icon等
+- Error Text
+
+を組み合わせ、色だけに依存しない。
+
+対象InputとErrorをアクセシビリティ上も関連付ける。
+
+---
+
+# 57. Error Summary
+
+大量の入力項目を持つ画面では、必要に応じてError Summaryを使用可能とする。
+
+候補：
+
+- 卓登録／編集
+- Import DETAIL
+- Import REVIEW等
+
+Scenario登録／PC登録等の比較的小規模フォームでは必須としない。
+
+複数Errorが存在する場合、
+
+- 最初のErrorへFocus
+- Error Summaryから対象へ移動
+
+等によって問題箇所を探し回らせない。
+
+---
+
+# 58. ErrorとWarning
+
+明確に区別する。
+
+## Error
+
+そのままでは処理を成立させられない状態。
+
+例：
+
+- 必須項目未入力
+- 不正な入力
+- 保存失敗
+
+## Warning
+
+処理自体は可能だが、ユーザー確認・判断を推奨する状態。
+
+例：
+
+- 重複候補
+- Importの曖昧な推定
+- 同一Person + 同一PC名
+- 時系列根拠の弱い参考値
+
+Warningを理由として勝手に登録禁止にしない。
+
+---
+
+# 59. Success Feedback
+
+通常の保存成功等で毎回大きなSuccess Bannerを表示しない。
+
+短いInline FeedbackまたはToastを基本とする。
+
+例：
+
+```text
+✓ 変更を保存しました
+```
+
+```text
+✓ シナリオを追加しました
+```
+
+重要な完了体験については専用Complete UIを使用できる。
+
+Import Completeはその代表例。
+
+---
+
+# 60. Saving
+
+Saving中はPrimary Actionを一時的に無効化し、二重送信を防止する。
+
+画面全体をLoading Overlayへ置換しない。
+
+状態例：
+
+```text
+保存中…
+```
+
+---
+
+# 61. Save Failure
+
+保存失敗時：
+
+- 同じ画面に留まる
+- 入力内容を保持
+- 画像調整状態等も保持
+- Errorを具体的に表示
+- 必要なら再試行可能
+
+とする。
+
+保存失敗を理由に再入力を要求しない。
+
+---
+
+# 62. Loading分類
+
+Loadingを大きく以下へ分ける。
+
+## Local Loading
+
+例：
+
+- BOOTH情報取得
+- Combo Box候補取得
+
+対象UI付近だけに表示。
+
+## Content Loading
+
+一覧等の初期取得。
+
+必要に応じてSkeletonを使用可能。
+
+## Long Process
+
+例：
+
+- Import解析
+- Import正式登録
+
+実進捗が存在する場合のみ%等を表示。
+
+偽の進捗率を表示しない。
+
+---
+
+# 63. Disabled
+
+Disabled状態はGrayだけに依存しない。
+
+必要に応じて、
+
+- Inactive Color
+- Hoverなし
+- pointer挙動なし
+- `aria-disabled`
+- 補助説明
+
+等を組み合わせる。
+
+操作できない理由が必要な場合はユーザーが理解できるようにする。
+
+---
+
+# 64. Empty State
+
+Empty Stateを単なる「ありません」で終わらせない。
+
+ただし長い世界観文章も不要。
+
+データ自体が存在しない状態と、検索結果0件を区別する。
+
+## Scenario 0件
+
+Scenario追加やImport等、次の行動へ進める。
+
+## Table 0件
+
+対象Scenarioへの新規卓登録導線を表示可能。
+
+## PC 0件
+
+PC追加導線を表示可能。
+
+## Search 0件
+
+検索条件変更を促す。
+
+データ自体が0件の場合と同じCTAを機械的に表示しない。
+
+---
+
+# 65. Placeholder
+
+Scenario画像なし・PC画像なし等はErrorではない。
+
+共通Placeholderまたは各画面で確定したNeutral Placeholderを使用する。
+
+`NO IMAGE` 等の巨大なエラー風表示を主役にしない。
+
+---
+
+# 66. Not Found / Access Error
+
+通常Empty Stateと区別する。
+
+データ削除済み、アクセス不可等の場合は、
+
+```text
+このページを表示できません。
+
+データが削除されたか、
+アクセスできない可能性があります。
+```
+
+等、必要以上に内部情報を露出しない表現を使用できる。
+
+所有権違反等の詳細を不用意に開示しない。
+
+---
+
+# 67. Network Error
+
+通信失敗等では、
+
+- 何が失敗したか
+- 入力が保持されているか
+- 再試行可能か
+
+を明確にする。
+
+フォーム入力中の場合、可能な限り入力状態を保持する。
+
+---
+
+# 68. Toast
+
+Toastを使用する対象を限定する。
+
+使用候補：
+
+- 保存成功
+- 削除成功
+- お気に入り変更
+- 小さな処理完了
+
+Toastを使用しないもの：
+
+- Validation Error
+- 削除確認
+- Import詳細Error
+- 重大Error
+
+大量のToastを積み重ねない。
+
+---
+
+# 69. Undo
+
+現MVPでは削除復元・Trash等を正式仕様として持たないため、
+
+> **削除後の「元に戻す」をVisual Designだけを理由として追加しない。**
+
+削除前確認で安全性を確保する。
+
+---
+
+# 70. Danger Zone
+
+Scenario / Table / PC等の削除Actionは、
+
+> **通常Actionから十分に分離**
+
+する。
+
+基本的に編集画面下部へ配置。
+
+`保存` の隣に削除Buttonを置かない。
+
+Danger Zoneは削除等、本当に危険な操作へ限定する。
+
+---
+
+# 71. Tooltip
+
+Tooltipは補助情報に使用する。
+
+主要操作の意味をTooltipだけに依存させない。
+
+DesktopでIcon Buttonを使用する場合はTooltipを使用可能。
+
+MobileではTooltip前提の操作設計にしない。
+
+---
+
+# 72. Hover
+
+Hoverは補助演出として扱う。
+
+Hoverでしか発見できない主要Action・重要情報を作らない。
+
+Keyboard Focusでも同等の情報・操作へ到達可能にする。
+
+---
+
+# 73. Focus
+
+全画面共通の基本を、
+
+> **Accent Strong `#3F7D79` + Ring / Outline**
+
+とする。
+
+色だけでFocusを表現しない。
+
+具体的なOutline幅等は実装時に調整可能とする。
+
+---
+
+# 74. Keyboard
+
+主要操作はKeyboardのみでも完結可能にする。
+
+最低限対象：
+
+- Link
+- Button
+- Combo Box
+- Filter
+- Tabs
+- Dialog
+- Slider
+- Checkbox
+- Candidate選択
+- Save
+- Delete
+- Reset
+
+Mouse / Touch Dragのみを唯一の操作手段にしない。
+
+---
+
+# 75. Reduced Motion
+
+`prefers-reduced-motion: reduce` を尊重する。
+
+Reduced Motion時：
+
+- Fade短縮 / 除去
+- Slide除去
+- 大きなZoom Transition除去
+- 大きな位置移動Animation除去
+
+等を行う。
+
+Motionを減らしても情報理解・操作が成立する構造とする。
+
+---
+
+# 76. 横断UI Typography
+
+System FeedbackはNoto Sans JPを主体とする。
+
+対象：
+
+- Error
+- Warning
+- Success
+- Dialog
+- Toast
+- Saving
+- Loading
+- Validation
+- Button
+- Status
+
+世界観表現のためにSystem ErrorへShippori Minchoを多用しない。
+
+---
+
+# 77. 横断UI実装単位
+
+実装時には概念的に、
+
+```text
+Dialog
+ConfirmDialog
+DangerDialog
+
+InlineError
+ErrorSummary
+
+Toast
+StatusMessage
+
+LoadingIndicator
+ProgressIndicator
+
+EmptyState
+Placeholder
+
+StatusLabel / Badge
+
+FocusRing
+```
+
+等へ共通化する方向とする。
+
+ただし具体的なReact Component名・Component分割粒度は実装設計時に最終決定する。
+
+Visual Design資料だけを理由として実装構造を固定しすぎない。
+
+---
+
+# 78. Webクリエイター視点での最終確認
+
+今回の設計によって、
+
+- Home
+- Scenario View
+- Desktop卓詳細
+- PL / PC
+- 卓登録／編集
+- Scenario登録／編集
+- PC登録／編集
+- Import
+
+の主要Visual Designを、同じTRPG GAME LIBRARY / Personal Gallery思想の中で役割分担できる。
+
+Importだけが突然一般的な管理Dashboardになることを避け、
+
+> **Archive Intake**
+
+として独自の役割を持たせる。
+
+一方、Dialog / Error / Saving等は世界観演出を抑え、
+
+> **Quiet System Feedback**
+
+として実用性・安全性を優先する。
+
+これにより、
+
+> **コンテンツを見る画面では世界観を強く、システムと対話する場面では明確さを強く**
+
+というVisual Hierarchyを成立させる。
+
+---
+
+# 79. エンジニア視点での最終確認
+
+今回のVisual Designによって、既存の以下を変更しない。
+
+- 9エンティティ
+- 14UC
+- CRUD
+- User所有権
+- 認証／認可
+- Import一時データと正式データの分離
+- ImportSession
+- 1 Userにつき進行中ImportSession最大1件
+- STEP02 / STEP03 Auto Save
+- Import再開
+- Import保持期間
+- 一部登録
+- 正式登録済みCandidateの扱い
+- Scenario / Person / PC照合ルール
+- Table重複ルール
+- 保存／更新／削除ルール
+
+また、
+
+- 二重送信防止
+- 保存失敗時の入力保持
+- 未保存変更時のみ離脱確認
+- Dialog Focus管理
+- ValidationとInputの関連付け
+- Keyboard
+- Focus
+- Reduced Motion
+
+を横断Design Systemとして扱う。
+
+---
+
+# 80. 今回の最終確定事項
+
+Import Visual Designは、
+
+> **ARCHIVE INTAKE**
+
+をVisual Conceptとする。
+
+基本体験は、
+
+```text
+01 INPUT
+↓
+02 REVIEW
+↓
+03 DETAIL / OPTIONAL
+↓
+04 REGISTER
+↓
+COMPLETE
+```
+
+とする。
+
+既存Import UXを作り直さず、現在の、
+
+- Typography
+- Grid
+- Spacing
+- Rule
+- Color
+- Focus
+- Motion
+- Responsive
+
+へ統合する。
+
+横断UI / State Designは、
+
+> **Quiet System Feedback**
+
+を基本思想とする。
+
+対象：
+
+- Dialog
+- Validation
+- Error
+- Warning
+- Success
+- Saving
+- Loading
+- Disabled
+- Empty
+- Placeholder
+- Toast
+- Danger Zone
+- Focus
+- Keyboard
+- Reduced Motion
+
+これらを各画面で無関係に作り直さず、共通Design Systemとして扱う。
+
+---
+
+# 81. 現在のVisual Design進捗
+
+本フェーズ完了時点で、少なくとも以下までVisual Design再設計が進んでいる。
+
+- アプリ全体Visual Design基礎
+- Home / Scenario View
+- Desktop卓詳細 / PC Focus v5.9統合
+- PL / PC
+- 卓登録／編集
+- Scenario登録／編集
+- PC登録／編集
+- Import
+- 横断UI / State Design
+
+現時点でVisual Design再設計を保留している主な領域：
+
+- Googleログイン
+- 初回SelfPerson設定
+- アカウント周辺UI
+
+これらは既存機能仕様が未確定という意味ではなく、現在のVisual Designへの再設計を保留しているものである。
+
+---
+
+# 82. 最重要原則
+
+今後も、
+
+> **既存の確定仕様を、現在確定したVisual Designへ落とし込む。**
+
+Visual Designを理由として既存データ仕様を変更しない。
+
+既存データ仕様を理由として、すでに成立しているVisual Designを不用意に作り直さない。
+
+両者に差が見つかった場合は、
+
+1. 差分を確認
+2. 既存確定仕様を確認
+3. Visual上の解決案を検討
+4. ユーザー判断
+5. 採用後に確定仕様へ反映
+
+の順で扱う。
+
+ユーザーの採用判断なく、提案を正式仕様へ昇格させない。

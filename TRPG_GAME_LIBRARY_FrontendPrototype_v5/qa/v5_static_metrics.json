@@ -1,0 +1,15 @@
+{
+  "unhandled_actions": [],
+  "js_braces": [
+    409,
+    409
+  ],
+  "css_braces": [
+    351,
+    351
+  ],
+  "legacy_new_table_clone": false,
+  "hardcoded_new_table_today": false,
+  "reduced_motion": true,
+  "qa_browser_navigation": "blocked by administrator in this environment"
+}

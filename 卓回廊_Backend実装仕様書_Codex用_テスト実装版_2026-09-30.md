@@ -2,6 +2,8 @@
 ## Codex用・ユーザーなしテスト実装版
 ### 2026-09-30
 
+最終改訂：2026-10-01 11:09:17 JST (UTC+09:00) / R1（修正履歴：§49）
+
 ---
 
 # 0. この文書の目的
@@ -46,6 +48,10 @@ Backendでは特に、以下を守る。
 8. 各Visual / CRUD / 詳細設計資料
 
 `TRPG_PCFocus_v5_9` やFrontend PrototypeのMock値はData仕様の根拠にしない。
+
+参照資料の責務範囲を守り、明示変更された項目だけを後発の確定事項で上書きする。旧資料の未確定一覧を理由に、別資料で採用済みの事項を未確定へ戻さない。添付回答中の提案はUser採用まで正式仕様へ昇格させない。
+
+仕様書を修正する場合は、本文を現行仕様へ訂正し、修正履歴に対象節・旧記述（転記漏れなら「未記載」）・訂正後・根拠・採用区分・修正日時（JST / UTC+09:00）を必ず追記する。過去の修正履歴は上書きしない。
 
 ---
 
@@ -1972,6 +1978,7 @@ Codexは以下の順を推奨。
 - CSRFが機能する。
 - Test SeedですべてのFrontend重要状態を再現できる。
 - Production Deferred項目を実装済みと偽らない。
+- §50の未補完API契約をTODOのままFrontend接続成立・テスト実装完成として扱わない。
 
 ---
 
@@ -1992,3 +1999,60 @@ TODO_SPEC_CONFIRMATION
 ```
 
 を残す。
+
+---
+
+# 49. 修正履歴
+
+## R1 — 2026-10-01 11:09:17 JST (UTC+09:00)
+
+原資料照合による監査後の訂正。実装は行っていない。DesktopのURLなし録画Action非表示は今回のUser回答で採用し、それ以外の新提案API / DTO / 集計方式は保留とした。
+
+旧記述欄は修正前の該当節の要約。転記漏れは「未記載」として示す。本文を訂正したうえでこの履歴を追記し、後続改訂でも過去履歴は保持する。
+
+| ID | 対象 | 旧記述 | 訂正後 / 訂正方法 | 根拠 | 採用区分 | 修正日時 |
+|---|---|---|---|---|---|---|
+| B01 | §1 情報源の優先順位 | 資料順位のみ。修正記録の必須項目は未記載。 | 責務と差分の扱い、旧記述・訂正後・根拠・採用区分・JST日時の必須記録を追加。 | 統合正本 §0.1–0.2 / Userの2026-10-01指示 | 編集運用の明文化 | 2026-10-01 11:09:17 JST (UTC+09:00) |
+| B02 | §50 監査引継ぎ（追加） | 確定FlowとAPI未補完・新規採用判断を分けた一覧は未記載。 | A-01〜A-09で両仕様書の補完対象を記録。提案Endpoint / DTO / 集計Ruleは未採用のまま。 | 今回の原資料照合 / 添付ChatGPT回答 / User回答 | 監査結果の記録（新提案は保留） | 2026-10-01 11:09:17 JST (UTC+09:00) |
+| B03 | §47 Definition of Done | 未補完API契約が残る場合の完成判定制約は未記載。 | API未補完のまま接続成立・テスト実装完成と扱わないことを明記。 | §50 A-01〜A-09 / 現行APIとFrontend確定Flowの差分 | 完成判定の明文化 | 2026-10-01 11:09:17 JST (UTC+09:00) |
+| B04 | 文書冒頭 | 作成日2026-09-30のみ。最終改訂日時は未記載。 | 原作成日を維持しR1の最終改訂日時と修正履歴参照を追加。 | Userの2026-10-01指示 | 改訂情報の明記 | 2026-10-01 11:09:17 JST (UTC+09:00) |
+
+### 根拠資料の略称
+
+- 統合正本：[TRPG活動履歴管理Webサービス_最新統合正本_2026-09-28_確定版_フロント制作補強修正版(3).md](%E4%BB%95%E6%A7%98%E6%9B%B8%EF%BC%88%E3%83%86%E3%82%B9%E3%83%88%E7%94%A8%EF%BC%89%E5%8F%82%E7%85%A7%E8%B3%87%E6%96%99/TRPG%E6%B4%BB%E5%8B%95%E5%B1%A5%E6%AD%B4%E7%AE%A1%E7%90%86Web%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9_%E6%9C%80%E6%96%B0%E7%B5%B1%E5%90%88%E6%AD%A3%E6%9C%AC_2026-09-28_%E7%A2%BA%E5%AE%9A%E7%89%88_%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E5%88%B6%E4%BD%9C%E8%A3%9C%E5%BC%B7%E4%BF%AE%E6%AD%A3%E7%89%88%283%29.md)
+- Visual仕上げ：[TRPG活動履歴管理Webサービス_VisualResponsiveAccessibility仕上げフェーズ_確定事項まとめ_2026-09-30.md](%E4%BB%95%E6%A7%98%E6%9B%B8%EF%BC%88%E3%83%86%E3%82%B9%E3%83%88%E7%94%A8%EF%BC%89%E5%8F%82%E7%85%A7%E8%B3%87%E6%96%99/TRPG%E6%B4%BB%E5%8B%95%E5%B1%A5%E6%AD%B4%E7%AE%A1%E7%90%86Web%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9_VisualResponsiveAccessibility%E4%BB%95%E4%B8%8A%E3%81%92%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA_%E7%A2%BA%E5%AE%9A%E4%BA%8B%E9%A0%85%E3%81%BE%E3%81%A8%E3%82%81_2026-09-30.md)
+- S1–S6：[卓回廊_S1-S6_BackendDataSecurityPhysicalDesign_確定事項まとめ_2026-09-30.md](%E4%BB%95%E6%A7%98%E6%9B%B8%EF%BC%88%E3%83%86%E3%82%B9%E3%83%88%E7%94%A8%EF%BC%89%E5%8F%82%E7%85%A7%E8%B3%87%E6%96%99/%E5%8D%93%E5%9B%9E%E5%BB%8A_S1-S6_BackendDataSecurityPhysicalDesign_%E7%A2%BA%E5%AE%9A%E4%BA%8B%E9%A0%85%E3%81%BE%E3%81%A8%E3%82%81_2026-09-30.md)
+- Backend追加確定：[TRPG活動履歴管理Webサービス_追加確定事項まとめ_2026-09-30_BackendDataSecurityPlatform_精査修正版.md](%E4%BB%95%E6%A7%98%E6%9B%B8%EF%BC%88%E3%83%86%E3%82%B9%E3%83%88%E7%94%A8%EF%BC%89%E5%8F%82%E7%85%A7%E8%B3%87%E6%96%99/TRPG%E6%B4%BB%E5%8B%95%E5%B1%A5%E6%AD%B4%E7%AE%A1%E7%90%86Web%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9_%E8%BF%BD%E5%8A%A0%E7%A2%BA%E5%AE%9A%E4%BA%8B%E9%A0%85%E3%81%BE%E3%81%A8%E3%82%81_2026-09-30_BackendDataSecurityPlatform_%E7%B2%BE%E6%9F%BB%E4%BF%AE%E6%AD%A3%E7%89%88.md)
+- 9月29日修正版：[TRPG活動履歴管理Webサービス_追加確定事項まとめ_2026-09-29_修正版.md](%E4%BB%95%E6%A7%98%E6%9B%B8%EF%BC%88%E3%83%86%E3%82%B9%E3%83%88%E7%94%A8%EF%BC%89%E5%8F%82%E7%85%A7%E8%B3%87%E6%96%99/TRPG%E6%B4%BB%E5%8B%95%E5%B1%A5%E6%AD%B4%E7%AE%A1%E7%90%86Web%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9_%E8%BF%BD%E5%8A%A0%E7%A2%BA%E5%AE%9A%E4%BA%8B%E9%A0%85%E3%81%BE%E3%81%A8%E3%82%81_2026-09-29_%E4%BF%AE%E6%AD%A3%E7%89%88.md)
+- PC登録編集 Visual：[TRPG活動履歴管理Webサービス_PC登録編集VisualDesign再設計フェーズ_確定事項まとめ_2026-09-25.md](%E4%BB%95%E6%A7%98%E6%9B%B8%EF%BC%88%E3%83%86%E3%82%B9%E3%83%88%E7%94%A8%EF%BC%89%E5%8F%82%E7%85%A7%E8%B3%87%E6%96%99/TRPG%E6%B4%BB%E5%8B%95%E5%B1%A5%E6%AD%B4%E7%AE%A1%E7%90%86Web%E3%82%B5%E3%83%BC%E3%83%92%E3%82%99%E3%82%B9_PC%E7%99%BB%E9%8C%B2%E7%B7%A8%E9%9B%86VisualDesign%E5%86%8D%E8%A8%AD%E8%A8%88%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9%E3%82%99_%E7%A2%BA%E5%AE%9A%E4%BA%8B%E9%A0%85%E3%81%BE%E3%81%A8%E3%82%81_2026-09-25.md)
+- PL-PC Visual：[TRPG活動履歴管理Webサービス_PL-PC_VisualDesign再設計フェーズ_確定事項まとめ_2026-09-25.md](%E4%BB%95%E6%A7%98%E6%9B%B8%EF%BC%88%E3%83%86%E3%82%B9%E3%83%88%E7%94%A8%EF%BC%89%E5%8F%82%E7%85%A7%E8%B3%87%E6%96%99/TRPG%E6%B4%BB%E5%8B%95%E5%B1%A5%E6%AD%B4%E7%AE%A1%E7%90%86Web%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9_PL-PC_VisualDesign%E5%86%8D%E8%A8%AD%E8%A8%88%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA_%E7%A2%BA%E5%AE%9A%E4%BA%8B%E9%A0%85%E3%81%BE%E3%81%A8%E3%82%81_2026-09-25.md)
+- 卓登録編集 Visual：[TRPG活動履歴管理Webサービス_卓登録編集VisualDesign再設計フェーズ_確定事項まとめ_2026-09-25.md](%E4%BB%95%E6%A7%98%E6%9B%B8%EF%BC%88%E3%83%86%E3%82%B9%E3%83%88%E7%94%A8%EF%BC%89%E5%8F%82%E7%85%A7%E8%B3%87%E6%96%99/TRPG%E6%B4%BB%E5%8B%95%E5%B1%A5%E6%AD%B4%E7%AE%A1%E7%90%86Web%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9_%E5%8D%93%E7%99%BB%E9%8C%B2%E7%B7%A8%E9%9B%86VisualDesign%E5%86%8D%E8%A8%AD%E8%A8%88%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA_%E7%A2%BA%E5%AE%9A%E4%BA%8B%E9%A0%85%E3%81%BE%E3%81%A8%E3%82%81_2026-09-25.md)
+- 画面詳細：[TRPG活動履歴管理Webサービス_各画面詳細設計フェーズ_確定事項まとめ_2026-09-16.md](%E4%BB%95%E6%A7%98%E6%9B%B8%EF%BC%88%E3%83%86%E3%82%B9%E3%83%88%E7%94%A8%EF%BC%89%E5%8F%82%E7%85%A7%E8%B3%87%E6%96%99/TRPG%E6%B4%BB%E5%8B%95%E5%B1%A5%E6%AD%B4%E7%AE%A1%E7%90%86Web%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9_%E5%90%84%E7%94%BB%E9%9D%A2%E8%A9%B3%E7%B4%B0%E8%A8%AD%E8%A8%88%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA_%E7%A2%BA%E5%AE%9A%E4%BA%8B%E9%A0%85%E3%81%BE%E3%81%A8%E3%82%81_2026-09-16.md)
+- 基準確定仕様：[TRPG活動履歴管理Webサービス_最新版確定仕様_9エンティティ14UC.md](%E4%BB%95%E6%A7%98%E6%9B%B8%EF%BC%88%E3%83%86%E3%82%B9%E3%83%88%E7%94%A8%EF%BC%89%E5%8F%82%E7%85%A7%E8%B3%87%E6%96%99/TRPG%E6%B4%BB%E5%8B%95%E5%B1%A5%E6%AD%B4%E7%AE%A1%E7%90%86Web%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9_%E6%9C%80%E6%96%B0%E7%89%88%E7%A2%BA%E5%AE%9A%E4%BB%95%E6%A7%98_9%E3%82%A8%E3%83%B3%E3%83%86%E3%82%A3%E3%83%86%E3%82%A314UC.md)
+- Import Visual：[#-Web制作総合演習1-#-TRPG活動履歴管理Webサービス-##-Import・横断UI-Visual-Design再設計フェーズ-確定事項まとめ-###.txt](%E4%BB%95%E6%A7%98%E6%9B%B8%EF%BC%88%E3%83%86%E3%82%B9%E3%83%88%E7%94%A8%EF%BC%89%E5%8F%82%E7%85%A7%E8%B3%87%E6%96%99/%23-Web%E5%88%B6%E4%BD%9C%E7%B7%8F%E5%90%88%E6%BC%94%E7%BF%921-%23-TRPG%E6%B4%BB%E5%8B%95%E5%B1%A5%E6%AD%B4%E7%AE%A1%E7%90%86Web%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9-%23%23-Import%E3%83%BB%E6%A8%AA%E6%96%ADUI-Visual-Design%E5%86%8D%E8%A8%AD%E8%A8%88%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA-%E7%A2%BA%E5%AE%9A%E4%BA%8B%E9%A0%85%E3%81%BE%E3%81%A8%E3%82%81-%23%23%23.txt)
+
+添付回答：2026-10-01にUserが提供したChatGPT回答（貼り付けたテキスト.txt）。User回答：同日の「Desktopも含めて非表示に統一する」。添付回答の提案全体を採用したものではない。
+
+---
+
+# 50. 監査引継ぎ・未採用提案
+
+未解決事項は以下の二種類を区別する。UI / 業務Ruleが確定していても、それを実現するAPI契約が不足する場合がある。添付回答の具体案は、この表で「未採用」とした範囲では正式仕様ではない。
+
+| ID | 区分 | 確認できた確定事項 / 不足 | 次に整理する事項・未採用案 |
+|---|---|---|---|
+| A-01 | 確定FlowのAPI補完 | SelfPersonは表示名を必須で作成しUserへ紐付ける。スキップ不可。現行API一覧には初回設定を完了する契約がない。 | 作成+紐付けのRequest / Response、既設定時・再送時・並行操作時の扱い。Google名で自動確定する仕様は追加しない。 |
+| A-02 | 確定Profile方針の補完 + 編集意味の判断 | Profile-driven、Scenario.gameSystem基準、保存時のSystem Key / Profile Version保持は確定。初期対応System / Profile定義とFrontend取得方法が不足。 | 初期Profile集合、配布API、保存済み履歴の表示・編集と現在Profileの関係を整理。添付の「過去編集は保存時Profile固定」は未採用。 |
+| A-03 | 確定Import FlowのAPI補完 | 元Source比較、途中保存、登録済みCandidate再編集禁止、version競合検知は確定。Session更新を要求する本文に対しSession PATCH契約がなく、Source追加・原文取得・DTOも不足。 | File+Textの送信方法、Session / Candidate更新DTOと遷移、Source取得、同一Candidate並行登録時の整合性を具体化。正式Entityを増やさない。 |
+| A-04 | PL変更 / 所有権・所属境界のAPI補完 | 選択Participationのみ更新、非選択履歴維持、Table子更新時の親version更新は確定。現行change-personはPC.versionだけを要求する。 | 影響Tableとの競合検知、子IDが対象Table / PCに属すること、更新・detach集合の重複や不正IDの拒否を明記する。添付のexpectedTableVersions追加は未採用の具体案。 |
+| A-05 | 確定画像安全性のAPI補完 | Position / Zoomは非破壊Metadata。新保存成功前に旧画像を破壊しない。現行本文はMetadata保存後に専用Image APIへ送る2段階方式。未採用外部候補はDraft限定、初回採用時のみ同意。 | 現行方式での画像PUT / DELETEのexpected version・成功後version、途中失敗の整合復旧、同意状態の取得・更新を整理。全Mutation共通の返却統一とFile+Transform同時保存案は未採用。 |
+| A-06 | 確定Previous基準のAPI補完 | 基準確定仕様§23には、対象卓より前の実施日による最新EndPcState、複数日の最新日基準、日付不明時の登録順による低精度参考という既存方針がある。新TableはまだtableIdがなく、現行GET /tables/{tableId}/previous-end-stateをそのまま使用できない。 | 日付・PC・編集中Table除外を渡せる新規用契約と、登録順参考を明確に区別するResponseを具体化。添付の新POST Endpointは未採用。登録日時を実施日時として表示しない。 |
+| A-07 | 集計・検索意味の採用判断 | 同一Personが同一Tableに複数Participationを持てる。UC17件数、PL+KP Filter組合せ、変更影響の表示単位の具体定義が不足 / 不一致。 | Role別distinct Table集計、PL+KPはOR・FavoriteはAND、pcCount / tableCount / participationCountを併記する添付案はいずれも未採用。確定まで値を推測しない。 |
+| A-08 | テスト環境契約の補完 | Production Cookie設定とCSRF Lifecycleは確定。Local HTTPでSecure=falseを許す記述と__Host-名の組合せを整理する必要がある。GET /csrfのResponse契約も不足。 | テスト用Cookie名 / HTTPS方針、CSRF TokenとHeader名の取得契約、Profile別の適用範囲を具体化。ProductionのSecure / HttpOnly等の確定方針を弱めない。 |
+| A-09 | QA条件の補完 / 再検証 | 主要Viewport列挙はあるがTablet / Breakpoint境界、24文字の数え方、未命名Table採番の安定順、エラーFixtureの作り方が不足。Text Secondaryの背景とのContrastも要再検証。 | 境界条件と再現方法を定め、Colorの実際の使用箇所・文字サイズでContrastを確認する。今回Color Token / 文字数計算 / 採番方法は変更しない。 |
+
+Mobileレイアウト順・Appearances初期5件/録画導線・PL変更初期全件ON・PC画像Keyboard操作・起点別保存Navigationは、原資料に存在する事項であり、新規業務判断待ちへ戻さない。
+
+録画URLなしのDesktop Action非表示だけは、2026-10-01のUser回答により今回採用した。Mobile / Appearancesの既存採用事項とは根拠を区別する。
+
+ここに挙げた未補完契約は、実装開始前に該当するBackend API / DTO節とFrontend利用節を対で改訂し、その修正履歴を追記する。今回の改訂ではAPI / Schema / 集計Ruleの具体案を正式採用していない。

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1200" viewBox="0 0 800 1200">
+<rect width="100%" height="100%" fill="#133031"/>
+<circle cx="176" cy="240" r="144" fill="none" stroke="#dce5df" stroke-width="7" opacity=".8"/>
+<path d="M -40 744 C 160 576, 336 936, 544 660 S 784 540, 880 720" fill="none" stroke="#8ea6a2" stroke-width="22" opacity=".8"/>
+<rect x="496" y="144" width="176" height="360" fill="#dce5df" opacity=".82" transform="rotate(8 584 324)"/>
+<line x1="72" y1="983" x2="728" y2="983" stroke="#dce5df" stroke-width="2" opacity=".75"/>
+<text x="72" y="888" font-family="'Noto Serif CJK JP', serif" font-size="52" fill="#f4f4f2" font-weight="700">夏の終わりに</text>
+<text x="72" y="948" font-family="sans-serif" font-size="18" letter-spacing="5" fill="#dce5df">灯台書房</text>
+<text x="72" y="1104" font-family="sans-serif" font-size="14" letter-spacing="3" fill="#dce5df" opacity=".8">TEST TRAILER · 縦 2:3</text>
+</svg>
