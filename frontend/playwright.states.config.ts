@@ -1,0 +1,2 @@
+﻿import {defineConfig} from '@playwright/test';
+export default defineConfig({testDir:'qa',testMatch:'states.scenarios.ts',timeout:45000,workers:1,fullyParallel:false,retries:0,reporter:[['list'],['json',{outputFile:'../.runtime/states-results.json'}]],use:{baseURL:'http://localhost:5174',viewport:{width:1440,height:900},screenshot:'only-on-failure',trace:'retain-on-failure'},outputDir:'../.runtime/states-output'});

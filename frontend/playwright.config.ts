@@ -1,0 +1,2 @@
+import {defineConfig} from '@playwright/test';
+export default defineConfig({testDir:'qa',testMatch:'**/*.spec.ts',timeout:45000,workers:1,fullyParallel:false,retries:0,reporter:[['list'],['html',{outputFolder:'../.runtime/playwright-report',open:'never'}],['json',{outputFile:'../.runtime/playwright-results.json'}]],use:{baseURL:'http://localhost:5173',viewport:{width:1440,height:900},screenshot:'only-on-failure',trace:'retain-on-failure'},outputDir:'../.runtime/playwright-output'});

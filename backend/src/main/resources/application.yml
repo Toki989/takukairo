@@ -1,0 +1,38 @@
+server:
+  address: 127.0.0.1
+  port: 8080
+debug: false
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/takukairo}
+    username: ${DB_USER:takukairo}
+    password: ${DB_PASSWORD:local-test-only}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  session:
+    timeout: 7d
+    jdbc:
+      initialize-schema: never
+  servlet:
+    multipart:
+      max-file-size: 24MB
+      max-request-size: 64MB
+  flyway:
+    locations: classpath:db/migration
+logging:
+  level:
+    root: INFO
+    org.hibernate.orm.connections.pooling: WARN
+    com.zaxxer.hikari: WARN
+    org.springframework.jdbc: INFO
+    org.hibernate.SQL: INFO
+  structured:
+    format:
+      console: ecs
+app:
+  storage: ${STORAGE_PATH:../.runtime/storage}
+  booth:
+    live-fetch: false
+  rate-limit: true

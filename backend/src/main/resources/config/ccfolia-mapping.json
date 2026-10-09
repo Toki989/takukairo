@@ -1,0 +1,8 @@
+{
+ "configRevision":1,
+ "profiles":[
+  {"profileKey":"coc_6e_v1","statusMappings":{"SAN":"san","HP":"hp","MP":"mp"},"memoMappings":{},"ignoredStatuses":[]},
+  {"profileKey":"coc_7e_v1","statusMappings":{"SAN":"san","HP":"hp","MP":"mp"},"memoMappings":{},"ignoredStatuses":[]},
+  {"profileKey":"emoklore_v1","statusMappings":{"HP":"hp","MP":"mp"},"memoMappings":{"共鳴感情・表":"resonance_surface","共鳴感情・裏":"resonance_hidden","共鳴感情・ルーツ":"resonance_root"},"ignoredStatuses":["共鳴"]}
+ ]
+}

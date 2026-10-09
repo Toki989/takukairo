@@ -1,0 +1,468 @@
+[
+  {
+    "profileKey": "coc_6e_v1",
+    "canonicalSystemKey": "coc_6e",
+    "displayName": "クトゥルフ神話TRPG 6版",
+    "active": true,
+    "configRevision": 1,
+    "pcFields": [],
+    "endStateStatuses": [
+      {
+        "key": "san",
+        "label": "SAN",
+        "displayOrder": 10,
+        "required": false
+      },
+      {
+        "key": "hp",
+        "label": "HP",
+        "displayOrder": 20,
+        "required": false
+      },
+      {
+        "key": "mp",
+        "label": "MP",
+        "displayOrder": 30,
+        "required": false
+      }
+    ],
+    "showOutcome": true,
+    "growthLabel": "成長",
+    "aftereffectsLabel": "後遺症",
+    "optionSources": []
+  },
+  {
+    "profileKey": "coc_7e_v1",
+    "canonicalSystemKey": "coc_7e",
+    "displayName": "クトゥルフ神話TRPG 7版",
+    "active": true,
+    "configRevision": 1,
+    "pcFields": [],
+    "endStateStatuses": [
+      {
+        "key": "san",
+        "label": "SAN",
+        "displayOrder": 10,
+        "required": false
+      },
+      {
+        "key": "hp",
+        "label": "HP",
+        "displayOrder": 20,
+        "required": false
+      },
+      {
+        "key": "mp",
+        "label": "MP",
+        "displayOrder": 30,
+        "required": false
+      }
+    ],
+    "showOutcome": true,
+    "growthLabel": "成長",
+    "aftereffectsLabel": "後遺症",
+    "optionSources": []
+  },
+  {
+    "profileKey": "emoklore_v1",
+    "canonicalSystemKey": "emoklore",
+    "displayName": "エモクロアTRPG",
+    "active": true,
+    "configRevision": 1,
+    "pcFields": [
+      {
+        "key": "resonance_surface",
+        "label": "共鳴感情・表",
+        "inputType": "SELECT",
+        "required": false,
+        "displayOrder": 10,
+        "validation": {},
+        "optionSourceRef": {
+          "sourceKey": "emoklore_resonance_emotions",
+          "revision": 1
+        },
+        "itemFields": null
+      },
+      {
+        "key": "resonance_hidden",
+        "label": "共鳴感情・裏",
+        "inputType": "SELECT",
+        "required": false,
+        "displayOrder": 20,
+        "validation": {},
+        "optionSourceRef": {
+          "sourceKey": "emoklore_resonance_emotions",
+          "revision": 1
+        },
+        "itemFields": null
+      },
+      {
+        "key": "resonance_root",
+        "label": "共鳴感情・ルーツ",
+        "inputType": "SELECT",
+        "required": false,
+        "displayOrder": 30,
+        "validation": {},
+        "optionSourceRef": {
+          "sourceKey": "emoklore_resonance_emotions",
+          "revision": 1
+        },
+        "itemFields": null
+      }
+    ],
+    "endStateStatuses": [
+      {
+        "key": "hp",
+        "label": "HP",
+        "displayOrder": 10,
+        "required": false
+      },
+      {
+        "key": "mp",
+        "label": "MP",
+        "displayOrder": 20,
+        "required": false
+      }
+    ],
+    "showOutcome": true,
+    "growthLabel": "残響",
+    "aftereffectsLabel": "後遺症",
+    "optionSources": [
+      {
+        "sourceKey": "emoklore_resonance_emotions",
+        "revision": 1,
+        "options": [
+          {
+            "key": "e01",
+            "label": "自己顕示（欲望）",
+            "group": "欲望",
+            "displayOrder": 10,
+            "selectable": true
+          },
+          {
+            "key": "e02",
+            "label": "所有（欲望）",
+            "group": "欲望",
+            "displayOrder": 20,
+            "selectable": true
+          },
+          {
+            "key": "e03",
+            "label": "本能（欲望）",
+            "group": "欲望",
+            "displayOrder": 30,
+            "selectable": true
+          },
+          {
+            "key": "e04",
+            "label": "破壊（欲望）",
+            "group": "欲望",
+            "displayOrder": 40,
+            "selectable": true
+          },
+          {
+            "key": "e05",
+            "label": "優越感（欲望）",
+            "group": "欲望",
+            "displayOrder": 50,
+            "selectable": true
+          },
+          {
+            "key": "e06",
+            "label": "怠惰（欲望）",
+            "group": "欲望",
+            "displayOrder": 60,
+            "selectable": true
+          },
+          {
+            "key": "e07",
+            "label": "逃避（欲望）",
+            "group": "欲望",
+            "displayOrder": 70,
+            "selectable": true
+          },
+          {
+            "key": "e08",
+            "label": "好奇心（欲望）",
+            "group": "欲望",
+            "displayOrder": 80,
+            "selectable": true
+          },
+          {
+            "key": "e09",
+            "label": "スリル（欲望）",
+            "group": "欲望",
+            "displayOrder": 90,
+            "selectable": true
+          },
+          {
+            "key": "e10",
+            "label": "喜び（情念）",
+            "group": "情念",
+            "displayOrder": 100,
+            "selectable": true
+          },
+          {
+            "key": "e11",
+            "label": "怒り（情念）",
+            "group": "情念",
+            "displayOrder": 110,
+            "selectable": true
+          },
+          {
+            "key": "e12",
+            "label": "哀しみ（情念）",
+            "group": "情念",
+            "displayOrder": 120,
+            "selectable": true
+          },
+          {
+            "key": "e13",
+            "label": "幸福（情念）",
+            "group": "情念",
+            "displayOrder": 130,
+            "selectable": true
+          },
+          {
+            "key": "e14",
+            "label": "不安（情念）",
+            "group": "情念",
+            "displayOrder": 140,
+            "selectable": true
+          },
+          {
+            "key": "e15",
+            "label": "嫌悪（情念）",
+            "group": "情念",
+            "displayOrder": 150,
+            "selectable": true
+          },
+          {
+            "key": "e16",
+            "label": "恐怖（情念）",
+            "group": "情念",
+            "displayOrder": 160,
+            "selectable": true
+          },
+          {
+            "key": "e17",
+            "label": "嫉妬（情念）",
+            "group": "情念",
+            "displayOrder": 170,
+            "selectable": true
+          },
+          {
+            "key": "e18",
+            "label": "恨み（情念）",
+            "group": "情念",
+            "displayOrder": 180,
+            "selectable": true
+          },
+          {
+            "key": "e19",
+            "label": "正義（理想）",
+            "group": "理想",
+            "displayOrder": 190,
+            "selectable": true
+          },
+          {
+            "key": "e20",
+            "label": "崇拝（理想）",
+            "group": "理想",
+            "displayOrder": 200,
+            "selectable": true
+          },
+          {
+            "key": "e21",
+            "label": "善悪（理想）",
+            "group": "理想",
+            "displayOrder": 210,
+            "selectable": true
+          },
+          {
+            "key": "e22",
+            "label": "希望（理想）",
+            "group": "理想",
+            "displayOrder": 220,
+            "selectable": true
+          },
+          {
+            "key": "e23",
+            "label": "向上（理想）",
+            "group": "理想",
+            "displayOrder": 230,
+            "selectable": true
+          },
+          {
+            "key": "e24",
+            "label": "理性（理想）",
+            "group": "理想",
+            "displayOrder": 240,
+            "selectable": true
+          },
+          {
+            "key": "e25",
+            "label": "勝利（理想）",
+            "group": "理想",
+            "displayOrder": 250,
+            "selectable": true
+          },
+          {
+            "key": "e26",
+            "label": "秩序（理想）",
+            "group": "理想",
+            "displayOrder": 260,
+            "selectable": true
+          },
+          {
+            "key": "e27",
+            "label": "憧憬（理想）",
+            "group": "理想",
+            "displayOrder": 270,
+            "selectable": true
+          },
+          {
+            "key": "e28",
+            "label": "無我（理想）",
+            "group": "理想",
+            "displayOrder": 280,
+            "selectable": true
+          },
+          {
+            "key": "e29",
+            "label": "友情（関係）",
+            "group": "関係",
+            "displayOrder": 290,
+            "selectable": true
+          },
+          {
+            "key": "e30",
+            "label": "愛（関係）",
+            "group": "関係",
+            "displayOrder": 300,
+            "selectable": true
+          },
+          {
+            "key": "e31",
+            "label": "恋（関係）",
+            "group": "関係",
+            "displayOrder": 310,
+            "selectable": true
+          },
+          {
+            "key": "e32",
+            "label": "依存（関係）",
+            "group": "関係",
+            "displayOrder": 320,
+            "selectable": true
+          },
+          {
+            "key": "e33",
+            "label": "尊敬（関係）",
+            "group": "関係",
+            "displayOrder": 330,
+            "selectable": true
+          },
+          {
+            "key": "e34",
+            "label": "軽蔑（関係）",
+            "group": "関係",
+            "displayOrder": 340,
+            "selectable": true
+          },
+          {
+            "key": "e35",
+            "label": "庇護（関係）",
+            "group": "関係",
+            "displayOrder": 350,
+            "selectable": true
+          },
+          {
+            "key": "e36",
+            "label": "支配（関係）",
+            "group": "関係",
+            "displayOrder": 360,
+            "selectable": true
+          },
+          {
+            "key": "e37",
+            "label": "奉仕（関係）",
+            "group": "関係",
+            "displayOrder": 370,
+            "selectable": true
+          },
+          {
+            "key": "e38",
+            "label": "甘え（関係）",
+            "group": "関係",
+            "displayOrder": 380,
+            "selectable": true
+          },
+          {
+            "key": "e39",
+            "label": "後悔（傷）",
+            "group": "傷",
+            "displayOrder": 390,
+            "selectable": true
+          },
+          {
+            "key": "e40",
+            "label": "孤独（傷）",
+            "group": "傷",
+            "displayOrder": 400,
+            "selectable": true
+          },
+          {
+            "key": "e41",
+            "label": "諦観（傷）",
+            "group": "傷",
+            "displayOrder": 410,
+            "selectable": true
+          },
+          {
+            "key": "e42",
+            "label": "絶望（傷）",
+            "group": "傷",
+            "displayOrder": 420,
+            "selectable": true
+          },
+          {
+            "key": "e43",
+            "label": "否定（傷）",
+            "group": "傷",
+            "displayOrder": 430,
+            "selectable": true
+          },
+          {
+            "key": "e44",
+            "label": "疑念（傷）",
+            "group": "傷",
+            "displayOrder": 440,
+            "selectable": true
+          },
+          {
+            "key": "e45",
+            "label": "罪悪感（傷）",
+            "group": "傷",
+            "displayOrder": 450,
+            "selectable": true
+          },
+          {
+            "key": "e46",
+            "label": "狂気（傷）",
+            "group": "傷",
+            "displayOrder": 460,
+            "selectable": true
+          },
+          {
+            "key": "e47",
+            "label": "劣等感（傷）",
+            "group": "傷",
+            "displayOrder": 470,
+            "selectable": true
+          }
+        ]
+      }
+    ]
+  }
+]

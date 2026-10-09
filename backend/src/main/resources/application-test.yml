@@ -1,0 +1,4 @@
+app:
+  rate-limit: false
+  scheduling:
+    enabled: false

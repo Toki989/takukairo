@@ -1,0 +1,9 @@
+.tools/
+.runtime/
+backend/target/
+frontend/node_modules/
+frontend/dist/
+frontend/test-results/
+.env
+*.log
+*.tsbuildinfo

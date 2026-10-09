@@ -1,0 +1,10 @@
+<configuration>
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter"><level>INFO</level></filter>
+    <encoder class="org.springframework.boot.logging.logback.StructuredLogEncoder"><format>ecs</format></encoder>
+  </appender>
+  <logger name="org.hibernate.orm.connections.pooling" level="WARN"/>
+  <logger name="com.zaxxer.hikari" level="WARN"/>
+  <root level="INFO"><appender-ref ref="CONSOLE"/></root>
+</configuration>
