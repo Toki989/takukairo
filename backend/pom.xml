@@ -26,4 +26,11 @@
     <dependency><groupId>org.testcontainers</groupId><artifactId>testcontainers-junit-jupiter</artifactId><scope>test</scope></dependency>
   </dependencies>
   <build><plugins><plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId></plugin></plugins></build>
+  <profiles>
+    <profile>
+      <id>import-qa</id>
+      <!-- Keep verified bytecode separate from an IDE's incremental target/classes output. -->
+      <build><directory>${project.basedir}/../.runtime/import-inference-qa/backend-build</directory></build>
+    </profile>
+  </profiles>
 </project>

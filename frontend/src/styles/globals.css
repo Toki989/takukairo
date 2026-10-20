@@ -11,3 +11,9 @@
 .pc-form-page{max-width:1200px}.zoom-controls{display:flex;gap:8px;align-items:center;margin:16px 0 32px}.zoom-controls input[type=range]{width:60%;max-width:260px}.danger-zone{border-top:1px solid var(--border);margin-top:64px;padding-top:24px}.image-editor{min-height:280px;background:#e9edeb}@media(max-width:767px){.desktop-zoom{display:none}.zoom-controls{flex-wrap:wrap}}
 .date-popover{position:fixed;inset:82px auto auto 40px;max-width:calc(100vw - 48px);padding:16px 24px;background:var(--surface);border:1px solid var(--border);box-shadow:0 8px 20px #00000012;font-size:14px}.date-popover span{line-height:2}.is-new-table{border-left:3px solid var(--teal);padding-left:20px}.bulk-actions{min-width:0;max-width:100%;display:flex;flex-wrap:wrap;gap:12px}.bulk-actions>select{width:auto;max-width:100%}.bulk-actions>label{width:100%}
 .toolbar>label{min-height:44px;display:flex;align-items:center;gap:8px}
+
+/* Import review keeps inline work accessible without shrinking the candidate summary. */
+.review-row{flex-wrap:wrap;align-items:flex-start}.review-row>button{flex:1;min-width:0;overflow-wrap:anywhere}.review-inline{width:100%;padding-left:38px}.review-inline form{max-width:680px;padding:16px 0}.review-inline form button{margin:8px 8px 0 0}
+@media(max-width:767px){.review-inline{padding-left:0}.review-row{gap:12px}.import-page .page-heading{flex-wrap:wrap}.review-inline form button{width:100%;margin-right:0}}
+
+.import-name{min-height:44px;line-height:1.5;resize:vertical;white-space:pre-wrap}.review-row>button{white-space:pre-wrap}

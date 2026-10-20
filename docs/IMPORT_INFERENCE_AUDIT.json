@@ -1,0 +1,1208 @@
+{
+  "date": "2026-10-15",
+  "overallStatus": "REVIEW_FIXES_INTERNAL_PASS_ACCEPTANCE_WAITING",
+  "workspace": "C:/Src/takukairo",
+  "scope": "ローカル／専用テスト環境。外部公開・Production deployなし。",
+  "specification": {
+    "contract": "卓回廊_Codex実装正本_2026-10-08_R5.1.12_最終Contract補強版.md",
+    "contractSha256": "CFF1D89F67CE5763453E3E0C48E5DD8EAE004EF20653ED976A67D7C21141984B",
+    "priority": "Part A優先。正式Contract原本は変更していない。",
+    "supplement": "卓回廊｜IMP-D01〜D07 確定仕様全文.md を全文照合。明示変更箇所は追補を適用し、それ以外はR5.1.12 Part A優先を維持。",
+    "excludedDocuments": [
+      "01_引継ぎメモ.md",
+      "02_次チャット用プロンプト.md"
+    ],
+    "missingOriginals": [],
+    "previouslyExcludedDocumentsRemainExcluded": true,
+    "supplementSha256": "583FECB97F28E3676F3447136650292C431649EDE92A58228F01D63F60F5E79C",
+    "missingReferencedDesignFiles": [
+      "推論システム設計/01_引継ぎメモ.md",
+      "推論システム設計/02_次チャット用プロンプト.md"
+    ]
+  },
+  "changes": {
+    "backend": [
+      "ImportStructure / ImportStructureParser: 原文Range・物理行・論理レコード付き共通中間構造。形式別解析と推論を分離。",
+      "ImportInference: 文脈・値・Person-PC-Role・競合・未割当値・項目別Traceを生成。",
+      "ImportBoundary: Session内の質的な二者間仮説。コピー証拠を除外し、推移的Mergeをしない。",
+      "ImportService: 推論Support DataとTrace保存、実登録Validationとの整合改善、C1 Merge禁止、Split/MergeのTrace保持、Resolution変更時の確認失効。",
+      "ImportDrafts: Role保留/未保存・任意項目未保存・Quote/Spotlight/EndPcState Validation。LibraryService/TableServiceのImport専用呼出はCandidate savepointで原子的に巻き戻す。",
+      "未解析ブロック専用Preview/Apply/明示除外API、残範囲の保持、登録後Source Lock、Complete A/B。",
+      "Merge時に選択グループの全組合せ・反証を再評価し、競合する元の値を未割当に保持。"
+    ],
+    "frontend": [
+      "REVIEW主要情報・確認フィルター・ページ送り・Inline Edit・必要時DETAIL。",
+      "保存済みResolutionの実際の名前と不一致を表示し、明示Rebind可能。共有Resolutionの暗黙更新なし。",
+      "Autosave直列化・登録前Barrier・Version競合時のDraft保持・Backend応答に従う確認表示。",
+      "名前内改行を保持する編集欄、Keyboard・Focus・Mobile操作。",
+      "ImportDecisions: SKP意味変更の説明と確認、Role/参加記録の保留・明示未保存、任意情報の修正・未保存通知、未解析範囲Previewと登録済み原文比較。",
+      "通常Autosaveと同一PATCHでの明示CHECKEDを区別。Backendの実質補正後はUNCHECKEDの最終内容を再表示。"
+    ],
+    "migrationEffect": "V4: Candidate JSONB推論Support列。V5: Session/Sourceに従属する未解析ブロック、消費範囲、候補との対応履歴。Formal 9 Entity・Roleは変更なし。",
+    "migrations": [
+      "backend/src/main/resources/db/migration/V4__import_inference_support.sql",
+      "backend/src/main/resources/db/migration/V5__import_unparsed_blocks.sql"
+    ]
+  },
+  "audit": [
+    {
+      "id": 1,
+      "status": "IMPLEMENTED",
+      "topic": "共通中間構造と共通推論",
+      "result": "全5形式を共通中間構造→共通推論→Candidate/Trace/Support Dataへ接続。"
+    },
+    {
+      "id": 2,
+      "status": "IMPLEMENTED",
+      "topic": "全5形式の構造",
+      "result": "CSV引用セル、Markdown/HTMLの見出し・表・段落、TXT・貼付を保持。代表的な全5形式を同内容で検証。",
+      "limit": "任意のHTML rowspan/colspan等の全構文を網羅したとの主張はしない。"
+    },
+    {
+      "id": 3,
+      "status": "IMPLEMENTED",
+      "topic": "原文位置",
+      "result": "UTF-16原文範囲・抜粋・物理行とCSV論理レコードを保持。実際の活動範囲と共有文脈の参照を分離。"
+    },
+    {
+      "id": 4,
+      "status": "IMPLEMENTED",
+      "topic": "欠損・上書き",
+      "result": "欠損候補を出力し、C3値を後勝ちで消さない。所属不明の活動情報はCandidate外の未解析ブロックとして保持。"
+    },
+    {
+      "id": 5,
+      "status": "IMPLEMENTED",
+      "topic": "文脈範囲",
+      "result": "見出し範囲・停止・実施済み文脈・予定等の行局所例外を分離。"
+    },
+    {
+      "id": 6,
+      "status": "IMPLEMENTED",
+      "topic": "証拠と推論依存",
+      "result": "原文証拠ID・DIRECT/INHERITED/INFERRED/UNRESOLVED・dependsOnを保持。コピー根拠を独立加点しない。"
+    },
+    {
+      "id": 7,
+      "status": "IMPLEMENTED",
+      "topic": "Person-PC-Role",
+      "result": "実施済みPerson-PCはPL、CoC実進行はKPを仮入力。根拠不足・予定・引用等は未判定。"
+    },
+    {
+      "id": 8,
+      "status": "IMPLEMENTED",
+      "topic": "未判定・複数候補",
+      "result": "Role未判定・KP/PL両候補・根拠を一時relationsに保持し、役割選択・保留・Participation単位の明示未保存に接続。Formal RoleはKP/PLのみ。"
+    },
+    {
+      "id": 9,
+      "status": "IMPLEMENTED",
+      "topic": "卓境界・跨Source全体評価",
+      "result": "E3新規組立と既存Mergeを分離。Mergeの選択グループ内全組合せを直接評価し、反証C1を拒否。推移結合や数値スコア、一律必須の卓名・日付・URLなし。"
+    },
+    {
+      "id": 10,
+      "status": "IMPLEMENTED",
+      "topic": "C2/C3と解決",
+      "result": "C2仮説・C3双方値とTraceを保持。Merge後にも元の競合値を未割当として残し、割当/IGNOREと編集で明示解決。"
+    },
+    {
+      "id": 11,
+      "status": "IMPLEMENTED",
+      "topic": "組立・Merge・部分登録後",
+      "result": "既存MergeはPreview→Apply。REGISTERED後は既存未解析ブロックのみ候補化を許可し、登録済み候補・Source・通常Analyze/Resetを変更しない。"
+    },
+    {
+      "id": 12,
+      "status": "IMPLEMENTED",
+      "topic": "statusとValidation",
+      "result": "明示未保存を除いた実効DraftでValidationとstatusを評価。Role・Quote・Spotlight・Profile・保存先Resolutionを検証し、正式保存でも再検証。"
+    },
+    {
+      "id": 13,
+      "status": "IMPLEMENTED",
+      "topic": "CHECKEDとPATCH",
+      "result": "省略PATCHの実質編集は旧CHECKED失効、明示同一PATCHは最終値にCHECKED可能。Backend補正時はUNCHECKED。対象ON/OFF・同じResolutionへの再Bind・表示操作で失効しない。"
+    },
+    {
+      "id": 14,
+      "status": "IMPLEMENTED",
+      "topic": "Resolution不一致",
+      "result": "CREATE_NEW draft/REUSE実Formal名と任意属性の実保存先を表示。不一致は明示Rebindし、共有Resolution・既存Formalを自動更新しない。"
+    },
+    {
+      "id": 15,
+      "status": "IMPLEMENTED",
+      "topic": "Trace再関連付け",
+      "result": "項目・参加者別Traceを保存し、Split/Mergeのstable keyへ再関連付け。対応不明な旧TraceはDETACHEDで保持し、現在値のユーザー編集由来を別表示。候補化後の置換履歴も消費記録に残す。"
+    },
+    {
+      "id": 16,
+      "status": "IMPLEMENTED",
+      "topic": "未解析範囲の使用管理",
+      "result": "ブロックの消費、新Candidate、原文Trace、残範囲、Session Versionを同一Transactionで保存。重複/重複範囲・古いPreviewを拒否。登録失敗でも消費済みと候補対応を維持。"
+    },
+    {
+      "id": 17,
+      "status": "IMPLEMENTED",
+      "topic": "Complete・再開・Cleanup",
+      "result": "CompleteでA:全候補終端、B:全活動ブロック明示除外/候補化済みを同じSession Lock下で検証。7日/48時間、再開、Reset/Cleanup従属を維持。"
+    },
+    {
+      "id": 18,
+      "status": "IMPLEMENTED",
+      "topic": "H03任意情報",
+      "result": "Scenario作者/URL、PC共通/システム専用URL、Participation HO/Quote/Spotlight/EndPcStateを既存正式保存へ接続。24 EGC・Profile・PC必須・500文字等を維持。実保存後の失敗もCandidate単位で全巻戻し。"
+    },
+    {
+      "id": 19,
+      "status": "IMPLEMENTED",
+      "topic": "SKP-only明示選択",
+      "result": "SKP-onlyは無断KP化せず意味変更確認を要求。KP/PL/参加記録未保存/保留を区別。明示主KPがある場合は既存表示順で主→SKPを保存。後から主KPを追加したBackend補正は再確認。"
+    },
+    {
+      "id": 20,
+      "status": "IMPLEMENTED",
+      "topic": "REVIEWとInline Edit",
+      "result": "REVIEW主要情報、Inline Edit、初期true/PENDING/UNCHECKED、100件超ページ、Mobile・Keyboard・Focus・保存状態・登録前Barrier。"
+    },
+    {
+      "id": 21,
+      "status": "PRESERVED",
+      "topic": "Bulk範囲",
+      "result": "既存4 Bulk操作のみ。追加一括修正・一括CHECKED・恒久学習なし。"
+    },
+    {
+      "id": 22,
+      "status": "INTERNAL_PASS_ACCEPTANCE_WAITING",
+      "topic": "検証",
+      "result": "内部テストと実API/実DB Browserテストを実行。T01〜T24のユーザー元入力は未提供のため受入合格扱いにしない。"
+    }
+  ],
+  "verification": {
+    "status": "INTERNAL_PASS_ACCEPTANCE_WAITING",
+    "phase": "今回のレビュー修正後。過去145件の記録を流用していない。",
+    "dateLocal": "2026-10-15 Asia/Tokyo",
+    "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/qa-import-inference.ps1 -MeasureScale",
+    "environment": "専用PostgreSQL 18.6 / 127.0.0.1:55432 / takukairo_import_qa・takukairo_import_browser_qa。Backend 8082、Frontend 5175。専用Storageとimport-qa Maven出力。通常DB/通常Storageは未使用。",
+    "backend": {
+      "tests": 166,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": {
+        "ContractIntegrationTest": {
+          "tests": 107,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "DevProfileGuardTest": {
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "ImportBoundaryTest": {
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "ImportInferenceTest": {
+          "tests": 23,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "ImportReviewRegressionTest": {
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "LimitsParserImageTest": {
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "RateLimitTest": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "ResolverConfigTest": {
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
+    },
+    "frontendState": {
+      "tests": 5,
+      "passed": 5,
+      "failed": 0
+    },
+    "browser": {
+      "tests": 19,
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "builds": {
+      "backendPackage": "PASS",
+      "frontendTypecheck": "PASS",
+      "frontendProjectBuild": "PASS",
+      "viteBuild": "PASS"
+    },
+    "static": {
+      "gitDiffCheck": "PASS",
+      "formalContractHashUnchanged": "PASS",
+      "supplementHashUnchanged": "PASS",
+      "existingMigrationV1ToV3Unchanged": "PASS (改行表現を正規化してGit HEADと比較)",
+      "dependencyVersionsUnchanged": "PASS",
+      "migrationWorkingTreeSha256": {
+        "V1__domain_and_support.sql": "02E591F254C076918AB072ED69196A56A76135AD98A2ADA92FF1C333337B7169",
+        "V2__spring_session.sql": "D5333E408D24D210020C3A60D5E1E3F4B52E858B904D47D00B462DDE20C24954",
+        "V3__parent_child_membership_guards.sql": "570BF3035C517752925E388AFC9E5211DB57033B4CE13DAB13E4C285A00C0D6D"
+      }
+    },
+    "acceptance": {
+      "T01-T24": "INPUT_NOT_PROVIDED",
+      "missingReferencedDesignFiles": [
+        "推論システム設計/01_引継ぎメモ.md",
+        "推論システム設計/02_次チャット用プロンプト.md"
+      ],
+      "migrationUpgrade": "今回新しいMigrationなし。既存V1〜V5のValidate/Hibernate起動は再実行。V3→V5新規アップグレード実験は今回再実行していない。"
+    },
+    "evidence": [
+      ".runtime/import-review/verified-final.log",
+      ".runtime/import-inference-qa/backend-build/surefire-reports",
+      ".runtime/import-inference-qa/browser-results.json",
+      ".runtime/import-review/regression-before.log",
+      ".runtime/import-review/r1-api-before.log",
+      ".runtime/import-review/context-scope-before.log",
+      ".runtime/import-review/scale-results.json"
+    ],
+    "redGreen": {
+      "parser": "初回8件すべて修正前失敗(7 failures/1 error)、最終10件すべて成功。",
+      "r1": "実API/実DBの追加2件が修正前失敗。最終Mapping拒否を含む3件成功。",
+      "r8": "旧ソースを別出力領域で比較測定。r8-api-before.logは全ペア保存撤去後・Detail取得実装前の中間段階の失敗記録であり、元実装全体のbaselineとは区別。",
+      "intermediateFailures": "Browser初回18/19の1失敗からSKP Role Traceの不足を補正。全体最終結果とは区別。"
+    },
+    "scalability": {
+      "httpAndDb": {
+        "dateLocal": "2026-10-15 Asia/Tokyo",
+        "scope": "Dedicated real HTTP/PostgreSQL/Storage; synthetic scalability fixtures, not T01–T24",
+        "environment": {
+          "cpu": "11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz",
+          "logicalCpus": 8,
+          "systemMemoryBytes": 8362713088,
+          "node": "v24.21.0"
+        },
+        "cases": [
+          {
+            "name": "dense-100",
+            "inputBytes": 612,
+            "files": 1,
+            "candidates": 100,
+            "analyzeMs": 252.5869,
+            "analyzeBytes": 20,
+            "reviewMs": 10.715100000000007,
+            "reviewBytes": 29740,
+            "detailMs": 15.677600000000098,
+            "detailBytes": 16311,
+            "detailAssessments": 99,
+            "database": {
+              "candidateCount": 100,
+              "metadataBytes": 36956,
+              "persistedPairCount": 0
+            },
+            "memory": {
+              "peakWorkingSetBytes": 382767104,
+              "workingSetBytes": 361623552,
+              "cpuSeconds": 88.359375,
+              "heapInfo": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 102400K, used 82571K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 48 young (49152K), 3 survivors (3072K)\n",
+              "heapAfterDiagnosticFullGc": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 102400K, used 33096K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 0 young (0K), 0 survivors (0K)\n",
+              "note": "OS peak is cumulative for this Backend process. Diagnostic full GC runs after all timings, between fixtures; heap snapshots are not allocation peaks."
+            }
+          },
+          {
+            "name": "dense-300",
+            "inputBytes": 2012,
+            "files": 1,
+            "candidates": 300,
+            "analyzeMs": 591.3998999999999,
+            "analyzeBytes": 20,
+            "reviewMs": 14.626999999999953,
+            "reviewBytes": 29740,
+            "detailMs": 26.110099999999875,
+            "detailBytes": 45511,
+            "detailAssessments": 299,
+            "database": {
+              "candidateCount": 300,
+              "metadataBytes": 111441,
+              "persistedPairCount": 0
+            },
+            "memory": {
+              "peakWorkingSetBytes": 382767104,
+              "workingSetBytes": 368664576,
+              "cpuSeconds": 89.515625,
+              "heapInfo": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 102400K, used 76146K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 43 young (44032K), 0 survivors (0K)\n",
+              "heapAfterDiagnosticFullGc": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 102400K, used 33117K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 0 young (0K), 0 survivors (0K)\n",
+              "note": "OS peak is cumulative for this Backend process. Diagnostic full GC runs after all timings, between fixtures; heap snapshots are not allocation peaks."
+            }
+          },
+          {
+            "name": "dense-600",
+            "inputBytes": 4112,
+            "files": 1,
+            "candidates": 600,
+            "analyzeMs": 1174.9273999999996,
+            "analyzeBytes": 20,
+            "reviewMs": 18.935599999999795,
+            "reviewBytes": 29740,
+            "detailMs": 49.45589999999993,
+            "detailBytes": 89311,
+            "detailAssessments": 599,
+            "database": {
+              "candidateCount": 600,
+              "metadataBytes": 223341,
+              "persistedPairCount": 0
+            },
+            "memory": {
+              "peakWorkingSetBytes": 390193152,
+              "workingSetBytes": 386473984,
+              "cpuSeconds": 92.421875,
+              "heapInfo": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 102400K, used 79835K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 46 young (47104K), 5 survivors (5120K)\n",
+              "heapAfterDiagnosticFullGc": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 102400K, used 33149K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 1 young (1024K), 0 survivors (0K)\n",
+              "note": "OS peak is cumulative for this Backend process. Diagnostic full GC runs after all timings, between fixtures; heap snapshots are not allocation peaks."
+            }
+          },
+          {
+            "name": "dense-1500",
+            "inputBytes": 10912,
+            "files": 1,
+            "candidates": 1500,
+            "analyzeMs": 4778.7163,
+            "analyzeBytes": 20,
+            "reviewMs": 19.233399999999165,
+            "reviewBytes": 29742,
+            "detailMs": 88.66349999999875,
+            "detailBytes": 220711,
+            "detailAssessments": 1499,
+            "database": {
+              "candidateCount": 1500,
+              "metadataBytes": 559766,
+              "persistedPairCount": 0
+            },
+            "memory": {
+              "peakWorkingSetBytes": 436408320,
+              "workingSetBytes": 379514880,
+              "cpuSeconds": 99.171875,
+              "heapInfo": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 105472K, used 50492K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 8 young (8192K), 5 survivors (5120K)\n",
+              "heapAfterDiagnosticFullGc": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 105472K, used 33168K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 0 young (0K), 0 survivors (0K)\n",
+              "note": "OS peak is cumulative for this Backend process. Diagnostic full GC runs after all timings, between fixtures; heap snapshots are not allocation peaks."
+            }
+          },
+          {
+            "name": "size-20MiB",
+            "inputBytes": 20971520,
+            "files": 1,
+            "candidates": 1,
+            "analyzeMs": 718.1216000000004,
+            "analyzeBytes": 20,
+            "reviewMs": 5.349099999999453,
+            "reviewBytes": 441,
+            "detailMs": 146.83989999999903,
+            "detailBytes": 1396,
+            "detailAssessments": 0,
+            "database": {
+              "candidateCount": 1,
+              "metadataBytes": 366,
+              "persistedPairCount": 0
+            },
+            "memory": {
+              "peakWorkingSetBytes": 804917248,
+              "workingSetBytes": 804888576,
+              "cpuSeconds": 101.828125,
+              "heapInfo": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 502784K, used 484943K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 54 young (55296K), 3 survivors (3072K)\n",
+              "heapAfterDiagnosticFullGc": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 133120K, used 33174K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 0 young (0K), 0 survivors (0K)\n",
+              "note": "OS peak is cumulative for this Backend process. Diagnostic full GC runs after all timings, between fixtures; heap snapshots are not allocation peaks."
+            }
+          },
+          {
+            "name": "size-50MiB",
+            "inputBytes": 52428800,
+            "files": 3,
+            "candidates": 3,
+            "analyzeMs": 2070.425800000001,
+            "analyzeBytes": 20,
+            "reviewMs": 7.6525000000001455,
+            "reviewBytes": 1031,
+            "detailMs": 421.2060999999994,
+            "detailBytes": 1687,
+            "detailAssessments": 2,
+            "database": {
+              "candidateCount": 3,
+              "metadataBytes": 1098,
+              "persistedPairCount": 0
+            },
+            "memory": {
+              "peakWorkingSetBytes": 1202302976,
+              "workingSetBytes": 1202274304,
+              "cpuSeconds": 105.40625,
+              "heapInfo": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 986112K, used 977775K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 3 young (3072K), 1 survivors (1024K)\n",
+              "heapAfterDiagnosticFullGc": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 133120K, used 33193K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 1 young (1024K), 0 survivors (0K)\n",
+              "note": "OS peak is cumulative for this Backend process. Diagnostic full GC runs after all timings, between fixtures; heap snapshots are not allocation peaks."
+            }
+          }
+        ]
+      },
+      "boundaryComparison": {
+        "before": [
+          {
+            "mode": "before",
+            "candidates": 100,
+            "materializedAssessments": 4950,
+            "milliseconds": 175,
+            "jsonBytes": 1406716,
+            "filterPredicates": 495000,
+            "heapPoolPeakSumBytes": 19573912
+          },
+          {
+            "mode": "before",
+            "candidates": 300,
+            "materializedAssessments": 44850,
+            "milliseconds": 1053,
+            "jsonBytes": 12859716,
+            "filterPredicates": 13455000,
+            "heapPoolPeakSumBytes": 64759648
+          },
+          {
+            "mode": "before",
+            "candidates": 600,
+            "materializedAssessments": 179700,
+            "milliseconds": 9874,
+            "jsonBytes": 51639216,
+            "filterPredicates": 107820000,
+            "heapPoolPeakSumBytes": 185612384
+          }
+        ],
+        "after": [
+          {
+            "mode": "after",
+            "candidates": 100,
+            "materializedAssessments": 99,
+            "milliseconds": 32,
+            "jsonBytes": 13953,
+            "filterPredicates": 0,
+            "heapPoolPeakSumBytes": 8937784
+          },
+          {
+            "mode": "after",
+            "candidates": 300,
+            "materializedAssessments": 299,
+            "milliseconds": 32,
+            "jsonBytes": 42353,
+            "filterPredicates": 0,
+            "heapPoolPeakSumBytes": 8003288
+          },
+          {
+            "mode": "after",
+            "candidates": 600,
+            "materializedAssessments": 599,
+            "milliseconds": 37,
+            "jsonBytes": 84953,
+            "filterPredicates": 0,
+            "heapPoolPeakSumBytes": 9079120
+          },
+          {
+            "mode": "after-explicit-group",
+            "candidates": 600,
+            "pairAssessments": 179700,
+            "counterEvidence": 179700,
+            "milliseconds": 269,
+            "jsonBytes": 51626679
+          }
+        ],
+        "method": "同じXmx1g、同じ合成Memberを使用。beforeは旧Analyze境界評価＋全候補フィルタ/JSON保存相当、afterは1候補のDetail評価。after-explicit-groupは同じ全600候補の直接評価。作業量の異なる数値から一律の速度倍率を算出しない。heapPoolPeakSumBytesは各Heap pool peakの合計であり、プロセスの厳密な同時ピークとは区別。"
+      },
+      "limitations": [
+        "件数測定は2列の合成CSV(最大1,500候補)。全5形式・最大件数での同時負荷試験ではない。",
+        "20/50MiBの容量測定は小数の記録に空白paddingを加えた別fixture。50MiBの高密度・大量候補を合格とみなさない。",
+        "Byte上限から候補数や必要メモリの上限は決まらず、1,500超・同時ユーザー負荷・本番SLAは未検証。",
+        "明示的に600候補全体を評価すると179,700ペアと反証のJSONが約51.6MB。グループ評価はO(n²)と大きい応答を維持し、反証を省略していない。",
+        "OS peakは同一Backendプロセスの累積値。heapInfoはtiming後のsnapshot。診断Full GC後の保持量を別記し、GCは処理時間測定の外で行う。"
+      ]
+    },
+    "visual": "Mobile screenshotの項目・原文表示を目視確認。BrowserでKeyboard/Focus/横溢れ/Autosave Barrierを再検証。"
+  },
+  "compatibility": {
+    "normalDatabase": "今回のQA・Migration検証では使用・更新していない。",
+    "normalImagesAndStorage": "変更・削除していない。",
+    "existingUserChanges": "作業前の未追跡 推論システム設計/ と追加確定仕様全文を保全。",
+    "versions": "Java/Spring/React/TS/PostgreSQLと依存Version、既存Migration V1〜V3を維持。pomの変更はQA専用ビルド出力profileのみ。",
+    "activation": "通常Flyway経路で追加V4/V5の適用が必要。通常DBには今回未適用。",
+    "deployment": "未実施。"
+  },
+  "supportApi": {
+    "base": "/api/import/session/{sessionId}",
+    "unparsed": [
+      {
+        "method": "GET",
+        "path": "/unparsed-blocks",
+        "response": "sessionVersion と blocks（原文・Source・原文範囲・理由・state・version・consumption）"
+      },
+      {
+        "method": "POST",
+        "path": "/unparsed-blocks/{blockId}/exclude",
+        "body": {
+          "expectedSessionVersion": "integer",
+          "expectedVersion": "block version",
+          "exclude": true
+        },
+        "effect": "USER_OMITを保持。SourceやCandidate全体を除外しない。"
+      },
+      {
+        "method": "POST",
+        "path": "/unparsed-blocks/{blockId}/candidate-preview",
+        "body": {
+          "expectedSessionVersion": "integer",
+          "expectedVersion": "block version",
+          "parts": [
+            {
+              "startOffset": "ブロック内UTF-16開始位置",
+              "endOffset": "ブロック内UTF-16終了位置（範囲外）",
+              "candidateData": "任意のPartial CandidateData。抽出値へ明示フィールドだけを重ねる。参加者keyを置換する場合はparticipationMappingsを必須とする。",
+              "separateTableConfirmed": "登録済み記録と比較した別卓判断",
+              "contextRanges": "任意: 同じSourceの共有文脈の絶対範囲",
+              "participationMappings": [
+                {
+                  "sourceParticipationIndex": "抽出参加者配列の0始まりindex",
+                  "candidateParticipationKey": "編集後の対応先key"
+                }
+              ]
+            }
+          ]
+        },
+        "rules": "partsは1件以上、昇順・重複なし・活動記録を含む範囲。原文・分割構成・既存REGISTEREDとの比較をPreviewし、Sourceは再Analyzeしない。"
+      },
+      {
+        "method": "POST",
+        "path": "/unparsed-blocks/{blockId}/candidates",
+        "body": "Previewと同一のpayload + previewRevision",
+        "effect": "新Candidate(true/PENDING/UNCHECKED)、原文Trace、消費範囲、候補対応、未処理残範囲、Session Versionを原子的に保存。"
+      }
+    ],
+    "candidateSupport": {
+      "participationSaveDecision": [
+        "SAVE",
+        "OMIT",
+        "HOLD"
+      ],
+      "roleMeaningAccepted": "SKP-onlyをKPとして登録する意味変更を明示確認したboolean",
+      "omittedFields": {
+        "scenario": [
+          "authorName",
+          "sourceUrl"
+        ],
+        "participation": [
+          "handout",
+          "displayQuote",
+          "endPcState",
+          "characterSheetUrl"
+        ]
+      },
+      "optionalFields": {
+        "scenario": [
+          "authorName",
+          "sourceUrl"
+        ],
+        "participation": [
+          "displayQuote",
+          "spotlightType",
+          "endPcState",
+          "characterSheetUrl",
+          "sheetUrlTarget"
+        ]
+      },
+      "newEntityOptionalTargets": "抽出値・明示未保存とCREATE_NEWの保存draftが異なる場合は実保存先を表示し、明示Rebindを要する。共有Resolution自体は変更しない。REUSE/作成済みEntityの属性を自動更新しない。",
+      "endPcState": "既存Formalの profileKey / statusValues / growth / outcome / aftereffects。解決済みScenario.gameSystemの保存時点Profileで検証。",
+      "confirmation": "通常Autosaveは旧CHECKEDを送信しない。ユーザーの明示確認のみ同一PATCHのCHECKEDを送信。実質補正があればUNCHECKED応答と補正後Draftを再表示。"
+    },
+    "retention": "全SupportはSession/Sourceに従属。原文もSupportもACTIVE 7日/Complete後48時間の既存削除経路に従う。"
+  },
+  "verificationHistory": [
+    {
+      "phase": "BEFORE_REVIEW_FIXES",
+      "note": "今回修正前の過去記録。今回修正後の合格として使用しない。",
+      "verification": {
+        "status": "INTERNAL_PASS",
+        "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/qa-import-inference.ps1",
+        "dateLocal": "2026-10-15 Asia/Tokyo",
+        "environment": "専用PostgreSQL 55432 / Backend 8082 / Frontend localhost:5175。IDE増分出力から分離したMaven import-qa profile。",
+        "evidence": [
+          ".runtime/import-inference-qa/supplement-final.log",
+          ".runtime/import-inference-qa/browser-results.json",
+          ".runtime/import-inference-qa/backend-build/surefire-reports"
+        ],
+        "acceptance": {
+          "T01-T24": "INPUT_NOT_PROVIDED",
+          "CT01-CT19": "仕様の振る舞いを内部データで検証。ユーザー実入力の受入合格の代用にはしない。",
+          "CT20": "T01〜T24実Fixture待ち。全5形式・境界・正式Identityの内部回帰は別途PASS。"
+        },
+        "backend": {
+          "tests": 145,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "suites": {
+            "ContractIntegrationTest": 97,
+            "DevProfileGuardTest": 1,
+            "ImportBoundaryTest": 11,
+            "ImportInferenceTest": 23,
+            "LimitsParserImageTest": 9,
+            "RateLimitTest": 3,
+            "ResolverConfigTest": 1
+          }
+        },
+        "frontendState": {
+          "tests": 5,
+          "passed": 5
+        },
+        "browser": {
+          "tests": 16,
+          "passed": 16,
+          "failed": 0,
+          "skipped": 0
+        },
+        "builds": {
+          "backendPackage": "PASS",
+          "frontendTypecheck": "PASS",
+          "frontendProjectBuild": "PASS",
+          "viteBuild": "PASS"
+        },
+        "static": {
+          "gitDiffCheck": "PASS",
+          "formalContractHashUnchanged": "PASS",
+          "existingMigrationV1ToV3Unchanged": "PASS",
+          "dependencyVersionsUnchanged": "PASS"
+        },
+        "migrationUpgrade": "専用DBでV3→V5移行。既存原文・Candidate・CHECKED・Formal・V1〜V3 checksum保持を確認。V4→V5は既存QA DBでも適用。",
+        "h01": "PASS: 部分登録後、同時Apply、二重消費拒否、共通文脈と活動消費の分離、残範囲、登録失敗後の対応保持、Split/Merge置換履歴、Complete A/B。",
+        "h03": "PASS: 任意情報の正式属先・Quote/Spotlight・PCなしState拒否・明示未保存・REUSE非更新・実保存後失敗のCandidate全巻戻しと他Candidate部分成功。",
+        "role": "PASS: SKP-onlyの意味確認、未判定参加記録の明示未保存、主KP/SKP表示順、後からの主KP追加と再確認。",
+        "visual": "Mobile/Keyboard/Focus/横溢れ/Autosave BarrierをBrowserで確認。mobile-detail.pngも目視確認。"
+      }
+    }
+  ],
+  "reviewFixes": {
+    "dateLocal": "2026-10-15 Asia/Tokyo",
+    "priorFindings": "8件すべて現物で再確認。指摘の撤回・仕様期待値の創作なし。",
+    "fixes": [
+      {
+        "id": "R1",
+        "priority": "P1",
+        "reconfirmed": true,
+        "correctionToPriorFinding": null,
+        "status": "IMPLEMENTED_VERIFIED",
+        "fix": "ブロックをPreviewで一度解析し、生成ID・元データ・relations・Traceを同じ保存済みPreviewからApply。独自IDへの置換はsourceParticipationIndex→candidateParticipationKeyの明示一対一Mappingを要求。対象不明・複数独立レコードの暗黙採用を拒否。Traceのoffset・labelLocation・依存ID・ACTIVE/DETACHED・編集由来を維持。旧構造のPreviewはSTALEとして再確認。SKPの未決Role Traceも保持。",
+        "tests": [
+          "ContractIntegrationTest.r1BlockPreviewApplyKeepsIdentityAndMeaningGateThroughRealDbAndRegister",
+          "ContractIntegrationTest.r1ExplicitBlockDataMappingSurvivesSplitAndMerge",
+          "ContractIntegrationTest.r1UnmappedBlockParticipantReplacementIsRejectedWithoutConsumingSource"
+        ],
+        "result": "修正前の実HTTP/DBでID不一致2件を再現。修正後はID一致、無承認KPはNEEDS_FIX・Register FAILED、正式Table増加なし。承認後だけ実登録成功。Split/Merge後も未承認登録を拒否。"
+      },
+      {
+        "id": "R2",
+        "priority": "P1",
+        "reconfirmed": true,
+        "correctionToPriorFinding": null,
+        "status": "IMPLEMENTED_VERIFIED",
+        "fix": "HTMLを可視テキストノードの順序で走査し、混在コンテナ自身の文字や未対応ラッパー内の文字も取り込む。本文のない意味のある項目見出しも保持。未所属原文を未解析ブロックへ残し、Completeの確認対象に含める。空白・装飾・script/style等の構造は活動記録にしない。",
+        "tests": [
+          "ImportReviewRegressionTest.r2MixedHtmlOwnTextAndUnsupportedWrappersRemainReviewable",
+          "ContractIntegrationTest.r2HtmlCoverageAndCompleteUseAllMeaningfulTextButIgnoreDecoration"
+        ],
+        "result": "PL:田中が候補・項目Traceに残る。未所属の別原文がある間は全CandidateをEXCLUDEDにしてもComplete拒否。明示除外後だけComplete成功。"
+      },
+      {
+        "id": "R3",
+        "priority": "P1",
+        "reconfirmed": true,
+        "correctionToPriorFinding": null,
+        "status": "IMPLEMENTED_VERIFIED",
+        "fix": "引用をBlock metadataで運び、HTML表・段落・pre・Markdown引用/fenceの全経路で実参加推論を抑止。引用の未解析ブロックと残範囲は引用フラグ・理由を保持し、ラッパー外の部分選択による再候補化でも引用文脈を失わない。表の直前にある明示文脈は連続する表の範囲だけ継承する。",
+        "tests": [
+          "ImportReviewRegressionTest.r3QuotedHtmlTablesAndPreNeverCreateActualRoles",
+          "ImportReviewRegressionTest.r3And4AdjacentTableContextStopsAtFollowingParagraph",
+          "ContractIntegrationTest.r3QuotedHtmlTablesBecomeRetainedReviewItemsNotActualParticipation",
+          "ContractIntegrationTest.r3QuotedContextSurvivesBlockFragmentConversionAndResiduals"
+        ],
+        "result": "引用表は通常PL/PCの根拠にならず、元記録は確認対象として保持。pre内の部分候補化でも自動PLを生成しない。"
+      },
+      {
+        "id": "R4",
+        "priority": "P2",
+        "reconfirmed": true,
+        "correctionToPriorFinding": null,
+        "status": "IMPLEMENTED_VERIFIED",
+        "fix": "行内の実施済み・予定の根拠を集合として評価し、競合C3に両方の原文値・根拠を保存。列順による上書きを廃止。段落の参加者ごとに文脈と依存根拠をsnapshotし、後置文脈はその参加記録だけへ適用。表の文脈は次段落・空行・見出しで停止。同一卓内の複数競合行も別々に保持。進行担当のKP推論も別参加者の後置文脈を流用しない。",
+        "tests": [
+          "ImportReviewRegressionTest.r4CompetingRowContextIsOrderIndependentAndRetainsBothEvidence",
+          "ImportReviewRegressionTest.r4LateParagraphContextStopsAtParticipantBoundary",
+          "ImportReviewRegressionTest.r4MultipleConflictingRowsInExplicitScopeKeepIndependentEvidence",
+          "ContractIntegrationTest.r4ContextConflictSurvivesHttpAndDbInBothColumnOrders"
+        ],
+        "result": "両列順ともRole未判定・C3を保持し、無解決RegisterはFAILED。正常な実施済みPerson-PCのPL仮入力とCoC進行KP推論は既存テストを維持。"
+      },
+      {
+        "id": "R5",
+        "priority": "P2",
+        "reconfirmed": true,
+        "correctionToPriorFinding": null,
+        "status": "IMPLEMENTED_VERIFIED",
+        "fix": "HTML brを独立した値境界として扱い、認識可能なtd見出し行を構造として区別する。値を単一scenarioNameへ連結せず、見出しから架空のCandidateを生成しない。",
+        "tests": [
+          "ImportReviewRegressionTest.r5BrAndTdHeadersMatchAllOtherFormats",
+          "ContractIntegrationTest.r5And6BrHtmlAndInlinePcKeepFieldAssociationsAfterPersistence",
+          "Browser: R2 R3 R4 R5 HTML structure and competing contexts remain visible review items"
+        ],
+        "result": "CSV・Markdown・HTML(br/td)・TXT・貼付で同じScenario/Person/Role/PC。実HTTP/DB・Browserでも余分な見出しCandidateなし。"
+      },
+      {
+        "id": "R6",
+        "priority": "P2",
+        "reconfirmed": true,
+        "correctionToPriorFinding": null,
+        "status": "IMPLEMENTED_VERIFIED",
+        "fix": "インラインPC markerの抽出時にpcName専用Traceと根拠IDを生成。personName・pcName・推論Roleをそれぞれ同じ実参加者keyへ関連付け、RoleはPC根拠と文脈根拠へ依存する。",
+        "tests": [
+          "ImportReviewRegressionTest.r6InlinePcHasTraceToItsOwnFieldAndEvidence",
+          "ContractIntegrationTest.r5And6BrHtmlAndInlinePcKeepFieldAssociationsAfterPersistence"
+        ],
+        "result": "原文substring/offsetだけでなく、各fieldPathが実在参加者・実値に対応することをassert。実DB再取得と正式登録も成功。"
+      },
+      {
+        "id": "R7",
+        "priority": "P2",
+        "reconfirmed": true,
+        "correctionToPriorFinding": null,
+        "status": "IMPLEMENTED_VERIFIED",
+        "fix": "ラベルの正規化とQuote本文を分離。Markdown/HTMLセル本文をtrimしない。TXT/貼付のラベル直後のASCII空白1個のみを構文区切りとして扱い、残る前後空白を保持する。Unicode正規化・切詰めなし。",
+        "tests": [
+          "ImportReviewRegressionTest.r7QuoteWhitespaceAndUnicodeStayExactInAllFormats",
+          "ImportReviewRegressionTest.r7QuoteLineBreaksRemainExactInCsvAndHtml",
+          "ContractIntegrationTest.r7ExactQuote24GraphemesSavesInAllFormatsAnd25RequiresExplicitOmission",
+          "Browser: R7 Markdown Quote preserves boundary spaces and graphemes through autosave and reload"
+        ],
+        "result": "全5形式の空白・結合文字・ZWJ EGC、CSV/HTMLの改行を保持。24 EGCは正式保存値と一致。25 EGCは原値を残して登録拒否し、項目単位の明示未保存後だけ登録成功。"
+      },
+      {
+        "id": "R8",
+        "priority": "P2",
+        "reconfirmed": true,
+        "correctionToPriorFinding": null,
+        "status": "IMPLEMENTED_MEASURED_WITH_LIMITS",
+        "fix": "Analyzeで全ペアを生成・候補へ重複保存しない。Detailは対象候補と他候補の全直接比較だけをその時点で生成。根拠signatureは候補単位、Source fingerprintは境界取得リクエスト内でSource単位に再利用。全体Merge評価も各ペアを一度直接評価し、全件再走査を廃止。既存C1 ledgerと旧保存評価も互換検証に使用。",
+        "tests": [
+          "ImportBoundaryTest.onDemandIncidentPairsKeepAllEvidenceAndCounterevidence",
+          "ContractIntegrationTest.r8DenseAssessmentsAreDerivedOnDemandWithoutDatabaseDuplication",
+          "scripts/measure-import-inference.mjs",
+          ".runtime/import-review/BoundaryScaleProbe.java"
+        ],
+        "result": "600件の旧107,820,000 predicateを再計測。新規Analyzeに全ペア保存なし。Detailは599件、明示全体評価は179,700ペアと全反証を保持。黙った打切り・推移結合なし。性能の保証範囲は下記測定条件に限定。"
+      }
+    ],
+    "verification": {
+      "status": "INTERNAL_PASS_ACCEPTANCE_WAITING",
+      "phase": "今回のレビュー修正後。過去145件の記録を流用していない。",
+      "dateLocal": "2026-10-15 Asia/Tokyo",
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/qa-import-inference.ps1 -MeasureScale",
+      "environment": "専用PostgreSQL 18.6 / 127.0.0.1:55432 / takukairo_import_qa・takukairo_import_browser_qa。Backend 8082、Frontend 5175。専用Storageとimport-qa Maven出力。通常DB/通常Storageは未使用。",
+      "backend": {
+        "tests": 166,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suites": {
+          "ContractIntegrationTest": {
+            "tests": 107,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "DevProfileGuardTest": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "ImportBoundaryTest": {
+            "tests": 12,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "ImportInferenceTest": {
+            "tests": 23,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "ImportReviewRegressionTest": {
+            "tests": 10,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "LimitsParserImageTest": {
+            "tests": 9,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "RateLimitTest": {
+            "tests": 3,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "ResolverConfigTest": {
+            "tests": 1,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          }
+        }
+      },
+      "frontendState": {
+        "tests": 5,
+        "passed": 5,
+        "failed": 0
+      },
+      "browser": {
+        "tests": 19,
+        "passed": 19,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "builds": {
+        "backendPackage": "PASS",
+        "frontendTypecheck": "PASS",
+        "frontendProjectBuild": "PASS",
+        "viteBuild": "PASS"
+      },
+      "static": {
+        "gitDiffCheck": "PASS",
+        "formalContractHashUnchanged": "PASS",
+        "supplementHashUnchanged": "PASS",
+        "existingMigrationV1ToV3Unchanged": "PASS (改行表現を正規化してGit HEADと比較)",
+        "dependencyVersionsUnchanged": "PASS",
+        "migrationWorkingTreeSha256": {
+          "V1__domain_and_support.sql": "02E591F254C076918AB072ED69196A56A76135AD98A2ADA92FF1C333337B7169",
+          "V2__spring_session.sql": "D5333E408D24D210020C3A60D5E1E3F4B52E858B904D47D00B462DDE20C24954",
+          "V3__parent_child_membership_guards.sql": "570BF3035C517752925E388AFC9E5211DB57033B4CE13DAB13E4C285A00C0D6D"
+        }
+      },
+      "acceptance": {
+        "T01-T24": "INPUT_NOT_PROVIDED",
+        "missingReferencedDesignFiles": [
+          "推論システム設計/01_引継ぎメモ.md",
+          "推論システム設計/02_次チャット用プロンプト.md"
+        ],
+        "migrationUpgrade": "今回新しいMigrationなし。既存V1〜V5のValidate/Hibernate起動は再実行。V3→V5新規アップグレード実験は今回再実行していない。"
+      },
+      "evidence": [
+        ".runtime/import-review/verified-final.log",
+        ".runtime/import-inference-qa/backend-build/surefire-reports",
+        ".runtime/import-inference-qa/browser-results.json",
+        ".runtime/import-review/regression-before.log",
+        ".runtime/import-review/r1-api-before.log",
+        ".runtime/import-review/context-scope-before.log",
+        ".runtime/import-review/scale-results.json"
+      ],
+      "redGreen": {
+        "parser": "初回8件すべて修正前失敗(7 failures/1 error)、最終10件すべて成功。",
+        "r1": "実API/実DBの追加2件が修正前失敗。最終Mapping拒否を含む3件成功。",
+        "r8": "旧ソースを別出力領域で比較測定。r8-api-before.logは全ペア保存撤去後・Detail取得実装前の中間段階の失敗記録であり、元実装全体のbaselineとは区別。",
+        "intermediateFailures": "Browser初回18/19の1失敗からSKP Role Traceの不足を補正。全体最終結果とは区別。"
+      },
+      "scalability": {
+        "httpAndDb": {
+          "dateLocal": "2026-10-15 Asia/Tokyo",
+          "scope": "Dedicated real HTTP/PostgreSQL/Storage; synthetic scalability fixtures, not T01–T24",
+          "environment": {
+            "cpu": "11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz",
+            "logicalCpus": 8,
+            "systemMemoryBytes": 8362713088,
+            "node": "v24.21.0"
+          },
+          "cases": [
+            {
+              "name": "dense-100",
+              "inputBytes": 612,
+              "files": 1,
+              "candidates": 100,
+              "analyzeMs": 252.5869,
+              "analyzeBytes": 20,
+              "reviewMs": 10.715100000000007,
+              "reviewBytes": 29740,
+              "detailMs": 15.677600000000098,
+              "detailBytes": 16311,
+              "detailAssessments": 99,
+              "database": {
+                "candidateCount": 100,
+                "metadataBytes": 36956,
+                "persistedPairCount": 0
+              },
+              "memory": {
+                "peakWorkingSetBytes": 382767104,
+                "workingSetBytes": 361623552,
+                "cpuSeconds": 88.359375,
+                "heapInfo": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 102400K, used 82571K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 48 young (49152K), 3 survivors (3072K)\n",
+                "heapAfterDiagnosticFullGc": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 102400K, used 33096K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 0 young (0K), 0 survivors (0K)\n",
+                "note": "OS peak is cumulative for this Backend process. Diagnostic full GC runs after all timings, between fixtures; heap snapshots are not allocation peaks."
+              }
+            },
+            {
+              "name": "dense-300",
+              "inputBytes": 2012,
+              "files": 1,
+              "candidates": 300,
+              "analyzeMs": 591.3998999999999,
+              "analyzeBytes": 20,
+              "reviewMs": 14.626999999999953,
+              "reviewBytes": 29740,
+              "detailMs": 26.110099999999875,
+              "detailBytes": 45511,
+              "detailAssessments": 299,
+              "database": {
+                "candidateCount": 300,
+                "metadataBytes": 111441,
+                "persistedPairCount": 0
+              },
+              "memory": {
+                "peakWorkingSetBytes": 382767104,
+                "workingSetBytes": 368664576,
+                "cpuSeconds": 89.515625,
+                "heapInfo": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 102400K, used 76146K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 43 young (44032K), 0 survivors (0K)\n",
+                "heapAfterDiagnosticFullGc": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 102400K, used 33117K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 0 young (0K), 0 survivors (0K)\n",
+                "note": "OS peak is cumulative for this Backend process. Diagnostic full GC runs after all timings, between fixtures; heap snapshots are not allocation peaks."
+              }
+            },
+            {
+              "name": "dense-600",
+              "inputBytes": 4112,
+              "files": 1,
+              "candidates": 600,
+              "analyzeMs": 1174.9273999999996,
+              "analyzeBytes": 20,
+              "reviewMs": 18.935599999999795,
+              "reviewBytes": 29740,
+              "detailMs": 49.45589999999993,
+              "detailBytes": 89311,
+              "detailAssessments": 599,
+              "database": {
+                "candidateCount": 600,
+                "metadataBytes": 223341,
+                "persistedPairCount": 0
+              },
+              "memory": {
+                "peakWorkingSetBytes": 390193152,
+                "workingSetBytes": 386473984,
+                "cpuSeconds": 92.421875,
+                "heapInfo": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 102400K, used 79835K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 46 young (47104K), 5 survivors (5120K)\n",
+                "heapAfterDiagnosticFullGc": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 102400K, used 33149K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 1 young (1024K), 0 survivors (0K)\n",
+                "note": "OS peak is cumulative for this Backend process. Diagnostic full GC runs after all timings, between fixtures; heap snapshots are not allocation peaks."
+              }
+            },
+            {
+              "name": "dense-1500",
+              "inputBytes": 10912,
+              "files": 1,
+              "candidates": 1500,
+              "analyzeMs": 4778.7163,
+              "analyzeBytes": 20,
+              "reviewMs": 19.233399999999165,
+              "reviewBytes": 29742,
+              "detailMs": 88.66349999999875,
+              "detailBytes": 220711,
+              "detailAssessments": 1499,
+              "database": {
+                "candidateCount": 1500,
+                "metadataBytes": 559766,
+                "persistedPairCount": 0
+              },
+              "memory": {
+                "peakWorkingSetBytes": 436408320,
+                "workingSetBytes": 379514880,
+                "cpuSeconds": 99.171875,
+                "heapInfo": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 105472K, used 50492K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 8 young (8192K), 5 survivors (5120K)\n",
+                "heapAfterDiagnosticFullGc": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 105472K, used 33168K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 0 young (0K), 0 survivors (0K)\n",
+                "note": "OS peak is cumulative for this Backend process. Diagnostic full GC runs after all timings, between fixtures; heap snapshots are not allocation peaks."
+              }
+            },
+            {
+              "name": "size-20MiB",
+              "inputBytes": 20971520,
+              "files": 1,
+              "candidates": 1,
+              "analyzeMs": 718.1216000000004,
+              "analyzeBytes": 20,
+              "reviewMs": 5.349099999999453,
+              "reviewBytes": 441,
+              "detailMs": 146.83989999999903,
+              "detailBytes": 1396,
+              "detailAssessments": 0,
+              "database": {
+                "candidateCount": 1,
+                "metadataBytes": 366,
+                "persistedPairCount": 0
+              },
+              "memory": {
+                "peakWorkingSetBytes": 804917248,
+                "workingSetBytes": 804888576,
+                "cpuSeconds": 101.828125,
+                "heapInfo": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 502784K, used 484943K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 54 young (55296K), 3 survivors (3072K)\n",
+                "heapAfterDiagnosticFullGc": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 133120K, used 33174K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 0 young (0K), 0 survivors (0K)\n",
+                "note": "OS peak is cumulative for this Backend process. Diagnostic full GC runs after all timings, between fixtures; heap snapshots are not allocation peaks."
+              }
+            },
+            {
+              "name": "size-50MiB",
+              "inputBytes": 52428800,
+              "files": 3,
+              "candidates": 3,
+              "analyzeMs": 2070.425800000001,
+              "analyzeBytes": 20,
+              "reviewMs": 7.6525000000001455,
+              "reviewBytes": 1031,
+              "detailMs": 421.2060999999994,
+              "detailBytes": 1687,
+              "detailAssessments": 2,
+              "database": {
+                "candidateCount": 3,
+                "metadataBytes": 1098,
+                "persistedPairCount": 0
+              },
+              "memory": {
+                "peakWorkingSetBytes": 1202302976,
+                "workingSetBytes": 1202274304,
+                "cpuSeconds": 105.40625,
+                "heapInfo": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 986112K, used 977775K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 3 young (3072K), 1 survivors (1024K)\n",
+                "heapAfterDiagnosticFullGc": "9912:\r\ngarbage-first heap   total reserved 2041856K, committed 133120K, used 33193K [0x0000000083600000, 0x0000000100000000)\n region size 1024K, 1 young (1024K), 0 survivors (0K)\n",
+                "note": "OS peak is cumulative for this Backend process. Diagnostic full GC runs after all timings, between fixtures; heap snapshots are not allocation peaks."
+              }
+            }
+          ]
+        },
+        "boundaryComparison": {
+          "before": [
+            {
+              "mode": "before",
+              "candidates": 100,
+              "materializedAssessments": 4950,
+              "milliseconds": 175,
+              "jsonBytes": 1406716,
+              "filterPredicates": 495000,
+              "heapPoolPeakSumBytes": 19573912
+            },
+            {
+              "mode": "before",
+              "candidates": 300,
+              "materializedAssessments": 44850,
+              "milliseconds": 1053,
+              "jsonBytes": 12859716,
+              "filterPredicates": 13455000,
+              "heapPoolPeakSumBytes": 64759648
+            },
+            {
+              "mode": "before",
+              "candidates": 600,
+              "materializedAssessments": 179700,
+              "milliseconds": 9874,
+              "jsonBytes": 51639216,
+              "filterPredicates": 107820000,
+              "heapPoolPeakSumBytes": 185612384
+            }
+          ],
+          "after": [
+            {
+              "mode": "after",
+              "candidates": 100,
+              "materializedAssessments": 99,
+              "milliseconds": 32,
+              "jsonBytes": 13953,
+              "filterPredicates": 0,
+              "heapPoolPeakSumBytes": 8937784
+            },
+            {
+              "mode": "after",
+              "candidates": 300,
+              "materializedAssessments": 299,
+              "milliseconds": 32,
+              "jsonBytes": 42353,
+              "filterPredicates": 0,
+              "heapPoolPeakSumBytes": 8003288
+            },
+            {
+              "mode": "after",
+              "candidates": 600,
+              "materializedAssessments": 599,
+              "milliseconds": 37,
+              "jsonBytes": 84953,
+              "filterPredicates": 0,
+              "heapPoolPeakSumBytes": 9079120
+            },
+            {
+              "mode": "after-explicit-group",
+              "candidates": 600,
+              "pairAssessments": 179700,
+              "counterEvidence": 179700,
+              "milliseconds": 269,
+              "jsonBytes": 51626679
+            }
+          ],
+          "method": "同じXmx1g、同じ合成Memberを使用。beforeは旧Analyze境界評価＋全候補フィルタ/JSON保存相当、afterは1候補のDetail評価。after-explicit-groupは同じ全600候補の直接評価。作業量の異なる数値から一律の速度倍率を算出しない。heapPoolPeakSumBytesは各Heap pool peakの合計であり、プロセスの厳密な同時ピークとは区別。"
+        },
+        "limitations": [
+          "件数測定は2列の合成CSV(最大1,500候補)。全5形式・最大件数での同時負荷試験ではない。",
+          "20/50MiBの容量測定は小数の記録に空白paddingを加えた別fixture。50MiBの高密度・大量候補を合格とみなさない。",
+          "Byte上限から候補数や必要メモリの上限は決まらず、1,500超・同時ユーザー負荷・本番SLAは未検証。",
+          "明示的に600候補全体を評価すると179,700ペアと反証のJSONが約51.6MB。グループ評価はO(n²)と大きい応答を維持し、反証を省略していない。",
+          "OS peakは同一Backendプロセスの累積値。heapInfoはtiming後のsnapshot。診断Full GC後の保持量を別記し、GCは処理時間測定の外で行う。"
+        ]
+      },
+      "visual": "Mobile screenshotの項目・原文表示を目視確認。BrowserでKeyboard/Focus/横溢れ/Autosave Barrierを再検証。"
+    },
+    "sourceHashes": {
+      "backend/src/main/java/jp/takukairo/importsession/ImportService.java": "BF188FD940871EB6B504D7B8724EF4F662A7B635388E9942B1F938B7C8F082A7",
+      "backend/src/main/java/jp/takukairo/importsession/ImportStructure.java": "24A8E87A25C2FD992E771C5FDAD70FD1037C3B9B27BDCB12EC07332391BF2988",
+      "backend/src/main/java/jp/takukairo/importsession/ImportStructureParser.java": "0CB24FFAF503C47FA4C4703C03C9EB94F68CC60CB0D99C7D20BB6BB6D2ECB00A",
+      "backend/src/main/java/jp/takukairo/importsession/ImportInference.java": "609D31B64CD46EE5F9B638A761D417ABBBBB33A4019A73F713F8B214E1DD38CC",
+      "backend/src/main/java/jp/takukairo/importsession/ImportBoundary.java": "DF3DB1700CD2F25B398ED26D6751B75E15507B96819EB5689C79F0AC0D092079",
+      "backend/src/test/java/jp/takukairo/ImportReviewRegressionTest.java": "541F99352B18CC1C0BE8A477F5E8ACE7617B27BD2153C47B5A6B307537BDB061",
+      "backend/src/test/java/jp/takukairo/ImportBoundaryTest.java": "AF1AFD9A539459F937C1BAF8A636548F88B5DBDB39EC223AAD51AD665903DFA4",
+      "backend/src/test/java/jp/takukairo/ContractIntegrationTest.java": "1FA1012E69525475ABBA784E60ADA80A0E0C50103D1722E36CE9CD8AD36D8CD3",
+      "frontend/src/features/ImportDecisions.tsx": "97559F2898F5F7626DD4608735823C2403974B8DB71F7B66887EA36FB629FCEC",
+      "frontend/qa/import-inference.spec.ts": "46683DF8363AA5E07668807A17227A202189D566AE70FB2045D39D3CD17D91D3",
+      "scripts/qa-import-inference.ps1": "6EF39BEFF100B9552B163582A2EAADE32C69A241C40855B1F38E9AF37F19E1CD",
+      "scripts/measure-import-inference.mjs": "CDE0A455377452F6A1A1ACD7B0E1B2E8AC85DF6CF0B59B0BA540424BA8135944"
+    },
+    "remainingConstraints": [
+      "T01〜T24のユーザー実入力の受入は未実行。",
+      "通常DB・既存ユーザーの保存済み候補を移行/修復する処理は実行していない。修正は新しく解析/Previewする経路に適用。",
+      "旧構造の有効Previewは再Previewが必要。既存Source/REGISTERED候補は書き換えていない。",
+      "高密度50MiB入力、1,500超候補、本番環境でのSLA保証は今回の測定範囲外。",
+      "外部公開・Production deployは未実施。"
+    ]
+  }
+}

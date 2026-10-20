@@ -29,5 +29,9 @@ public class ImportController {
  @PostMapping("/{id}/candidates/merge-preview") Object mergePreview(@PathVariable long id,@RequestBody Map<String,Object>b){return service.preview(id,"MERGE",null,b);}
  @PostMapping("/{id}/candidates/merge") Object merge(@PathVariable long id,@RequestBody Map<String,Object>b){return service.apply(id,"MERGE",null,b);}
  @PostMapping("/{id}/register") Object register(@PathVariable long id,@RequestBody Map<String,Object>b){return service.register(id,b);}
+ @GetMapping("/{id}/unparsed-blocks") Object blocks(@PathVariable long id){return service.unparsedBlocks(id);}
+ @PostMapping("/{id}/unparsed-blocks/{bid}/exclude") Object excludeBlock(@PathVariable long id,@PathVariable long bid,@RequestBody Map<String,Object>b){return service.excludeBlock(id,bid,b);}
+ @PostMapping("/{id}/unparsed-blocks/{bid}/candidate-preview") Object previewBlock(@PathVariable long id,@PathVariable long bid,@RequestBody Map<String,Object>b){return service.previewBlock(id,bid,b);}
+ @PostMapping("/{id}/unparsed-blocks/{bid}/candidates") Object applyBlock(@PathVariable long id,@PathVariable long bid,@RequestBody Map<String,Object>b){return service.applyBlock(id,bid,b);}
  @PostMapping("/{id}/complete") Object complete(@PathVariable long id,@RequestBody Map<String,Object>b){return service.complete(id,b);}
 }

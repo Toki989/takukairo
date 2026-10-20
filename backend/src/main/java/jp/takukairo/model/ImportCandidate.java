@@ -15,6 +15,7 @@ public class ImportCandidate {
  @Column(name="registration_status", length=32) public String registrationStatus;
  @JdbcTypeCode(SqlTypes.JSON) @Column(name="registration_result", columnDefinition="jsonb") public String registrationResult = "{}";
  @JdbcTypeCode(SqlTypes.JSON) @Column(name="resolution_refs", columnDefinition="jsonb") public String resolutionRefs = "{}";
+ @JdbcTypeCode(SqlTypes.JSON) @Column(name="inference_data", columnDefinition="jsonb") public String inferenceData = "{}";
  @Column(name="created_at") public Instant createdAt = Instant.now();
  @Column(name="updated_at") public Instant updatedAt = Instant.now();
  @Version public long version;
