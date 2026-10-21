@@ -30,7 +30,7 @@ public final class ImportDrafts {
    if(optional(p.get("characterSheetUrl"))!=null){url(p.get("characterSheetUrl"),path+"/characterSheetUrl");if(optional(p.get("pcName"))==null||!Set.of("COMMON","SYSTEM").contains(Optional.ofNullable(text(p.get("sheetUrlTarget"))).orElse("")))throw ApiException.invalid(path+"/sheetUrlTarget","TARGET_REQUIRED","Character Sheet URLの保存先を選択してください。");if("SYSTEM".equals(p.get("sheetUrlTarget"))&&optional(gameSystem)==null)throw ApiException.invalid(path+"/sheetUrlTarget","SYSTEM_REQUIRED","保存先のゲームシステムを確認してください。");}
   }
  }
- public static boolean hasState(Map<String,Object>state){return obj(state.get("statusValues")).values().stream().anyMatch(Objects::nonNull)||optional(state.get("growth"))!=null||optional(state.get("outcome"))!=null||optional(state.get("aftereffects"))!=null;}
+ public static boolean hasState(Map<String,Object>state){return hasEndPcState(state);}
 
  /** Auto-derived display choice must be visible before explicit reconfirmation. */
  public static boolean normalizeSpotlight(Map<String,Object>d){boolean changed=false;for(var p:list(d.get("participations"))){if(!p.containsKey("displayQuote")&&!p.containsKey("spotlightType"))continue;boolean ho=optional(p.get("handout"))!=null&&!omitted(p,"handout"),quote=exactQuote(p.get("displayQuote"))!=null&&!omitted(p,"displayQuote");if(ho&&quote)continue;Object desired=ho?"HO":quote?"QUOTE":null;if(!Objects.equals(p.get("spotlightType"),desired)){p.put("spotlightType",desired);changed=true;}}return changed;}

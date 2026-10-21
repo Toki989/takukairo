@@ -23,12 +23,13 @@ public final class ImportInference {
  public List<ImportParser.Parsed> infer(Document doc) {
   var results=new ArrayList<ImportParser.Parsed>();var contexts=new TreeMap<Integer,List<Context>>();var completion=new TreeMap<Integer,Boolean>();var explicit=new TreeMap<Integer,Boolean>();Draft current=new Draft(),tableContext=null;Kind previous=null;
   for(var b:doc.blocks()) {
-   if(b.quoted()){if(!current.populated())inherit(current,contexts,completion,explicit);current.quotedEvidence=true;current.source(b);unknown(current,"引用: "+b.text(),b.range(),b);continue;}
+   if(b.quoted()){if(!current.populated())inherit(current,contexts,completion,explicit);current.quotedEvidence=true;current.source(b);if(b.text().codePoints().anyMatch(Character::isLetterOrDigit))unknown(current,"引用: "+b.text(),b.range(),b);else current.traces.add(b.range().trace("/inference/quoted",0,b.id()+":quoted","DIRECT",List.of()));continue;}
    if(b.kind()==Kind.HEADING){tableContext=null;previous=b.kind();emit(current,results,doc.format());current=new Draft();contexts.tailMap(b.level()).clear();completion.tailMap(b.level()).clear();explicit.tailMap(b.level()).clear();var pair=pair(b.text());String key=field(pair[0]);
-    if(Set.of("scenarioName","gameSystemName","tableName").contains(key)){contexts.put(b.level(),new ArrayList<>(List.of(new Context(key,pair[1],b))));if(key.equals("tableName"))explicit.put(b.level(),true);}else if(!completed(b.text())){contexts.put(b.level(),new ArrayList<>(List.of(new Context("unknown",b.text(),b))));}
-    boolean statusHeading=key.equals("context")||key.equals("unknown")&&pair[1].isEmpty();if(statusHeading&&(completed(b.text())||excludedContext(b.text())))completion.put(b.level(),completed(b.text()));if(statusHeading&&completed(b.text()))contexts.computeIfAbsent(b.level(),k->new ArrayList<>()).add(new Context("context",b.text(),b));continue;
+    if(Set.of("scenarioName","gameSystemName","tableName").contains(key)&&!pair[1].isBlank()){contexts.put(b.level(),new ArrayList<>(List.of(new Context(key,pair[1],b))));if(key.equals("tableName"))explicit.put(b.level(),true);}else if(!completed(b.text())&&!harmlessHeading(b.text())){contexts.put(b.level(),new ArrayList<>(List.of(new Context("unknown",b.text(),b))));}
+    boolean statusHeading=key.equals("context")||key.equals("unknown")&&pair[1].isEmpty();if(statusHeading&&(completed(b.text())||excludedContext(b.text())))completion.put(b.level(),completed(b.text()));if(statusHeading&&(completed(b.text())||excludedContext(b.text())))contexts.computeIfAbsent(b.level(),k->new ArrayList<>()).add(new Context("context",b.text(),b));continue;
    }
    if(b.kind()==Kind.BLANK){tableContext=null;previous=b.kind();if(!current.explicitTable){emit(current,results,doc.format());current=new Draft();}continue;}
+   if(b.kind()==Kind.PARAGRAPH&&b.text().codePoints().noneMatch(Character::isLetterOrDigit))continue;
    if(b.kind()==Kind.RECORD&&!current.explicitTable){
     if(tableContext==null&&list(current.data.get("participations")).isEmpty()&&current.traces.stream().anyMatch(t->"/inference/context".equals(t.get("fieldPath"))))tableContext=current;
     boolean sharedOnly=tableContext==current&&onlyContext(current);if(!sharedOnly)emit(current,results,doc.format());current=new Draft();
@@ -37,19 +38,26 @@ public final class ImportInference {
    if(b.kind()!=Kind.RECORD){tableContext=null;if(previous==Kind.RECORD&&!current.explicitTable){emit(current,results,doc.format());current=new Draft();}}
    previous=b.kind();
    if(!current.populated())inherit(current,contexts,completion,explicit);
+   if(b.kind()==Kind.PARAGRAPH){var entry=pair(b.text());if(field(entry[0]).equals("tableName")&&!entry[1].isBlank()&&current.data.get("tableName")!=null&&!Objects.equals(current.data.get("tableName"),entry[1])&&!current.explicitTable&&!list(current.data.get("participations")).isEmpty()){
+    // A repeated label after an activity is a boundary hypothesis, never proof of C1.
+    var prior=current;var hypothesis=map("kind","C2","fieldPath","/inference/boundary","values",List.of(prior.data.get("tableName"),entry[1]),"reasonCode","REPEATED_TABLE_AFTER_ACTIVITY","evidenceId",b.id());prior.conflicts.add(hypothesis);prior.traces.add(b.range().trace("/inference/boundary",0,b.id(),"UNRESOLVED",List.of()));emit(prior,results,doc.format());current=new Draft();inherit(current,contexts,completion,explicit);
+    for(String shared:List.of("scenarioName","gameSystemName","authorName","sourceUrl"))if(prior.data.get(shared)!=null){current.data.put(shared,prior.data.get(shared));for(var trace:prior.traces)if(("/table/"+shared).equals(trace.get("fieldPath"))){var inherited=new LinkedHashMap<>(trace);inherited.put("derivation","INHERITED");inherited.put("dependsOn",List.of(trace.get("evidenceId")));current.traces.add(inherited);}}
+    // A paragraph label cannot inherit the previous explicit scope as a proven same-table link.
+    current.scopeEvidenceId=null;current.explicitTable=false;current.conflicts.add(new LinkedHashMap<>(hypothesis));current.traces.add(b.range().trace("/inference/boundary",0,b.id(),"UNRESOLVED",List.of()));tableContext=null;
+   }}
    current.source(b);
    if(b.kind()==Kind.RECORD){current.participant=null;record(current,b);for(var trace:current.traces)for(var cell:b.cells())if(cell.labelRange()!=null&&Objects.equals(trace.get("startOffset"),cell.range().startOffset())){trace.put("labelLocation",cell.labelRange().trace("/structure/columnLabel",0,"header:"+cell.labelRange().startOffset(),"DIRECT",List.of()));trace.put("dependsOnLabel", "header:"+cell.labelRange().startOffset());}}
    else {
     var pair=pair(b.text());String key=field(pair[0]);
     if(key.equals("scenarioName")&&!Objects.equals(current.data.get("scenarioName"),"")&&!Objects.equals(current.data.get("scenarioName"),pair[1])&&!current.explicitTable){emit(current,results,doc.format());current=new Draft();inherit(current,contexts,completion,explicit);current.source(b);}
-    if((actualContext(b.text())||excludedContext(b.text()))&&pair[1].isEmpty()){accept(current,"context",b.text(),b.range(),b,b.text());}
-    else {var segments=b.text().split("[／/]\\s*(?=(?:PC|HO|セリフ|台詞|Quote|終了SAN|終了HP|終了MP|Spotlight)[:：])");if(segments.length>1){for(var segment:segments){var entry=pair(segment);accept(current,field(entry[0]),entry[1],b.range(),b,segment);}}else accept(current,key,pair[1].isEmpty()?b.text():pair[1],b.range(),b,b.text());}
+    if((actualContext(b.text())||excludedContext(b.text()))&&pair[1].isEmpty()&&!b.text().matches(".*[:：].*")){accept(current,"context",b.text(),b.range(),b,b.text());}
+    else inline(current,b);
    }
   }
   emit(current,results,doc.format());
   // A meaningful field heading without any body must not disappear from accounting.
-  var covered=new HashSet<Object>();results.forEach(p->p.traces().forEach(t->covered.add(t.get("startOffset"))));
-  for(var b:doc.blocks())if(b.kind()==Kind.HEADING&&!b.quoted()&&!field(pair(b.text())[0]).equals("unknown")&&!covered.contains(b.range().startOffset())){var d=new Draft();d.source(b);var pair=pair(b.text());accept(d,field(pair[0]),pair[1],b.range(),b,b.text());emit(d,results,doc.format());}
+  var covered=new HashSet<Object>();results.forEach(p->p.traces().forEach(t->{int at=((Number)t.get("startOffset")).intValue();boolean anchored=!list(p.data().get("participations")).isEmpty()||!list(p.data().get("tableDates")).isEmpty()||List.of("scenarioName","tableName","recordingUrl").stream().anyMatch(key->p.data().get(key) instanceof String s&&!s.isBlank());if(anchored||!text(t.get("fieldPath")).startsWith("/unassignedValues/")||at>=((Number)p.inference().get("recordStartOffset")).intValue()&&at<((Number)p.inference().get("recordEndOffset")).intValue())covered.add(at);}));
+  for(var b:doc.blocks())if(b.kind()==Kind.HEADING&&!b.quoted()&&!harmlessHeading(b.text())&&!covered.contains(b.range().startOffset())){var d=new Draft();d.source(b);var pair=pair(b.text());accept(d,field(pair[0]),field(pair[0]).equals("unknown")?b.text():pair[1],b.range(),b,b.text());emit(d,results,doc.format());}
   results.sort(Comparator.comparingInt(p->((Number)p.inference().get("recordStartOffset")).intValue()));return assemble(results);
  }
  private List<ImportParser.Parsed> assemble(List<ImportParser.Parsed> pieces) {
@@ -69,19 +77,21 @@ public final class ImportInference {
   var outerEvidence=new LinkedHashSet<>(d.usedContext);boolean outerCompleted=d.completed,outerExcluded=d.contextExcluded;int first=list(d.data.get("participations")).size();
   var outerContexts=new ArrayList<>(d.localContexts);d.localContexts.clear();d.recordMode=true;
   // Interpret row context before roles, but do not let a row exception leak to other records.
-  for(var c:b.cells())if(field(c.label()).equals("context")&&!c.value().isBlank())accept(d,"context",c.value(),c.range(),b,c.label()+": "+c.value());
-  for(var c:b.cells())if(!Set.of("person","KP","PL","SKP","context","progress").contains(field(c.label()))&&!PARTICIPANT_FIELDS.contains(field(c.label())))if(!c.value().isBlank())accept(d,field(c.label()),c.value(),c.range(),b,c.label()+": "+c.value());
-  for(var c:b.cells())if(Set.of("person","KP","PL","SKP").contains(field(c.label()))&&!c.value().isBlank())accept(d,field(c.label()),c.value(),c.range(),b,c.label()+": "+c.value());
+  for(var c:b.cells())if(field(c.label()).equals("context")&&hasValue(c))accept(d,"context",c.value(),c.range(),b,c.label()+": "+c.value());
+  for(var c:b.cells())if(!Set.of("person","KP","PL","SKP","context","progress").contains(field(c.label()))&&!PARTICIPANT_FIELDS.contains(field(c.label())))if(hasValue(c))accept(d,field(c.label()),c.value(),c.range(),b,c.label()+": "+c.value());
+  for(var c:b.cells())if(Set.of("person","KP","PL","SKP").contains(field(c.label()))&&hasValue(c))accept(d,field(c.label()),c.value(),c.range(),b,c.label()+": "+c.value());
   var rowParts=list(d.data.get("participations")).subList(first,list(d.data.get("participations")).size());if(rowParts.size()>1){var eligible=rowParts.stream().filter(part->!"KP".equals(part.get("role"))).toList();d.participant=eligible.size()==1?eligible.getFirst():null;}
-  for(var c:b.cells())if(PARTICIPANT_FIELDS.contains(field(c.label()))&&!c.value().isBlank())accept(d,field(c.label()),c.value(),c.range(),b,c.label()+": "+c.value());
-  for(var c:b.cells())if(field(c.label()).equals("progress")&&!c.value().isBlank())accept(d,"progress",c.value(),c.range(),b,c.label()+": "+c.value());
+  for(var c:b.cells())if(PARTICIPANT_FIELDS.contains(field(c.label()))&&hasValue(c))accept(d,field(c.label()),c.value(),c.range(),b,c.label()+": "+c.value());
+  for(var c:b.cells())if(field(c.label()).equals("progress")&&hasValue(c))accept(d,"progress",c.value(),c.range(),b,c.label()+": "+c.value());
   var parts=list(d.data.get("participations"));for(int i=first;i<parts.size();i++){String key=text(parts.get(i).get("candidateParticipationKey"));d.recordCompleted.put(key,d.completed);d.recordExcluded.put(key,d.contextExcluded);d.recordEvidence.put(key,new ArrayList<>(d.usedContext));}
   d.completed=outerCompleted;d.contextExcluded=outerExcluded;d.usedContext.clear();d.usedContext.addAll(outerEvidence);d.localContexts.clear();d.localContexts.addAll(outerContexts);d.recordMode=false;d.participant=null;
  }
+ private boolean hasValue(Cell c){return field(c.label()).equals("displayQuote")?!c.value().isEmpty():!c.value().isBlank();}
  private void accept(Draft d,String key,String value,Range range,Block b,String original) {
   String evidence=b.id()+":"+key+":"+range.startOffset();
+  if(!key.equals("unknown")&&(value.isEmpty()||!key.equals("displayQuote")&&value.isBlank())){d.traces.add(range.trace("/inference/missing/"+key,b.logicalRecord(),evidence,"DIRECT",List.of()));return;}
   if(Set.of("scenarioName","gameSystemName","tableName","recordingUrl","authorName","sourceUrl").contains(key)) {
-   Object old=d.data.get(key);if(old!=null&&!old.equals("")&&!Objects.equals(old,value)&&d.traces.stream().anyMatch(t->Objects.equals(t.get("fieldPath"),"/table/"+key)&&!Objects.equals(t.get("derivation"),"INHERITED"))){d.conflicts.add(map("kind","C3","fieldPath","/table/"+key,"values",List.of(old,value),"evidenceId",evidence));unknown(d,original,range,b);}
+   Object old=d.data.get(key);if(old!=null&&!old.equals("")&&!Objects.equals(old,value)&&(key.equals("tableName")&&d.explicitTable||d.traces.stream().anyMatch(t->Objects.equals(t.get("fieldPath"),"/table/"+key)&&!Objects.equals(t.get("derivation"),"INHERITED")))){d.conflicts.add(map("kind","C3","fieldPath","/table/"+key,"values",List.of(old,value),"evidenceId",evidence));unknown(d,original,range,b);}
    else d.data.put(key,value);
    d.traces.add(range.trace("/table/"+key,b.logicalRecord(),evidence,"DIRECT",List.of()));return;
   }
@@ -107,7 +117,7 @@ public final class ImportInference {
   }
   if(Set.of("pc","role","handout").contains(key)) {
    if(d.participant==null){unknown(d,value,range,b);return;}var p=d.participant;String field=key.equals("pc")?"pcName":key.equals("handout")?"handout":"role";
-   if(key.equals("role")&&!Set.of("KP","PL").contains(value)){d.relations.add(map("candidateParticipationKey",p.get("candidateParticipationKey"),"state","UNDETERMINED","originalRole",value,"evidenceIds",List.of(evidence)));d.traces.add(range.trace("/participations/"+p.get("candidateParticipationKey")+"/role",b.logicalRecord(),evidence,"UNRESOLVED",List.of()));if(value.matches("(?is).*\\bKP\\b.*\\bPL\\b.*|.*\\bPL\\b.*\\bKP\\b.*")){var relation=d.relations.getLast();relation.put("state","ALTERNATIVES");relation.put("candidateRoles",List.of("KP","PL"));relation.put("reason","原文にKPとPLの両候補があるため明示選択が必要");}else if(!value.equals("SKP"))unknown(d,original,range,b);return;}
+   if(key.equals("role")&&!Set.of("KP","PL").contains(value)){p.put("role",null);d.relations.add(map("candidateParticipationKey",p.get("candidateParticipationKey"),"state","UNDETERMINED","originalRole",value,"evidenceIds",List.of(evidence)));d.traces.add(range.trace("/participations/"+p.get("candidateParticipationKey")+"/role",b.logicalRecord(),evidence,"UNRESOLVED",List.of()));if(value.matches("(?is).*\\bKP\\b.*\\bPL\\b.*|.*\\bPL\\b.*\\bKP\\b.*")){var relation=d.relations.getLast();relation.put("state","ALTERNATIVES");relation.put("candidateRoles",List.of("KP","PL"));relation.put("reason","原文にKPとPLの両候補があるため明示選択が必要");}else if(!value.equals("SKP"))unknown(d,original,range,b);return;}
    if(p.get(field)!=null&&!Objects.equals(p.get(field),value)){d.conflicts.add(map("kind","C3","fieldPath","/participations/"+p.get("candidateParticipationKey")+"/"+field,"values",List.of(p.get(field),value),"evidenceId",evidence));unknown(d,original,range,b);return;}
    p.put(field,value);d.traces.add(range.trace("/participations/"+p.get("candidateParticipationKey")+"/"+field,b.logicalRecord(),evidence,"DIRECT",List.of()));if(key.equals("pc"))inferRole(d,p,range,b,evidence);return;
   }
@@ -144,9 +154,27 @@ public final class ImportInference {
   }
  }
  private void resolveKnownSkp(Draft d){boolean main=list(d.data.get("participations")).stream().anyMatch(p->"KP".equals(p.get("role"))&&d.relations.stream().noneMatch(r->Objects.equals(r.get("candidateParticipationKey"),p.get("candidateParticipationKey"))&&"SKP".equals(r.get("originalRole"))));if(!main)return;var skpKeys=new HashSet<String>();for(var r:d.relations)if("SKP".equals(r.get("originalRole"))&&!Boolean.FALSE.equals(r.get("eligibleActualParticipation"))){r.put("hasMainKp",true);r.put("state","PROVISIONAL");skpKeys.add(text(r.get("candidateParticipationKey")));}var parts=list(d.data.get("participations"));for(var p:parts)if(skpKeys.contains(text(p.get("candidateParticipationKey"))))p.put("role","KP");parts.sort(Comparator.comparingInt(p->skpKeys.contains(text(p.get("candidateParticipationKey")))?1:0));}
- private boolean excludedContext(String s){return s.matches("(?is).*(予定|日程調整|主催|作者|投稿者|引用|NPC|planned|quote).*");}
- private boolean actualContext(String s){return s.matches("(?is).*(実施済|プレイ済|通過済|参加者.*記録|completed|played).*");}
+ private boolean excludedContext(String s){return s.matches("(?is).*(予定|候補|未実施|未完了|未プレイ|未通過|日程調整|主催|作者|投稿者|引用|NPC|(?:実施済み?|完了|プレイ済み?|通過済み?)(?:ではない|でない|ではなく|していない)|\\b(?:planned|candidate|tentative|quote|uncompleted|unplayed)\\b|\\b(?:not|never)\\s+(?:yet\\s+)?(?:completed|played)\\b).*")||s.strip().matches("(?s)^(?:\".*\"|“.*”|「.*」|『.*』)$");}
+ private boolean actualContext(String s){return !excludedContext(s)&&s.matches("(?is).*(実施済|プレイ済|通過済|参加者.*記録|\\bcompleted\\b|\\bplayed\\b).*");}
  private boolean completed(String s){return actualContext(s)&&!excludedContext(s);}
+ private boolean harmlessHeading(String s){return s.codePoints().noneMatch(Character::isLetterOrDigit)||s.strip().matches("(?i)(?:概要|目次|参加者|参加者一覧|その他|メモ|Overview|Contents)");}
+ private void inline(Draft d,Block b){
+  String[] segments=b.text().split("(?i)[／/]\\s*(?=(?:PC|HO|セリフ|台詞|Quote|終了SAN|終了HP|終了MP|Spotlight)[:：])",-1);int quote=-1;
+  for(int i=0;i<segments.length;i++)if(field(pair(segments[i])[0]).equals("displayQuote")){quote=i;break;}
+  if(quote>=0&&quote<segments.length-1){
+   // Neither punctuation nor a Quote label alone disambiguates dialogue from inline attributes.
+   int at=0;for(int i=0;i<quote;i++){at+=segments[i].length();var delimiter=Pattern.compile("[／/]\\s*").matcher(b.text());delimiter.region(at,b.text().length());if(delimiter.lookingAt())at=delimiter.end();}
+   String original=b.text().substring(at),whole=pair(original)[1];boolean inlineContext=quote>=2;var alternatives=new ArrayList<Map<String,Object>>();
+   for(int i=quote;i<segments.length;i++){var entry=pair(segments[i]);alternatives.add(map("field",field(entry[0]),"value",entry[1]));}
+   for(int i=0;i<quote;i++){var entry=pair(segments[i]);accept(d,field(entry[0]),entry[1],b.range(),b,segments[i]);}
+   if(inlineContext){for(int i=quote;i<segments.length;i++){var entry=pair(segments[i]);accept(d,field(entry[0]),entry[1],b.range(),b,segments[i]);}}
+   else accept(d,"displayQuote",whole,b.range(),b,original);
+   String path=d.participant==null?"/inference/inlineQuote":"/participations/"+d.participant.get("candidateParticipationKey")+"/displayQuote";
+   d.conflicts.add(map("kind","C3","fieldPath",path,"reasonCode","INLINE_QUOTE","values",List.of("台詞全体: "+whole,"Inline項目: "+String.join(" ／ ",Arrays.copyOfRange(segments,quote,segments.length))),"interpretations",List.of(map("type","QUOTE","value",whole),map("type","INLINE","fields",alternatives)),"evidenceId",b.id()));unknown(d,original,b.range(),b);
+   for(var trace:d.traces)if(Objects.equals(trace.get("startOffset"),b.range().startOffset())&&text(trace.get("fieldPath")).startsWith("/participations/")&&alternatives.stream().anyMatch(a->text(trace.get("fieldPath")).endsWith("/"+switch(text(a.get("field"))){case "pc"->"pcName";case "stateSan","stateHp","stateMp"->"endPcState/statusValues/"+text(a.get("field")).substring(5).toLowerCase(Locale.ROOT);default->text(a.get("field"));}))){trace.put("derivation","UNRESOLVED");trace.put("interpretationEvidenceId",b.id());}return;
+  }
+  for(String segment:segments){var entry=pair(segment);String key=field(entry[0]);boolean delimited=segment.indexOf(':')>=0||segment.indexOf('：')>=0;accept(d,key,delimited?entry[1]:segment,b.range(),b,segment);}
+ }
  private void unknown(Draft d,String value,Range r,Block b) {
   if(value.isBlank())return;String item="u-"+UUID.randomUUID();list(d.data.get("unassignedValues")).add(map("itemKey",item,"rawValue",value,"assignment",map("type","UNASSIGNED","candidateParticipationKey",null)));d.traces.add(r.trace("/unassignedValues/"+item,b.logicalRecord(),b.id()+":"+r.startOffset(),"DIRECT",List.of()));
  }

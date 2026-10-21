@@ -43,12 +43,20 @@ public final class ImportStructureParser {
  }
  private Document lines(String raw,boolean markdown,String fallback) {
   var blocks=new ArrayList<Block>();var headings=new TreeMap<Integer,String>();var headers=new ArrayList<String>();var headerRanges=new ArrayList<Range>();
-  String parent=null;int offset=0;boolean fence=false;String[] lines=raw.split("\\r\\n|\\n|\\r",-1);
+  String parent=null;int offset=0;String[] lines=raw.split("\\r\\n|\\n|\\r",-1);var codeLines=new BitSet();var quoteLines=new BitSet();
+  if(markdown){var tree=org.commonmark.parser.Parser.builder().includeSourceSpans(org.commonmark.parser.IncludeSourceSpans.BLOCKS).build().parse(raw);tree.accept(new org.commonmark.node.AbstractVisitor(){
+   private void code(org.commonmark.node.Node node){var spans=node.getSourceSpans();if(!spans.isEmpty())codeLines.set(spans.getFirst().getLineIndex(),spans.getLast().getLineIndex()+1);}
+   @Override public void visit(org.commonmark.node.FencedCodeBlock node){code(node);}
+   @Override public void visit(org.commonmark.node.IndentedCodeBlock node){code(node);}
+   @Override public void visit(org.commonmark.node.BlockQuote node){var spans=node.getSourceSpans();if(!spans.isEmpty())quoteLines.set(spans.getFirst().getLineIndex(),spans.getLast().getLineIndex()+1);visitChildren(node);}
+  });}
   for(int i=0;i<lines.length;i++) {
    String original=lines[i],text=original;int start=offset,end=start+original.length();
    offset=end+(end<raw.length()&&raw.charAt(end)=='\r'&&end+1<raw.length()&&raw.charAt(end+1)=='\n'?2:1);
    String id="b-"+(i+1);Kind kind=text.isBlank()?Kind.BLANK:Kind.PARAGRAPH;int level=0;var cells=new ArrayList<Cell>();
-   if(markdown&&(text.startsWith("~~~")||text.startsWith(String.valueOf((char)96).repeat(3))))fence=!fence;
+   boolean fence=codeLines.get(i);
+   // CommonMark includes lazy continuation lines even when they have no '>' marker.
+   if(markdown&&(fence||quoteLines.get(i))){headers.clear();headerRanges.clear();blocks.add(new Block(id,kind,0,parent,original,List.of(),index.range(start,end),0,true));continue;}
    boolean setext=markdown&&!fence&&i+1<lines.length&&lines[i+1].strip().matches("=+|-{3,}");
    if(setext){text=(lines[i+1].strip().startsWith("=")?"# ":"## ")+text;}
    var heading=Pattern.compile("^(#{1,6})\\s+(.+)$").matcher(text.strip());
@@ -56,10 +64,19 @@ public final class ImportStructureParser {
    else if(!fence&&(text.startsWith("|")||original.contains("\t"))) {
     char delimiter=original.contains("\t")?'\t':'|';var spans=splitCells(raw,start,end,delimiter);var values=spans.stream().map(s->s.excerpt().strip()).toList();
     if(!values.isEmpty()&&values.stream().allMatch(s->s.matches(":?-{3,}:?")))continue;
-    if(headers.isEmpty()){headers.addAll(values);headerRanges.addAll(spans);continue;}
+    if(headers.isEmpty()){
+     boolean separator=i+1<lines.length&&lines[i+1].strip().matches("\\|?\\s*:?-{3,}:?\\s*(?:\\|\\s*:?-{3,}:?\\s*)*\\|?");
+     boolean labelled=values.stream().anyMatch(s->!ImportInference.field(s).equals("unknown"));
+     if(labelled||separator){headers.addAll(values);headerRanges.addAll(spans);
+      // Unknown header-only content is still reviewable; a following data row consumes it as a label.
+      boolean dataFollows=i+(separator?2:1)<lines.length&&(lines[i+(separator?2:1)].startsWith("|")||lines[i+(separator?2:1)].contains("\t"));
+      if(dataFollows||values.stream().allMatch(s->!ImportInference.field(s).equals("unknown")))continue;
+     }
+     blocks.add(new Block(id,Kind.PARAGRAPH,0,parent,original,List.of(),index.range(start,end),0));continue;
+    }
     kind=Kind.RECORD;for(int c=0;c<values.size();c++){String label=c<headers.size()?headers.get(c):"";cells.add(new Cell(label,ImportInference.field(label).equals("displayQuote")?spans.get(c).excerpt():values.get(c),spans.get(c),c<headerRanges.size()?headerRanges.get(c):null));}
    }else {headers.clear();headerRanges.clear();if(!fence&&markdown)text=text.replaceFirst("^(?:[-*+]|[0-9]+[.)])\\s+","");}
-   boolean quoted=markdown&&(fence||text.stripLeading().startsWith(">"));
+   boolean quoted=markdown&&text.stripLeading().startsWith(">");
    blocks.add(new Block(id,kind,level,parent,text,cells,index.range(start,end),0,quoted));if(kind==Kind.HEADING)parent=id;if(setext){int nextEnd=offset+lines[i+1].length();offset=nextEnd+(nextEnd<raw.length()&&raw.charAt(nextEnd)=='\r'&&nextEnd+1<raw.length()&&raw.charAt(nextEnd+1)=='\n'?2:1);i++;}
   }
   return new Document(markdown?"MARKDOWN":fallback,raw,blocks);

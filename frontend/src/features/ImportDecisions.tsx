@@ -4,6 +4,7 @@ import {ErrorPanel,useErrors} from '../components/common';
 import type {CandidateData,ImportSession,UnparsedBlock,Profile,Resolve} from '../api/types';
 
 type Part=CandidateData['participations'][number];
+export function InferenceConflict({conflict:c}:{conflict:{fieldPath:string;values:unknown[];reasonCode?:string}}){return <div role="status" style={{overflowWrap:'anywhere'}}><p>競合 {c.fieldPath}: {c.values.map(String).join(' / ')}。未割当の原文を確認してください。</p>{c.reasonCode==='INLINE_QUOTE'&&<p>台詞とInline項目の区切りが曖昧なため、両方の解釈を保持しています。Quoteと後続項目を原文と照合して編集し、未割当の扱いを選択してください。</p>}{c.reasonCode==='REPEATED_TABLE_AFTER_ACTIVITY'&&<p>卓名の反復と参加者記録から、所属範囲の候補を分けています。別卓と断定していません。原文と所属を確認し、同卓なら統合のプレビューから明示適用してください。</p>}</div>}
 export function omittedDescriptions(d:CandidateData):string[]{
  const values=(d.omittedFields??[]).map(f=>'シナリオの '+f);
  for(const p of d.participations){if(p.saveDecision==='OMIT')values.push(p.personName+' の参加記録（HO・Quote・終了時データ等を含む）');else for(const f of p.omittedFields??[])values.push(p.personName+' の '+f)}
