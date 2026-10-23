@@ -1,4 +1,15 @@
 import type {CandidateData,Resolution} from '../api/types';
+export function assignedData(raw:CandidateData):CandidateData {
+ const d=structuredClone(raw),assigned=new Map<string,string>();
+ for(const u of d.unassignedValues){const a=u.assignment,p=d.participations.find(p=>p.candidateParticipationKey===a.candidateParticipationKey);const field=a.type==='PARTICIPATION_PERSON'?'personName':a.type==='PARTICIPATION_PC'?'pcName':a.type==='PARTICIPATION_HANDOUT'?'handout':null;
+  if(!field||!p||p.saveDecision==='OMIT'||p.omittedFields?.includes(field))continue;
+  const key=p.candidateParticipationKey+':'+field;if(assigned.has(key)&&assigned.get(key)!==u.rawValue)return structuredClone(raw);assigned.set(key,u.rawValue);p[field]=u.rawValue;
+ }return d;
+}
+export function editAssignedField(raw:CandidateData,key:string,field:'personName'|'pcName'|'handout',value:string):CandidateData {
+ const type=field==='personName'?'PARTICIPATION_PERSON':field==='pcName'?'PARTICIPATION_PC':'PARTICIPATION_HANDOUT';
+ return {...raw,participations:raw.participations.map(p=>p.candidateParticipationKey===key?{...p,[field]:value}:p),unassignedValues:raw.unassignedValues.map(u=>u.assignment.type===type&&u.assignment.candidateParticipationKey===key?{...u,assignment:{type:'UNASSIGNED',candidateParticipationKey:null}}:u)};
+}
 export function resolutionName(r:Resolution):string {
  return r.decision==='CREATE_NEW'?String(r.draftData?.name??r.draftData?.displayName??''):String(r.createdEntityId??r.existingEntityId??'');
 }

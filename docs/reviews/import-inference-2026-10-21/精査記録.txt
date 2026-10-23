@@ -1,0 +1,272 @@
+卓回廊 Import推論システム 追加精査記録
+日付: 2026-10-21 Asia/Tokyo
+対象Commit: 2392430eb13041ef6dec163d04b864610738c9b0
+状態: 精査完了。修正は未着手。前回5件を保持し、新規6件を追加。計11件OPEN。
+
+検証: 現行Backend全ソースを隔離先へコンパイル。既存推論・境界テスト58件成功、失敗0。
+追加の内部入力31ケースを実行。これは不具合反例・対照例・設計上の観察を含む件数であり、31件の不具合という意味ではない。
+Service反例の永続化と所有者lookupはメモリ上の代替。実DBの登録・Transaction・Version・Rollbackを検証した結果ではない。
+業務コード・既存テストSuite・通常DB・Storageは変更していない。今回作成したものは精査記録と検証資料だけ。
+
+R01 [HIGH] Mergeで片方だけにある作者・URL等が未保存通知なしに候補から脱落する
+由来: PREVIOUS_REVIEW / 状態: OPEN_NOT_FIXED
+該当: backend/src/main/java/jp/takukairo/importsession/ImportService.java:207 / backend/src/main/java/jp/takukairo/importsession/ImportService.java:208 / frontend/src/features/Import.tsx:29
+観測: 作者・Scenario URLが空の候補Aを先頭に、作者B・URLありの候補BをMergeするとcanApply=true。統合候補にはBの作者・URLも、その未割当値もない。今回確認したのはPreview出力であり、実DBへの登録は未実行。
+期待: 採用済みの抽出情報は統合後も保持する。保存しないなら対象値と明示除外意思を結びつけ、登録前と結果に通知する。
+原因: 画面が最初の候補のscalar値を採用し、Backendは非空値が2種類以上あるC3だけを保全する。1種類しかない値の脱落を検出しない。
+修正範囲: 競合検出と全入力値の保全を分ける。全入力値・任意情報・除外意思を統合先へ照合し、引継ぎまたは明示解決を要求する。
+修正後に確認すること:
+  - 先頭だけ空／末尾だけ空／順序逆転／全候補で同じ非空値／異なる非空値を確認する
+  - authorName、sourceUrl、recordingUrl、gameSystemNameを横断する
+  - omittedFieldsの異なる候補を統合しても他候補の値を暗黙除外しない
+  - Preview→Apply→実登録後のFormal値と未保存通知を照合する
+検証ID: R01-merge-single-value
+
+R02 [HIGH] HTML結合セル・入れ子表を通常の列として読み、別の値を人物名にする
+由来: PREVIOUS_REVIEW_EXPANDED / 状態: OPEN_NOT_FIXED
+該当: backend/src/main/java/jp/takukairo/importsession/ImportStructureParser.java:124 / backend/src/main/java/jp/takukairo/importsession/ImportStructureParser.java:129
+観測: rowspan=2のシナリオ列を持つ表では2行目の佐藤をscenarioName、赤い星をPLのpersonNameへ割り当てる。colspanでも後続PCが人物名になる。入れ子表ではPLPC田中青い月という連結文字列が人物名になる。
+期待: セルと列の対応が分からない構造は通常フィールドへ確定せず、元範囲を保持して確認へ回す。
+原因: childrenのth/tdの物理添字だけでheaderを選び、rowspan/colspanや子テーブルの境界を考慮しない。
+修正範囲: 構造アダプターで表グリッドと入れ子境界を扱う。未対応構造は検出して未解析へ退避する。推測した誤ったDIRECT Traceを生成しない。
+修正後に確認すること:
+  - rowspan、colspan、入れ子表、複数段header、欠落セル、列数過不足を確認する
+  - 抽出値だけでなくラベルLocationと元セルの対応も照合する
+  - 未対応時にも活動範囲が消えずCompleteの判定へ接続されることを実APIで確認する
+検証ID: R02-rowspan, N24-html-colspan, N07-html-nested-table
+
+R03 [HIGH] 否定・不確実・下位の未確認文脈を実施済みとしてPL推論へ使う
+由来: PREVIOUS_REVIEW_EXPANDED / 状態: OPEN_NOT_FIXED
+該当: backend/src/main/java/jp/takukairo/importsession/ImportInference.java:29 / backend/src/main/java/jp/takukairo/importsession/ImportInference.java:153 / backend/src/main/java/jp/takukairo/importsession/ImportInference.java:157
+観測: プレイ済みではありません、実施済みか未確認、参加者募集記録のいずれもPerson-PCからPLを仮入力する。実施済み見出しの下に記録:未確認を置いても、上位の実施済み判定が残る。
+期待: 実施済みの肯定証拠が明確な場合にRole Aを使い、否定・不確実・募集や連絡だけの記録ではRoleを保留する。局所状態は上位状態を適切に止める。
+原因: actualContextが部分一致の二値判定で、否定は一部表現しか扱わない。見出しのcompletionも既知の肯定・否定の場合しか更新しない。
+修正範囲: 肯定／否定／不明・不確実を分離し、文脈の所属範囲と上位継承の停止を共通化する。単語を追加するだけでなく局所上書きと根拠依存を検証する。
+修正後に確認すること:
+  - 日本語の否定・敬体・不確実・募集・連絡記録と英語否定を確認する
+  - 見出し／段落／CSV行の同じ意味を比較する
+  - 上位肯定＋局所否定／不明、兄弟範囲、遅れて現れる記録状態を確認する
+  - 直接PLラベル、PL推論、CoC進行KP推論それぞれの影響を分けて確認する
+検証ID: R03-negative, N01-child-unknown-status, N20-neutral-participation-context, N21-uncertain-context
+
+R04 [MEDIUM] 段落やcaptionのシナリオ情報と、その直後の表の参加記録が切れる
+由来: PREVIOUS_REVIEW_EXPANDED / 状態: OPEN_NOT_FIXED
+該当: backend/src/main/java/jp/takukairo/importsession/ImportInference.java:33 / backend/src/main/java/jp/takukairo/importsession/ImportInference.java:36
+観測: シナリオA・CoC・実施済みという段落の直後に氏名/PCの表を置くと、シナリオだけの候補とシナリオ未設定の参加者候補になる。実施状態だけは表へ継承する。captionのシナリオ情報も同様。
+期待: 共有文脈として採用する情報は属性とTraceを一緒に引き継ぐ。所属が不確実ならその関連候補を保持し、情報を無関係な候補へ分離して終わらせない。自動同卓統合の根拠を創作しない。
+原因: tableContextがcompleted/contextExcludedとcontext Traceだけをコピーする。scalar属性の引継ぎと意味上の関連付けがない。
+修正範囲: 見出し以外の共有文脈の適用条件・停止条件を整理し、属性と根拠を一体で引き継ぐ。
+修正後に確認すること:
+  - 表直前の段落、HTML caption、見出しの同内容を比較する
+  - 後続の別表・別段落へ文脈が漏れないことを確認する
+  - シナリオ・ゲームシステム・作者・URLと実施状態の整合を確認する
+検証ID: R04-paragraph-table, N23-table-caption-field
+
+R05 [MEDIUM] 同じ行のKPとSKPを一人のKP名として読む
+由来: PREVIOUS_REVIEW / 状態: OPEN_NOT_FIXED
+該当: backend/src/main/java/jp/takukairo/importsession/ImportInference.java:99 / backend/src/main/java/jp/takukairo/importsession/ImportInference.java:162
+観測: KP：佐藤、SKP：田中を、personName=佐藤、SKP：田中、role=KPの一人として抽出する。
+期待: 追補のKP/SKP明示例どおり二つのParticipationを抽出し、主KP先頭・SKP後続へ接続する。
+原因: Inline分割対象に人物・Roleラベルがなく、最初のコロン以降全体を名前にする。
+修正範囲: 人物名自体の記号やQuoteを守りながら、明示Roleラベルによる項目境界を扱う。
+修正後に確認すること:
+  - 同一行／別行／CSV別列の同内容を比較する
+  - KP→SKP、SKP→KP、PL併記、複数SKPを確認する
+  - 名前中の読点・スラッシュや台詞内のラベルで誤分割しない
+検証ID: R05-inline-roles
+
+R06 [HIGH] 参加者キー変更で未解決Role・SKP-onlyの意味確認を回避できる
+由来: NEW_REVIEW / 状態: OPEN_NOT_FIXED
+該当: backend/src/main/java/jp/takukairo/importsession/ImportService.java:80 / backend/src/main/java/jp/takukairo/importsession/ImportService.java:108 / backend/src/main/java/jp/takukairo/importsession/ImportService.java:182 / backend/src/main/java/jp/takukairo/importsession/ImportService.java:213
+観測: SKP-only候補の参加者キーを変更してKPにするPATCHが、roleMeaningAcceptedなしでREGISTERABLE/CHECKEDになる。normalizeSkpは新キーの元SKPを主KPと誤認する。Splitで新キーにすると元RelationがDETACHEDとなりvalidateRoleChoicesも通る。実DB登録は未実行。
+期待: 未解決Role、SKP由来、意味確認義務、参加者Traceは、許可されたキー変更や構造操作でも失われない。
+原因: キーの一意性のみを検証し、旧参加記録とのMappingを要求しない。Relationが一致しない場合、検証が閉じずにスキップする。block操作にあるMapping要件がPATCH/Split/Mergeに統一されていない。
+修正範囲: 既存キーを不変にするか、全編集経路で明示一対一Mappingと削除・新規作成意思を要求する。照合できない既存義務を黙って無効化しない。名前一致をIdentityの代わりにしない。
+修正後に確認すること:
+  - 通常PATCH、Split、Merge、未解析ブロック候補化を横断する
+  - SKP-only、Role候補複数、予定・引用由来、HOLD/OMITを含める
+  - キー衝突の解消後も全義務とSourceTraceが正しい参加者へ残ることを確認する
+  - 確認なしの正式保存拒否、明示解決後の正式保存成功を実API/DBで確認する
+検証ID: N13-split-new-key, N18-patch-new-key
+
+R07 [MEDIUM] 除外した参加者の無効なResolutionが残り、正常な残りの候補を登録不可にする
+由来: NEW_REVIEW / 状態: OPEN_NOT_FIXED
+該当: backend/src/main/java/jp/takukairo/importsession/ImportService.java:59 / backend/src/main/java/jp/takukairo/importsession/ImportService.java:65
+観測: 一人をsaveDecision=OMITにしても、その人のPC Resolutionにinvalid-urlがあると候補はNEEDS_FIXになる。残る正常参加者とシナリオのResolutionは解決済み。
+期待: 明示除外した部分を除く実効データと、その保存に使う照合先だけで登録可否を決める。原記録・除外意思は保持する。
+原因: effective()で参加者は除外するが、最後のResolution検証は未加工のrefs全件を走査する。Registerが実際に使う参照集合と異なる。
+修正範囲: 実効ParticipationとPC有無に対応する有効Resolution集合を導出し、分類と登録で共有する。未使用Resolution自体は履歴として保持してよい。
+修正後に確認すること:
+  - 全参加者OMIT、一部OMIT、PC解除、HOLD→SAVEの各状態を確認する
+  - 除外先のURL/属性の異常だけで正常な保存対象が妨げられない
+  - OMITを戻すと必要な検証が復活し、除外通知が維持される
+検証ID: N12-omitted-invalid-reference
+
+R08 [HIGH] 正式保存で拒否される属性をREGISTERABLEと判定する
+由来: NEW_REVIEW / 状態: OPEN_NOT_FIXED
+該当: backend/src/main/java/jp/takukairo/importsession/ImportService.java:59 / backend/src/main/java/jp/takukairo/importsession/ImportService.java:115 / backend/src/main/java/jp/takukairo/importsession/ImportService.java:121 / backend/src/main/java/jp/takukairo/scenario/LibraryService.java:24 / backend/src/main/resources/db/migration/V1__domain_and_support.sql:16
+観測: 256文字の作者を含むScenario Resolution、systemSettings内に無効URLがあるPC Resolutionが、どちらもREGISTERABLEになる。作者のDB列はVARCHAR(255)。PC設定の深いValidationは正式保存時にだけ行われる。DBでの失敗挙動は今回実測していない。
+期待: 保存対象の制約違反は登録前にNEEDS_FIXとし、修正または明示未保存を選べる。1候補の異常が独立候補の登録を巻き込まない。
+原因: validateResolutionDraftはトップレベル項目名と一部URLしか検証せず、文字数・PC設定の深い制約が正式サービスと重複して不一致。registerの候補単位catchはApiExceptionだけでDB制約例外を扱わない。
+修正範囲: 正式保存と同じ純粋Validationを共有する。作者・ゲームシステム等の列制約とPC systemSettingsを含める。候補単位失敗の扱いはDB例外を含む実検証で確認する。
+修正後に確認すること:
+  - 各文字数境界255/256、URL境界、PC設定のProfile・型・必須項目・重複を確認する
+  - 有効候補と無効候補を同一Register要求へ入れ、独立候補の結果とRollbackを実DBで確認する
+  - 未保存選択とCREATE_NEW/REUSE_EXISTING/作成済み共有Resolutionを横断する
+検証ID: N16-author-limit, N17-pc-setting-validation
+
+R09 [MEDIUM] 未判定・明示OMITを含む候補のSplit/Mergeが、正式登録用Role検証で止まる
+由来: NEW_REVIEW / 状態: OPEN_NOT_FIXED
+該当: backend/src/main/java/jp/takukairo/importsession/ImportService.java:75 / backend/src/main/java/jp/takukairo/importsession/ImportService.java:90 / backend/src/main/java/jp/takukairo/importsession/ImportService.java:91
+観測: SKP-onlyのrole=nullを保持したSplit Previewは400 INVALID_ROLE。saveDecision=OMITを明示した同じ参加記録でも同様。Mergeにも同じraw validateDraftを呼ぶ経路がある。
+期待: 構造修復中の一時候補は、未解決状態を維持して分割・統合できるか、業務上の制限を明確にする。少なくともOMIT済みRoleを正式保存対象として検証しない。
+原因: 構造整合の検証と正式登録の必須値検証を分けず、未加工のcandidateDataにvalidateDraftを適用する。
+修正範囲: 一時候補の構造Validationと実効保存データの登録Validationを分ける。未解決RelationとTraceを保持したままPreview/Apply後のstatusを評価する。
+修正後に確認すること:
+  - Role未判定・複数候補・SKP-only・OMIT/HOLDを含むSplit/Mergeを確認する
+  - 主KPとSKP断片を統合してから解決する流れを確認する
+  - 不完全候補を操作可能にしても、そのまま正式登録できないことを確認する
+検証ID: N25-split-unresolved-false, N25-split-unresolved-true
+
+R10 [MEDIUM] 未割当値を割り当てた後の実効値と、編集・照合画面・Traceの値が一致しない
+由来: NEW_REVIEW / 状態: OPEN_NOT_FIXED
+該当: backend/src/main/java/jp/takukairo/importsession/ImportService.java:74 / backend/src/main/java/jp/takukairo/importsession/ImportService.java:193 / frontend/src/features/Import.tsx:12
+観測: 未割当の新PCを参加者のPCへ割り当てると、実効pcNameは新PCになる。一方、PATCH応答のpcNameとCREATE_NEW照合名は元PCのままでREGISTERABLE。editedFieldsも/table/unassignedValuesだけでPCフィールドの由来変更を示さない。画面は応答の未加工pcNameを使う。Browser操作と実DB登録は今回未実施。
+期待: ユーザーが確認する実効値、照合する値、保存先の表示、項目別Traceが同じ割当結果を表す。元原文は保持し、割当による変更を区別する。
+原因: applyAssignmentsは分類/登録用のコピーだけを変更し、候補DTO・ResolutionPicker・項目別編集由来へ反映しない。
+修正範囲: 原データと実効Draftの両方を明確に返し、画面・照合・確認・登録は同じ実効値を使う。割当根拠を対象フィールドへ関連付け、実質変更時はCHECKEDを失効させる。
+修正後に確認すること:
+  - 人物・PC・HOの各割当、複数割当競合、割当解除、IGNORE、参加者OMITを確認する
+  - 割当前後の表示名・正式保存先・SourceTrace・CHECKEDを照合する
+  - API/Browser/実DBの結果が同じであることを確認する
+検証ID: N15-assignment-provenance
+
+R11 [MEDIUM] MarkdownのATX見出し直後の区切り線をSetext見出しと誤認する
+由来: NEW_REVIEW / 状態: OPEN_NOT_FIXED
+該当: backend/src/main/java/jp/takukairo/importsession/ImportStructureParser.java:60 / backend/src/main/java/jp/takukairo/importsession/ImportStructureParser.java:62
+観測: # シナリオ: A の直後に---を置くと、元の見出しをさらにSetext化して# シナリオ: Aという未知ラベルにする。scenarioNameが空になる。先頭パイプ省略表・2スペース字下げ表も表として認識されず未割当へ回る。
+期待: 有効なMarkdown構造を正しく保持する。非対応構文を意味の異なる見出しへ変換しない。
+原因: ASTは引用・コード判定だけに使い、見出しと表の認識は独立した行正規表現で再解釈する。Setext候補の前行種別を確認しない。
+修正範囲: 見出しは既存CommonMark ASTの種別・SourceSpanを使う等、構文の二重解釈を避ける。表構文の対応範囲と安全なfallbackも整理する。
+修正後に確認すること:
+  - ATX＋区切り線、本来のSetext、空行、リスト、引用・コード境界の組合せを確認する
+  - 通常表・字下げ表・外側パイプ省略表・エスケープを含む表を比較する
+  - 値と見出し階層、行範囲、原文抜粋の全てを照合する
+検証ID: N22-atx-followed-by-rule, N03-md-no-border, N05-md-indented-table
+
+まとめて修正・検証する単位
+G1 構造・文脈の保全 [R02, R03, R04, R05, R11]
+形式ごとの例外修正だけで終えず、構造から共通推論へ渡す値・範囲・所属・状態を一緒に検証する。
+
+G2 編集・分割統合を通じた情報と判断の保全 [R01, R06, R09]
+値・参加者Identity・未解決義務・明示未保存・TraceのMappingを全操作で一体として扱う。
+
+G3 画面・分類・登録の実効データとValidation統一 [R07, R08, R10]
+保存対象を導出する処理と正式Validationを共有し、画面が確認した意味と登録する意味を一致させる。
+
+G4 修正後の通し検証 [R01, R02, R03, R04, R05, R06, R07, R08, R09, R10, R11]
+個別反例の成功に加えて、共有Resolution・OMIT/HOLD・Split/Merge・確認・部分登録・再開・Completeの連続操作を専用DB/実API/Browserで検証する。
+
+不具合と断定しなかった観察事項
+N19-evidence-id-collision / DESIGN_RISK_NOT_COUNTED_AS_CONFIRMED_DEFECT
+異なるSourceでb-1:scenarioName:0等のevidenceIdが衝突する。現在のSourceContext外枠との組合せで追跡できる場面もあるため、これだけを実害確定とはしない。跨Source・断片再解析の依存参照にはSource識別子を含む名前空間を検討する。
+
+N14-omitted-boundary / SPECIFICATION_QUESTION_NOT_COUNTED_AS_CONFIRMED_DEFECT
+OMITした参加者もE2の元記録証拠に使われる。正式保存の除外と、原文が持つ同卓証拠の無効化は同義とは限らないため、不具合と断定しない。
+
+N04-md-escaped-pipe / SPECIFICATION_QUESTION_NOT_COUNTED_AS_CONFIRMED_DEFECT
+QuoteにMarkdownのエスケープ表現が残る。原文保全とMarkdown上の表示値のどちらをQuote値とするか確認してから変更する。
+
+未実行・限界
+  - 実HTTP/PostgreSQLを使うContractIntegrationTest
+  - Browser UI検査
+  - DB例外を含むRegisterの候補単位Rollback
+  - Cleanup/同時操作の実DB競合試験
+  - 高密度最大容量・同時負荷
+  - ユーザー実入力T01〜T24
+  - 静的確認項目を実行合格とは扱わない。
+  - 31の反例/観察ケースは内部の補助入力であり、ユーザー受入Fixtureの代用ではない。
+  - 未検出の不具合がないことや、次の修正1回で必ず完了することまでは保証しない。
+  - 推論設計の01_引継ぎメモ.mdと02_次チャット用プロンプト.mdは現物がなく、既存正式Contractと確定追補を優先した。
+
+詳細・元出力: findings.json / probes.jsonl / existing-unit-results.json
+反例検証ソース: DeepProbe.java / ExistingUnitReview.java
+Source SHA-256はfindings.jsonのevidence.sourceSha256に保存。
+
+======================================================================
+修正・再検証追記（2026-10-23 / Asia/Tokyo）
+======================================================================
+この追記は上記2026-10-21の精査に対する実装結果。元の指摘、当時のOPEN、再現入力、観察・未実行記録は履歴として残す。
+現在の対応状況は本追記およびfindings.jsonのcurrentStatus/remediationを参照。正式仕様はR5.1.12 Part Aと確定追補の明示変更箇所を優先し、精査記録の提案を仕様変更の根拠にしていない。
+
+開始時の再確認と保全
+  - HEAD: 2392430eb13041ef6dec163d04b864610738c9b0。開始時はtracked変更なし、docs/reviews/のみuntracked。記録の旧行番号ではなく現物を確認した。
+  - 旧Backendソースから既存推論58テストと反例/観察31ケースを新規に再実行。過去の合格記録の転用はしていない。
+  - 修正前ログ: .runtime/import-baseline-unit.log。今回の修正前出力: before-fix-probes.jsonl（元probes.jsonlも保持）。MemoryStoreの結果はHTTP/DBの証拠とは扱わない。
+  - ユーザー由来の元資料と再現ソースは保持。通常DB、既存途中保存、画像Storage、正式Entity構造は検証目的で変更・破棄していない。Production公開・deployは行っていない。
+
+全11件の現在の対応（全て FIXED_VERIFIED_INTERNAL）
+R01: Mergeのscalar全項目、未割当値、値ごとの明示未保存を保全。片側だけの値は継承し、異なる値は出自付き未割当へ保持。Preview/Apply、入力順反転、正式DB保存、明示未保存の組合せを検証。
+R02: rowspan/colspan/入れ子/複数段header/非矩形HTML表は表全体を原文範囲付き未解析ブロックへ保持。PC列等を人物DIRECTへ誤確定しない。未処理ならComplete拒否、明示処理後のCompleteを実APIで検証。
+R03: 明確な実施済み肯定だけをRole推論に使用。否定、不確実、募集/連絡、下位未確認で継承を停止。独立した肯定文脈・兄弟スコープの復帰も検証。
+R04: 表直前の段落/captionからシナリオ等と項目別Traceを一緒に継承。Markdown空行を考慮し、別HTML表へ局所文脈を漏らさない。
+R05: 引用・括弧を尊重してKP/SKP/PLラベルを分離。主KPの順序、逆順、Inline Quote中のラベル、Quote前後の空白保全を検証。
+R06: PATCH/Split/Mergeで元Participationキーの保持または一対一の明示Mappingを要求。Relation、未解決義務、Ref、割当、Trace、編集パスを一体対応。古い途中保存の孤立DETACHED義務も検出し、明示Mappingと意味の再確認で修復可能。キーの名前一致による自動Identity確定はしない。
+R07: 保存するParticipationとPC有無から実際に使用するResolutionを導出。OMIT/PC解除の未使用異常は正常部分の登録を妨げない。SAVEへ戻せば検証が復活する。未保存通知と実DBの残存部分を検証。
+R08: Formal作成とImport事前検証でLibraryDraftsを共有。作者/System列長、PC Profile・型・必須・URL・重複・既存Setting持込を検出。実DB例外を候補内でRollbackし、共有Resolutionと別候補の成功を維持する。
+R09: Split/Mergeの構造Validationと登録Validationを分離。未判定Role、OMIT、HOLDを保持した構造操作を許可。結果はUNCHECKED、未解決なら登録不可。元参加記録の無通知削除は拒否する。
+R10: raw Draftとeffective表示Draftを区別し、編集欄、Review、照合、CHECKED判定、登録を同じ割当結果に揃えた。USER_ASSIGNMENT Traceを対象項目へ付け、DIRECT原文を書き換えない。人物/PC/HO、競合、解除、手編集、OMIT、旧名の新規Resolution不一致を検証。
+R11: CommonMark ASTの見出し種別・範囲を使用。ATX直後のrule、真正Setext、複数行Setext/CRLF、字下げ・外側pipe省略表を回帰検証。
+
+共通原因から追加対処した派生不具合
+  - Splitで入力から落ちた未割当値・optional scalarを原文と共に保持。
+  - Merge代替値の項目TraceをALTERNATIVEとして区別し、別参加者の原文を編集後値の根拠と表示しない。
+  - 分割先に属さないDETACHED履歴によって別参加者の義務を再活性化しない。
+  - 古い途中保存の孤立キー対応を修復する際、空Refが有効Refを隠す問題を解消。異なる有効Refの衝突は明示再選択を要求。
+  - 構造操作で無関係な候補を正規化したりCHECKED失効・Version更新したりしない。
+  - Inline QuoteをRole分割で破壊せず、Quote前後の空白も保持。
+  - JDBC savepoint後のHibernate状態破損を避けるため、候補単位の独立Transactionへ変更。Session Row Lockと全要求Versionの先行検証を維持し、候補のFormalデータ・createdEntityId・REGISTEREDを一体でcommit/rollbackする。
+Support情報の追加と既存仕様との対応はdocs/API_CONTRACT.md末尾に記載。
+
+今回の最終実行（2026-10-23、現修正ソース）
+  実行コマンド:
+    powershell -NoProfile -ExecutionPolicy Bypass -File scripts/qa-import-inference.ps1
+    git -c core.safecrlf=false diff --check
+  結果:
+    Backend: 241件（実HTTP/PostgreSQL ContractIntegrationTest 136件を含む）成功、失敗・error・skipなし。
+    Frontend state回帰: 7件成功。
+    TypeScript --noEmit / project build / Vite build / Backend package: 成功。
+    Playwright専用Import Browser: 27件成功、失敗・skip・retry/flakyなし。
+    diff --check: 成功。
+    実行ラッパー注記: 全段階成功・正常cleanup完了後、外側PowerShellはstderrの全ストリームredirectでexit 1を返した。stderrだけを書きexit 0する隔離子プロセスでも同じexit 1を再現し、LASTEXITCODEを明示exitすると0となることを確認。試験失敗とは区別し、JSONのcommandsにも生のラッパー終了値を記録した。
+  隔離先:
+    PostgreSQL 18.6、port55432、.runtime/import-inference-qa/pgdata。
+    API統合用takukairo_import_qa、Browser用takukairo_import_browser_qa。
+    app8082 / frontend5175、integration-storage / browser-storageも専用。
+    スクリプトの作用先を実行前に確認。終了時は専用プロセスを停止し、QAデータは保持。
+  実API/DBで確認した範囲:
+    登録結果とFormal値、Version競合・同時要求、所有境界、REGISTERED不変、Source Lock、共有Resolution、CHECKED失効、明示未保存通知。
+    PostgreSQL triggerで候補内の作成途中にDB例外を起こし、Formal行とcreatedEntityIdのRollback・正常兄弟候補の成功を検証。
+  連続操作:
+    Browserの編集→割当→照合→確認→API Split/Merge→Browser再確認→部分登録→再読込/再開→残候補の明示除外→Completeを同一Sessionで実行。
+    分割/統合と最後の除外/Completeは同じBrowser認証Contextの実HTTP APIを使用。他の既存BrowserテストがUIの分割/統合・Preview適用も検証する。
+  証拠:
+    修正検証結果_2026-10-23.json: R別のテスト対応、全suite/case結果、実行環境、ソースとログのSHA-256。
+    browser-results-2026-10-23.json: Playwright全結果。
+    .runtime/import-october-final23.log: 最終一括実行ログ。
+    .runtime/import-inference-qa/backend-build/surefire-reports/: 全Backend XML。
+    .runtime/import-inference-qa/desktop-detail.png / mobile-detail.png: Browser検査画像。Desktop/Mobileの表示と原文欄を目視確認。
+  途中の失敗と修正:
+    正式仕様が許すResolution別名まで拒否したValidationを、割当先のCREATE_NEW不一致へ限定。
+    構造操作へ残っていた登録Validation、古いキーのRef重複、Splitの過剰scalar保持、Quote空白、無関係候補の正規化を回帰追加して是正。
+    追加Browserテストの暗黙label検索は、実際のcomboboxアクセシブル名による検索へ修正。
+    上記途中ログの成功部分は最終結果の代用として扱わない。
+
+未確定観察と残る検証範囲
+  - N19 evidenceId衝突は設計上の観察、N14 OMITと境界証拠・N04 escaped pipeのQuote表現は仕様上の確認事項として保持。独断で仕様を変更していない。
+  - rowspan/colspan等の複雑HTML表の自動展開は未対応。原文を保持して手動確認に回す。
+  - 高密度最大容量、多数Userの同時負荷、候補Transaction用のConnection Pool容量は未検証。
+  - 通常DBへ接続する既存アプリ全Viewport suiteは実行せず、関連Importの専用Browser suiteを実行。
+  - Production、実OAuth Credential、公開は対象外。
+  - ユーザー実入力T01〜T24は未提供。全件内部回帰成功は正式受入合格を意味しない。
+

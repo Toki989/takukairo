@@ -75,3 +75,16 @@ FILE PUTでtimeout / network / 非解釈可能Response / 5xxなど結果不明�
 | UC13 卓詳細 | v5.9 Desktop3レーン、Mobile/Tablet再配置、Selector/Keyboard |
 | UC14 履歴修正削除 | Table Aggregate PUT/DELETE、Version、Cascade |
 | UC17 活動 | Activity summary/by-month/by-year、Home表示 |
+
+## Import精査修正のSupport補強（2026-10-22）
+
+既存Endpoint・Formal Entity・Role・所有権・Versionは維持する。以下はIMP-D01／D03／D04／D05を成立させる一時Support情報であり、正式仕様の変更ではない。
+
+- Candidate Detail／PATCH Responseの`candidateData`は割当前の編集Draftを保持し、`effectiveCandidateData`に割当を反映した表示用Draftを返す。Reviewの`summary`は表示用、`rawSummary`は編集用。OMIT部分も表示用Draftには残し、正式保存用には除く。割当競合時は元Draftを表示し、statusで修正を要求する。
+- 新規Resolution名は明示選択により抽出ラベルと異なってよい。人物／PC名への割当がある場合は、割当後の値とCREATE_NEW保存先の不一致を事前検出する。REUSE_EXISTINGは名前一致によるIdentity確定を行わず、選択したIDを使う。
+- PATCH／Split／Mergeは元Participationキーを保持する。変更が必要な場合のみ`participationMappings: [{sourceCandidateId, fromKey, toKey}]`で一対一対応を明示する。単一候補のPATCH／Splitでは`sourceCandidateId`を省略可能。Mergeでは入力元を指定する。MappingはRelation・Resolution Ref・割当・項目別Trace・編集パスに一体適用する。Split／MergeのResolution Bindingは従来どおり別途明示する。
+- 元参加記録の無通知削除は拒否し、保存しない参加者は元キーまたは対応済みキーの`saveDecision=OMIT`で残す。未割当値・採用済みscalar値が構造操作の入力から落ちる場合は、Previewの結果Draftへ値と出自を保持する。元の明示除外意思も値ごとに保全し、別入力元の値を暗黙除外しない。
+- `USER_ASSIGNMENT` Traceは割当元の項目・原文位置への依存を示す。元のDIRECT Traceの原文は変更しない。`RETAINED_VALUE`は構造操作で未割当へ保持した元値、`association=ALTERNATIVE`は現在値と異なる入力元の値を表す。
+- 正式保存に使う実効Participation／PCのResolutionだけを事前検証する。未使用Resolutionは履歴として残す。作者・System名の列長、PC設定のProfile・型・URL・重複等は正式作成と共通のValidationを使う。
+- RegisterはSession Row Lock下で全要求Versionを先に検証し、候補ごとの独立TransactionでFormalデータ・`createdEntityId`・REGISTEREDを原子的に保存する。DB例外時はその候補のTransactionをRollbackし、別TransactionでFAILED結果を記録する。別候補の成功と共有Resolutionを壊さず、リクエスト終了時にSession Versionを更新する。途中の接続断ではGETで現在の結果を確認する。
+- HTMLのrowspan／colspan／入れ子表／複数段header／非矩形表は、誤った正式項目へ確定せず、表全体を原文範囲付き未解析ブロックへ回す。未処理ならCompleteを拒否する。

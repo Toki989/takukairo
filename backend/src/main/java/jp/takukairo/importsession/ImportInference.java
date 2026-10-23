@@ -22,18 +22,19 @@ public final class ImportInference {
  }
  public List<ImportParser.Parsed> infer(Document doc) {
   var results=new ArrayList<ImportParser.Parsed>();var contexts=new TreeMap<Integer,List<Context>>();var completion=new TreeMap<Integer,Boolean>();var explicit=new TreeMap<Integer,Boolean>();Draft current=new Draft(),tableContext=null;Kind previous=null;
-  for(var b:doc.blocks()) {
+  for(int blockIndex=0;blockIndex<doc.blocks().size();blockIndex++) {var b=doc.blocks().get(blockIndex);
+   if(b.kind()==Kind.UNPARSED){emit(current,results,doc.format());current=new Draft();current.quotedEvidence=b.quoted();current.source(b);unknown(current,b.range().excerpt(),b.range(),b);emit(current,results,doc.format());results.getLast().inference().put("unparsedReason","表の列対応を保証できない構造です。原文を確認し、参加記録ごとに候補化するか明示除外してください。");current=new Draft();tableContext=null;previous=b.kind();continue;}
    if(b.quoted()){if(!current.populated())inherit(current,contexts,completion,explicit);current.quotedEvidence=true;current.source(b);if(b.text().codePoints().anyMatch(Character::isLetterOrDigit))unknown(current,"引用: "+b.text(),b.range(),b);else current.traces.add(b.range().trace("/inference/quoted",0,b.id()+":quoted","DIRECT",List.of()));continue;}
    if(b.kind()==Kind.HEADING){tableContext=null;previous=b.kind();emit(current,results,doc.format());current=new Draft();contexts.tailMap(b.level()).clear();completion.tailMap(b.level()).clear();explicit.tailMap(b.level()).clear();var pair=pair(b.text());String key=field(pair[0]);
     if(Set.of("scenarioName","gameSystemName","tableName").contains(key)&&!pair[1].isBlank()){contexts.put(b.level(),new ArrayList<>(List.of(new Context(key,pair[1],b))));if(key.equals("tableName"))explicit.put(b.level(),true);}else if(!completed(b.text())&&!harmlessHeading(b.text())){contexts.put(b.level(),new ArrayList<>(List.of(new Context("unknown",b.text(),b))));}
-    boolean statusHeading=key.equals("context")||key.equals("unknown")&&pair[1].isEmpty();if(statusHeading&&(completed(b.text())||excludedContext(b.text())))completion.put(b.level(),completed(b.text()));if(statusHeading&&(completed(b.text())||excludedContext(b.text())))contexts.computeIfAbsent(b.level(),k->new ArrayList<>()).add(new Context("context",b.text(),b));continue;
+    boolean statusHeading=key.equals("context")||key.equals("unknown")&&pair[1].isEmpty()&&(completed(b.text())||excludedContext(b.text()));if(statusHeading){completion.put(b.level(),completed(b.text()));contexts.computeIfAbsent(b.level(),k->new ArrayList<>()).add(new Context("context",b.text(),b));}continue;
    }
-   if(b.kind()==Kind.BLANK){tableContext=null;previous=b.kind();if(!current.explicitTable){emit(current,results,doc.format());current=new Draft();}continue;}
+   if(b.kind()==Kind.BLANK){int next=blockIndex+1;while(next<doc.blocks().size()&&doc.blocks().get(next).kind()==Kind.BLANK)next++;if(previous!=Kind.RECORD&&list(current.data.get("participations")).isEmpty()&&next<doc.blocks().size()&&doc.blocks().get(next).kind()==Kind.RECORD)continue;tableContext=null;previous=b.kind();if(!current.explicitTable){emit(current,results,doc.format());current=new Draft();}continue;}
    if(b.kind()==Kind.PARAGRAPH&&b.text().codePoints().noneMatch(Character::isLetterOrDigit))continue;
    if(b.kind()==Kind.RECORD&&!current.explicitTable){
-    if(tableContext==null&&list(current.data.get("participations")).isEmpty()&&current.traces.stream().anyMatch(t->"/inference/context".equals(t.get("fieldPath"))))tableContext=current;
-    boolean sharedOnly=tableContext==current&&onlyContext(current);if(!sharedOnly)emit(current,results,doc.format());current=new Draft();
-    if(tableContext!=null){inherit(current,contexts,completion,explicit);current.completed=tableContext.completed;current.contextExcluded=tableContext.contextExcluded;current.usedContext.addAll(tableContext.usedContext);for(var t:tableContext.traces)if("/inference/context".equals(t.get("fieldPath"))){var inherited=new LinkedHashMap<>(t);inherited.put("derivation","INHERITED");inherited.put("dependsOn",List.of(t.get("evidenceId")));current.traces.add(inherited);}if(sharedOnly){list(current.data.get("unassignedValues")).addAll(list(tableContext.data.get("unassignedValues")));for(var t:tableContext.traces)if(text(t.get("fieldPath")).startsWith("/unassignedValues/"))current.traces.add(new LinkedHashMap<>(t));}}
+    if(tableContext==null&&list(current.data.get("participations")).isEmpty()&&current.populated())tableContext=current;
+    boolean sharedOnly=tableContext==current;if(!sharedOnly)emit(current,results,doc.format());current=new Draft();
+    if(tableContext!=null){inherit(current,contexts,completion,explicit);current.completed=tableContext.completed;current.contextExcluded=tableContext.contextExcluded;current.usedContext.addAll(tableContext.usedContext);for(String field:List.of("scenarioName","gameSystemName","tableName","authorName","sourceUrl","recordingUrl"))if(tableContext.data.get(field)!=null)current.data.put(field,tableContext.data.get(field));for(var t:tableContext.traces)if("/inference/context".equals(t.get("fieldPath"))||text(t.get("fieldPath")).startsWith("/table/")){var inherited=new LinkedHashMap<>(t);inherited.put("derivation","INHERITED");inherited.put("dependsOn",List.of(t.get("evidenceId")));current.traces.add(inherited);}if(sharedOnly){list(current.data.get("unassignedValues")).addAll(list(tableContext.data.get("unassignedValues")));for(var t:tableContext.traces)if(text(t.get("fieldPath")).startsWith("/unassignedValues/"))current.traces.add(new LinkedHashMap<>(t));}}
    }
    if(b.kind()!=Kind.RECORD){tableContext=null;if(previous==Kind.RECORD&&!current.explicitTable){emit(current,results,doc.format());current=new Draft();}}
    previous=b.kind();
@@ -128,7 +129,7 @@ public final class ImportInference {
   }
   if(key.equals("context")){
    if(d.localContexts.isEmpty()){d.completed=false;d.contextExcluded=false;d.usedContext.removeIf(id->id.contains(":context"));}
-   d.localContexts.add(value);d.completed|=actualContext(value);d.contextExcluded|=excludedContext(value);d.usedContext.add(evidence);d.traces.add(range.trace("/inference/context",b.logicalRecord(),evidence,"DIRECT",List.of()));
+   d.localContexts.add(value);d.completed|=actualContext(value);d.contextExcluded|=!actualContext(value);d.usedContext.add(evidence);d.traces.add(range.trace("/inference/context",b.logicalRecord(),evidence,"DIRECT",List.of()));
    if(d.completed&&d.contextExcluded){String scope=d.recordMode?b.id():"paragraph";Object participant=d.participant==null?null:d.participant.get("candidateParticipationKey");d.conflicts.removeIf(x->"/inference/context".equals(x.get("fieldPath"))&&Objects.equals(x.get("contextScope"),scope)&&Objects.equals(x.get("participantKey"),participant));d.conflicts.add(map("kind","C3","fieldPath","/inference/context","contextScope",scope,"participantKey",participant,"values",new ArrayList<>(d.localContexts),"evidenceIds",new ArrayList<>(d.usedContext)));}
    if(d.participant!=null)snapshotContext(d,d.participant);if(!completed(value))unknown(d,original,range,b);return;
   }
@@ -154,11 +155,22 @@ public final class ImportInference {
   }
  }
  private void resolveKnownSkp(Draft d){boolean main=list(d.data.get("participations")).stream().anyMatch(p->"KP".equals(p.get("role"))&&d.relations.stream().noneMatch(r->Objects.equals(r.get("candidateParticipationKey"),p.get("candidateParticipationKey"))&&"SKP".equals(r.get("originalRole"))));if(!main)return;var skpKeys=new HashSet<String>();for(var r:d.relations)if("SKP".equals(r.get("originalRole"))&&!Boolean.FALSE.equals(r.get("eligibleActualParticipation"))){r.put("hasMainKp",true);r.put("state","PROVISIONAL");skpKeys.add(text(r.get("candidateParticipationKey")));}var parts=list(d.data.get("participations"));for(var p:parts)if(skpKeys.contains(text(p.get("candidateParticipationKey"))))p.put("role","KP");parts.sort(Comparator.comparingInt(p->skpKeys.contains(text(p.get("candidateParticipationKey")))?1:0));}
- private boolean excludedContext(String s){return s.matches("(?is).*(予定|候補|未実施|未完了|未プレイ|未通過|日程調整|主催|作者|投稿者|引用|NPC|(?:実施済み?|完了|プレイ済み?|通過済み?)(?:ではない|でない|ではなく|していない)|\\b(?:planned|candidate|tentative|quote|uncompleted|unplayed)\\b|\\b(?:not|never)\\s+(?:yet\\s+)?(?:completed|played)\\b).*")||s.strip().matches("(?s)^(?:\".*\"|“.*”|「.*」|『.*』)$");}
- private boolean actualContext(String s){return !excludedContext(s)&&s.matches("(?is).*(実施済|プレイ済|通過済|参加者.*記録|\\bcompleted\\b|\\bplayed\\b).*");}
+ private boolean excludedContext(String s){return s.matches("(?is).*(予定|候補|未実施|未完了|未プレイ|未通過|未確認|不明|不確実|かもしれ|かどうか|募集|連絡|日程調整|主催|作者|投稿者|引用|NPC|(?:実施済み?|完了|プレイ済み?|通過済み?)(?:では(?:あり)?ません|で(?:は)?ない|ではなく|していない)|[?？]|\\b(?:planned|candidate|tentative|quote|uncompleted|unplayed|unknown|uncertain|recruiting|unconfirmed)\\b|\\b(?:not|never)\\s+(?:yet\\s+)?(?:completed|played)\\b).*")||s.strip().matches("(?s)^(?:\".*\"|“.*”|「.*」|『.*』)$");}
+ private boolean actualContext(String s){return !excludedContext(s)&&s.matches("(?is).*(実施済|プレイ済|通過済|\\bcompleted\\b|\\bplayed\\b).*");}
  private boolean completed(String s){return actualContext(s)&&!excludedContext(s);}
  private boolean harmlessHeading(String s){return s.codePoints().noneMatch(Character::isLetterOrDigit)||s.strip().matches("(?i)(?:概要|目次|参加者|参加者一覧|その他|メモ|Overview|Contents)");}
  private void inline(Draft d,Block b){
+  var segments=roleSegments(b.text());if(segments.size()>1){for(String segment:segments)inlineFields(d,new Block(b.id(),b.kind(),b.level(),b.parentId(),segment,b.cells(),b.range(),b.logicalRecord(),b.quoted()));return;}inlineFields(d,b);
+ }
+ private List<String> roleSegments(String text){
+  var out=new ArrayList<String>();int start=0,depth=0;boolean asciiQuote=false;
+  for(int i=0;i<text.length();i++){char ch=text.charAt(i);if(ch=='"')asciiQuote=!asciiQuote;if("「『（(“".indexOf(ch)>=0)depth++;if("」』）)”".indexOf(ch)>=0)depth=Math.max(0,depth-1);
+   if(depth==0&&!asciiQuote&&"、,／/".indexOf(ch)>=0&&text.substring(i+1).matches("(?is)^\\s*(?:KP|SKP|PL)\\s*[:：].*")){out.add(text.substring(start,i));start=i+1;}
+   // Everything after a Quote label may be dialogue containing role labels.
+   if(ch==':'||ch=='：'){int labelStart=start;for(int j=i-1;j>=start;j--)if("／/".indexOf(text.charAt(j))>=0){labelStart=j+1;break;}String label=text.substring(labelStart,i).strip();if(field(label).equals("displayQuote"))break;}
+  }out.add(text.substring(start));return out;
+ }
+ private void inlineFields(Draft d,Block b){
   String[] segments=b.text().split("(?i)[／/]\\s*(?=(?:PC|HO|セリフ|台詞|Quote|終了SAN|終了HP|終了MP|Spotlight)[:：])",-1);int quote=-1;
   for(int i=0;i<segments.length;i++)if(field(pair(segments[i])[0]).equals("displayQuote")){quote=i;break;}
   if(quote>=0&&quote<segments.length-1){

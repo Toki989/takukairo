@@ -1,0 +1,1300 @@
+{
+  "date": "2026-10-23",
+  "timezone": "Asia/Tokyo",
+  "baselineHead": "2392430eb13041ef6dec163d04b864610738c9b0",
+  "initialWorktree": "Only untracked docs/reviews/; no tracked modifications",
+  "officialAcceptance": false,
+  "userFixturesT01T24": "NOT_PROVIDED",
+  "environment": {
+    "java": "Temurin 25.0.4.1+1",
+    "node": "24.21.0",
+    "postgres": "18.6",
+    "cluster": ".runtime/import-inference-qa/pgdata",
+    "port": 55432,
+    "integrationDb": "takukairo_import_qa",
+    "browserDb": "takukairo_import_browser_qa",
+    "storage": [
+      ".runtime/import-inference-qa/integration-storage",
+      ".runtime/import-inference-qa/browser-storage"
+    ],
+    "normalDatabaseOrImageStorageTargeted": false
+  },
+  "beforeFix": {
+    "units": 58,
+    "unitFailures": 0,
+    "probes": "before-fix-probes.jsonl",
+    "unitLog": ".runtime/import-baseline-unit.log"
+  },
+  "afterFix": {
+    "backend": {
+      "tests": 241,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": [
+        {
+          "name": "jp.takukairo.ContractIntegrationTest",
+          "tests": 136,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "bulkResolutionApplyAndClearAreAtomicAndKeepSharedRows",
+              "result": "PASSED"
+            },
+            {
+              "name": "defect1OmittedHandoutCannotBeRestoredByAssignment",
+              "result": "PASSED"
+            },
+            {
+              "name": "explicitSeparateTableScopesCannotBeMergedAndSplittingDoesNotLoseTheGuard",
+              "result": "PASSED"
+            },
+            {
+              "name": "mergeConflictsRequireBindingOrExplicitDiscard",
+              "result": "PASSED"
+            },
+            {
+              "name": "importSourceChangeResetsAnalysis",
+              "result": "PASSED"
+            },
+            {
+              "name": "safeImageUploadReplacementAndNoStorageKeyDto",
+              "result": "PASSED"
+            },
+            {
+              "name": "r3QuotedContextSurvivesBlockFragmentConversionAndResiduals",
+              "result": "PASSED"
+            },
+            {
+              "name": "octoberR08DatabaseFailureRollsBackCandidateAndSharedResolutionWhileSiblingSucceeds",
+              "result": "PASSED"
+            },
+            {
+              "name": "resolutionNameEditAndRebindDoNotModifySharedDraftOrFormalData",
+              "result": "PASSED"
+            },
+            {
+              "name": "octoberR01MergeRetainsSingleValuesInEitherOrderAndFormalSave",
+              "result": "PASSED"
+            },
+            {
+              "name": "tableVersionConflictAndConcurrentMutation",
+              "result": "PASSED"
+            },
+            {
+              "name": "octoberR01ScalarConservationMatrix",
+              "result": "PASSED"
+            },
+            {
+              "name": "octoberR10AssignmentProjectionResolutionTraceAndSavedValueAgree",
+              "result": "PASSED"
+            },
+            {
+              "name": "ct09And10InvalidOptionalDataRequiresCorrectionOrExplicitOmission",
+              "result": "PASSED"
+            },
+            {
+              "name": "textBusinessBoundaryUsesTextAndVersionRemainsOnFailure",
+              "result": "PASSED"
+            },
+            {
+              "name": "cleanupCompensationFallbackAndDeadRetention",
+              "result": "PASSED"
+            },
+            {
+              "name": "r1BlockPreviewApplyKeepsIdentityAndMeaningGateThroughRealDbAndRegister",
+              "result": "PASSED"
+            },
+            {
+              "name": "importPartialRegisterDoubleAndPostRegisterLocks",
+              "result": "PASSED"
+            },
+            {
+              "name": "tableRoleChangeClearsPcSpecificFieldsAndDeleteAllChildren",
+              "result": "PASSED"
+            },
+            {
+              "name": "duplicateNamesAndDatesAllowed",
+              "result": "PASSED"
+            },
+            {
+              "name": "savedProfileKeySurvivesScenarioChange",
+              "result": "PASSED"
+            },
+            {
+              "name": "n5AmbiguousQuoteRequiresDecisionAndEitherInterpretationCanBeSavedExactly",
+              "result": "PASSED"
+            },
+            {
+              "name": "malformedAggregateCollectionsCannotSilentlyDeleteChildren",
+              "result": "PASSED"
+            },
+            {
+              "name": "r3QuotedHtmlTablesBecomeRetainedReviewItemsNotActualParticipation",
+              "result": "PASSED"
+            },
+            {
+              "name": "previousDatesFallbackTiesAndStatusOnly",
+              "result": "PASSED"
+            },
+            {
+              "name": "importCandidateVersionAndSessionMembership",
+              "result": "PASSED"
+            },
+            {
+              "name": "defect4LazyQuoteContinuationNeverReachesFormalParticipants",
+              "result": "PASSED"
+            },
+            {
+              "name": "emokloreMemoNfkcOptionsDuplicatesAndIgnoreMax",
+              "result": "PASSED"
+            },
+            {
+              "name": "previousCandidateExactProfileCurrentExcludedNoHistory200",
+              "result": "PASSED"
+            },
+            {
+              "name": "ct04OmittingOneUnresolvedParticipationPreservesTwoNormalParticipantsAndNotice",
+              "result": "PASSED"
+            },
+            {
+              "name": "n6RepeatedTableHypothesesKeepMembershipThroughRegisterWithoutC1OrAutoReuse",
+              "result": "PASSED"
+            },
+            {
+              "name": "inferredParticipationPersistsWithFieldTraceAndExplicitResolutionRegistration",
+              "result": "PASSED"
+            },
+            {
+              "name": "pcDetachDeletesStateAtomically",
+              "result": "PASSED"
+            },
+            {
+              "name": "twentyFilesReplacementKeepsIdOrderAndFinalCapacity",
+              "result": "PASSED"
+            },
+            {
+              "name": "mainKpPrecedesExplicitSkpEvenWhenSourceListsSkpFirst",
+              "result": "PASSED"
+            },
+            {
+              "name": "expiredAndCompletedSessionCleanupLeavesFormalRecords",
+              "result": "PASSED"
+            },
+            {
+              "name": "editedCheckedCandidateExpiresAndNoOpKeepsConfirmation",
+              "result": "PASSED"
+            },
+            {
+              "name": "explicitAuthorOmissionRequiresNewMatchingResolutionRatherThanMutatingSharedDraft",
+              "result": "PASSED"
+            },
+            {
+              "name": "ct16And17UserEditedValuesKeepImmutableOriginalTraceAndOtherCandidateChecked",
+              "result": "PASSED"
+            },
+            {
+              "name": "fileFailurePreservesOldAndErrorPriority",
+              "result": "PASSED"
+            },
+            {
+              "name": "octoberR06R09SplitMergePreserveUnresolvedAndOmittedRecords",
+              "result": "PASSED"
+            },
+            {
+              "name": "characterSheetSystemTargetIsSavedOnlyToExplicitPcSystemSetting",
+              "result": "PASSED"
+            },
+            {
+              "name": "ccfoliaConflictingSpecificEvidenceBlocksProfileCandidates",
+              "result": "PASSED"
+            },
+            {
+              "name": "reviewRejectsInvalidRoleAndKpPcBeforeFormalRegistration",
+              "result": "PASSED"
+            },
+            {
+              "name": "previousMalformedDateAndFractionalVersionAre400",
+              "result": "PASSED"
+            },
+            {
+              "name": "importResolutionReloadClearAndSharedIdentity",
+              "result": "PASSED"
+            },
+            {
+              "name": "invalidTableSaveRollsBackPcStateDeletion",
+              "result": "PASSED"
+            },
+            {
+              "name": "r8DenseAssessmentsAreDerivedOnDemandWithoutDatabaseDuplication",
+              "result": "PASSED"
+            },
+            {
+              "name": "octoberStructureOperationDoesNotNormalizeOrUncheckUnrelatedCandidate",
+              "result": "PASSED"
+            },
+            {
+              "name": "selectedPlChangesOnlyChosenAndKeepsPcState",
+              "result": "PASSED"
+            },
+            {
+              "name": "defect5EmptyKpStateIsRegisterableAndCreatesNoState",
+              "result": "PASSED"
+            },
+            {
+              "name": "defect5OnlyEmptyStatesAreAllowedWithoutPcAndOnKp",
+              "result": "PASSED"
+            },
+            {
+              "name": "ct14ExplicitSamePatchConfirmWorksButBackendCorrectionExpiresIt",
+              "result": "PASSED"
+            },
+            {
+              "name": "ccfoliaEachProfileMappingAndUnsupportedTrigger",
+              "result": "PASSED"
+            },
+            {
+              "name": "noOpReplacementStillIncrementsAndCleanupRetries",
+              "result": "PASSED"
+            },
+            {
+              "name": "octoberR06PatchMappingRetainsSkpMeaningAndTraceAndUnmappedMutationIsAtomic",
+              "result": "PASSED"
+            },
+            {
+              "name": "pcSettingsOmittedEmptyFullAndVersion",
+              "result": "PASSED"
+            },
+            {
+              "name": "directTraceCannotPointToSourceInOtherSession",
+              "result": "PASSED"
+            },
+            {
+              "name": "octoberR01OmissionOnOneInputNeverSilentlyOmitsTheOtherValue",
+              "result": "PASSED"
+            },
+            {
+              "name": "r4ContextConflictSurvivesHttpAndDbInBothColumnOrders",
+              "result": "PASSED"
+            },
+            {
+              "name": "formalFieldsRemainExact",
+              "result": "PASSED"
+            },
+            {
+              "name": "r5And6BrHtmlAndInlinePcKeepFieldAssociationsAfterPersistence",
+              "result": "PASSED"
+            },
+            {
+              "name": "recentFavoriteAndSearchAreOwned",
+              "result": "PASSED"
+            },
+            {
+              "name": "tableDeleteLeavesParentsAndDeletesChildren",
+              "result": "PASSED"
+            },
+            {
+              "name": "ct11ReuseNeverOverwritesExtractedScenarioOptionalAttributes",
+              "result": "PASSED"
+            },
+            {
+              "name": "flywayAndHibernateValidateStarted",
+              "result": "PASSED"
+            },
+            {
+              "name": "skpAfterExplicitMainAdditionUsesExistingDisplayOrderAndNeedsReconfirmation",
+              "result": "PASSED"
+            },
+            {
+              "name": "databaseOwnershipAndPcRequiredForState",
+              "result": "PASSED"
+            },
+            {
+              "name": "n7IndentedFenceSurvivesPatchAndRequiresExplicitHandlingBeforeRegister",
+              "result": "PASSED"
+            },
+            {
+              "name": "migrationFromV3PreservesFormalAndInProgressImportData",
+              "result": "PASSED"
+            },
+            {
+              "name": "imageSecondVersionCheckAndCompensation",
+              "result": "PASSED"
+            },
+            {
+              "name": "r1UnmappedBlockParticipantReplacementIsRejectedWithoutConsumingSource",
+              "result": "PASSED"
+            },
+            {
+              "name": "octoberR06MergeCollisionMappingKeepsEachRoleObligation",
+              "result": "PASSED"
+            },
+            {
+              "name": "csrfRequiredAndFreshAfterLogin",
+              "result": "PASSED"
+            },
+            {
+              "name": "imageDeleteResetsPositionAndQueuesOldObjects",
+              "result": "PASSED"
+            },
+            {
+              "name": "splitRequiresExplicitMappingAndCopiesTraces",
+              "result": "PASSED"
+            },
+            {
+              "name": "explicitActiveMigrationUpdatesPcButLeavesEndStates",
+              "result": "PASSED"
+            },
+            {
+              "name": "pcSwapReplacesStateAtomicallyAndRoleErrorDoesNotMutate",
+              "result": "PASSED"
+            },
+            {
+              "name": "plChangeAllRollbackOnOneConflict",
+              "result": "PASSED"
+            },
+            {
+              "name": "currentImportSerializesTimestampsAndAbsenceIsJsonNull",
+              "result": "PASSED"
+            },
+            {
+              "name": "quoteExtendedGraphemeAndSpotlight",
+              "result": "PASSED"
+            },
+            {
+              "name": "ct07RetainedBlockConversionAfterPartialRegisterIsAtomicAndCannotBeUsedTwice",
+              "result": "PASSED"
+            },
+            {
+              "name": "h01ExpiredBlocksAreCleanedWithoutDeletingFormalData",
+              "result": "PASSED"
+            },
+            {
+              "name": "ccfoliaMaximumEscapedBodyAnd413Separate",
+              "result": "PASSED"
+            },
+            {
+              "name": "n5SpecifiedInlineFieldsReachFormalTargetsAfterExplicitReview",
+              "result": "PASSED"
+            },
+            {
+              "name": "ccfoliaEmokloreMismatchAndDuplicateMemo",
+              "result": "PASSED"
+            },
+            {
+              "name": "h03FailureAfterActualOptionalWritesRollsBackOneCandidateAndOtherCandidateStillRegisters",
+              "result": "PASSED"
+            },
+            {
+              "name": "replacementStorageFailurePreservesOldAndVersion",
+              "result": "PASSED"
+            },
+            {
+              "name": "r1ExplicitBlockDataMappingSurvivesSplitAndMerge",
+              "result": "PASSED"
+            },
+            {
+              "name": "tableParentChildMembership",
+              "result": "PASSED"
+            },
+            {
+              "name": "activeProfilesResolverAndOptions",
+              "result": "PASSED"
+            },
+            {
+              "name": "oldCsrfAfterLoginRotationIsRejected",
+              "result": "PASSED"
+            },
+            {
+              "name": "octoberR08AuthorAndPcDeepConstraintsAgreeWithFormalBoundary",
+              "result": "PASSED"
+            },
+            {
+              "name": "invalidOptionalInformationFailsWholeCandidateAndKeepsInput",
+              "result": "PASSED"
+            },
+            {
+              "name": "mergeSameFalseTargetInheritedAndDuplicateParticipantKeysReject",
+              "result": "PASSED"
+            },
+            {
+              "name": "octoberR07OmittedInvalidReferenceCannotBlockRemainingFormalSave",
+              "result": "PASSED"
+            },
+            {
+              "name": "defect3HoldOmitAndExplicitPlAreDistinctEvenWithSaveDecision",
+              "result": "PASSED"
+            },
+            {
+              "name": "h03QuoteStateAuthorAndCharacterSheetSaveToFormalTargets",
+              "result": "PASSED"
+            },
+            {
+              "name": "h01MultiplePartsShareContextButNotActivityRangesAndStalePreviewCannotMutate",
+              "result": "PASSED"
+            },
+            {
+              "name": "resolutionBindingRejectsOtherSessionAndWrongType",
+              "result": "PASSED"
+            },
+            {
+              "name": "n1UnassignedMarkdownActivityBlocksCompleteThroughHttpAndDb",
+              "result": "PASSED"
+            },
+            {
+              "name": "n3BlankFieldsPersistAsMissingAndNeverCreateLabelNamedEntities",
+              "result": "PASSED"
+            },
+            {
+              "name": "directDatabasePcDetachCannotLeaveExistingEndState",
+              "result": "PASSED"
+            },
+            {
+              "name": "cookieAndLogout",
+              "result": "PASSED"
+            },
+            {
+              "name": "r7ExactQuote24GraphemesSavesInAllFormatsAnd25RequiresExplicitOmission",
+              "result": "PASSED"
+            },
+            {
+              "name": "otherUserDenied",
+              "result": "PASSED"
+            },
+            {
+              "name": "ct03SkpOnlyRequiresMeaningAcknowledgementAndCreatesNoInventedMain",
+              "result": "PASSED"
+            },
+            {
+              "name": "registeredFileLockOccursBeforeBusinessSizeLimit",
+              "result": "PASSED"
+            },
+            {
+              "name": "n2BackendSkpCorrectionExpiresCheckedAndIsNotAttributedToUser",
+              "result": "PASSED"
+            },
+            {
+              "name": "h01PartialRangePreservesResidualAndCompleteRequiresBothAAndB",
+              "result": "PASSED"
+            },
+            {
+              "name": "sharedResolutionRegisterCreatesOnce",
+              "result": "PASSED"
+            },
+            {
+              "name": "aggregateReorderUsesDeferredConstraint",
+              "result": "PASSED"
+            },
+            {
+              "name": "staleResolutionSnapshotWinsApplyConflict",
+              "result": "PASSED"
+            },
+            {
+              "name": "setupGate",
+              "result": "PASSED"
+            },
+            {
+              "name": "plChangeDoesNotRewritePastAutomatically",
+              "result": "PASSED"
+            },
+            {
+              "name": "n2ConfirmationPatchDoesNotPromotePlannedSkpOrInventUserDecision",
+              "result": "PASSED"
+            },
+            {
+              "name": "r2HtmlCoverageAndCompleteUseAllMeaningfulTextButIgnoreDecoration",
+              "result": "PASSED"
+            },
+            {
+              "name": "fullRawTextBoundaryAndUnicodeEscapeWorstCasePassBodyGuard",
+              "result": "PASSED"
+            },
+            {
+              "name": "activityCountsDistinctTablesNotRepeatedParticipations",
+              "result": "PASSED"
+            },
+            {
+              "name": "fileReplacementAtTwentyFilesAndExactFiftyMiBUsesFinalSize",
+              "result": "PASSED"
+            },
+            {
+              "name": "octoberR02UnsupportedHtmlBlocksCompletionUntilExplicitDecision",
+              "result": "PASSED"
+            },
+            {
+              "name": "mergeMixedTargetNeedsChoiceAndDuplicateKeyRejected",
+              "result": "PASSED"
+            },
+            {
+              "name": "defect3UnresolvedRoleAlternativesBlockCheckedUntilExplicitChoice",
+              "result": "PASSED"
+            },
+            {
+              "name": "deleteConditions",
+              "result": "PASSED"
+            },
+            {
+              "name": "importPreviewIsNonDestructiveAndStalePriority",
+              "result": "PASSED"
+            },
+            {
+              "name": "ccfoliaMappingUnknownAndInvalid",
+              "result": "PASSED"
+            },
+            {
+              "name": "consumedBlockLineageFollowsSplitMergeAndMergePreservesBothConflictingValues",
+              "result": "PASSED"
+            },
+            {
+              "name": "h01RegisteredSimilarityRequiresExplicitSeparateTableDecision",
+              "result": "PASSED"
+            },
+            {
+              "name": "inactiveProfileCanRemainButMigrationUnavailableHasExactPath",
+              "result": "PASSED"
+            },
+            {
+              "name": "octoberR06OlderDetachedDraftCannotRegisterUntilExplicitMappingAndMeaningReview",
+              "result": "PASSED"
+            },
+            {
+              "name": "ct05And06UnknownActivityBlocksCompleteButDecorationDoesNot",
+              "result": "PASSED"
+            },
+            {
+              "name": "n4NegativeContextCannotRegisterButIndependentPositiveC05StillCan",
+              "result": "PASSED"
+            },
+            {
+              "name": "duplicateCanonicalRejectedUnknownNotDeduplicated",
+              "result": "PASSED"
+            },
+            {
+              "name": "importBusinessLimitsMultipleFieldErrorsAndNoVersionAdvance",
+              "result": "PASSED"
+            },
+            {
+              "name": "partialFailureRollsBackCreatedFormalEntities",
+              "result": "PASSED"
+            },
+            {
+              "name": "n2ActualMainAndSkpKeepFormalKpDisplayOrder",
+              "result": "PASSED"
+            }
+          ]
+        },
+        {
+          "name": "jp.takukairo.DevProfileGuardTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "fixedDevLoginExistsOnlyInDevOrTest",
+              "result": "PASSED"
+            }
+          ]
+        },
+        {
+          "name": "jp.takukairo.ImportBoundaryTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "wholeGroupDoesNotPromoteAnUnprovenEndToEndPair",
+              "result": "PASSED"
+            },
+            {
+              "name": "explicitSameTableAssemblyKeepsParticipantsAndConflicts",
+              "result": "PASSED"
+            },
+            {
+              "name": "copiedSourcesNeverSupplyIndependentEvidence",
+              "result": "PASSED"
+            },
+            {
+              "name": "noScenarioNameIsRequiredWhenIndependentRecordsAndDatesAgree",
+              "result": "PASSED"
+            },
+            {
+              "name": "explicitSeparateScopesAreC1",
+              "result": "PASSED"
+            },
+            {
+              "name": "equivalentRecordsAcrossFormatsArePotentialCopies",
+              "result": "PASSED"
+            },
+            {
+              "name": "unrelatedScenariosDoNotBecomePairConflicts",
+              "result": "PASSED"
+            },
+            {
+              "name": "noParticipantRecordIsUniversallyRequiredForIndependentRecordingAndDateEvidence",
+              "result": "PASSED"
+            },
+            {
+              "name": "independentDatesAndParticipantRecordsOnlyProposeExplicitConfirmation",
+              "result": "PASSED"
+            },
+            {
+              "name": "differentDatesAloneDoNotProveSeparateTablesAndPairsNeverFormUnion",
+              "result": "PASSED"
+            },
+            {
+              "name": "wholeGroupRejectsHiddenSeparateScopesEvenIfOtherPairsHaveEvidence",
+              "result": "PASSED"
+            },
+            {
+              "name": "onDemandIncidentPairsKeepAllEvidenceAndCounterevidence",
+              "result": "PASSED"
+            }
+          ]
+        },
+        {
+          "name": "jp.takukairo.ImportCurrentDefectsTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "nonemptyQuoteWhitespaceIsNotChangedByTheEmptyFieldFix",
+              "result": "PASSED"
+            },
+            {
+              "name": "uncertainQuoteKeepsBothInterpretationsAndRequiresReview",
+              "result": "PASSED"
+            },
+            {
+              "name": "negativeCandidateAndQuotedContextNeverSupplyCompletedEvidence",
+              "result": "PASSED"
+            },
+            {
+              "name": "codeFencesRespectIndentCharacterLengthAndClosingSyntax",
+              "result": "PASSED"
+            },
+            {
+              "name": "decorationAndBenignHeadingsDoNotAddUnassignedBlockers",
+              "result": "PASSED"
+            },
+            {
+              "name": "repeatedTableAfterActivityRetainsSeparateMembershipHypotheses",
+              "result": "PASSED"
+            },
+            {
+              "name": "meaningfulUnusedHeadingsAndSingleRowsAreAccountedFor",
+              "result": "PASSED"
+            },
+            {
+              "name": "negativeHeadingEvidenceStopsAtSiblingAndPositiveC05RemainsActive",
+              "result": "PASSED"
+            },
+            {
+              "name": "emptyFieldsNeverBecomeNamesOrRoleEvidence",
+              "result": "PASSED"
+            },
+            {
+              "name": "explicitInlineExampleStillExtractsAttributesButRetainsQuoteAlternative",
+              "result": "PASSED"
+            }
+          ]
+        },
+        {
+          "name": "jp.takukairo.ImportFiveDefectsTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "markdownQuoteSpansIncludeLazyNestedAndCodeContinuationsButStopAtNormalRecords",
+              "result": "PASSED"
+            },
+            {
+              "name": "emptyStateDefinitionIgnoresMetadataButRetainsActualData",
+              "result": "PASSED"
+            },
+            {
+              "name": "roleAlternativesClearProvisionalValueWithoutErasingEvidence",
+              "result": "PASSED"
+            }
+          ]
+        },
+        {
+          "name": "jp.takukairo.ImportInferenceTest",
+          "tests": 23,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "localPlannedContextAndLateContextAreReevaluatedBeforeRoleInference",
+              "result": "PASSED"
+            },
+            {
+              "name": "internalMarkdownEmptyCellsNeverShiftParticipantColumns",
+              "result": "PASSED"
+            },
+            {
+              "name": "headingContextIsScopedAndParticipantsDoNotLeak",
+              "result": "PASSED"
+            },
+            {
+              "name": "completedPersonPcGetsPlButUnscopedRosterAndSkpDoNot",
+              "result": "PASSED"
+            },
+            {
+              "name": "htmlSourceLinesAddressRawTagsInsteadOfRenderedText",
+              "result": "PASSED"
+            },
+            {
+              "name": "explicitRoleInPlannedContextIsObservedButNotActualParticipationRole",
+              "result": "PASSED"
+            },
+            {
+              "name": "sameNamesAndDatesDoNotTransitivelyJoinRecords",
+              "result": "PASSED"
+            },
+            {
+              "name": "onlyExplicitRecordedYearsCanNormalizeCalendarSeparators",
+              "result": "PASSED"
+            },
+            {
+              "name": "explicitInlineMarkersSplitOnlyKnownFieldsNotNameSlashes",
+              "result": "PASSED"
+            },
+            {
+              "name": "csvQuotedCellsKeepNewlineCommaAndPhysicalRows",
+              "result": "PASSED"
+            },
+            {
+              "name": "rowContextExceptionsNeverInvalidateOtherParticipantsInExplicitTableScope",
+              "result": "PASSED"
+            },
+            {
+              "name": "scenarioTitleIsNotAnActualParticipationContext",
+              "result": "PASSED"
+            },
+            {
+              "name": "unqualifiedPcWithTwoPeopleIsRetainedInsteadOfBeingAttachedByListingOrder",
+              "result": "PASSED"
+            },
+            {
+              "name": "quotedRecordsDoNotCreateActualParticipationAndHeaderOnlyInputIsRetained",
+              "result": "PASSED"
+            },
+            {
+              "name": "mainKpDoesNotTurnPlannedSkpIntoActualKp",
+              "result": "PASSED"
+            },
+            {
+              "name": "columnLabelsHaveOriginalEvidenceAndMarkdownSetextHierarchyIsRetained",
+              "result": "PASSED"
+            },
+            {
+              "name": "cocActualProgressCanInferKpButUnscopedProgressCannot",
+              "result": "PASSED"
+            },
+            {
+              "name": "explicitKpPlForSamePersonRemainTwoParticipationCandidates",
+              "result": "PASSED"
+            },
+            {
+              "name": "allFiveFormatsHaveSameMeaningAndFieldTrace",
+              "result": "PASSED"
+            },
+            {
+              "name": "plannedAuthorsAndNpcDoNotCreateActualRoles",
+              "result": "PASSED"
+            },
+            {
+              "name": "missingScenarioAndDuplicateHeadersNeverDiscardOrOverwrite",
+              "result": "PASSED"
+            },
+            {
+              "name": "optionalFieldsFromAllFiveFormatsHaveSameMeaningAndExactFieldTrace",
+              "result": "PASSED"
+            },
+            {
+              "name": "onePlAmongKpAndPlIsAQualifiedPcTarget",
+              "result": "PASSED"
+            }
+          ]
+        },
+        {
+          "name": "jp.takukairo.ImportOctoberReviewTest",
+          "tests": 33,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "r11MultilineSetextConsumesItsEntireHeadingRange",
+              "result": "PASSED"
+            },
+            {
+              "name": "r03OnlyAffirmativeActualContextInfersRole(String)[1]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r03OnlyAffirmativeActualContextInfersRole(String)[2]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r03OnlyAffirmativeActualContextInfersRole(String)[3]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r03OnlyAffirmativeActualContextInfersRole(String)[4]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r03OnlyAffirmativeActualContextInfersRole(String)[5]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r03OnlyAffirmativeActualContextInfersRole(String)[6]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r03OnlyAffirmativeActualContextInfersRole(String)[7]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r03OnlyAffirmativeActualContextInfersRole(String)[8]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r03OnlyAffirmativeActualContextInfersRole(String)[9]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r02UnsupportedGridRetainsWholeRangeWithoutFalseDirectFields(String)[1]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r02UnsupportedGridRetainsWholeRangeWithoutFalseDirectFields(String)[2]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r02UnsupportedGridRetainsWholeRangeWithoutFalseDirectFields(String)[3]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r02UnsupportedGridRetainsWholeRangeWithoutFalseDirectFields(String)[4]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r02UnsupportedGridRetainsWholeRangeWithoutFalseDirectFields(String)[5]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r05RoleSegmentationPreservesExactQuoteBoundarySpaces",
+              "result": "PASSED"
+            },
+            {
+              "name": "r04ImmediateContextTravelsWithFieldTrace(String)[1]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r04ImmediateContextTravelsWithFieldTrace(String)[2]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r03AffirmativeStillInfersPl(String)[1]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r03AffirmativeStillInfersPl(String)[2]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r03AffirmativeStillInfersPl(String)[3]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r03AffirmativeStillInfersPl(String)[4]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r05InlineQuoteRoleLabelCannotCreateAnotherParticipant",
+              "result": "PASSED"
+            },
+            {
+              "name": "r05QuotedRoleLabelIsPartOfNameOrDialogue",
+              "result": "PASSED"
+            },
+            {
+              "name": "r05InlineRolesPreserveMainOrder(String)[1]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r05InlineRolesPreserveMainOrder(String)[2]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r05InlineRolesPreserveMainOrder(String)[3]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r11MarkdownStructureUsesActualHeadingKindAndTableColumns(String)[1]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r11MarkdownStructureUsesActualHeadingKindAndTableColumns(String)[2]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r11MarkdownStructureUsesActualHeadingKindAndTableColumns(String)[3]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r11MarkdownStructureUsesActualHeadingKindAndTableColumns(String)[4]",
+              "result": "PASSED"
+            },
+            {
+              "name": "r03ChildUnknownStopsParentButSiblingRestoresContext",
+              "result": "PASSED"
+            },
+            {
+              "name": "r04MarkdownBlankBetweenParagraphAndTablePreservesSharedFields",
+              "result": "PASSED"
+            }
+          ]
+        },
+        {
+          "name": "jp.takukairo.ImportReviewRegressionTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "r7QuoteLineBreaksRemainExactInCsvAndHtml",
+              "result": "PASSED"
+            },
+            {
+              "name": "r5BrAndTdHeadersMatchAllOtherFormats",
+              "result": "PASSED"
+            },
+            {
+              "name": "r4LateParagraphContextStopsAtParticipantBoundary",
+              "result": "PASSED"
+            },
+            {
+              "name": "r6InlinePcHasTraceToItsOwnFieldAndEvidence",
+              "result": "PASSED"
+            },
+            {
+              "name": "r7QuoteWhitespaceAndUnicodeStayExactInAllFormats",
+              "result": "PASSED"
+            },
+            {
+              "name": "r4MultipleConflictingRowsInExplicitScopeKeepIndependentEvidence",
+              "result": "PASSED"
+            },
+            {
+              "name": "r3And4AdjacentTableContextStopsAtFollowingParagraph",
+              "result": "PASSED"
+            },
+            {
+              "name": "r2MixedHtmlOwnTextAndUnsupportedWrappersRemainReviewable",
+              "result": "PASSED"
+            },
+            {
+              "name": "r4CompetingRowContextIsOrderIndependentAndRetainsBothEvidence",
+              "result": "PASSED"
+            },
+            {
+              "name": "r3QuotedHtmlTablesAndPreNeverCreateActualRoles",
+              "result": "PASSED"
+            }
+          ]
+        },
+        {
+          "name": "jp.takukairo.LimitsParserImageTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "imageTooLargeAndAnimatedWebp",
+              "result": "PASSED"
+            },
+            {
+              "name": "parserFormatsPreserveUnknownAndCp932",
+              "result": "PASSED"
+            },
+            {
+              "name": "allApplicableErrorsAndOrder",
+              "result": "PASSED"
+            },
+            {
+              "name": "genericSchemaValidatesAllInputTypesAndRetiredValues",
+              "result": "PASSED"
+            },
+            {
+              "name": "boundaryLimitsAndReplacementFinalState",
+              "result": "PASSED"
+            },
+            {
+              "name": "imageMagicTransparencyAndDerivativeSize",
+              "result": "PASSED"
+            },
+            {
+              "name": "jpegExifOrientationIsAppliedToMasterAndDerivative",
+              "result": "PASSED"
+            },
+            {
+              "name": "extendedGraphemeCounting",
+              "result": "PASSED"
+            },
+            {
+              "name": "oversizedHeaderIsRejectedBeforeRasterAllocation",
+              "result": "PASSED"
+            }
+          ]
+        },
+        {
+          "name": "jp.takukairo.RateLimitTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "onlyTestOverrideCanDisable",
+              "result": "PASSED"
+            },
+            {
+              "name": "enabledBoothUserLimit",
+              "result": "PASSED"
+            },
+            {
+              "name": "enabledAuthIpLimitAndNoBucketDetails",
+              "result": "PASSED"
+            }
+          ]
+        },
+        {
+          "name": "jp.takukairo.ResolverConfigTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "cases": [
+            {
+              "name": "initialAliasesEmptyAndExplicitTestAliasReturnsSuggestedWithoutCanonical",
+              "result": "PASSED"
+            }
+          ]
+        }
+      ]
+    },
+    "browser": {
+      "stats": {
+        "startTime": "2026-10-23T01:03:39.076Z",
+        "duration": 150919.182,
+        "expected": 27,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "file": "browser-results-2026-10-23.json"
+    },
+    "frontendState": {
+      "tests": 7,
+      "failures": 0
+    },
+    "typecheck": "PASSED",
+    "build": "PASSED",
+    "package": "PASSED",
+    "diffCheck": "PASSED"
+  },
+  "findings": [
+    {
+      "id": "R01",
+      "status": "FIXED_VERIFIED_INTERNAL",
+      "change": "Mergeの全scalar・未割当値・値ごとの明示未保存を保存。空側への単一値継承、代替値の未割当化、出自をPreview/Applyで保持。",
+      "tests": [
+        "octoberR01MergeRetainsSingleValuesInEitherOrderAndFormalSave",
+        "octoberR01OmissionOnOneInputNeverSilentlyOmitsTheOtherValue",
+        "octoberR01ScalarConservationMatrix"
+      ]
+    },
+    {
+      "id": "R02",
+      "status": "FIXED_VERIFIED_INTERNAL",
+      "change": "非対応HTMLグリッドを表全体の未解析ブロックとして保持し、誤ったDIRECT人物抽出を防止。未処理はComplete不可。",
+      "tests": [
+        "r02UnsupportedGridRetainsWholeRangeWithoutFalseDirectFields",
+        "octoberR02UnsupportedHtmlBlocksCompletionUntilExplicitDecision"
+      ]
+    },
+    {
+      "id": "R03",
+      "status": "FIXED_VERIFIED_INTERNAL",
+      "change": "明確な実施済み肯定だけをRole推論へ使用。否定・不確実・募集/連絡・下位未確認で継承を停止。",
+      "tests": [
+        "r03OnlyAffirmativeActualContextInfersRole",
+        "r03ChildUnknownStopsParentButSiblingRestoresContext",
+        "r03AffirmativeStillInfersPl",
+        "n4NegativeContextCannotRegisterButIndependentPositiveC05StillCan"
+      ]
+    },
+    {
+      "id": "R04",
+      "status": "FIXED_VERIFIED_INTERNAL",
+      "change": "直前段落/captionの属性とTraceを表へ一緒に継承。Markdown空行を考慮し、別表境界で局所文脈を止める。",
+      "tests": [
+        "r04ImmediateContextTravelsWithFieldTrace",
+        "r04MarkdownBlankBetweenParagraphAndTablePreservesSharedFields"
+      ]
+    },
+    {
+      "id": "R05",
+      "status": "FIXED_VERIFIED_INTERNAL",
+      "change": "Quote/括弧を尊重する明示Roleラベル境界でKP/SKP/PLを分離。主KP先頭。Inline Quote内Roleラベルは人物を増やさない。",
+      "tests": [
+        "r05InlineRolesPreserveMainOrder",
+        "r05QuotedRoleLabelIsPartOfNameOrDialogue",
+        "r05InlineQuoteRoleLabelCannotCreateAnotherParticipant",
+        "r05RoleSegmentationPreservesExactQuoteBoundarySpaces"
+      ]
+    },
+    {
+      "id": "R06",
+      "status": "FIXED_VERIFIED_INTERNAL",
+      "change": "全編集経路で安定キーまたは明示Mappingを要求。Role義務、Ref、割当、Trace、編集パスを一体対応。古いDETACHED孤立義務も読取/登録で検出し、Mapping後に明示意味確認を要求。",
+      "tests": [
+        "octoberR06PatchMappingRetainsSkpMeaningAndTraceAndUnmappedMutationIsAtomic",
+        "octoberR06MergeCollisionMappingKeepsEachRoleObligation",
+        "octoberR06R09SplitMergePreserveUnresolvedAndOmittedRecords",
+        "octoberR06OlderDetachedDraftCannotRegisterUntilExplicitMappingAndMeaningReview",
+        "r1ExplicitBlockDataMappingSurvivesSplitAndMerge"
+      ]
+    },
+    {
+      "id": "R07",
+      "status": "FIXED_VERIFIED_INTERNAL",
+      "change": "実効ParticipationとPC有無から使用Resolutionを導出。OMIT/PC解除の未使用異常は残りを妨げず、再SAVEで検証復活。",
+      "tests": [
+        "octoberR07OmittedInvalidReferenceCannotBlockRemainingFormalSave",
+        "ct04OmittingOneUnresolvedParticipationPreservesTwoNormalParticipantsAndNotice"
+      ]
+    },
+    {
+      "id": "R08",
+      "status": "FIXED_VERIFIED_INTERNAL",
+      "change": "新規Formal作成とImport事前検証でLibraryDraftsを共有。作者/System列長、PC設定のProfile/型/URL/重複/必須を事前検出。候補独立TransactionでDB例外もRollback。",
+      "tests": [
+        "octoberR08AuthorAndPcDeepConstraintsAgreeWithFormalBoundary",
+        "octoberR08DatabaseFailureRollsBackCandidateAndSharedResolutionWhileSiblingSucceeds",
+        "partialFailureRollsBackCreatedFormalEntities",
+        "sharedResolutionRegisterCreatesOnce"
+      ]
+    },
+    {
+      "id": "R09",
+      "status": "FIXED_VERIFIED_INTERNAL",
+      "change": "構造Validationを正式保存Validationから分離。未判定Role/OMIT/HOLDを保持したSplit/Mergeを許可し、結果はUNCHECKEDかつ未解決なら登録不可。",
+      "tests": [
+        "octoberR06R09SplitMergePreserveUnresolvedAndOmittedRecords",
+        "r1ExplicitBlockDataMappingSurvivesSplitAndMerge",
+        "octoberStructureOperationDoesNotNormalizeOrUncheckUnrelatedCandidate"
+      ]
+    },
+    {
+      "id": "R10",
+      "status": "FIXED_VERIFIED_INTERNAL",
+      "change": "raw/effective Draftを明示し画面/照合/Review/正式保存を割当結果に統一。割当先のUSER_ASSIGNMENT Trace、実効項目の編集履歴、CHECKED失効を追加。旧名CREATE_NEWを事前拒否。",
+      "tests": [
+        "octoberR10AssignmentProjectionResolutionTraceAndSavedValueAgree",
+        "October continuous workflow",
+        "assignment projection and release preserve original draft, omissions and conflicting values"
+      ]
+    },
+    {
+      "id": "R11",
+      "status": "FIXED_VERIFIED_INTERNAL",
+      "change": "CommonMark ASTのHeading種別/範囲を使用。ATX直後rule、真のSetext（複数行/CRLF）、外側pipe省略/字下げ表を認識。",
+      "tests": [
+        "r11MarkdownStructureUsesActualHeadingKindAndTableColumns",
+        "r11MultilineSetextConsumesItsEntireHeadingRange"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/qa-import-inference.ps1 *> .runtime/import-october-final23.log",
+      "log": ".runtime/import-october-final23.log",
+      "result": "ALL_STAGES_PASSED",
+      "shellWrapperExitCode": 1,
+      "shellWrapperNote": "Windows PowerShell parent returns 1 when native stderr is redirected even if child exits 0. Reproduced using isolated stderr-only child with exit 0; explicit exit of LASTEXITCODE returns 0. Final QA log reaches normal cleanup, all suites pass, and script ends exit 0. No failed stage inferred from wrapper status.",
+      "runs": [
+        "Maven test -Pimport-qa -Dtakukairo.import-test-db=true",
+        "Maven package -DskipTests",
+        "tsc --noEmit",
+        "tsc -b",
+        "vite build",
+        "node --experimental-strip-types --test qa/import-state.test.mjs",
+        "Playwright --config playwright.import.config.ts"
+      ]
+    },
+    {
+      "command": "git -c core.safecrlf=false diff --check",
+      "result": "PASSED"
+    }
+  ],
+  "derivedFixes": [
+    "Splitの未割当値の無通知脱落防止",
+    "Mergeの代替値を項目別Traceへ接続",
+    "構造操作で無関係な入力元との差をユーザー編集と誤記しない",
+    "DETACHED履歴を別参加者の未解決義務として再活性化しない",
+    "古い途中保存の孤立Role義務を検出して明示Mappingで修復",
+    "Setext複数行を活動記録として再解釈しない",
+    "Inline Quote中のRoleラベルで人物を増やさない。Quote前後の空白は原値どおり保持",
+    "構造操作で無関係な候補を正規化・UNCHECKED化しない"
+  ],
+  "unchangedObservations": [
+    "N19 evidence-id-collision: design observation only; no independent specification change",
+    "N14 omitted-boundary: unresolved specification observation; no behavior change",
+    "N04 md-escaped-pipe: unresolved Quote representation question; no behavior change"
+  ],
+  "limitations": [
+    "内部回帰成功はユーザー実入力T01〜T24の正式受入合格ではない",
+    "結合/入れ子/複数段header/非矩形HTML表は自動展開せず原文付き手動確認へ回す",
+    "高密度最大容量・多数Userでの同時負荷/Connection Pool容量は未検証",
+    "通常アプリ全Viewport Browser suiteは通常DB作用を避け実行しない。関連Import Browser suiteを隔離環境で実行",
+    "Production/OAuth実Credential/公開は対象外"
+  ],
+  "sourceSha256": {
+    "backend/src/main/java/jp/takukairo/importsession/ImportService.java": "cd403ea8b01a06699e1e786fc90ff90f88811769c3ce129ac6efe1608a837cd8",
+    "backend/src/main/java/jp/takukairo/importsession/ImportInference.java": "95340865cb9cf749a4cc17ff13abc788044cb6c1e9bd9e21b60f2dd6791fbaea",
+    "backend/src/main/java/jp/takukairo/importsession/ImportStructureParser.java": "b3c2dd6962b7e6c82d9de517f13b1ac3190d5052f4777a4a586dfb6ddbac98e6",
+    "backend/src/main/java/jp/takukairo/importsession/ImportStructure.java": "9907c17d2abf5086d8369fbde1aa030a94ad38a977f7956aa808d828b210e035",
+    "backend/src/main/java/jp/takukairo/importsession/ImportDrafts.java": "34c0247a6c48276d7f0b366de5a3da7b17e6c524397ba80a8aa0ec272b277163",
+    "backend/src/main/java/jp/takukairo/scenario/LibraryDrafts.java": "2c5a7a0f924f24ca67215f9770381402e9372ff82d81a37c2b25866332883198",
+    "backend/src/main/java/jp/takukairo/scenario/LibraryService.java": "2ea2b8eb4fbfbb79e9a6d86e27ab50e77181d9a1b8d2a2a62581d0b72bbe9d6c",
+    "backend/src/main/java/jp/takukairo/table/TableService.java": "7900bd07e123b84ca8da78831e91e868ae73c00fa7ab51457402415e112aba65",
+    "backend/src/test/java/jp/takukairo/ContractIntegrationTest.java": "72b0dd778d145bd681f22f7029dfd87eb2072ca89d5550734cb0097820850413",
+    "backend/src/test/java/jp/takukairo/ImportOctoberReviewTest.java": "c8498d1d4ba7d03e4d590d44735736c74133ea19ee0b6061e310934bd6226258",
+    "frontend/src/features/Import.tsx": "8fa99fc4a1c17f190dd8d5c122b785f2088c91300e762b244b25078ca3c91679",
+    "frontend/src/features/import-state.ts": "fccc80067d4ee540d3778ef7835b4c645e61af3c59d867e7e89e199add1f0e2d",
+    "frontend/src/api/types.ts": "9f63e8e32d5f6cb42de7bc50f13469cd34589a76dfa9eb8f65d06a3ef739ea6f",
+    "frontend/qa/import-inference.spec.ts": "2e52e13978568a2597e52dbf91705af7cd06eef0c31075e9850a69f48006126f",
+    "frontend/qa/import-state.test.mjs": "e3dfee736714536fc89b4ab43455a55803b0e94b8485bdc491da208b4ef2ab77"
+  },
+  "evidenceSha256": {
+    ".runtime/import-october-final23.log": "699330143b8ab4932c7c022a4393a2069dccbacf2758843f5b8bd2422a278a8a",
+    ".runtime/import-inference-qa/browser-results.json": "4426c30e1cc614a33c0d167e7f2ae2246d303a78596967e47b42c83d623abbe1",
+    ".runtime/import-inference-qa/desktop-detail.png": "68a0bb208367525e72cbef72948c8fe6d50bd14a3b9458ddb57f1cf4c48e78b4",
+    ".runtime/import-inference-qa/mobile-detail.png": "97a29896a56c84730f7cf53bf3fdcd7a7fdcd6d37fc733fcf2752afa23b750b7"
+  }
+}

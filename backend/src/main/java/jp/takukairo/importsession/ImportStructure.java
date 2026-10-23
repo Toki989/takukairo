@@ -4,7 +4,7 @@ import static jp.takukairo.common.Json.*;
 /** Ephemeral structure; offsets address the untouched source in UTF-16. */
 public final class ImportStructure {
  private ImportStructure() {}
- public enum Kind { HEADING, PARAGRAPH, RECORD, BLANK }
+ public enum Kind { HEADING, PARAGRAPH, RECORD, BLANK, UNPARSED }
  public record Range(int startOffset,int endOffset,int lineStart,int lineEnd,String excerpt) {
   public Map<String,Object> trace(String field,long record,String evidence,String derivation,List<String> dependencies) {
    return map("fieldPath",field,"startOffset",startOffset,"endOffset",endOffset,"lineStart",lineStart,"lineEnd",lineEnd,"excerpt",excerpt,"logicalRecord",record==0?null:record,"evidenceId",evidence,"derivation",derivation,"dependsOn",dependencies);

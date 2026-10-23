@@ -20,7 +20,7 @@ public class TableService {
  public Object get(long id){return dto(user.owned(TrpgTable.class,id));}
  public Object forScenario(long id){user.owned(Scenario.class,id);return s.query(TrpgTable.class,"where e.scenarioId=:id order by e.createdAt,e.id","id",id).stream().map(this::dto).toList();}
  public Object appearances(long id){user.owned(Pc.class,id);return s.query(Participation.class,"where e.pcId=:id","id",id).stream().sorted(Comparator.comparing((Participation p)->library.basis(s.find(TrpgTable.class,p.tableId)),Comparator.reverseOrder())).map(p->{var t=s.find(TrpgTable.class,p.tableId);return map("table",dto(t),"participationId",p.id,"person",library.personDto(s.find(Person.class,p.personId)));}).toList();}
- /** ImportService restores its Candidate savepoint if validation fails. */
+ /** ImportService rolls back its Candidate transaction if saving fails. */
  @Transactional(noRollbackFor=ApiException.class)
  public Map<String,Object> saveForImport(long scenarioId,Map<String,Object>b){return save(null,scenarioId,b);}
  public Map<String,Object> save(Long id,long scenarioId,Map<String,Object>b){var scenario=user.owned(Scenario.class,scenarioId);var t=id==null?new TrpgTable():user.owned(TrpgTable.class,id);if(id!=null){t=s.lock(TrpgTable.class,id);Store.version(t.version,requiredLong(b,"version"));}else{t.userId=user.id();t.scenarioId=scenarioId;s.save(t);s.flush();}t.scenarioId=scenarioId;t.tableName=optional(b.get("tableName"));if(t.tableName!=null&&t.tableName.codePointCount(0,t.tableName.length())>255)throw ApiException.invalid("/tableName","TOO_LONG","255文字以下にしてください。");t.recordingUrl=url(b.get("recordingUrl"),"/recordingUrl");

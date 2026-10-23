@@ -3,6 +3,47 @@ async function mutation(request:APIRequestContext,url:string,method:string,data?
 async function fresh(page:Page,text:string){await page.goto('/dev-login');await page.getByRole('button',{name:'固定テストユーザーでログイン'}).click();await expect(page.getByRole('heading',{name:'あなたの回廊'})).toBeVisible();const old=await(await page.request.get('/api/import/session/current')).json();if(old)await mutation(page.request,'/import/session/'+old.id+'?expectedSessionVersion='+old.version,'DELETE');await page.goto('/import');await page.getByRole('button',{name:'インポートを始める',exact:true}).click();await page.getByLabel('テキストを貼り付ける').fill(text);await page.getByRole('button',{name:'テキストを追加',exact:true}).click();await expect(page.getByText('貼り付けテキスト',{exact:true})).toBeVisible();await page.getByRole('button',{name:'解析して確認へ'}).click();await expect(page.locator('.review-row')).toHaveCount(Math.min(100,text.split('\n\n').length));return(await page.request.get('/api/import/session/current')).json()}
 async function review(page:Page,sid:number){return(await(await page.request.get('/api/import/session/'+sid+'/review')).json()).items}
 test.beforeEach(async({baseURL})=>{expect(baseURL,'This mutating suite must use the dedicated QA frontend').toBe('http://localhost:5175')});
+
+test('October continuous workflow: edit assign resolve split merge recheck partial register resume Complete',async({page})=>{
+ test.setTimeout(90000);
+ const s=await fresh(page,'シナリオ: 通し検証\nPL: 田中\nPC: 元PC\n新PC\nSKP: 補助\n\nシナリオ: 後で処理');
+ const base='/import/session/'+s.id;
+ const current=async()=>await(await page.request.get('/api'+base)).json();
+ const detail=async(id:number)=>await(await page.request.get('/api'+base+'/candidates/'+id)).json();
+ const rows=await review(page,s.id),original=rows.find((r:any)=>r.summary.scenarioName==='通し検証');
+ await page.locator('.review-row').filter({hasText:'通し検証'}).locator(':scope > button').first().click();
+ await page.getByLabel('卓名',{exact:true}).fill('編集した卓');
+ await page.getByLabel('参加記録の扱い',{exact:true}).nth(1).selectOption('OMIT');
+ await page.getByRole('combobox',{name:'この値の扱い',exact:true}).selectOption('PARTICIPATION_PC');
+ const key=original.summary.participations[0].candidateParticipationKey;
+ await page.getByLabel('割り当てる参加者',{exact:true}).selectOption(key);
+ await expect(page.getByLabel('PC名',{exact:true}).first()).toHaveValue('新PC');
+ await page.getByRole('button',{name:'変更を保存',exact:true}).click();
+ await expect.poll(async()=>(await detail(original.candidateId)).candidate.effectiveCandidateData.participations[0].pcName).toBe('新PC');
+ for(const label of ['シナリオの照合','人物の照合','PCの照合']){
+  const picker=page.getByRole('group',{name:label,exact:true}).first();await picker.getByLabel(label+'の判断').selectOption('CREATE_NEW');await picker.getByRole('button',{name:'この判断を保存',exact:true}).click();await expect(picker.getByText('新規登録する判断を保存済み',{exact:true})).toBeVisible();
+ }
+ await expect(page.getByRole('group',{name:'PCの照合',exact:true}).first()).toContainText('正式保存先: 新PC');
+ await page.getByLabel('内容を確認済み').check();await page.getByRole('button',{name:'変更を保存',exact:true}).click();
+ await expect.poll(async()=>(await detail(original.candidateId)).candidate.confirmationStatus).toBe('CHECKED');
+ await page.getByRole('button',{name:'確認一覧へ戻る'}).click();
+ const saved=(await detail(original.candidateId)).candidate,refs=saved.resolutionRefs;
+ const bindings=[{slot:{type:'SCENARIO'},resolutionId:refs.scenarioResolutionId},...refs.participations.flatMap((p:any)=>[{slot:{type:'PERSON',candidateParticipationKey:p.candidateParticipationKey},resolutionId:p.personResolutionId},{slot:{type:'PC',candidateParticipationKey:p.candidateParticipationKey},resolutionId:p.pcResolutionId}]).filter((x:any)=>x.resolutionId)];
+ const empty={...structuredClone(saved.candidateData),participations:[],unassignedValues:[]};
+ const split={expectedSessionVersion:(await current()).version,expectedVersion:saved.version,parts:[{clientPartKey:'a',candidateData:saved.candidateData,resolutionBindings:bindings},{clientPartKey:'b',candidateData:empty,resolutionBindings:[]}]};
+ const sp=await mutation(page.request,base+'/candidates/'+saved.id+'/split-preview','POST',split);expect(sp.resultingCandidates.every((p:any)=>p.canApply)).toBe(true);await mutation(page.request,base+'/candidates/'+saved.id+'/split','POST',{...split,previewRevision:sp.previewRevision});
+ const splitRows=(await review(page,s.id)).filter((r:any)=>r.summary.scenarioName==='通し検証');expect(splitRows).toHaveLength(2);expect(splitRows.every((r:any)=>r.confirmationStatus==='UNCHECKED')).toBe(true);
+ const merge={expectedSessionVersion:(await current()).version,sources:splitRows.map((r:any)=>({candidateId:r.candidateId,expectedVersion:r.version})),mergedCandidateData:saved.candidateData,resolutionBindings:bindings};
+ const mp=await mutation(page.request,base+'/candidates/merge-preview','POST',merge);expect(mp.canApply).toBe(true);await mutation(page.request,base+'/candidates/merge','POST',{...merge,previewRevision:mp.previewRevision});
+ await page.reload();await page.getByRole('button',{name:'続きから再開'}).click();await page.locator('.review-row').filter({hasText:'通し検証'}).locator(':scope > button').first().click();
+ await expect(page.getByLabel('PC名',{exact:true}).first()).toHaveValue('新PC');await expect(page.getByLabel('内容を確認済み')).not.toBeChecked();await expect(page.getByText('今回は保存しません: 補助 の参加記録（HO・Quote・終了時データ等を含む）',{exact:true})).toBeVisible();
+ await page.getByText('入力元を確認',{exact:true}).click();await expect(page.locator('small').filter({hasText:'ユーザー割当'}).first()).toBeVisible();
+ await page.getByLabel('内容を確認済み').check();await page.getByRole('button',{name:'変更を保存',exact:true}).click();await page.getByRole('button',{name:'確認一覧へ戻る'}).click();await page.getByRole('button',{name:'正式登録へ',exact:true}).click();await page.getByRole('button',{name:/対象を正式登録する/}).click();await expect(page.getByRole('link',{name:'卓を開く'})).toBeVisible();await expect(page.getByText(/明示未保存: .*participations/)).toBeVisible();
+ const after=await review(page,s.id),registered=after.find((r:any)=>r.registrationStatus==='REGISTERED');expect(after.find((r:any)=>r.summary.scenarioName==='後で処理').registrationStatus).toBe('PENDING');const registeredDetail=await detail(registered.candidateId);const formal=await(await page.request.get('/api/tables/'+registeredDetail.candidate.registrationResult.registeredTableId)).json();expect(formal.participations).toHaveLength(1);expect(formal.participations[0].pc.name).toBe('新PC');
+ await page.reload();await page.getByRole('button',{name:'続きから再開'}).click();
+ const pending=after.find((r:any)=>r.summary.scenarioName==='後で処理');await mutation(page.request,base+'/candidates/'+pending.candidateId,'PATCH',{expectedSessionVersion:(await current()).version,expectedVersion:pending.version,registrationTarget:false});
+ const complete=await mutation(page.request,base+'/complete','POST',{expectedSessionVersion:(await current()).version});expect(complete.registeredTableCount).toBe(1);expect((await current()).status).toBe('COMPLETED');
+});
 test('defect2 detail autosave preserves A to B to A while the B response is in flight',async({page})=>{
  const s=await fresh(page,'シナリオ: 連続保存\n卓名: A');await page.locator('.review-row>button').first().click();await expect(page.getByLabel('卓名',{exact:true})).toHaveValue('A');
  let release!:()=>void,arrived!:()=>void;const held=new Promise<void>(resolve=>release=resolve),started=new Promise<void>(resolve=>arrived=resolve);const patches:any[]=[];

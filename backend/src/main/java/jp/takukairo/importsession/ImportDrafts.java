@@ -10,6 +10,17 @@ public final class ImportDrafts {
  private ImportDrafts() {}
  public static final Set<String> SCENARIO_OPTIONAL=Set.of("authorName","sourceUrl");
  public static final Set<String> PART_OPTIONAL=Set.of("handout","displayQuote","endPcState","characterSheetUrl");
+ public static void applyAssignments(Map<String,Object>d){
+  var assigned=new HashMap<String,Object>();for(var value:list(d.get("unassignedValues"))){var a=obj(value.get("assignment"));String type=text(a.get("type"));
+   if(!Set.of("UNASSIGNED","PARTICIPATION_PERSON","PARTICIPATION_PC","PARTICIPATION_HANDOUT","IGNORE").contains(type==null?"":type))throw ApiException.invalid("/candidateData/unassignedValues","INVALID_ASSIGNMENT","値の扱いを確認してください。");
+   if(!type.startsWith("PARTICIPATION_"))continue;
+   var part=list(d.get("participations")).stream().filter(p->Objects.equals(p.get("candidateParticipationKey"),a.get("candidateParticipationKey"))).findFirst().orElseThrow(()->ApiException.invalid("/candidateData/unassignedValues","INVALID_ASSIGNMENT","割り当てる参加者を選択してください。"));
+   String field=switch(type){case "PARTICIPATION_PERSON"->"personName";case "PARTICIPATION_PC"->"pcName";default->"handout";};
+   if("OMIT".equals(part.get("saveDecision"))||omitted(part,field))continue;
+   String target=text(part.get("candidateParticipationKey"))+":"+field;if(assigned.containsKey(target)&&!Objects.equals(assigned.get(target),value.get("rawValue")))throw ApiException.invalid("/candidateData/unassignedValues","CONFLICTING_ASSIGNMENTS","同じ項目に異なる値が割り当てられています。原文を確認してください。");assigned.put(target,value.get("rawValue"));part.put(field,value.get("rawValue"));
+  }
+ }
+ public static Map<String,Object> assigned(Map<String,Object>d){var result=object(write(d));applyAssignments(result);return result;}
  public static Map<String,Object> effective(Map<String,Object> original) {
   var d=object(write(original));validateOmissions(d,SCENARIO_OPTIONAL);
   omit(d);var parts=new ArrayList<Map<String,Object>>();var omittedParts=new HashSet<String>();

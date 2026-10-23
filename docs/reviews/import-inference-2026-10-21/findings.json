@@ -1,0 +1,746 @@
+{
+  "schemaVersion": 1,
+  "dateLocal": "2026-10-21",
+  "timezone": "Asia/Tokyo",
+  "reviewedCommit": "2392430eb13041ef6dec163d04b864610738c9b0",
+  "status": "REVIEW_COMPLETE_FIXES_NOT_STARTED",
+  "request": "前回の修正情報を保持したまま追加精査し、修正をまとめて扱えるようにする。",
+  "summary": {
+    "retainedPreviousFindings": 5,
+    "newFindings": 6,
+    "totalOpenFindings": 11,
+    "existingUnitTests": {
+      "method": "JUnit Platform launcher; current sources; five parser/boundary suites; no DB",
+      "found": 58,
+      "succeeded": 58,
+      "failed": 0,
+      "skipped": 0,
+      "failures": []
+    },
+    "isolatedProbeCases": 31,
+    "productionCodeChanged": false,
+    "repositoryTestSuiteChanged": false,
+    "normalDatabaseOrStorageUsed": false
+  },
+  "method": {
+    "compiled": "backend/src/main/java配下の現行全ソースを隔離classesへjavacでコンパイル。resourcesは現行src/main/resourcesを使用。",
+    "probes": "実ImportParser/ImportInference/ImportBoundary/ImportServiceを実行。Serviceの永続化・所有者lookupのみMemoryStore/CurrentUserへ置換。Transaction/Version/JPA/SQL保証の実験ではない。",
+    "units": "現行の推論・境界5 Suiteを同じ隔離classesへコンパイルしJUnit Platform Launcherで実行。既存Bytecodeの合格記録を流用していない。",
+    "static": "API/Version/所有境界/Source Lock/未解析消費/確認状態/分割統合/登録とRollback/正式属性Validation/Frontend DTO利用を横断して読んだ。"
+  },
+  "findings": [
+    {
+      "id": "R01",
+      "origin": "PREVIOUS_REVIEW",
+      "priority": "HIGH",
+      "status": "OPEN_NOT_FIXED",
+      "title": "Mergeで片方だけにある作者・URL等が未保存通知なしに候補から脱落する",
+      "locations": [
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 207
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 208
+        },
+        {
+          "file": "frontend/src/features/Import.tsx",
+          "line": 29
+        }
+      ],
+      "probes": [
+        "R01-merge-single-value"
+      ],
+      "observed": "作者・Scenario URLが空の候補Aを先頭に、作者B・URLありの候補BをMergeするとcanApply=true。統合候補にはBの作者・URLも、その未割当値もない。今回確認したのはPreview出力であり、実DBへの登録は未実行。",
+      "expected": "採用済みの抽出情報は統合後も保持する。保存しないなら対象値と明示除外意思を結びつけ、登録前と結果に通知する。",
+      "rootCause": "画面が最初の候補のscalar値を採用し、Backendは非空値が2種類以上あるC3だけを保全する。1種類しかない値の脱落を検出しない。",
+      "fixScope": "競合検出と全入力値の保全を分ける。全入力値・任意情報・除外意思を統合先へ照合し、引継ぎまたは明示解決を要求する。",
+      "acceptance": [
+        "先頭だけ空／末尾だけ空／順序逆転／全候補で同じ非空値／異なる非空値を確認する",
+        "authorName、sourceUrl、recordingUrl、gameSystemNameを横断する",
+        "omittedFieldsの異なる候補を統合しても他候補の値を暗黙除外しない",
+        "Preview→Apply→実登録後のFormal値と未保存通知を照合する"
+      ],
+      "currentStatus": "FIXED_VERIFIED_INTERNAL",
+      "remediationEvidence": "修正検証結果_2026-10-23.json#R01"
+    },
+    {
+      "id": "R02",
+      "origin": "PREVIOUS_REVIEW_EXPANDED",
+      "priority": "HIGH",
+      "status": "OPEN_NOT_FIXED",
+      "title": "HTML結合セル・入れ子表を通常の列として読み、別の値を人物名にする",
+      "locations": [
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportStructureParser.java",
+          "line": 124
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportStructureParser.java",
+          "line": 129
+        }
+      ],
+      "probes": [
+        "R02-rowspan",
+        "N24-html-colspan",
+        "N07-html-nested-table"
+      ],
+      "observed": "rowspan=2のシナリオ列を持つ表では2行目の佐藤をscenarioName、赤い星をPLのpersonNameへ割り当てる。colspanでも後続PCが人物名になる。入れ子表ではPLPC田中青い月という連結文字列が人物名になる。",
+      "expected": "セルと列の対応が分からない構造は通常フィールドへ確定せず、元範囲を保持して確認へ回す。",
+      "rootCause": "childrenのth/tdの物理添字だけでheaderを選び、rowspan/colspanや子テーブルの境界を考慮しない。",
+      "fixScope": "構造アダプターで表グリッドと入れ子境界を扱う。未対応構造は検出して未解析へ退避する。推測した誤ったDIRECT Traceを生成しない。",
+      "acceptance": [
+        "rowspan、colspan、入れ子表、複数段header、欠落セル、列数過不足を確認する",
+        "抽出値だけでなくラベルLocationと元セルの対応も照合する",
+        "未対応時にも活動範囲が消えずCompleteの判定へ接続されることを実APIで確認する"
+      ],
+      "currentStatus": "FIXED_VERIFIED_INTERNAL",
+      "remediationEvidence": "修正検証結果_2026-10-23.json#R02"
+    },
+    {
+      "id": "R03",
+      "origin": "PREVIOUS_REVIEW_EXPANDED",
+      "priority": "HIGH",
+      "status": "OPEN_NOT_FIXED",
+      "title": "否定・不確実・下位の未確認文脈を実施済みとしてPL推論へ使う",
+      "locations": [
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportInference.java",
+          "line": 29
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportInference.java",
+          "line": 153
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportInference.java",
+          "line": 157
+        }
+      ],
+      "probes": [
+        "R03-negative",
+        "N01-child-unknown-status",
+        "N20-neutral-participation-context",
+        "N21-uncertain-context"
+      ],
+      "observed": "プレイ済みではありません、実施済みか未確認、参加者募集記録のいずれもPerson-PCからPLを仮入力する。実施済み見出しの下に記録:未確認を置いても、上位の実施済み判定が残る。",
+      "expected": "実施済みの肯定証拠が明確な場合にRole Aを使い、否定・不確実・募集や連絡だけの記録ではRoleを保留する。局所状態は上位状態を適切に止める。",
+      "rootCause": "actualContextが部分一致の二値判定で、否定は一部表現しか扱わない。見出しのcompletionも既知の肯定・否定の場合しか更新しない。",
+      "fixScope": "肯定／否定／不明・不確実を分離し、文脈の所属範囲と上位継承の停止を共通化する。単語を追加するだけでなく局所上書きと根拠依存を検証する。",
+      "acceptance": [
+        "日本語の否定・敬体・不確実・募集・連絡記録と英語否定を確認する",
+        "見出し／段落／CSV行の同じ意味を比較する",
+        "上位肯定＋局所否定／不明、兄弟範囲、遅れて現れる記録状態を確認する",
+        "直接PLラベル、PL推論、CoC進行KP推論それぞれの影響を分けて確認する"
+      ],
+      "currentStatus": "FIXED_VERIFIED_INTERNAL",
+      "remediationEvidence": "修正検証結果_2026-10-23.json#R03"
+    },
+    {
+      "id": "R04",
+      "origin": "PREVIOUS_REVIEW_EXPANDED",
+      "priority": "MEDIUM",
+      "status": "OPEN_NOT_FIXED",
+      "title": "段落やcaptionのシナリオ情報と、その直後の表の参加記録が切れる",
+      "locations": [
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportInference.java",
+          "line": 33
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportInference.java",
+          "line": 36
+        }
+      ],
+      "probes": [
+        "R04-paragraph-table",
+        "N23-table-caption-field"
+      ],
+      "observed": "シナリオA・CoC・実施済みという段落の直後に氏名/PCの表を置くと、シナリオだけの候補とシナリオ未設定の参加者候補になる。実施状態だけは表へ継承する。captionのシナリオ情報も同様。",
+      "expected": "共有文脈として採用する情報は属性とTraceを一緒に引き継ぐ。所属が不確実ならその関連候補を保持し、情報を無関係な候補へ分離して終わらせない。自動同卓統合の根拠を創作しない。",
+      "rootCause": "tableContextがcompleted/contextExcludedとcontext Traceだけをコピーする。scalar属性の引継ぎと意味上の関連付けがない。",
+      "fixScope": "見出し以外の共有文脈の適用条件・停止条件を整理し、属性と根拠を一体で引き継ぐ。",
+      "acceptance": [
+        "表直前の段落、HTML caption、見出しの同内容を比較する",
+        "後続の別表・別段落へ文脈が漏れないことを確認する",
+        "シナリオ・ゲームシステム・作者・URLと実施状態の整合を確認する"
+      ],
+      "currentStatus": "FIXED_VERIFIED_INTERNAL",
+      "remediationEvidence": "修正検証結果_2026-10-23.json#R04"
+    },
+    {
+      "id": "R05",
+      "origin": "PREVIOUS_REVIEW",
+      "priority": "MEDIUM",
+      "status": "OPEN_NOT_FIXED",
+      "title": "同じ行のKPとSKPを一人のKP名として読む",
+      "locations": [
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportInference.java",
+          "line": 99
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportInference.java",
+          "line": 162
+        }
+      ],
+      "probes": [
+        "R05-inline-roles"
+      ],
+      "observed": "KP：佐藤、SKP：田中を、personName=佐藤、SKP：田中、role=KPの一人として抽出する。",
+      "expected": "追補のKP/SKP明示例どおり二つのParticipationを抽出し、主KP先頭・SKP後続へ接続する。",
+      "rootCause": "Inline分割対象に人物・Roleラベルがなく、最初のコロン以降全体を名前にする。",
+      "fixScope": "人物名自体の記号やQuoteを守りながら、明示Roleラベルによる項目境界を扱う。",
+      "acceptance": [
+        "同一行／別行／CSV別列の同内容を比較する",
+        "KP→SKP、SKP→KP、PL併記、複数SKPを確認する",
+        "名前中の読点・スラッシュや台詞内のラベルで誤分割しない"
+      ],
+      "currentStatus": "FIXED_VERIFIED_INTERNAL",
+      "remediationEvidence": "修正検証結果_2026-10-23.json#R05"
+    },
+    {
+      "id": "R06",
+      "origin": "NEW_REVIEW",
+      "priority": "HIGH",
+      "status": "OPEN_NOT_FIXED",
+      "title": "参加者キー変更で未解決Role・SKP-onlyの意味確認を回避できる",
+      "locations": [
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 80
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 108
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 182
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 213
+        }
+      ],
+      "probes": [
+        "N13-split-new-key",
+        "N18-patch-new-key"
+      ],
+      "observed": "SKP-only候補の参加者キーを変更してKPにするPATCHが、roleMeaningAcceptedなしでREGISTERABLE/CHECKEDになる。normalizeSkpは新キーの元SKPを主KPと誤認する。Splitで新キーにすると元RelationがDETACHEDとなりvalidateRoleChoicesも通る。実DB登録は未実行。",
+      "expected": "未解決Role、SKP由来、意味確認義務、参加者Traceは、許可されたキー変更や構造操作でも失われない。",
+      "rootCause": "キーの一意性のみを検証し、旧参加記録とのMappingを要求しない。Relationが一致しない場合、検証が閉じずにスキップする。block操作にあるMapping要件がPATCH/Split/Mergeに統一されていない。",
+      "fixScope": "既存キーを不変にするか、全編集経路で明示一対一Mappingと削除・新規作成意思を要求する。照合できない既存義務を黙って無効化しない。名前一致をIdentityの代わりにしない。",
+      "acceptance": [
+        "通常PATCH、Split、Merge、未解析ブロック候補化を横断する",
+        "SKP-only、Role候補複数、予定・引用由来、HOLD/OMITを含める",
+        "キー衝突の解消後も全義務とSourceTraceが正しい参加者へ残ることを確認する",
+        "確認なしの正式保存拒否、明示解決後の正式保存成功を実API/DBで確認する"
+      ],
+      "currentStatus": "FIXED_VERIFIED_INTERNAL",
+      "remediationEvidence": "修正検証結果_2026-10-23.json#R06"
+    },
+    {
+      "id": "R07",
+      "origin": "NEW_REVIEW",
+      "priority": "MEDIUM",
+      "status": "OPEN_NOT_FIXED",
+      "title": "除外した参加者の無効なResolutionが残り、正常な残りの候補を登録不可にする",
+      "locations": [
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 59
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 65
+        }
+      ],
+      "probes": [
+        "N12-omitted-invalid-reference"
+      ],
+      "observed": "一人をsaveDecision=OMITにしても、その人のPC Resolutionにinvalid-urlがあると候補はNEEDS_FIXになる。残る正常参加者とシナリオのResolutionは解決済み。",
+      "expected": "明示除外した部分を除く実効データと、その保存に使う照合先だけで登録可否を決める。原記録・除外意思は保持する。",
+      "rootCause": "effective()で参加者は除外するが、最後のResolution検証は未加工のrefs全件を走査する。Registerが実際に使う参照集合と異なる。",
+      "fixScope": "実効ParticipationとPC有無に対応する有効Resolution集合を導出し、分類と登録で共有する。未使用Resolution自体は履歴として保持してよい。",
+      "acceptance": [
+        "全参加者OMIT、一部OMIT、PC解除、HOLD→SAVEの各状態を確認する",
+        "除外先のURL/属性の異常だけで正常な保存対象が妨げられない",
+        "OMITを戻すと必要な検証が復活し、除外通知が維持される"
+      ],
+      "currentStatus": "FIXED_VERIFIED_INTERNAL",
+      "remediationEvidence": "修正検証結果_2026-10-23.json#R07"
+    },
+    {
+      "id": "R08",
+      "origin": "NEW_REVIEW",
+      "priority": "HIGH",
+      "status": "OPEN_NOT_FIXED",
+      "title": "正式保存で拒否される属性をREGISTERABLEと判定する",
+      "locations": [
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 59
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 115
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 121
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/scenario/LibraryService.java",
+          "line": 24
+        },
+        {
+          "file": "backend/src/main/resources/db/migration/V1__domain_and_support.sql",
+          "line": 16
+        }
+      ],
+      "probes": [
+        "N16-author-limit",
+        "N17-pc-setting-validation"
+      ],
+      "observed": "256文字の作者を含むScenario Resolution、systemSettings内に無効URLがあるPC Resolutionが、どちらもREGISTERABLEになる。作者のDB列はVARCHAR(255)。PC設定の深いValidationは正式保存時にだけ行われる。DBでの失敗挙動は今回実測していない。",
+      "expected": "保存対象の制約違反は登録前にNEEDS_FIXとし、修正または明示未保存を選べる。1候補の異常が独立候補の登録を巻き込まない。",
+      "rootCause": "validateResolutionDraftはトップレベル項目名と一部URLしか検証せず、文字数・PC設定の深い制約が正式サービスと重複して不一致。registerの候補単位catchはApiExceptionだけでDB制約例外を扱わない。",
+      "fixScope": "正式保存と同じ純粋Validationを共有する。作者・ゲームシステム等の列制約とPC systemSettingsを含める。候補単位失敗の扱いはDB例外を含む実検証で確認する。",
+      "acceptance": [
+        "各文字数境界255/256、URL境界、PC設定のProfile・型・必須項目・重複を確認する",
+        "有効候補と無効候補を同一Register要求へ入れ、独立候補の結果とRollbackを実DBで確認する",
+        "未保存選択とCREATE_NEW/REUSE_EXISTING/作成済み共有Resolutionを横断する"
+      ],
+      "currentStatus": "FIXED_VERIFIED_INTERNAL",
+      "remediationEvidence": "修正検証結果_2026-10-23.json#R08"
+    },
+    {
+      "id": "R09",
+      "origin": "NEW_REVIEW",
+      "priority": "MEDIUM",
+      "status": "OPEN_NOT_FIXED",
+      "title": "未判定・明示OMITを含む候補のSplit/Mergeが、正式登録用Role検証で止まる",
+      "locations": [
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 75
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 90
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 91
+        }
+      ],
+      "probes": [
+        "N25-split-unresolved-false",
+        "N25-split-unresolved-true"
+      ],
+      "observed": "SKP-onlyのrole=nullを保持したSplit Previewは400 INVALID_ROLE。saveDecision=OMITを明示した同じ参加記録でも同様。Mergeにも同じraw validateDraftを呼ぶ経路がある。",
+      "expected": "構造修復中の一時候補は、未解決状態を維持して分割・統合できるか、業務上の制限を明確にする。少なくともOMIT済みRoleを正式保存対象として検証しない。",
+      "rootCause": "構造整合の検証と正式登録の必須値検証を分けず、未加工のcandidateDataにvalidateDraftを適用する。",
+      "fixScope": "一時候補の構造Validationと実効保存データの登録Validationを分ける。未解決RelationとTraceを保持したままPreview/Apply後のstatusを評価する。",
+      "acceptance": [
+        "Role未判定・複数候補・SKP-only・OMIT/HOLDを含むSplit/Mergeを確認する",
+        "主KPとSKP断片を統合してから解決する流れを確認する",
+        "不完全候補を操作可能にしても、そのまま正式登録できないことを確認する"
+      ],
+      "currentStatus": "FIXED_VERIFIED_INTERNAL",
+      "remediationEvidence": "修正検証結果_2026-10-23.json#R09"
+    },
+    {
+      "id": "R10",
+      "origin": "NEW_REVIEW",
+      "priority": "MEDIUM",
+      "status": "OPEN_NOT_FIXED",
+      "title": "未割当値を割り当てた後の実効値と、編集・照合画面・Traceの値が一致しない",
+      "locations": [
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 74
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+          "line": 193
+        },
+        {
+          "file": "frontend/src/features/Import.tsx",
+          "line": 12
+        }
+      ],
+      "probes": [
+        "N15-assignment-provenance"
+      ],
+      "observed": "未割当の新PCを参加者のPCへ割り当てると、実効pcNameは新PCになる。一方、PATCH応答のpcNameとCREATE_NEW照合名は元PCのままでREGISTERABLE。editedFieldsも/table/unassignedValuesだけでPCフィールドの由来変更を示さない。画面は応答の未加工pcNameを使う。Browser操作と実DB登録は今回未実施。",
+      "expected": "ユーザーが確認する実効値、照合する値、保存先の表示、項目別Traceが同じ割当結果を表す。元原文は保持し、割当による変更を区別する。",
+      "rootCause": "applyAssignmentsは分類/登録用のコピーだけを変更し、候補DTO・ResolutionPicker・項目別編集由来へ反映しない。",
+      "fixScope": "原データと実効Draftの両方を明確に返し、画面・照合・確認・登録は同じ実効値を使う。割当根拠を対象フィールドへ関連付け、実質変更時はCHECKEDを失効させる。",
+      "acceptance": [
+        "人物・PC・HOの各割当、複数割当競合、割当解除、IGNORE、参加者OMITを確認する",
+        "割当前後の表示名・正式保存先・SourceTrace・CHECKEDを照合する",
+        "API/Browser/実DBの結果が同じであることを確認する"
+      ],
+      "currentStatus": "FIXED_VERIFIED_INTERNAL",
+      "remediationEvidence": "修正検証結果_2026-10-23.json#R10"
+    },
+    {
+      "id": "R11",
+      "origin": "NEW_REVIEW",
+      "priority": "MEDIUM",
+      "status": "OPEN_NOT_FIXED",
+      "title": "MarkdownのATX見出し直後の区切り線をSetext見出しと誤認する",
+      "locations": [
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportStructureParser.java",
+          "line": 60
+        },
+        {
+          "file": "backend/src/main/java/jp/takukairo/importsession/ImportStructureParser.java",
+          "line": 62
+        }
+      ],
+      "probes": [
+        "N22-atx-followed-by-rule",
+        "N03-md-no-border",
+        "N05-md-indented-table"
+      ],
+      "observed": "# シナリオ: A の直後に---を置くと、元の見出しをさらにSetext化して# シナリオ: Aという未知ラベルにする。scenarioNameが空になる。先頭パイプ省略表・2スペース字下げ表も表として認識されず未割当へ回る。",
+      "expected": "有効なMarkdown構造を正しく保持する。非対応構文を意味の異なる見出しへ変換しない。",
+      "rootCause": "ASTは引用・コード判定だけに使い、見出しと表の認識は独立した行正規表現で再解釈する。Setext候補の前行種別を確認しない。",
+      "fixScope": "見出しは既存CommonMark ASTの種別・SourceSpanを使う等、構文の二重解釈を避ける。表構文の対応範囲と安全なfallbackも整理する。",
+      "acceptance": [
+        "ATX＋区切り線、本来のSetext、空行、リスト、引用・コード境界の組合せを確認する",
+        "通常表・字下げ表・外側パイプ省略表・エスケープを含む表を比較する",
+        "値と見出し階層、行範囲、原文抜粋の全てを照合する"
+      ],
+      "currentStatus": "FIXED_VERIFIED_INTERNAL",
+      "remediationEvidence": "修正検証結果_2026-10-23.json#R11"
+    }
+  ],
+  "fixGroups": [
+    {
+      "id": "G1",
+      "theme": "構造・文脈の保全",
+      "findings": [
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R11"
+      ],
+      "instruction": "形式ごとの例外修正だけで終えず、構造から共通推論へ渡す値・範囲・所属・状態を一緒に検証する。"
+    },
+    {
+      "id": "G2",
+      "theme": "編集・分割統合を通じた情報と判断の保全",
+      "findings": [
+        "R01",
+        "R06",
+        "R09"
+      ],
+      "instruction": "値・参加者Identity・未解決義務・明示未保存・TraceのMappingを全操作で一体として扱う。"
+    },
+    {
+      "id": "G3",
+      "theme": "画面・分類・登録の実効データとValidation統一",
+      "findings": [
+        "R07",
+        "R08",
+        "R10"
+      ],
+      "instruction": "保存対象を導出する処理と正式Validationを共有し、画面が確認した意味と登録する意味を一致させる。"
+    },
+    {
+      "id": "G4",
+      "theme": "修正後の通し検証",
+      "findings": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "R11"
+      ],
+      "instruction": "個別反例の成功に加えて、共有Resolution・OMIT/HOLD・Split/Merge・確認・部分登録・再開・Completeの連続操作を専用DB/実API/Browserで検証する。"
+    }
+  ],
+  "additionalObservations": [
+    {
+      "probe": "N19-evidence-id-collision",
+      "status": "DESIGN_RISK_NOT_COUNTED_AS_CONFIRMED_DEFECT",
+      "observation": "異なるSourceでb-1:scenarioName:0等のevidenceIdが衝突する。現在のSourceContext外枠との組合せで追跡できる場面もあるため、これだけを実害確定とはしない。跨Source・断片再解析の依存参照にはSource識別子を含む名前空間を検討する。"
+    },
+    {
+      "probe": "N14-omitted-boundary",
+      "status": "SPECIFICATION_QUESTION_NOT_COUNTED_AS_CONFIRMED_DEFECT",
+      "observation": "OMITした参加者もE2の元記録証拠に使われる。正式保存の除外と、原文が持つ同卓証拠の無効化は同義とは限らないため、不具合と断定しない。"
+    },
+    {
+      "probe": "N04-md-escaped-pipe",
+      "status": "SPECIFICATION_QUESTION_NOT_COUNTED_AS_CONFIRMED_DEFECT",
+      "observation": "QuoteにMarkdownのエスケープ表現が残る。原文保全とMarkdown上の表示値のどちらをQuote値とするか確認してから変更する。"
+    }
+  ],
+  "verificationCoverage": {
+    "runtimeConfirmed": [
+      {
+        "id": "R01",
+        "probes": [
+          "R01-merge-single-value"
+        ]
+      },
+      {
+        "id": "R02",
+        "probes": [
+          "R02-rowspan",
+          "N24-html-colspan",
+          "N07-html-nested-table"
+        ]
+      },
+      {
+        "id": "R03",
+        "probes": [
+          "R03-negative",
+          "N01-child-unknown-status",
+          "N20-neutral-participation-context",
+          "N21-uncertain-context"
+        ]
+      },
+      {
+        "id": "R04",
+        "probes": [
+          "R04-paragraph-table",
+          "N23-table-caption-field"
+        ]
+      },
+      {
+        "id": "R05",
+        "probes": [
+          "R05-inline-roles"
+        ]
+      },
+      {
+        "id": "R06",
+        "probes": [
+          "N13-split-new-key",
+          "N18-patch-new-key"
+        ]
+      },
+      {
+        "id": "R07",
+        "probes": [
+          "N12-omitted-invalid-reference"
+        ]
+      },
+      {
+        "id": "R08",
+        "probes": [
+          "N16-author-limit",
+          "N17-pc-setting-validation"
+        ]
+      },
+      {
+        "id": "R09",
+        "probes": [
+          "N25-split-unresolved-false",
+          "N25-split-unresolved-true"
+        ]
+      },
+      {
+        "id": "R10",
+        "probes": [
+          "N15-assignment-provenance"
+        ]
+      },
+      {
+        "id": "R11",
+        "probes": [
+          "N22-atx-followed-by-rule",
+          "N03-md-no-border",
+          "N05-md-indented-table"
+        ]
+      }
+    ],
+    "crossCuttingStaticReview": [
+      "User所有境界とSession/Candidate/Resolution Version",
+      "REGISTERED不変・Source Lock",
+      "Preview Snapshotと同一payloadの再検証",
+      "未解析ブロックの範囲消費・残範囲・Complete A/B",
+      "CHECKED失効とBackend補正の扱い",
+      "Import専用savepointと正式ServiceのnoRollbackFor",
+      "画面のAutosave/Version回復/Resolution表示"
+    ],
+    "notRerun": [
+      "実HTTP/PostgreSQLを使うContractIntegrationTest",
+      "Browser UI検査",
+      "DB例外を含むRegisterの候補単位Rollback",
+      "Cleanup/同時操作の実DB競合試験",
+      "高密度最大容量・同時負荷",
+      "ユーザー実入力T01〜T24"
+    ],
+    "limitations": [
+      "静的確認項目を実行合格とは扱わない。",
+      "31の反例/観察ケースは内部の補助入力であり、ユーザー受入Fixtureの代用ではない。",
+      "未検出の不具合がないことや、次の修正1回で必ず完了することまでは保証しない。",
+      "推論設計の01_引継ぎメモ.mdと02_次チャット用プロンプト.mdは現物がなく、既存正式Contractと確定追補を優先した。"
+    ]
+  },
+  "evidence": {
+    "probes": "probes.jsonl",
+    "units": "existing-unit-results.json",
+    "probeSource": "DeepProbe.java",
+    "unitLauncherSource": "ExistingUnitReview.java",
+    "runtimeDirectory": ".runtime/inference-deep-review-2026-10-21",
+    "dependencyClasspathSource": ".runtime/import-review/javac.args",
+    "sourceSha256": {
+      "backend/src/main/java/jp/takukairo/importsession/ImportService.java": "5f2652abf3b699af0b04d3710ba725fa25c8e777c017af5b4167635fd44af4c9",
+      "backend/src/main/java/jp/takukairo/importsession/ImportInference.java": "9e6cfd72d05d87f6cc1b9822ebeba342b02b251f45814ce3f65291b4f94c7033",
+      "backend/src/main/java/jp/takukairo/importsession/ImportStructureParser.java": "992d742009b674aa189d437b3a79616dab1ef05d116880c5f48d79fc6aee1fae",
+      "backend/src/main/java/jp/takukairo/importsession/ImportBoundary.java": "df3db1700cd2f25b398ed26d6751b75e15507b96819eb5689c79f0ac0d092079",
+      "backend/src/main/java/jp/takukairo/importsession/ImportDrafts.java": "6b90597011e510739f0469594254dba57b71cbc82e90ab04b75bb9658a523860",
+      "frontend/src/features/Import.tsx": "a8c5b1e7f98f38671df8b8644b6ed7a7429cc64e0b658691c8b72a9194d334fd",
+      "frontend/src/features/ImportDecisions.tsx": "e81536aced88ac136bef434fbd7719ce67f4477d5825fad85f4d964dc9f4e10e",
+      "frontend/src/features/import-state.ts": "3749e4af3bca9db215885f3aa18ca6e0e0264ad49a00360bc1c00d1973330205",
+      "backend/src/main/java/jp/takukairo/scenario/LibraryService.java": "3a06259af11d1b1ddbd6ba99db293b027ce10812881ce173661df16afae15def",
+      "backend/src/main/java/jp/takukairo/table/TableService.java": "8ff964e0e39dc08d11c4a2a152d0403687b4f182db3ebd48a7b30def6bcb9a72",
+      "backend/src/main/resources/db/migration/V1__domain_and_support.sql": "02e591f254c076918ab072ed69196a56a76135ad98a2ada92ff1c333337b7169",
+      "卓回廊｜IMP-D01〜D07 確定仕様全文.md": "583fecb97f28e3676f3447136650292c431649ede92a58228f01d63f60f5e79c"
+    }
+  },
+  "completionCriteria": [
+    "R01〜R11それぞれの期待結果と受入確認を満たす。",
+    "G1〜G3の共通処理を修正した後、G4を最後にまとめて実施する。",
+    "失敗を握りつぶす・自動IGNORE・自動CHECKED・名前一致によるIdentity確定で帳尻を合わせない。",
+    "以前の修正と新規修正の双方を同一の現行ソースで検証し、実行した範囲と未実行範囲を更新する。"
+  ],
+  "currentStatus": "ALL_11_FIXED_VERIFIED_INTERNAL",
+  "currentOpenFindings": 0,
+  "remediation": {
+    "date": "2026-10-23",
+    "status": "ALL_11_FIXED_VERIFIED_INTERNAL",
+    "officialAcceptance": false,
+    "evidence": "修正検証結果_2026-10-23.json",
+    "findings": [
+      {
+        "id": "R01",
+        "status": "FIXED_VERIFIED_INTERNAL",
+        "change": "Mergeの全scalar・未割当値・値ごとの明示未保存を保存。空側への単一値継承、代替値の未割当化、出自をPreview/Applyで保持。",
+        "tests": [
+          "octoberR01MergeRetainsSingleValuesInEitherOrderAndFormalSave",
+          "octoberR01OmissionOnOneInputNeverSilentlyOmitsTheOtherValue",
+          "octoberR01ScalarConservationMatrix"
+        ]
+      },
+      {
+        "id": "R02",
+        "status": "FIXED_VERIFIED_INTERNAL",
+        "change": "非対応HTMLグリッドを表全体の未解析ブロックとして保持し、誤ったDIRECT人物抽出を防止。未処理はComplete不可。",
+        "tests": [
+          "r02UnsupportedGridRetainsWholeRangeWithoutFalseDirectFields",
+          "octoberR02UnsupportedHtmlBlocksCompletionUntilExplicitDecision"
+        ]
+      },
+      {
+        "id": "R03",
+        "status": "FIXED_VERIFIED_INTERNAL",
+        "change": "明確な実施済み肯定だけをRole推論へ使用。否定・不確実・募集/連絡・下位未確認で継承を停止。",
+        "tests": [
+          "r03OnlyAffirmativeActualContextInfersRole",
+          "r03ChildUnknownStopsParentButSiblingRestoresContext",
+          "r03AffirmativeStillInfersPl",
+          "n4NegativeContextCannotRegisterButIndependentPositiveC05StillCan"
+        ]
+      },
+      {
+        "id": "R04",
+        "status": "FIXED_VERIFIED_INTERNAL",
+        "change": "直前段落/captionの属性とTraceを表へ一緒に継承。Markdown空行を考慮し、別表境界で局所文脈を止める。",
+        "tests": [
+          "r04ImmediateContextTravelsWithFieldTrace",
+          "r04MarkdownBlankBetweenParagraphAndTablePreservesSharedFields"
+        ]
+      },
+      {
+        "id": "R05",
+        "status": "FIXED_VERIFIED_INTERNAL",
+        "change": "Quote/括弧を尊重する明示Roleラベル境界でKP/SKP/PLを分離。主KP先頭。Inline Quote内Roleラベルは人物を増やさない。",
+        "tests": [
+          "r05InlineRolesPreserveMainOrder",
+          "r05QuotedRoleLabelIsPartOfNameOrDialogue",
+          "r05InlineQuoteRoleLabelCannotCreateAnotherParticipant",
+          "r05RoleSegmentationPreservesExactQuoteBoundarySpaces"
+        ]
+      },
+      {
+        "id": "R06",
+        "status": "FIXED_VERIFIED_INTERNAL",
+        "change": "全編集経路で安定キーまたは明示Mappingを要求。Role義務、Ref、割当、Trace、編集パスを一体対応。古いDETACHED孤立義務も読取/登録で検出し、Mapping後に明示意味確認を要求。",
+        "tests": [
+          "octoberR06PatchMappingRetainsSkpMeaningAndTraceAndUnmappedMutationIsAtomic",
+          "octoberR06MergeCollisionMappingKeepsEachRoleObligation",
+          "octoberR06R09SplitMergePreserveUnresolvedAndOmittedRecords",
+          "octoberR06OlderDetachedDraftCannotRegisterUntilExplicitMappingAndMeaningReview",
+          "r1ExplicitBlockDataMappingSurvivesSplitAndMerge"
+        ]
+      },
+      {
+        "id": "R07",
+        "status": "FIXED_VERIFIED_INTERNAL",
+        "change": "実効ParticipationとPC有無から使用Resolutionを導出。OMIT/PC解除の未使用異常は残りを妨げず、再SAVEで検証復活。",
+        "tests": [
+          "octoberR07OmittedInvalidReferenceCannotBlockRemainingFormalSave",
+          "ct04OmittingOneUnresolvedParticipationPreservesTwoNormalParticipantsAndNotice"
+        ]
+      },
+      {
+        "id": "R08",
+        "status": "FIXED_VERIFIED_INTERNAL",
+        "change": "新規Formal作成とImport事前検証でLibraryDraftsを共有。作者/System列長、PC設定のProfile/型/URL/重複/必須を事前検出。候補独立TransactionでDB例外もRollback。",
+        "tests": [
+          "octoberR08AuthorAndPcDeepConstraintsAgreeWithFormalBoundary",
+          "octoberR08DatabaseFailureRollsBackCandidateAndSharedResolutionWhileSiblingSucceeds",
+          "partialFailureRollsBackCreatedFormalEntities",
+          "sharedResolutionRegisterCreatesOnce"
+        ]
+      },
+      {
+        "id": "R09",
+        "status": "FIXED_VERIFIED_INTERNAL",
+        "change": "構造Validationを正式保存Validationから分離。未判定Role/OMIT/HOLDを保持したSplit/Mergeを許可し、結果はUNCHECKEDかつ未解決なら登録不可。",
+        "tests": [
+          "octoberR06R09SplitMergePreserveUnresolvedAndOmittedRecords",
+          "r1ExplicitBlockDataMappingSurvivesSplitAndMerge",
+          "octoberStructureOperationDoesNotNormalizeOrUncheckUnrelatedCandidate"
+        ]
+      },
+      {
+        "id": "R10",
+        "status": "FIXED_VERIFIED_INTERNAL",
+        "change": "raw/effective Draftを明示し画面/照合/Review/正式保存を割当結果に統一。割当先のUSER_ASSIGNMENT Trace、実効項目の編集履歴、CHECKED失効を追加。旧名CREATE_NEWを事前拒否。",
+        "tests": [
+          "octoberR10AssignmentProjectionResolutionTraceAndSavedValueAgree",
+          "October continuous workflow",
+          "assignment projection and release preserve original draft, omissions and conflicting values"
+        ]
+      },
+      {
+        "id": "R11",
+        "status": "FIXED_VERIFIED_INTERNAL",
+        "change": "CommonMark ASTのHeading種別/範囲を使用。ATX直後rule、真のSetext（複数行/CRLF）、外側pipe省略/字下げ表を認識。",
+        "tests": [
+          "r11MarkdownStructureUsesActualHeadingKindAndTableColumns",
+          "r11MultilineSetextConsumesItsEntireHeadingRange"
+        ]
+      }
+    ]
+  }
+}

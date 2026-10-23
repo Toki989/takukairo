@@ -43,12 +43,13 @@ public final class ImportStructureParser {
  }
  private Document lines(String raw,boolean markdown,String fallback) {
   var blocks=new ArrayList<Block>();var headings=new TreeMap<Integer,String>();var headers=new ArrayList<String>();var headerRanges=new ArrayList<Range>();
-  String parent=null;int offset=0;String[] lines=raw.split("\\r\\n|\\n|\\r",-1);var codeLines=new BitSet();var quoteLines=new BitSet();
+  String parent=null;int offset=0;String[] lines=raw.split("\\r\\n|\\n|\\r",-1);var codeLines=new BitSet();var quoteLines=new BitSet();var headingLevels=new HashMap<Integer,Integer>();var headingEnds=new HashMap<Integer,Integer>();
   if(markdown){var tree=org.commonmark.parser.Parser.builder().includeSourceSpans(org.commonmark.parser.IncludeSourceSpans.BLOCKS).build().parse(raw);tree.accept(new org.commonmark.node.AbstractVisitor(){
    private void code(org.commonmark.node.Node node){var spans=node.getSourceSpans();if(!spans.isEmpty())codeLines.set(spans.getFirst().getLineIndex(),spans.getLast().getLineIndex()+1);}
    @Override public void visit(org.commonmark.node.FencedCodeBlock node){code(node);}
    @Override public void visit(org.commonmark.node.IndentedCodeBlock node){code(node);}
    @Override public void visit(org.commonmark.node.BlockQuote node){var spans=node.getSourceSpans();if(!spans.isEmpty())quoteLines.set(spans.getFirst().getLineIndex(),spans.getLast().getLineIndex()+1);visitChildren(node);}
+   @Override public void visit(org.commonmark.node.Heading node){var spans=node.getSourceSpans();if(!spans.isEmpty()){headingLevels.put(spans.getFirst().getLineIndex(),node.getLevel());headingEnds.put(spans.getFirst().getLineIndex(),spans.getLast().getLineIndex());}}
   });}
   for(int i=0;i<lines.length;i++) {
    String original=lines[i],text=original;int start=offset,end=start+original.length();
@@ -57,30 +58,33 @@ public final class ImportStructureParser {
    boolean fence=codeLines.get(i);
    // CommonMark includes lazy continuation lines even when they have no '>' marker.
    if(markdown&&(fence||quoteLines.get(i))){headers.clear();headerRanges.clear();blocks.add(new Block(id,kind,0,parent,original,List.of(),index.range(start,end),0,true));continue;}
-   boolean setext=markdown&&!fence&&i+1<lines.length&&lines[i+1].strip().matches("=+|-{3,}");
-   if(setext){text=(lines[i+1].strip().startsWith("=")?"# ":"## ")+text;}
-   var heading=Pattern.compile("^(#{1,6})\\s+(.+)$").matcher(text.strip());
-   if(markdown&&!fence&&heading.matches()){kind=Kind.HEADING;level=heading.group(1).length();text=heading.group(2);headings.tailMap(level).clear();parent=headings.isEmpty()?null:headings.lastEntry().getValue();headings.put(level,id);headers.clear();headerRanges.clear();}
-   else if(!fence&&(text.startsWith("|")||original.contains("\t"))) {
+   boolean setext=headingLevels.containsKey(i)&&headingEnds.get(i)>i;
+   int headingEnd=setext?headingEnds.get(i):i;
+   if(setext)text=String.join("\n",Arrays.copyOfRange(lines,i,headingEnd)).strip();
+   if(markdown&&!fence&&headingLevels.containsKey(i)){kind=Kind.HEADING;level=headingLevels.get(i);text=setext?text.strip():text.strip().replaceFirst("^#{1,6}(?:\\s+|$)","").replaceFirst("\\s+#+\\s*$","");headings.tailMap(level).clear();parent=headings.isEmpty()?null:headings.lastEntry().getValue();headings.put(level,id);headers.clear();headerRanges.clear();}
+   else if(!fence&&(text.stripLeading().startsWith("|")||original.contains("\t")||markdown&&text.contains("|")&&(!headers.isEmpty()||i+1<lines.length&&tableSeparator(lines[i+1])))) {
     char delimiter=original.contains("\t")?'\t':'|';var spans=splitCells(raw,start,end,delimiter);var values=spans.stream().map(s->s.excerpt().strip()).toList();
     if(!values.isEmpty()&&values.stream().allMatch(s->s.matches(":?-{3,}:?")))continue;
     if(headers.isEmpty()){
-     boolean separator=i+1<lines.length&&lines[i+1].strip().matches("\\|?\\s*:?-{3,}:?\\s*(?:\\|\\s*:?-{3,}:?\\s*)*\\|?");
+     boolean separator=i+1<lines.length&&tableSeparator(lines[i+1]);
      boolean labelled=values.stream().anyMatch(s->!ImportInference.field(s).equals("unknown"));
      if(labelled||separator){headers.addAll(values);headerRanges.addAll(spans);
       // Unknown header-only content is still reviewable; a following data row consumes it as a label.
-      boolean dataFollows=i+(separator?2:1)<lines.length&&(lines[i+(separator?2:1)].startsWith("|")||lines[i+(separator?2:1)].contains("\t"));
+      boolean dataFollows=i+(separator?2:1)<lines.length&&(lines[i+(separator?2:1)].contains("|")||lines[i+(separator?2:1)].contains("\t"));
       if(dataFollows||values.stream().allMatch(s->!ImportInference.field(s).equals("unknown")))continue;
      }
      blocks.add(new Block(id,Kind.PARAGRAPH,0,parent,original,List.of(),index.range(start,end),0));continue;
     }
-    kind=Kind.RECORD;for(int c=0;c<values.size();c++){String label=c<headers.size()?headers.get(c):"";cells.add(new Cell(label,ImportInference.field(label).equals("displayQuote")?spans.get(c).excerpt():values.get(c),spans.get(c),c<headerRanges.size()?headerRanges.get(c):null));}
+    if(values.size()!=headers.size()){kind=Kind.UNPARSED;headers.clear();headerRanges.clear();}
+    else {kind=Kind.RECORD;for(int c=0;c<values.size();c++){String label=headers.get(c);cells.add(new Cell(label,ImportInference.field(label).equals("displayQuote")?spans.get(c).excerpt():values.get(c),spans.get(c),headerRanges.get(c)));}}
    }else {headers.clear();headerRanges.clear();if(!fence&&markdown)text=text.replaceFirst("^(?:[-*+]|[0-9]+[.)])\\s+","");}
    boolean quoted=markdown&&text.stripLeading().startsWith(">");
-   blocks.add(new Block(id,kind,level,parent,text,cells,index.range(start,end),0,quoted));if(kind==Kind.HEADING)parent=id;if(setext){int nextEnd=offset+lines[i+1].length();offset=nextEnd+(nextEnd<raw.length()&&raw.charAt(nextEnd)=='\r'&&nextEnd+1<raw.length()&&raw.charAt(nextEnd+1)=='\n'?2:1);i++;}
+   if(setext){for(int line=i+1;line<=headingEnd;line++){end=offset+lines[line].length();offset=end+(end<raw.length()&&raw.charAt(end)=='\r'&&end+1<raw.length()&&raw.charAt(end+1)=='\n'?2:1);}i=headingEnd;}
+   blocks.add(new Block(id,kind,level,parent,text,cells,index.range(start,end),0,quoted));if(kind==Kind.HEADING)parent=id;
   }
   return new Document(markdown?"MARKDOWN":fallback,raw,blocks);
  }
+ private boolean tableSeparator(String line){return line.strip().matches("\\|?\\s*:?-{3,}:?\\s*(?:\\|\\s*:?-{3,}:?\\s*)*\\|?");}
  private List<Range> splitCells(String raw,int start,int end,char delimiter) {
   var out=new ArrayList<Range>();int from=start;boolean first=true;
   for(int i=start;i<end;i++)if(raw.charAt(i)==delimiter&&(i==start||raw.charAt(i-1)!='\\')){
@@ -103,6 +107,7 @@ public final class ImportStructureParser {
   void add(Element owner,String text,Range range,Kind kind,List<Cell> cells){if(text.isBlank()&&cells.isEmpty())return;int level=0;String id="h-"+(++sequence);if(kind==Kind.HEADING){level=Integer.parseInt(owner.normalName().substring(1));headings.tailMap(level).clear();parent=headings.isEmpty()?null:headings.lastEntry().getValue();headings.put(level,id);}blocks.add(new Block(id,kind,level,parent,text,cells,range,0,quoted(owner)));if(kind==Kind.HEADING)parent=id;}
   void visit(Element e){
    if(Set.of("script","style","template").contains(e.normalName()))return;
+   if(e.normalName().equals("table")){table(e);return;}
    if(e.normalName().equals("tr")){row(e);return;}
    boolean heading=e.normalName().matches("h[1-6]");
    if(e.sourceRange().isTracked()&&e.children().stream().noneMatch(this::structural)){
@@ -122,6 +127,16 @@ public final class ImportStructureParser {
    if(start>=0)add(e,text.toString(),index.range(start,end),Kind.PARAGRAPH,List.of());
   }
   List<Element> columns(Element row){return row.children().stream().filter(x->Set.of("th","td").contains(x.normalName())).toList();}
+  void table(Element table){
+   var rows=table.select("tr").stream().filter(x->x.closest("table")==table).toList();
+   int width=rows.isEmpty()?0:columns(rows.getFirst()).size();
+   // A physical column index is only valid for a rectangular, single-header table.
+   // Preserve unsupported grids as one reviewable source range, including nested tables.
+   boolean unsupported=table.select("table").stream().anyMatch(x->x!=table)||table.select("th,td").stream().anyMatch(x->!x.attr("rowspan").matches("|1")||!x.attr("colspan").matches("|1"))||rows.stream().anyMatch(r->columns(r).size()!=width)||rows.stream().skip(1).anyMatch(r->columns(r).stream().allMatch(c->c.normalName().equals("th")));
+   if(unsupported){add(table,span(table).excerpt(),span(table),Kind.UNPARSED,List.of());}
+   else {for(var caption:table.children().stream().filter(x->x.normalName().equals("caption")).toList())visit(caption);for(var row:rows)row(row);}
+   blocks.add(new Block("h-"+(++sequence),Kind.BLANK,0,parent,"",List.of(),index.range(span(table).endOffset(),span(table).endOffset()),0));
+  }
   void row(Element row){
    var table=row.closest("table");var first=table==null?row:table.select("tr").stream().filter(x->x.closest("table")==table).findFirst().orElse(row);var header=columns(first);
    boolean hasHeader=!header.isEmpty()&&(header.stream().allMatch(x->x.normalName().equals("th"))||header.stream().filter(x->!ImportInference.field(x.wholeText()).equals("unknown")).count()>=2);
