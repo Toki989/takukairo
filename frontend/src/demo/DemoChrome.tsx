@@ -1,5 +1,5 @@
 import {useContext, useState} from 'react';
-import {Link, NavLink, Outlet, useLocation} from 'react-router-dom';
+import {Link, NavLink, Outlet} from 'react-router-dom';
 import {mutate} from '../api/client';
 import {ConfirmContext, Dialog, ErrorPanel, useErrors} from '../components/common';
 import {storageNotice} from './store';
@@ -22,9 +22,7 @@ export function DemoChrome() {
 }
 
 export function DemoShell() {
-  const location = useLocation();
   return <><header className="app-header"><Link className="brand" to="/">卓回廊</Link><nav aria-label="主な画面"><NavLink to="/" end>HOME</NavLink><NavLink to="/pcs">PL / PC</NavLink><NavLink to="/import">IMPORT</NavLink></nav><Link className="account-entrance" to="/account">体験データ</Link></header>
-    {location.pathname === '/' && <section className="demo-welcome"><p className="kicker">YOUR STORIES, IN ONE GALLERY.</p><h2>遊んだ物語が、<br className="demo-mobile-break"/>あなたの回廊になる。</h2><p>シナリオを開き、卓の記録から登場人物のその後へ。<br/>あの日の物語を、作品とキャラクターで振り返ります。</p><div className="demo-actions"><Link className="demo-link-primary" to="/scenarios/1">卓の記録を見てみる <span aria-hidden="true">↗</span></Link><Link to="/pcs">PCのコレクションへ →</Link></div><small>画像・人物・記録は体験用サンプルです。追加や編集も自由に試せます。</small></section>}
     <Outlet/><footer className="app-footer"><Link to="/terms">体験版の利用について</Link><Link to="/privacy">データの取り扱い</Link><span>BROWSER DEMO</span></footer></>;
 }
 

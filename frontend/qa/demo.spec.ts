@@ -16,6 +16,61 @@ test('a static subpath opens without login, with all trailers and no API calls',
   await page.screenshot({path: '../.runtime/demo-home-desktop.png', fullPage: true});
 });
 
+test('gallery honors artwork proportions, gives wide art more space and preserves sort order', async ({page}) => {
+  for (const width of [1440, 1200, 1199, 768, 767, 375]) {
+    await page.setViewportSize({width, height: 1000});
+    await page.goto('./');
+    await expect(page.locator('.scenario-gallery .gallery-item')).toHaveCount(19);
+    await expect.poll(() => page.locator('.scenario-gallery img').evaluateAll(images => images.length === 19 && images.every(image => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0))).toBe(true);
+    const geometry = await page.locator('.scenario-gallery .gallery-item').evaluateAll(items => items.map(item => {
+      const image = item.querySelector('img')!;
+      const rect = image.getBoundingClientRect();
+      const art = image.parentElement!.getBoundingClientRect();
+      return {shape: item.getAttribute('data-shape'), width: rect.width, height: rect.height, naturalRatio: image.naturalWidth / image.naturalHeight, artHeight: art.height, x: rect.x, y: rect.y};
+    }));
+    for (const image of geometry) {
+      expect(Math.abs(image.width / image.height - image.naturalRatio)).toBeLessThan(0.01);
+      expect(Math.abs(image.artHeight - image.height)).toBeLessThan(1);
+    }
+    expect(geometry[0].shape).toBe('portrait');
+    expect(geometry[0].height).toBeGreaterThan(geometry[0].width * 1.5);
+    expect(geometry[1].shape).toBe('landscape');
+    expect(geometry[1].width).toBeGreaterThan(geometry[0].width * 1.9);
+    expect(geometry[2].shape).toBe('square');
+    for (let i = 1; i < geometry.length; i++) expect(geometry[i].y >= geometry[i - 1].y - 1 && (geometry[i].y > geometry[i - 1].y + 1 || geometry[i].x > geometry[i - 1].x)).toBe(true);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  }
+  await page.getByLabel('並び順', {exact: true}).selectOption('NAME');
+  await expect.poll(async () => {
+    const names = await page.locator('.scenario-gallery h2').allTextContents();
+    return names.join('|') === [...names].sort((a, b) => a.localeCompare(b, 'ja')).join('|');
+  }).toBe(true);
+});
+
+test('secondary gallery information is quiet until pointer or keyboard focus, with touch access', async ({page, browser}) => {
+  await page.goto('./');
+  const work = page.locator('.scenario-gallery .gallery-item').filter({has: page.getByRole('heading', {name: '灯台は夢を見るか', exact: true})});
+  const count = work.getByText('1 卓', {exact: true});
+  const favorite = work.getByRole('button', {name: '灯台は夢を見るかのお気に入り', exact: true});
+  await expect(count).toHaveCSS('opacity', '0');
+  await expect(favorite).toHaveCSS('opacity', '0');
+  await work.getByRole('link').focus();
+  await expect(count).toHaveCSS('opacity', '1');
+  await page.keyboard.press('Tab');
+  await expect(favorite).toBeFocused();
+  await page.keyboard.press('Space');
+  await expect(favorite).toHaveAttribute('aria-pressed', 'true');
+  const touch = await browser.newContext({viewport: {width: 375, height: 812}, hasTouch: true, isMobile: true});
+  try {
+    const mobile = await touch.newPage();
+    await mobile.goto(page.url());
+    const button = mobile.getByRole('button', {name: '灯台は夢を見るかのお気に入り', exact: true});
+    await expect(button).toHaveCSS('opacity', '1');
+    await button.tap();
+    await expect(button).toHaveAttribute('aria-pressed', 'true');
+  } finally { await touch.close(); }
+});
+
 test('favorite, search, persistence and reset preserve unrelated browser data', async ({page}) => {
   await page.goto('./');
   const favorite = page.getByRole('button', {name: '硝子温室の残響のお気に入り', exact: true});

@@ -1,0 +1,66 @@
+/* Part C §17.5: a curated gallery, with the artwork's own proportions. */
+:global(.scenario-gallery).gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: 32px 24px;
+  /* Keep the selected sort order in both visual and keyboard reading order. */
+  grid-auto-flow: row;
+}
+.gallery .work { min-width: 0; position: relative; }
+.gallery .work[data-shape='landscape'] { grid-column: span 2; }
+.gallery .link { display: block; color: inherit; text-decoration: none; }
+.gallery .art { width: 100%; }
+.gallery .art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+}
+.gallery .art :global(.image-placeholder),
+.gallery .art :global(.skeleton) {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 3 / 4;
+}
+.gallery .metadata { position: relative; padding-top: 12px; }
+.gallery .metadata h2 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.gallery .author { margin: 0; padding-right: 44px; font-size: 13px; line-height: 1.7; color: var(--sub); }
+.gallery .supplement { display: block; margin-top: 8px; padding-right: 44px; font-size: 12px; opacity: 0; }
+.gallery .favorite {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--sub);
+  font-size: 20px;
+  opacity: 0;
+}
+.gallery .favorite[aria-pressed='true'] { opacity: 1; color: #886000; }
+.gallery .work:hover .supplement,
+.gallery .work:focus-within .supplement,
+.gallery .work:hover .favorite,
+.gallery .work:focus-within .favorite { opacity: 1; }
+.gallery .link:hover h2 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+@media (min-width: 768px) and (max-width: 1199px) {
+  :global(.scenario-gallery).gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 767px) {
+  :global(.scenario-gallery).gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; }
+  .gallery .metadata { padding-top: 12px; }
+  .gallery .metadata h2 { font-size: 18px; }
+}
+/* Touch has no hover: keep secondary actions available without a hidden first tap. */
+@media (hover: none) {
+  .gallery .supplement, .gallery .favorite { opacity: 1; }
+}
