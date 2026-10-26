@@ -1,0 +1,81 @@
+{
+  "id": 5,
+  "version": 2,
+  "scenarioId": 5,
+  "scenario": {
+    "id": 5,
+    "version": 0,
+    "name": "硝子の灯台",
+    "authorName": null,
+    "sourceUrl": null,
+    "gameSystem": null,
+    "externalImageUrl": null,
+    "image": null,
+    "createdAt": "2026-10-26T01:43:40.415Z",
+    "updatedAt": "2026-10-26T01:43:40.415Z",
+    "favorite": false,
+    "tableCount": 1
+  },
+  "tableName": "9月上旬の臨時卓",
+  "recordingUrl": null,
+  "createdAt": "2026-10-26T01:43:40.426Z",
+  "tableDates": [
+    {
+      "id": 5,
+      "playedOn": "2026-09-02",
+      "version": 0
+    }
+  ],
+  "participations": [
+    {
+      "id": 9,
+      "version": 0,
+      "personId": 10,
+      "person": {
+        "id": 10,
+        "version": 0,
+        "displayName": "すばる"
+      },
+      "pcId": null,
+      "pc": null,
+      "role": "KP",
+      "displayOrder": 1,
+      "ho": null,
+      "displayQuote": null,
+      "spotlightType": null,
+      "endPcState": null
+    },
+    {
+      "id": 10,
+      "version": 0,
+      "personId": 11,
+      "person": {
+        "id": 11,
+        "version": 0,
+        "displayName": "つばめ"
+      },
+      "pcId": 5,
+      "pc": {
+        "id": 5,
+        "version": 1,
+        "name": "小夜 千景",
+        "personId": 11,
+        "person": {
+          "id": 11,
+          "version": 0,
+          "displayName": "つばめ"
+        },
+        "characterSheetUrl": null,
+        "image": null,
+        "createdAt": "2026-10-26T01:43:40.422Z",
+        "systemSettings": []
+      },
+      "role": "PL",
+      "displayOrder": 1,
+      "ho": null,
+      "displayQuote": null,
+      "spotlightType": null,
+      "endPcState": null
+    }
+  ]
+}

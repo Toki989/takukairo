@@ -1,0 +1,45 @@
+{
+  "status": 200,
+  "body": {
+    "sessionId": 5,
+    "sessionVersion": 22,
+    "results": [
+      {
+        "candidateId": 18,
+        "requestedVersion": 9,
+        "outcome": "REGISTERED",
+        "candidateVersion": 10,
+        "registrationStatus": "REGISTERED",
+        "registeredTableId": 1,
+        "omittedItems": [],
+        "error": null
+      },
+      {
+        "candidateId": 19,
+        "requestedVersion": 9,
+        "outcome": "REGISTERED",
+        "candidateVersion": 10,
+        "registrationStatus": "REGISTERED",
+        "registeredTableId": 2,
+        "omittedItems": [
+          {
+            "fieldPath": "/unassignedValues/u-3325b878-8ff2-4472-ba14-b67f42267856",
+            "value": "実施日: 2026-08-16 / 2026-08-17",
+            "decision": "USER_OMIT"
+          },
+          {
+            "fieldPath": "/unassignedValues/u-c6904725-cabb-4064-9d79-c24a52b71667",
+            "value": "実施日: 2026-08-16 / 2026-08-17",
+            "decision": "USER_OMIT"
+          },
+          {
+            "fieldPath": "/unassignedValues/u-9c076354-2c7c-47d2-ac12-6f86f6da9095",
+            "value": "実施日: 2026-08-16 / 2026-08-17",
+            "decision": "USER_OMIT"
+          }
+        ],
+        "error": null
+      }
+    ]
+  }
+}

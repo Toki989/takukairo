@@ -19,6 +19,27 @@ import static jp.takukairo.common.Json.*;
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 class ContractIntegrationTest {
+ @Test void analysisWithoutSourcesIsRejectedWithoutAdvancingOrMutatingSession()throws Exception{
+  long sid=number(session().get("id")),before=version(sid);
+  var result=post("/import/session/"+sid+"/analyze",map("expectedSessionVersion",before));code(result,400,"VALIDATION_ERROR");
+  assertEquals("/sources",list(result.body.get("fieldErrors")).getFirst().get("path"));assertEquals("REQUIRED",list(result.body.get("fieldErrors")).getFirst().get("code"));
+  assertEquals(before,version(sid));assertEquals("INPUT",get("/import/session/"+sid).body.get("currentStep"));
+  assertEquals(0,jdbc.queryForObject("select count(*) from import_candidate where import_session_id=?",Integer.class,sid));
+ }
+
+ @Test void roundOneCsvIntakeReadsSixPeopleButDoesNotClaimTwoTableAcceptance()throws Exception{
+  // User fixture intake regression. Two-table grouping and date-list acceptance are pending.
+  long sid=number(session().get("id"));byte[] bytes;try(var input=new ClassPathResource("import/round1/01_csv_T01_T02.csv").getInputStream()){bytes=input.readAllBytes();}
+  assertEquals(201,multipart("POST","/import/session/"+sid+"/sources/files","files",List.of(new Upload("01_csv_T01_T02.csv",bytes)),version(sid)).status);
+  assertEquals(200,post("/import/session/"+sid+"/analyze",map("expectedSessionVersion",version(sid))).status);
+  var rows=list(get("/import/session/"+sid+"/review").body.get("items"));assertEquals(6,rows.size());
+  assertEquals(List.of("あお","みな","れん","しずく","ゆづき","いと"),rows.stream().map(r->list(obj(r.get("summary")).get("participations")).getFirst().get("personName")).toList());
+  assertEquals(List.of("KP","PL","PL","KP","PL","PL"),rows.stream().map(r->list(obj(r.get("summary")).get("participations")).getFirst().get("role")).toList());
+  assertEquals("天野 透",list(obj(rows.get(1).get("summary")).get("participations")).getFirst().get("pcName"));assertEquals("HO2",list(obj(rows.get(5).get("summary")).get("participations")).getFirst().get("handout"));
+  assertEquals("2026-07-12",list(obj(rows.getFirst().get("summary")).get("tableDates")).getFirst().get("playedOn"));
+  assertTrue(list(obj(rows.getLast().get("summary")).get("tableDates")).isEmpty());assertTrue(list(obj(rows.getLast().get("rawSummary")).get("unassignedValues")).stream().anyMatch(u->text(u.get("rawValue")).contains("2026-08-16 / 2026-08-17")));
+ }
+
  @Test void readinessSharedDatesReachFormalTableDates()throws Exception{
   long sid=number(session().get("id"));String raw="シナリオ: 日付保全\n日付: 2026-10-01\n日付: 2026-10-02\n\n|PL|PC|\n|---|---|\n|田中|青い月|";
   assertEquals(201,multipart("POST","/import/session/"+sid+"/sources/files","files",List.of(new Upload("dates.md",raw.getBytes(StandardCharsets.UTF_8))),version(sid)).status);

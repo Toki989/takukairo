@@ -1,0 +1,113 @@
+{
+  "id": 1,
+  "version": 2,
+  "scenarioId": 1,
+  "scenario": {
+    "id": 1,
+    "version": 0,
+    "name": "月影の書庫",
+    "authorName": null,
+    "sourceUrl": null,
+    "gameSystem": "クトゥルフ神話TRPG",
+    "externalImageUrl": null,
+    "image": null,
+    "createdAt": "2026-10-26T01:42:15.960Z",
+    "updatedAt": "2026-10-26T01:42:15.960Z",
+    "favorite": false,
+    "tableCount": 1
+  },
+  "tableName": "月影の書庫 第1卓",
+  "recordingUrl": null,
+  "createdAt": "2026-10-26T01:42:16.029Z",
+  "tableDates": [
+    {
+      "id": 1,
+      "playedOn": "2026-07-12",
+      "version": 0
+    }
+  ],
+  "participations": [
+    {
+      "id": 1,
+      "version": 0,
+      "personId": 2,
+      "person": {
+        "id": 2,
+        "version": 0,
+        "displayName": "あお"
+      },
+      "pcId": null,
+      "pc": null,
+      "role": "KP",
+      "displayOrder": 1,
+      "ho": null,
+      "displayQuote": null,
+      "spotlightType": null,
+      "endPcState": null
+    },
+    {
+      "id": 2,
+      "version": 0,
+      "personId": 3,
+      "person": {
+        "id": 3,
+        "version": 0,
+        "displayName": "みな"
+      },
+      "pcId": 1,
+      "pc": {
+        "id": 1,
+        "version": 1,
+        "name": "天野 透",
+        "personId": 3,
+        "person": {
+          "id": 3,
+          "version": 0,
+          "displayName": "みな"
+        },
+        "characterSheetUrl": null,
+        "image": null,
+        "createdAt": "2026-10-26T01:42:16.013Z",
+        "systemSettings": []
+      },
+      "role": "PL",
+      "displayOrder": 1,
+      "ho": null,
+      "displayQuote": null,
+      "spotlightType": null,
+      "endPcState": null
+    },
+    {
+      "id": 3,
+      "version": 0,
+      "personId": 4,
+      "person": {
+        "id": 4,
+        "version": 0,
+        "displayName": "れん"
+      },
+      "pcId": 2,
+      "pc": {
+        "id": 2,
+        "version": 1,
+        "name": "白瀬 渚",
+        "personId": 4,
+        "person": {
+          "id": 4,
+          "version": 0,
+          "displayName": "れん"
+        },
+        "characterSheetUrl": null,
+        "image": null,
+        "createdAt": "2026-10-26T01:42:16.026Z",
+        "systemSettings": []
+      },
+      "role": "PL",
+      "displayOrder": 2,
+      "ho": null,
+      "displayQuote": null,
+      "spotlightType": null,
+      "endPcState": null
+    }
+  ]
+}

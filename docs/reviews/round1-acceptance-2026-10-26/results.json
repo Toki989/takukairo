@@ -1,0 +1,720 @@
+{
+  "startedAt": "2026-10-26T01:41:44.461Z",
+  "environment": {
+    "archiveSha256": "EBA40017B050F40182B3FEC458D54151565F34CF816A843F6FA2D2124BBFFAA7",
+    "run": "C:\\Src\\takukairo\\.runtime\\round1-acceptance-2026-10-26\\run3",
+    "backendPort": 8082,
+    "frontendPort": 5175,
+    "database": "takukairo_round1_20261026_run3",
+    "postgresPort": 55432,
+    "frontendPid": 24588,
+    "backendPid": 11752
+  },
+  "scope": "Actual UI upload/analysis and explicit correction/registration; original archive unchanged",
+  "initial": [
+    {
+      "file": "01_csv_T01_T02.csv",
+      "sessionId": 1,
+      "expectedCandidates": 2,
+      "actualCandidates": 6,
+      "unparsedBlocks": 0,
+      "automaticStructureMatches": false,
+      "actual": [
+        {
+          "scenario": "月影の書庫",
+          "table": "月影の書庫 第1卓",
+          "system": "クトゥルフ神話TRPG",
+          "dates": [
+            "2026-07-12"
+          ],
+          "recording": null,
+          "people": [
+            {
+              "person": "あお",
+              "role": "KP",
+              "pc": null,
+              "ho": null
+            }
+          ]
+        },
+        {
+          "scenario": "月影の書庫",
+          "table": "月影の書庫 第1卓",
+          "system": "クトゥルフ神話TRPG",
+          "dates": [
+            "2026-07-12"
+          ],
+          "recording": null,
+          "people": [
+            {
+              "person": "みな",
+              "role": "PL",
+              "pc": "天野 透",
+              "ho": null
+            }
+          ]
+        },
+        {
+          "scenario": "月影の書庫",
+          "table": "月影の書庫 第1卓",
+          "system": "クトゥルフ神話TRPG",
+          "dates": [
+            "2026-07-12"
+          ],
+          "recording": null,
+          "people": [
+            {
+              "person": "れん",
+              "role": "PL",
+              "pc": "白瀬 渚",
+              "ho": null
+            }
+          ]
+        },
+        {
+          "scenario": "星屑の回廊",
+          "table": "星屑の回廊 夏季卓",
+          "system": "新クトゥルフ神話TRPG",
+          "dates": [],
+          "recording": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "people": [
+            {
+              "person": "しずく",
+              "role": "KP",
+              "pc": null,
+              "ho": null
+            }
+          ]
+        },
+        {
+          "scenario": "星屑の回廊",
+          "table": "星屑の回廊 夏季卓",
+          "system": "新クトゥルフ神話TRPG",
+          "dates": [],
+          "recording": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "people": [
+            {
+              "person": "ゆづき",
+              "role": "PL",
+              "pc": "朝霧 灯",
+              "ho": "HO1"
+            }
+          ]
+        },
+        {
+          "scenario": "星屑の回廊",
+          "table": "星屑の回廊 夏季卓",
+          "system": "新クトゥルフ神話TRPG",
+          "dates": [],
+          "recording": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "people": [
+            {
+              "person": "いと",
+              "role": "PL",
+              "pc": "久遠 澄",
+              "ho": "HO2"
+            }
+          ]
+        }
+      ],
+      "expected": [
+        {
+          "scenario": "月影の書庫",
+          "table": "月影の書庫 第1卓",
+          "system": "クトゥルフ神話TRPG",
+          "dates": [
+            "2026-07-12"
+          ],
+          "recording": null,
+          "people": [
+            {
+              "person": "あお",
+              "role": "KP",
+              "pc": null,
+              "ho": null
+            },
+            {
+              "person": "みな",
+              "role": "PL",
+              "pc": "天野 透",
+              "ho": null
+            },
+            {
+              "person": "れん",
+              "role": "PL",
+              "pc": "白瀬 渚",
+              "ho": null
+            }
+          ]
+        },
+        {
+          "scenario": "星屑の回廊",
+          "table": "星屑の回廊 夏季卓",
+          "system": "新クトゥルフ神話TRPG",
+          "dates": [
+            "2026-08-16",
+            "2026-08-17"
+          ],
+          "recording": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "people": [
+            {
+              "person": "いと",
+              "role": "PL",
+              "pc": "久遠 澄",
+              "ho": "HO2"
+            },
+            {
+              "person": "しずく",
+              "role": "KP",
+              "pc": null,
+              "ho": null
+            },
+            {
+              "person": "ゆづき",
+              "role": "PL",
+              "pc": "朝霧 灯",
+              "ho": "HO1"
+            }
+          ]
+        }
+      ],
+      "unconfirmedRegistrationDisabled": true,
+      "sourcePreserved": true,
+      "inputSha256": "7263311d9c309b5c0c9b0ee07f7902bbd13e42a18bd648a4c64a063301405c37"
+    },
+    {
+      "file": "02_markdown_T03.md",
+      "sessionId": 2,
+      "expectedCandidates": 1,
+      "actualCandidates": 3,
+      "unparsedBlocks": 1,
+      "automaticStructureMatches": false,
+      "actual": [
+        {
+          "scenario": "深海の郵便局",
+          "table": "深海の郵便局 夜間卓",
+          "system": null,
+          "dates": [],
+          "recording": null,
+          "people": []
+        },
+        {
+          "scenario": null,
+          "table": null,
+          "system": null,
+          "dates": [],
+          "recording": null,
+          "people": [
+            {
+              "person": "こはる",
+              "role": "KP",
+              "pc": null,
+              "ho": null
+            }
+          ]
+        },
+        {
+          "scenario": null,
+          "table": null,
+          "system": null,
+          "dates": [],
+          "recording": null,
+          "people": [
+            {
+              "person": "ひかり",
+              "role": "PL",
+              "pc": null,
+              "ho": null
+            }
+          ]
+        }
+      ],
+      "expected": [
+        {
+          "scenario": "深海の郵便局",
+          "table": "深海の郵便局 夜間卓",
+          "system": null,
+          "dates": [],
+          "recording": null,
+          "people": [
+            {
+              "person": "こはる",
+              "role": "KP",
+              "pc": null,
+              "ho": null
+            },
+            {
+              "person": "ひかり",
+              "role": "PL",
+              "pc": null,
+              "ho": null
+            }
+          ]
+        }
+      ],
+      "unconfirmedRegistrationDisabled": true,
+      "sourcePreserved": true,
+      "inputSha256": "4fc2e4ec7bd2394a62595d408fbf6a0bc6d82381b1ec863a3af61a2cc148b3b4"
+    },
+    {
+      "file": "03_html_T04.html",
+      "sessionId": 3,
+      "expectedCandidates": 1,
+      "actualCandidates": 1,
+      "unparsedBlocks": 0,
+      "automaticStructureMatches": false,
+      "actual": [
+        {
+          "scenario": "シナリオ名",
+          "table": "卓名",
+          "system": null,
+          "dates": [],
+          "recording": null,
+          "people": [
+            {
+              "person": "参加者",
+              "role": null,
+              "pc": null,
+              "ho": null
+            }
+          ]
+        }
+      ],
+      "expected": [
+        {
+          "scenario": "消えた時計塔",
+          "table": "消えた時計塔 記録のみ",
+          "system": null,
+          "dates": [
+            "2026-08-29"
+          ],
+          "recording": null,
+          "people": []
+        }
+      ],
+      "unconfirmedRegistrationDisabled": true,
+      "sourcePreserved": true,
+      "inputSha256": "5992ff759c28eddd418d1ed78614ae8b72180dbe910f535880cbab921a2dfa83"
+    },
+    {
+      "file": "04_text_T05.txt",
+      "sessionId": 4,
+      "expectedCandidates": 1,
+      "actualCandidates": 1,
+      "unparsedBlocks": 0,
+      "automaticStructureMatches": true,
+      "actual": [
+        {
+          "scenario": null,
+          "table": "9月上旬の臨時卓",
+          "system": null,
+          "dates": [
+            "2026-09-02"
+          ],
+          "recording": null,
+          "people": [
+            {
+              "person": "すばる",
+              "role": "KP",
+              "pc": null,
+              "ho": null
+            },
+            {
+              "person": "つばめ",
+              "role": "PL",
+              "pc": "小夜 千景",
+              "ho": null
+            }
+          ]
+        }
+      ],
+      "expected": [
+        {
+          "scenario": null,
+          "table": "9月上旬の臨時卓",
+          "system": null,
+          "dates": [
+            "2026-09-02"
+          ],
+          "recording": null,
+          "people": [
+            {
+              "person": "すばる",
+              "role": "KP",
+              "pc": null,
+              "ho": null
+            },
+            {
+              "person": "つばめ",
+              "role": "PL",
+              "pc": "小夜 千景",
+              "ho": null
+            }
+          ]
+        }
+      ],
+      "unconfirmedRegistrationDisabled": true,
+      "sourcePreserved": true,
+      "inputSha256": "0faeaa540a93ca1de9c1838ca1b84232a9644857fe736fa511793a35d44bb522"
+    }
+  ],
+  "registration": [
+    {
+      "fixture": "T01",
+      "tableId": 1,
+      "outcome": "REGISTERED",
+      "formalMatches": true,
+      "actual": {
+        "scenario": "月影の書庫",
+        "table": "月影の書庫 第1卓",
+        "system": "クトゥルフ神話TRPG",
+        "dates": [
+          "2026-07-12"
+        ],
+        "recording": null,
+        "people": [
+          {
+            "person": "あお",
+            "role": "KP",
+            "pc": null,
+            "ho": null
+          },
+          {
+            "person": "みな",
+            "role": "PL",
+            "pc": "天野 透",
+            "ho": null
+          },
+          {
+            "person": "れん",
+            "role": "PL",
+            "pc": "白瀬 渚",
+            "ho": null
+          }
+        ]
+      }
+    },
+    {
+      "fixture": "T02",
+      "tableId": 2,
+      "outcome": "REGISTERED",
+      "formalMatches": true,
+      "actual": {
+        "scenario": "星屑の回廊",
+        "table": "星屑の回廊 夏季卓",
+        "system": "新クトゥルフ神話TRPG",
+        "dates": [
+          "2026-08-16",
+          "2026-08-17"
+        ],
+        "recording": "https://example.com/trpg/recordings/hoshikuzu-summer",
+        "people": [
+          {
+            "person": "いと",
+            "role": "PL",
+            "pc": "久遠 澄",
+            "ho": "HO2"
+          },
+          {
+            "person": "しずく",
+            "role": "KP",
+            "pc": null,
+            "ho": null
+          },
+          {
+            "person": "ゆづき",
+            "role": "PL",
+            "pc": "朝霧 灯",
+            "ho": "HO1"
+          }
+        ]
+      }
+    },
+    {
+      "fixture": "T03",
+      "tableId": 3,
+      "outcome": "REGISTERED",
+      "formalMatches": true,
+      "actual": {
+        "scenario": "深海の郵便局",
+        "table": "深海の郵便局 夜間卓",
+        "system": null,
+        "dates": [],
+        "recording": null,
+        "people": [
+          {
+            "person": "こはる",
+            "role": "KP",
+            "pc": null,
+            "ho": null
+          },
+          {
+            "person": "ひかり",
+            "role": "PL",
+            "pc": null,
+            "ho": null
+          }
+        ]
+      }
+    },
+    {
+      "fixture": "T04",
+      "tableId": 4,
+      "outcome": "REGISTERED",
+      "formalMatches": true,
+      "actual": {
+        "scenario": "消えた時計塔",
+        "table": "消えた時計塔 記録のみ",
+        "system": null,
+        "dates": [
+          "2026-08-29"
+        ],
+        "recording": null,
+        "people": []
+      }
+    },
+    {
+      "fixture": "T05",
+      "tableId": 5,
+      "outcome": "REGISTERED",
+      "formalMatches": true,
+      "actual": {
+        "scenario": "硝子の灯台",
+        "table": "9月上旬の臨時卓",
+        "system": null,
+        "dates": [
+          "2026-09-02"
+        ],
+        "recording": null,
+        "people": [
+          {
+            "person": "すばる",
+            "role": "KP",
+            "pc": null,
+            "ho": null
+          },
+          {
+            "person": "つばめ",
+            "role": "PL",
+            "pc": "小夜 千景",
+            "ho": null
+          }
+        ]
+      }
+    }
+  ],
+  "checks": [
+    {
+      "check": "explicitUiMerge",
+      "label": "T01",
+      "sourceCandidateIds": [
+        12,
+        13,
+        14
+      ],
+      "resultCount": 4
+    },
+    {
+      "check": "explicitUiMerge",
+      "label": "T02",
+      "sourceCandidateIds": [
+        15,
+        16,
+        17
+      ],
+      "resultCount": 2
+    },
+    {
+      "check": "uiCorrectionResolutionAndConfirmation",
+      "fixture": "T01",
+      "actions": [
+        {
+          "field": "tableDates",
+          "from": [
+            {
+              "playedOn": "2026-07-12"
+            },
+            {
+              "playedOn": "2026-07-12"
+            },
+            {
+              "playedOn": "2026-07-12"
+            }
+          ],
+          "to": [
+            "2026-07-12"
+          ],
+          "reason": "Explicit date correction from input, no parser change"
+        }
+      ],
+      "candidateId": 18
+    },
+    {
+      "check": "uiCorrectionResolutionAndConfirmation",
+      "fixture": "T02",
+      "actions": [
+        {
+          "field": "tableDates",
+          "from": [],
+          "to": [
+            "2026-08-16",
+            "2026-08-17"
+          ],
+          "reason": "Explicit date correction from input, no parser change"
+        },
+        {
+          "field": "unassignedValues",
+          "action": "IGNORE",
+          "values": [
+            "実施日: 2026-08-16 / 2026-08-17",
+            "実施日: 2026-08-16 / 2026-08-17",
+            "実施日: 2026-08-16 / 2026-08-17"
+          ],
+          "reason": "Dates/names transferred explicitly above; headings, unknown-date text and notes remain in source"
+        }
+      ],
+      "candidateId": 19
+    },
+    {
+      "check": "explicitUiMerge",
+      "label": "T03",
+      "sourceCandidateIds": [
+        20,
+        21,
+        22
+      ],
+      "resultCount": 1
+    },
+    {
+      "check": "uiExcludeAnnotation",
+      "file": "02_markdown_T03.md",
+      "reason": "The remaining block is a note that the date and PC are missing, not another table"
+    },
+    {
+      "check": "uiCorrectionResolutionAndConfirmation",
+      "fixture": "T03",
+      "actions": [
+        {
+          "field": "unassignedValues",
+          "action": "IGNORE",
+          "values": [
+            "TRPG活動記録",
+            "卓：深海の郵便局 夜間卓",
+            "実施日：不明",
+            "TRPG活動記録",
+            "卓：深海の郵便局 夜間卓",
+            "TRPG活動記録",
+            "卓：深海の郵便局 夜間卓"
+          ],
+          "reason": "Dates/names transferred explicitly above; headings, unknown-date text and notes remain in source"
+        }
+      ],
+      "candidateId": 23
+    },
+    {
+      "check": "uiCorrectionResolutionAndConfirmation",
+      "fixture": "T04",
+      "actions": [
+        {
+          "field": "participations",
+          "action": "OMIT",
+          "reason": "参加者 is an HTML label, not a person; raw record retained"
+        },
+        {
+          "field": "unassignedValues",
+          "action": "IGNORE",
+          "values": [
+            "卓の活動記録",
+            "消えた時計塔",
+            "消えた時計塔 記録のみ",
+            "実施日",
+            "2026-08-29",
+            "0名（名簿の記録なし）",
+            "開催履歴だけが保存されている。KP・PL・PCは未記録。"
+          ],
+          "reason": "Dates/names transferred explicitly above; headings, unknown-date text and notes remain in source"
+        }
+      ],
+      "candidateId": 24
+    },
+    {
+      "check": "uiCorrectionResolutionAndConfirmation",
+      "fixture": "T05",
+      "actions": [
+        {
+          "field": "scenarioName",
+          "from": "",
+          "to": "硝子の灯台",
+          "reason": "Explicit test operator supplement, absent from input"
+        },
+        {
+          "field": "unassignedValues",
+          "action": "IGNORE",
+          "values": [
+            "【TRPG 卓の活動記録】",
+            "メモ：シナリオのタイトルを記録し忘れた。"
+          ],
+          "reason": "Dates/names transferred explicitly above; headings, unknown-date text and notes remain in source"
+        }
+      ],
+      "candidateId": 25
+    }
+  ],
+  "baseline": {
+    "tables": 0,
+    "scenarios": 0,
+    "persons": 1,
+    "pcs": 0,
+    "tableDates": 0,
+    "participations": 0,
+    "endPcStates": 0
+  },
+  "initialPhase": "COMPLETED",
+  "clientErrors": [],
+  "finalCounts": {
+    "tables": 5,
+    "scenarios": 5,
+    "persons": 11,
+    "pcs": 5,
+    "tableDates": 5,
+    "participations": 10,
+    "endPcStates": 0
+  },
+  "newEntityCounts": {
+    "tables": 5,
+    "scenarios": 5,
+    "persons": 10,
+    "pcs": 5,
+    "tableDates": 5,
+    "participations": 10,
+    "endPcStates": 0
+  },
+  "forbiddenLabelEntities": {
+    "people": 0,
+    "scenarios": 0,
+    "tables": 0
+  },
+  "finalSourceIntegrity": [
+    {
+      "file": "01_csv_T01_T02.csv",
+      "sha256": "7263311d9c309b5c0c9b0ee07f7902bbd13e42a18bd648a4c64a063301405c37",
+      "preserved": true
+    },
+    {
+      "file": "02_markdown_T03.md",
+      "sha256": "4fc2e4ec7bd2394a62595d408fbf6a0bc6d82381b1ec863a3af61a2cc148b3b4",
+      "preserved": true
+    },
+    {
+      "file": "03_html_T04.html",
+      "sha256": "5992ff759c28eddd418d1ed78614ae8b72180dbe910f535880cbab921a2dfa83",
+      "preserved": true
+    },
+    {
+      "file": "04_text_T05.txt",
+      "sha256": "0faeaa540a93ca1de9c1838ca1b84232a9644857fe736fa511793a35d44bb522",
+      "preserved": true
+    }
+  ],
+  "registrationPhase": "COMPLETED"
+}

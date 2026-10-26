@@ -1,0 +1,999 @@
+{
+  "s": {
+    "id": 2,
+    "version": 2,
+    "currentStep": "REVIEW",
+    "status": "ACTIVE",
+    "savedAt": "2026-10-26T01:41:50.830Z",
+    "expiresAt": "2026-11-02T01:41:50.830Z",
+    "sources": [
+      {
+        "id": 2,
+        "sourceType": "FILE",
+        "originalFileName": "02_markdown_T03.md",
+        "encoding": "AUTO",
+        "rawText": null,
+        "order": 1
+      }
+    ]
+  },
+  "review": {
+    "sessionId": 2,
+    "sessionVersion": 2,
+    "summary": {
+      "total": 3,
+      "registerable": 0,
+      "needsReview": 1,
+      "needsFix": 2,
+      "checked": 0
+    },
+    "unparsedBlocks": [
+      {
+        "id": 1,
+        "version": 0,
+        "sourceId": 2,
+        "startOffset": 149,
+        "endOffset": 174,
+        "originalText": "※この記録には実施日とPLのPC名が残っていない。",
+        "reason": "卓の所属・活動内容を確認してください。",
+        "state": "UNPROCESSED",
+        "sourceLocation": {
+          "quoted": false,
+          "excerpt": "※この記録には実施日とPLのPC名が残っていない。",
+          "lineEnd": 16,
+          "dependsOn": [],
+          "endOffset": 174,
+          "fieldPath": "/unparsedBlock",
+          "lineStart": 16,
+          "derivation": "DIRECT",
+          "evidenceId": "range:149:174",
+          "startOffset": 149,
+          "logicalRecord": null
+        },
+        "consumption": {}
+      }
+    ],
+    "items": [
+      {
+        "candidateId": 7,
+        "version": 1,
+        "status": "NEEDS_REVIEW",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "summary": {
+          "tableName": "深海の郵便局 夜間卓",
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "深海の郵便局",
+          "gameSystemName": null,
+          "participations": [],
+          "unassignedValues": [
+            {
+              "itemKey": "u-99ca2640-ed23-4573-a79d-7e01a7f49125",
+              "rawValue": "TRPG活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-1607977c-7483-4ace-b657-939117140dd1",
+              "rawValue": "卓：深海の郵便局 夜間卓",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-f807b90b-8d4c-48a4-bcfa-9b136b10c88b",
+              "rawValue": "実施日：不明",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "rawSummary": {
+          "tableName": "深海の郵便局 夜間卓",
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "深海の郵便局",
+          "gameSystemName": null,
+          "participations": [],
+          "unassignedValues": [
+            {
+              "itemKey": "u-99ca2640-ed23-4573-a79d-7e01a7f49125",
+              "rawValue": "TRPG活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-1607977c-7483-4ace-b657-939117140dd1",
+              "rawValue": "卓：深海の郵便局 夜間卓",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-f807b90b-8d4c-48a4-bcfa-9b136b10c88b",
+              "rawValue": "実施日：不明",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        }
+      },
+      {
+        "candidateId": 8,
+        "version": 1,
+        "status": "NEEDS_FIX",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "summary": {
+          "tableName": null,
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "こはる",
+              "candidateParticipationKey": "p-bdcf4483-0a92-49f3-a4b3-c09ccadbec54"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-443a7e40-064f-4222-a58f-1d3cfa3aeba8",
+              "rawValue": "TRPG活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-d88fcad6-e73d-4fe3-9668-c26edda201fb",
+              "rawValue": "卓：深海の郵便局 夜間卓",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "rawSummary": {
+          "tableName": null,
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "こはる",
+              "candidateParticipationKey": "p-bdcf4483-0a92-49f3-a4b3-c09ccadbec54"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-443a7e40-064f-4222-a58f-1d3cfa3aeba8",
+              "rawValue": "TRPG活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-d88fcad6-e73d-4fe3-9668-c26edda201fb",
+              "rawValue": "卓：深海の郵便局 夜間卓",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        }
+      },
+      {
+        "candidateId": 9,
+        "version": 1,
+        "status": "NEEDS_FIX",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "summary": {
+          "tableName": null,
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": null,
+              "handout": null,
+              "personName": "ひかり",
+              "candidateParticipationKey": "p-1f4c0015-6dfb-4066-afdf-3f292672b666"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-4fb15ddb-40ee-4a38-80f2-43968d9973ea",
+              "rawValue": "TRPG活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-64c56e1a-c219-4ada-9522-56debfbf3509",
+              "rawValue": "卓：深海の郵便局 夜間卓",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "rawSummary": {
+          "tableName": null,
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": null,
+              "handout": null,
+              "personName": "ひかり",
+              "candidateParticipationKey": "p-1f4c0015-6dfb-4066-afdf-3f292672b666"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-4fb15ddb-40ee-4a38-80f2-43968d9973ea",
+              "rawValue": "TRPG活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-64c56e1a-c219-4ada-9522-56debfbf3509",
+              "rawValue": "卓：深海の郵便局 夜間卓",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "details": [
+    {
+      "candidate": {
+        "id": 7,
+        "version": 1,
+        "candidateData": {
+          "tableName": "深海の郵便局 夜間卓",
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "深海の郵便局",
+          "gameSystemName": null,
+          "participations": [],
+          "unassignedValues": [
+            {
+              "itemKey": "u-99ca2640-ed23-4573-a79d-7e01a7f49125",
+              "rawValue": "TRPG活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-1607977c-7483-4ace-b657-939117140dd1",
+              "rawValue": "卓：深海の郵便局 夜間卓",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-f807b90b-8d4c-48a4-bcfa-9b136b10c88b",
+              "rawValue": "実施日：不明",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "effectiveCandidateData": {
+          "tableName": "深海の郵便局 夜間卓",
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "深海の郵便局",
+          "gameSystemName": null,
+          "participations": [],
+          "unassignedValues": [
+            {
+              "itemKey": "u-99ca2640-ed23-4573-a79d-7e01a7f49125",
+              "rawValue": "TRPG活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-1607977c-7483-4ace-b657-939117140dd1",
+              "rawValue": "卓：深海の郵便局 夜間卓",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-f807b90b-8d4c-48a4-bcfa-9b136b10c88b",
+              "rawValue": "実施日：不明",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "status": "NEEDS_REVIEW",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "registrationResult": {},
+        "resolutionRefs": {
+          "participations": [],
+          "scenarioResolutionId": null
+        },
+        "inference": {
+          "format": "MARKDOWN",
+          "boundary": "E0",
+          "conflicts": [],
+          "relations": [],
+          "originalData": {
+            "tableName": "深海の郵便局 夜間卓",
+            "tableDates": [],
+            "recordingUrl": null,
+            "scenarioName": "深海の郵便局",
+            "gameSystemName": null,
+            "participations": [],
+            "unassignedValues": [
+              {
+                "itemKey": "u-99ca2640-ed23-4573-a79d-7e01a7f49125",
+                "rawValue": "TRPG活動記録",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              },
+              {
+                "itemKey": "u-1607977c-7483-4ace-b657-939117140dd1",
+                "rawValue": "卓：深海の郵便局 夜間卓",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              },
+              {
+                "itemKey": "u-f807b90b-8d4c-48a4-bcfa-9b136b10c88b",
+                "rawValue": "実施日：不明",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              }
+            ]
+          },
+          "quotedEvidence": false,
+          "recordEndOffset": 68,
+          "scopeEvidenceId": null,
+          "recordStartOffset": 29,
+          "sharedContextEvidenceIds": [],
+          "boundaryAssessments": []
+        }
+      },
+      "resolutions": [],
+      "omittedItems": [],
+      "sourceContexts": [
+        {
+          "sourceId": 2,
+          "sourceType": "FILE",
+          "originalFileName": "02_markdown_T03.md",
+          "traces": [
+            {
+              "excerpt": "# TRPG活動記録",
+              "lineEnd": 1,
+              "dependsOn": [],
+              "endOffset": 10,
+              "fieldPath": "/unassignedValues/u-99ca2640-ed23-4573-a79d-7e01a7f49125",
+              "lineStart": 1,
+              "derivation": "DIRECT",
+              "evidenceId": "b-1:0",
+              "startOffset": 0,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 2,
+          "sourceType": "FILE",
+          "originalFileName": "02_markdown_T03.md",
+          "traces": [
+            {
+              "excerpt": "## 卓：深海の郵便局 夜間卓",
+              "lineEnd": 3,
+              "dependsOn": [],
+              "endOffset": 27,
+              "fieldPath": "/unassignedValues/u-1607977c-7483-4ace-b657-939117140dd1",
+              "lineStart": 3,
+              "derivation": "DIRECT",
+              "evidenceId": "b-3:12",
+              "startOffset": 12,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 2,
+          "sourceType": "FILE",
+          "originalFileName": "02_markdown_T03.md",
+          "traces": [
+            {
+              "excerpt": "- シナリオ名：深海の郵便局",
+              "lineEnd": 5,
+              "dependsOn": [],
+              "endOffset": 43,
+              "fieldPath": "/table/scenarioName",
+              "lineStart": 5,
+              "derivation": "DIRECT",
+              "evidenceId": "b-5:scenarioName:29",
+              "startOffset": 29,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 2,
+          "sourceType": "FILE",
+          "originalFileName": "02_markdown_T03.md",
+          "traces": [
+            {
+              "excerpt": "- 卓名：深海の郵便局 夜間卓",
+              "lineEnd": 6,
+              "dependsOn": [],
+              "endOffset": 59,
+              "fieldPath": "/table/tableName",
+              "lineStart": 6,
+              "derivation": "DIRECT",
+              "evidenceId": "b-6:tableName:44",
+              "startOffset": 44,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 2,
+          "sourceType": "FILE",
+          "originalFileName": "02_markdown_T03.md",
+          "traces": [
+            {
+              "excerpt": "- 実施日：不明",
+              "lineEnd": 7,
+              "dependsOn": [],
+              "endOffset": 68,
+              "fieldPath": "/unassignedValues/u-f807b90b-8d4c-48a4-bcfa-9b136b10c88b",
+              "lineStart": 7,
+              "derivation": "DIRECT",
+              "evidenceId": "b-7:60",
+              "startOffset": 60,
+              "logicalRecord": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "candidate": {
+        "id": 8,
+        "version": 1,
+        "candidateData": {
+          "tableName": null,
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "こはる",
+              "candidateParticipationKey": "p-bdcf4483-0a92-49f3-a4b3-c09ccadbec54"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-443a7e40-064f-4222-a58f-1d3cfa3aeba8",
+              "rawValue": "TRPG活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-d88fcad6-e73d-4fe3-9668-c26edda201fb",
+              "rawValue": "卓：深海の郵便局 夜間卓",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "effectiveCandidateData": {
+          "tableName": null,
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "こはる",
+              "candidateParticipationKey": "p-bdcf4483-0a92-49f3-a4b3-c09ccadbec54"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-443a7e40-064f-4222-a58f-1d3cfa3aeba8",
+              "rawValue": "TRPG活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-d88fcad6-e73d-4fe3-9668-c26edda201fb",
+              "rawValue": "卓：深海の郵便局 夜間卓",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "status": "NEEDS_FIX",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "registrationResult": {},
+        "resolutionRefs": {
+          "participations": [
+            {
+              "pcResolutionId": null,
+              "personResolutionId": null,
+              "candidateParticipationKey": "p-bdcf4483-0a92-49f3-a4b3-c09ccadbec54"
+            }
+          ],
+          "scenarioResolutionId": null
+        },
+        "inference": {
+          "format": "MARKDOWN",
+          "boundary": "E0",
+          "conflicts": [],
+          "relations": [],
+          "originalData": {
+            "tableName": null,
+            "tableDates": [],
+            "recordingUrl": null,
+            "scenarioName": "",
+            "gameSystemName": null,
+            "participations": [
+              {
+                "role": "KP",
+                "pcName": null,
+                "handout": null,
+                "personName": "こはる",
+                "candidateParticipationKey": "p-bdcf4483-0a92-49f3-a4b3-c09ccadbec54"
+              }
+            ],
+            "unassignedValues": [
+              {
+                "itemKey": "u-443a7e40-064f-4222-a58f-1d3cfa3aeba8",
+                "rawValue": "TRPG活動記録",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              },
+              {
+                "itemKey": "u-d88fcad6-e73d-4fe3-9668-c26edda201fb",
+                "rawValue": "卓：深海の郵便局 夜間卓",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              }
+            ]
+          },
+          "quotedEvidence": false,
+          "recordEndOffset": 132,
+          "scopeEvidenceId": null,
+          "recordStartOffset": 118,
+          "sharedContextEvidenceIds": [],
+          "boundaryAssessments": []
+        }
+      },
+      "resolutions": [],
+      "omittedItems": [],
+      "sourceContexts": [
+        {
+          "sourceId": 2,
+          "sourceType": "FILE",
+          "originalFileName": "02_markdown_T03.md",
+          "traces": [
+            {
+              "excerpt": "# TRPG活動記録",
+              "lineEnd": 1,
+              "dependsOn": [],
+              "endOffset": 10,
+              "fieldPath": "/unassignedValues/u-443a7e40-064f-4222-a58f-1d3cfa3aeba8",
+              "lineStart": 1,
+              "derivation": "DIRECT",
+              "evidenceId": "b-1:0",
+              "startOffset": 0,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 2,
+          "sourceType": "FILE",
+          "originalFileName": "02_markdown_T03.md",
+          "traces": [
+            {
+              "excerpt": "## 卓：深海の郵便局 夜間卓",
+              "lineEnd": 3,
+              "dependsOn": [],
+              "endOffset": 27,
+              "fieldPath": "/unassignedValues/u-d88fcad6-e73d-4fe3-9668-c26edda201fb",
+              "lineStart": 3,
+              "derivation": "DIRECT",
+              "evidenceId": "b-3:12",
+              "startOffset": 12,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 2,
+          "sourceType": "FILE",
+          "originalFileName": "02_markdown_T03.md",
+          "traces": [
+            {
+              "excerpt": " こはる ",
+              "lineEnd": 13,
+              "dependsOn": [],
+              "endOffset": 129,
+              "fieldPath": "/participations/p-bdcf4483-0a92-49f3-a4b3-c09ccadbec54/personName",
+              "lineStart": 13,
+              "derivation": "DIRECT",
+              "evidenceId": "b-13:person:124",
+              "startOffset": 124,
+              "labelLocation": {
+                "excerpt": " 人物名 ",
+                "lineEnd": 11,
+                "dependsOn": [],
+                "endOffset": 90,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 11,
+                "derivation": "DIRECT",
+                "evidenceId": "header:85",
+                "startOffset": 85,
+                "logicalRecord": null
+              },
+              "logicalRecord": null,
+              "dependsOnLabel": "header:85"
+            }
+          ]
+        },
+        {
+          "sourceId": 2,
+          "sourceType": "FILE",
+          "originalFileName": "02_markdown_T03.md",
+          "traces": [
+            {
+              "excerpt": " KP ",
+              "lineEnd": 13,
+              "dependsOn": [],
+              "endOffset": 123,
+              "fieldPath": "/participations/p-bdcf4483-0a92-49f3-a4b3-c09ccadbec54/role",
+              "lineStart": 13,
+              "derivation": "DIRECT",
+              "evidenceId": "b-13:role:119",
+              "startOffset": 119,
+              "labelLocation": {
+                "excerpt": " 役割 ",
+                "lineEnd": 11,
+                "dependsOn": [],
+                "endOffset": 84,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 11,
+                "derivation": "DIRECT",
+                "evidenceId": "header:80",
+                "startOffset": 80,
+                "logicalRecord": null
+              },
+              "logicalRecord": null,
+              "dependsOnLabel": "header:80"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "candidate": {
+        "id": 9,
+        "version": 1,
+        "candidateData": {
+          "tableName": null,
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": null,
+              "handout": null,
+              "personName": "ひかり",
+              "candidateParticipationKey": "p-1f4c0015-6dfb-4066-afdf-3f292672b666"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-4fb15ddb-40ee-4a38-80f2-43968d9973ea",
+              "rawValue": "TRPG活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-64c56e1a-c219-4ada-9522-56debfbf3509",
+              "rawValue": "卓：深海の郵便局 夜間卓",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "effectiveCandidateData": {
+          "tableName": null,
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": null,
+              "handout": null,
+              "personName": "ひかり",
+              "candidateParticipationKey": "p-1f4c0015-6dfb-4066-afdf-3f292672b666"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-4fb15ddb-40ee-4a38-80f2-43968d9973ea",
+              "rawValue": "TRPG活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-64c56e1a-c219-4ada-9522-56debfbf3509",
+              "rawValue": "卓：深海の郵便局 夜間卓",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "status": "NEEDS_FIX",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "registrationResult": {},
+        "resolutionRefs": {
+          "participations": [
+            {
+              "pcResolutionId": null,
+              "personResolutionId": null,
+              "candidateParticipationKey": "p-1f4c0015-6dfb-4066-afdf-3f292672b666"
+            }
+          ],
+          "scenarioResolutionId": null
+        },
+        "inference": {
+          "format": "MARKDOWN",
+          "boundary": "E0",
+          "conflicts": [],
+          "relations": [],
+          "originalData": {
+            "tableName": null,
+            "tableDates": [],
+            "recordingUrl": null,
+            "scenarioName": "",
+            "gameSystemName": null,
+            "participations": [
+              {
+                "role": "PL",
+                "pcName": null,
+                "handout": null,
+                "personName": "ひかり",
+                "candidateParticipationKey": "p-1f4c0015-6dfb-4066-afdf-3f292672b666"
+              }
+            ],
+            "unassignedValues": [
+              {
+                "itemKey": "u-4fb15ddb-40ee-4a38-80f2-43968d9973ea",
+                "rawValue": "TRPG活動記録",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              },
+              {
+                "itemKey": "u-64c56e1a-c219-4ada-9522-56debfbf3509",
+                "rawValue": "卓：深海の郵便局 夜間卓",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              }
+            ]
+          },
+          "quotedEvidence": false,
+          "recordEndOffset": 147,
+          "scopeEvidenceId": null,
+          "recordStartOffset": 133,
+          "sharedContextEvidenceIds": [],
+          "boundaryAssessments": []
+        }
+      },
+      "resolutions": [],
+      "omittedItems": [],
+      "sourceContexts": [
+        {
+          "sourceId": 2,
+          "sourceType": "FILE",
+          "originalFileName": "02_markdown_T03.md",
+          "traces": [
+            {
+              "excerpt": "# TRPG活動記録",
+              "lineEnd": 1,
+              "dependsOn": [],
+              "endOffset": 10,
+              "fieldPath": "/unassignedValues/u-4fb15ddb-40ee-4a38-80f2-43968d9973ea",
+              "lineStart": 1,
+              "derivation": "DIRECT",
+              "evidenceId": "b-1:0",
+              "startOffset": 0,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 2,
+          "sourceType": "FILE",
+          "originalFileName": "02_markdown_T03.md",
+          "traces": [
+            {
+              "excerpt": "## 卓：深海の郵便局 夜間卓",
+              "lineEnd": 3,
+              "dependsOn": [],
+              "endOffset": 27,
+              "fieldPath": "/unassignedValues/u-64c56e1a-c219-4ada-9522-56debfbf3509",
+              "lineStart": 3,
+              "derivation": "DIRECT",
+              "evidenceId": "b-3:12",
+              "startOffset": 12,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 2,
+          "sourceType": "FILE",
+          "originalFileName": "02_markdown_T03.md",
+          "traces": [
+            {
+              "excerpt": " ひかり ",
+              "lineEnd": 14,
+              "dependsOn": [],
+              "endOffset": 144,
+              "fieldPath": "/participations/p-1f4c0015-6dfb-4066-afdf-3f292672b666/personName",
+              "lineStart": 14,
+              "derivation": "DIRECT",
+              "evidenceId": "b-14:person:139",
+              "startOffset": 139,
+              "labelLocation": {
+                "excerpt": " 人物名 ",
+                "lineEnd": 11,
+                "dependsOn": [],
+                "endOffset": 90,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 11,
+                "derivation": "DIRECT",
+                "evidenceId": "header:85",
+                "startOffset": 85,
+                "logicalRecord": null
+              },
+              "logicalRecord": null,
+              "dependsOnLabel": "header:85"
+            }
+          ]
+        },
+        {
+          "sourceId": 2,
+          "sourceType": "FILE",
+          "originalFileName": "02_markdown_T03.md",
+          "traces": [
+            {
+              "excerpt": " PL ",
+              "lineEnd": 14,
+              "dependsOn": [],
+              "endOffset": 138,
+              "fieldPath": "/participations/p-1f4c0015-6dfb-4066-afdf-3f292672b666/role",
+              "lineStart": 14,
+              "derivation": "DIRECT",
+              "evidenceId": "b-14:role:134",
+              "startOffset": 134,
+              "labelLocation": {
+                "excerpt": " 役割 ",
+                "lineEnd": 11,
+                "dependsOn": [],
+                "endOffset": 84,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 11,
+                "derivation": "DIRECT",
+                "evidenceId": "header:80",
+                "startOffset": 80,
+                "logicalRecord": null
+              },
+              "logicalRecord": null,
+              "dependsOnLabel": "header:80"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

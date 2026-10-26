@@ -1,0 +1,18 @@
+{
+  "id": 5,
+  "version": 23,
+  "currentStep": "REGISTER",
+  "status": "COMPLETED",
+  "savedAt": "2026-10-26T01:42:18.137Z",
+  "expiresAt": "2026-11-02T01:42:18.137Z",
+  "sources": [
+    {
+      "id": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "encoding": "AUTO",
+      "rawText": null,
+      "order": 1
+    }
+  ]
+}

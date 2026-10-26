@@ -1,0 +1,647 @@
+{
+  "s": {
+    "id": 7,
+    "version": 2,
+    "currentStep": "REVIEW",
+    "status": "ACTIVE",
+    "savedAt": "2026-10-26T01:43:02.354Z",
+    "expiresAt": "2026-11-02T01:43:02.354Z",
+    "sources": [
+      {
+        "id": 7,
+        "sourceType": "FILE",
+        "originalFileName": "03_html_T04.html",
+        "encoding": "AUTO",
+        "rawText": null,
+        "order": 1
+      }
+    ]
+  },
+  "review": {
+    "sessionId": 7,
+    "sessionVersion": 2,
+    "summary": {
+      "total": 1,
+      "registerable": 0,
+      "needsReview": 0,
+      "needsFix": 1,
+      "checked": 0
+    },
+    "unparsedBlocks": [],
+    "items": [
+      {
+        "candidateId": 24,
+        "version": 1,
+        "status": "NEEDS_FIX",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "summary": {
+          "tableName": "卓名",
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "シナリオ名",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": null,
+              "pcName": null,
+              "handout": null,
+              "personName": "参加者",
+              "candidateParticipationKey": "p-79f754b7-f68c-4b4f-8570-d43ed9d16a4b"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-43b718c4-294a-41e8-aac0-778bc6559a95",
+              "rawValue": "卓の活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-a24ed2d4-32fe-4739-b008-d3d227392892",
+              "rawValue": "消えた時計塔",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-2a3ad9c0-4ae3-4464-9781-f2630d7d5b4a",
+              "rawValue": "消えた時計塔 記録のみ",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-b93c2a4f-8240-4088-8b9e-c5bbe019992e",
+              "rawValue": "実施日",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-c60d4eba-fdbe-49f2-b470-3fc083e92c06",
+              "rawValue": "2026-08-29",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-7762106b-d259-4a8c-8e1a-da7ff6607fdc",
+              "rawValue": "0名（名簿の記録なし）",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-0f5d5d2f-c1fc-47d5-ae27-e2db5871c964",
+              "rawValue": "開催履歴だけが保存されている。KP・PL・PCは未記録。",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "rawSummary": {
+          "tableName": "卓名",
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "シナリオ名",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": null,
+              "pcName": null,
+              "handout": null,
+              "personName": "参加者",
+              "candidateParticipationKey": "p-79f754b7-f68c-4b4f-8570-d43ed9d16a4b"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-43b718c4-294a-41e8-aac0-778bc6559a95",
+              "rawValue": "卓の活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-a24ed2d4-32fe-4739-b008-d3d227392892",
+              "rawValue": "消えた時計塔",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-2a3ad9c0-4ae3-4464-9781-f2630d7d5b4a",
+              "rawValue": "消えた時計塔 記録のみ",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-b93c2a4f-8240-4088-8b9e-c5bbe019992e",
+              "rawValue": "実施日",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-c60d4eba-fdbe-49f2-b470-3fc083e92c06",
+              "rawValue": "2026-08-29",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-7762106b-d259-4a8c-8e1a-da7ff6607fdc",
+              "rawValue": "0名（名簿の記録なし）",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-0f5d5d2f-c1fc-47d5-ae27-e2db5871c964",
+              "rawValue": "開催履歴だけが保存されている。KP・PL・PCは未記録。",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "details": [
+    {
+      "candidate": {
+        "id": 24,
+        "version": 1,
+        "candidateData": {
+          "tableName": "卓名",
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "シナリオ名",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": null,
+              "pcName": null,
+              "handout": null,
+              "personName": "参加者",
+              "candidateParticipationKey": "p-79f754b7-f68c-4b4f-8570-d43ed9d16a4b"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-43b718c4-294a-41e8-aac0-778bc6559a95",
+              "rawValue": "卓の活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-a24ed2d4-32fe-4739-b008-d3d227392892",
+              "rawValue": "消えた時計塔",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-2a3ad9c0-4ae3-4464-9781-f2630d7d5b4a",
+              "rawValue": "消えた時計塔 記録のみ",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-b93c2a4f-8240-4088-8b9e-c5bbe019992e",
+              "rawValue": "実施日",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-c60d4eba-fdbe-49f2-b470-3fc083e92c06",
+              "rawValue": "2026-08-29",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-7762106b-d259-4a8c-8e1a-da7ff6607fdc",
+              "rawValue": "0名（名簿の記録なし）",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-0f5d5d2f-c1fc-47d5-ae27-e2db5871c964",
+              "rawValue": "開催履歴だけが保存されている。KP・PL・PCは未記録。",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "effectiveCandidateData": {
+          "tableName": "卓名",
+          "tableDates": [],
+          "recordingUrl": null,
+          "scenarioName": "シナリオ名",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": null,
+              "pcName": null,
+              "handout": null,
+              "personName": "参加者",
+              "candidateParticipationKey": "p-79f754b7-f68c-4b4f-8570-d43ed9d16a4b"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-43b718c4-294a-41e8-aac0-778bc6559a95",
+              "rawValue": "卓の活動記録",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-a24ed2d4-32fe-4739-b008-d3d227392892",
+              "rawValue": "消えた時計塔",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-2a3ad9c0-4ae3-4464-9781-f2630d7d5b4a",
+              "rawValue": "消えた時計塔 記録のみ",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-b93c2a4f-8240-4088-8b9e-c5bbe019992e",
+              "rawValue": "実施日",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-c60d4eba-fdbe-49f2-b470-3fc083e92c06",
+              "rawValue": "2026-08-29",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-7762106b-d259-4a8c-8e1a-da7ff6607fdc",
+              "rawValue": "0名（名簿の記録なし）",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-0f5d5d2f-c1fc-47d5-ae27-e2db5871c964",
+              "rawValue": "開催履歴だけが保存されている。KP・PL・PCは未記録。",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "status": "NEEDS_FIX",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "registrationResult": {},
+        "resolutionRefs": {
+          "participations": [
+            {
+              "pcResolutionId": null,
+              "personResolutionId": null,
+              "candidateParticipationKey": "p-79f754b7-f68c-4b4f-8570-d43ed9d16a4b"
+            }
+          ],
+          "scenarioResolutionId": null
+        },
+        "inference": {
+          "format": "HTML",
+          "boundary": "E0",
+          "conflicts": [],
+          "relations": [
+            {
+              "state": "UNDETERMINED",
+              "evidenceIds": [],
+              "candidateParticipationKey": "p-79f754b7-f68c-4b4f-8570-d43ed9d16a4b"
+            }
+          ],
+          "originalData": {
+            "tableName": "卓名",
+            "tableDates": [],
+            "recordingUrl": null,
+            "scenarioName": "シナリオ名",
+            "gameSystemName": null,
+            "participations": [
+              {
+                "role": null,
+                "pcName": null,
+                "handout": null,
+                "personName": "参加者",
+                "candidateParticipationKey": "p-79f754b7-f68c-4b4f-8570-d43ed9d16a4b"
+              }
+            ],
+            "unassignedValues": [
+              {
+                "itemKey": "u-43b718c4-294a-41e8-aac0-778bc6559a95",
+                "rawValue": "卓の活動記録",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              },
+              {
+                "itemKey": "u-a24ed2d4-32fe-4739-b008-d3d227392892",
+                "rawValue": "消えた時計塔",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              },
+              {
+                "itemKey": "u-2a3ad9c0-4ae3-4464-9781-f2630d7d5b4a",
+                "rawValue": "消えた時計塔 記録のみ",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              },
+              {
+                "itemKey": "u-b93c2a4f-8240-4088-8b9e-c5bbe019992e",
+                "rawValue": "実施日",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              },
+              {
+                "itemKey": "u-c60d4eba-fdbe-49f2-b470-3fc083e92c06",
+                "rawValue": "2026-08-29",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              },
+              {
+                "itemKey": "u-7762106b-d259-4a8c-8e1a-da7ff6607fdc",
+                "rawValue": "0名（名簿の記録なし）",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              },
+              {
+                "itemKey": "u-0f5d5d2f-c1fc-47d5-ae27-e2db5871c964",
+                "rawValue": "開催履歴だけが保存されている。KP・PL・PCは未記録。",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              }
+            ]
+          },
+          "quotedEvidence": false,
+          "recordEndOffset": 379,
+          "scopeEvidenceId": null,
+          "recordStartOffset": 175,
+          "sharedContextEvidenceIds": [],
+          "boundaryAssessments": []
+        }
+      },
+      "resolutions": [],
+      "omittedItems": [],
+      "sourceContexts": [
+        {
+          "sourceId": 7,
+          "sourceType": "FILE",
+          "originalFileName": "03_html_T04.html",
+          "traces": [
+            {
+              "excerpt": "<h1>卓の活動記録</h1>",
+              "lineEnd": 10,
+              "dependsOn": [],
+              "endOffset": 155,
+              "fieldPath": "/unassignedValues/u-43b718c4-294a-41e8-aac0-778bc6559a95",
+              "lineStart": 10,
+              "derivation": "DIRECT",
+              "evidenceId": "h-1:140",
+              "startOffset": 140,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 7,
+          "sourceType": "FILE",
+          "originalFileName": "03_html_T04.html",
+          "traces": [
+            {
+              "excerpt": "<dt>シナリオ名</dt>",
+              "lineEnd": 12,
+              "dependsOn": [],
+              "endOffset": 189,
+              "fieldPath": "/table/scenarioName",
+              "lineStart": 12,
+              "derivation": "DIRECT",
+              "evidenceId": "h-2:scenarioName:175",
+              "startOffset": 175,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 7,
+          "sourceType": "FILE",
+          "originalFileName": "03_html_T04.html",
+          "traces": [
+            {
+              "excerpt": "<dd>消えた時計塔</dd>",
+              "lineEnd": 12,
+              "dependsOn": [],
+              "endOffset": 204,
+              "fieldPath": "/unassignedValues/u-a24ed2d4-32fe-4739-b008-d3d227392892",
+              "lineStart": 12,
+              "derivation": "DIRECT",
+              "evidenceId": "h-3:189",
+              "startOffset": 189,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 7,
+          "sourceType": "FILE",
+          "originalFileName": "03_html_T04.html",
+          "traces": [
+            {
+              "excerpt": "<dt>卓名</dt>",
+              "lineEnd": 13,
+              "dependsOn": [],
+              "endOffset": 224,
+              "fieldPath": "/table/tableName",
+              "lineStart": 13,
+              "derivation": "DIRECT",
+              "evidenceId": "h-4:tableName:213",
+              "startOffset": 213,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 7,
+          "sourceType": "FILE",
+          "originalFileName": "03_html_T04.html",
+          "traces": [
+            {
+              "excerpt": "<dd>消えた時計塔 記録のみ</dd>",
+              "lineEnd": 13,
+              "dependsOn": [],
+              "endOffset": 244,
+              "fieldPath": "/unassignedValues/u-2a3ad9c0-4ae3-4464-9781-f2630d7d5b4a",
+              "lineStart": 13,
+              "derivation": "DIRECT",
+              "evidenceId": "h-5:224",
+              "startOffset": 224,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 7,
+          "sourceType": "FILE",
+          "originalFileName": "03_html_T04.html",
+          "traces": [
+            {
+              "excerpt": "<dt>実施日</dt>",
+              "lineEnd": 14,
+              "dependsOn": [],
+              "endOffset": 265,
+              "fieldPath": "/unassignedValues/u-b93c2a4f-8240-4088-8b9e-c5bbe019992e",
+              "lineStart": 14,
+              "derivation": "DIRECT",
+              "evidenceId": "h-6:253",
+              "startOffset": 253,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 7,
+          "sourceType": "FILE",
+          "originalFileName": "03_html_T04.html",
+          "traces": [
+            {
+              "excerpt": "<dd>2026-08-29</dd>",
+              "lineEnd": 14,
+              "dependsOn": [],
+              "endOffset": 284,
+              "fieldPath": "/unassignedValues/u-c60d4eba-fdbe-49f2-b470-3fc083e92c06",
+              "lineStart": 14,
+              "derivation": "DIRECT",
+              "evidenceId": "h-7:265",
+              "startOffset": 265,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 7,
+          "sourceType": "FILE",
+          "originalFileName": "03_html_T04.html",
+          "traces": [
+            {
+              "excerpt": "<dt>参加者</dt>",
+              "lineEnd": 15,
+              "dependsOn": [],
+              "endOffset": 305,
+              "fieldPath": "/participations/p-79f754b7-f68c-4b4f-8570-d43ed9d16a4b/personName",
+              "lineStart": 15,
+              "derivation": "DIRECT",
+              "evidenceId": "h-8:person:293",
+              "startOffset": 293,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 7,
+          "sourceType": "FILE",
+          "originalFileName": "03_html_T04.html",
+          "traces": [
+            {
+              "excerpt": "<dd>0名（名簿の記録なし）</dd>",
+              "lineEnd": 15,
+              "dependsOn": [],
+              "endOffset": 325,
+              "fieldPath": "/unassignedValues/u-7762106b-d259-4a8c-8e1a-da7ff6607fdc",
+              "lineStart": 15,
+              "derivation": "DIRECT",
+              "evidenceId": "h-9:305",
+              "startOffset": 305,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 7,
+          "sourceType": "FILE",
+          "originalFileName": "03_html_T04.html",
+          "traces": [
+            {
+              "excerpt": "<p>開催履歴だけが保存されている。KP・PL・PCは未記録。</p>",
+              "lineEnd": 17,
+              "dependsOn": [],
+              "endOffset": 379,
+              "fieldPath": "/unassignedValues/u-0f5d5d2f-c1fc-47d5-ae27-e2db5871c964",
+              "lineStart": 17,
+              "derivation": "DIRECT",
+              "evidenceId": "h-10:344",
+              "startOffset": 344,
+              "logicalRecord": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

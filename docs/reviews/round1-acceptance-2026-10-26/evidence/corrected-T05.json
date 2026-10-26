@@ -1,0 +1,206 @@
+{
+  "candidate": {
+    "id": 25,
+    "version": 2,
+    "candidateData": {
+      "tableName": "9月上旬の臨時卓",
+      "tableDates": [
+        {
+          "playedOn": "2026-09-02"
+        }
+      ],
+      "recordingUrl": null,
+      "scenarioName": "硝子の灯台",
+      "gameSystemName": null,
+      "participations": [
+        {
+          "role": "KP",
+          "pcName": null,
+          "handout": null,
+          "personName": "すばる",
+          "candidateParticipationKey": "p-effa4f1c-abfe-43d5-8c72-0414f6aa5d06"
+        },
+        {
+          "role": "PL",
+          "pcName": "小夜 千景",
+          "handout": null,
+          "personName": "つばめ",
+          "candidateParticipationKey": "p-c88b3956-286b-416d-9fb6-319f2ca7ee1e"
+        }
+      ],
+      "unassignedValues": [
+        {
+          "itemKey": "u-75095109-df33-4f94-8266-2564b0c143cd",
+          "rawValue": "【TRPG 卓の活動記録】",
+          "assignment": {
+            "type": "IGNORE",
+            "candidateParticipationKey": null
+          }
+        },
+        {
+          "itemKey": "u-4f43033a-7526-4777-b263-ce94608de1f7",
+          "rawValue": "メモ：シナリオのタイトルを記録し忘れた。",
+          "assignment": {
+            "type": "IGNORE",
+            "candidateParticipationKey": null
+          }
+        }
+      ]
+    },
+    "effectiveCandidateData": {
+      "tableName": "9月上旬の臨時卓",
+      "tableDates": [
+        {
+          "playedOn": "2026-09-02"
+        }
+      ],
+      "recordingUrl": null,
+      "scenarioName": "硝子の灯台",
+      "gameSystemName": null,
+      "participations": [
+        {
+          "role": "KP",
+          "pcName": null,
+          "handout": null,
+          "personName": "すばる",
+          "candidateParticipationKey": "p-effa4f1c-abfe-43d5-8c72-0414f6aa5d06"
+        },
+        {
+          "role": "PL",
+          "pcName": "小夜 千景",
+          "handout": null,
+          "personName": "つばめ",
+          "candidateParticipationKey": "p-c88b3956-286b-416d-9fb6-319f2ca7ee1e"
+        }
+      ],
+      "unassignedValues": [
+        {
+          "itemKey": "u-75095109-df33-4f94-8266-2564b0c143cd",
+          "rawValue": "【TRPG 卓の活動記録】",
+          "assignment": {
+            "type": "IGNORE",
+            "candidateParticipationKey": null
+          }
+        },
+        {
+          "itemKey": "u-4f43033a-7526-4777-b263-ce94608de1f7",
+          "rawValue": "メモ：シナリオのタイトルを記録し忘れた。",
+          "assignment": {
+            "type": "IGNORE",
+            "candidateParticipationKey": null
+          }
+        }
+      ]
+    },
+    "status": "NEEDS_REVIEW",
+    "confirmationStatus": "UNCHECKED",
+    "registrationTarget": true,
+    "registrationStatus": "PENDING",
+    "registrationResult": {},
+    "resolutionRefs": {
+      "participations": [
+        {
+          "pcResolutionId": null,
+          "personResolutionId": null,
+          "candidateParticipationKey": "p-effa4f1c-abfe-43d5-8c72-0414f6aa5d06"
+        },
+        {
+          "pcResolutionId": null,
+          "personResolutionId": null,
+          "candidateParticipationKey": "p-c88b3956-286b-416d-9fb6-319f2ca7ee1e"
+        }
+      ],
+      "scenarioResolutionId": null
+    },
+    "inference": {
+      "format": "TXT",
+      "boundary": "E0",
+      "conflicts": [],
+      "relations": [],
+      "editedFields": [
+        "/table/scenarioName",
+        "/table/unassignedValues"
+      ],
+      "omittedItems": [
+        {
+          "value": "【TRPG 卓の活動記録】",
+          "decision": "USER_OMIT",
+          "fieldPath": "/unassignedValues/u-75095109-df33-4f94-8266-2564b0c143cd"
+        },
+        {
+          "value": "メモ：シナリオのタイトルを記録し忘れた。",
+          "decision": "USER_OMIT",
+          "fieldPath": "/unassignedValues/u-4f43033a-7526-4777-b263-ce94608de1f7"
+        }
+      ],
+      "originalData": {
+        "tableName": "9月上旬の臨時卓",
+        "tableDates": [
+          {
+            "playedOn": "2026-09-02"
+          }
+        ],
+        "recordingUrl": null,
+        "scenarioName": "",
+        "gameSystemName": null,
+        "participations": [
+          {
+            "role": "KP",
+            "pcName": null,
+            "handout": null,
+            "personName": "すばる",
+            "candidateParticipationKey": "p-effa4f1c-abfe-43d5-8c72-0414f6aa5d06"
+          },
+          {
+            "role": "PL",
+            "pcName": "小夜 千景",
+            "handout": null,
+            "personName": "つばめ",
+            "candidateParticipationKey": "p-c88b3956-286b-416d-9fb6-319f2ca7ee1e"
+          }
+        ],
+        "unassignedValues": [
+          {
+            "itemKey": "u-75095109-df33-4f94-8266-2564b0c143cd",
+            "rawValue": "【TRPG 卓の活動記録】",
+            "assignment": {
+              "type": "UNASSIGNED",
+              "candidateParticipationKey": null
+            }
+          },
+          {
+            "itemKey": "u-4f43033a-7526-4777-b263-ce94608de1f7",
+            "rawValue": "メモ：シナリオのタイトルを記録し忘れた。",
+            "assignment": {
+              "type": "UNASSIGNED",
+              "candidateParticipationKey": null
+            }
+          }
+        ]
+      },
+      "quotedEvidence": false,
+      "recordEndOffset": 91,
+      "scopeEvidenceId": null,
+      "recordStartOffset": 0,
+      "sharedContextEvidenceIds": [],
+      "boundaryAssessments": []
+    }
+  },
+  "operatorActions": [
+    {
+      "field": "scenarioName",
+      "from": "",
+      "to": "硝子の灯台",
+      "reason": "Explicit test operator supplement, absent from input"
+    },
+    {
+      "field": "unassignedValues",
+      "action": "IGNORE",
+      "values": [
+        "【TRPG 卓の活動記録】",
+        "メモ：シナリオのタイトルを記録し忘れた。"
+      ],
+      "reason": "Dates/names transferred explicitly above; headings, unknown-date text and notes remain in source"
+    }
+  ]
+}

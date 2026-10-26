@@ -1,0 +1,67 @@
+{
+  "status": 200,
+  "body": {
+    "sessionId": 7,
+    "sessionVersion": 8,
+    "results": [
+      {
+        "candidateId": 24,
+        "requestedVersion": 5,
+        "outcome": "REGISTERED",
+        "candidateVersion": 6,
+        "registrationStatus": "REGISTERED",
+        "registeredTableId": 4,
+        "omittedItems": [
+          {
+            "fieldPath": "/participations/p-79f754b7-f68c-4b4f-8570-d43ed9d16a4b",
+            "value": {
+              "role": null,
+              "pcName": null,
+              "handout": null,
+              "personName": "参加者",
+              "saveDecision": "OMIT",
+              "candidateParticipationKey": "p-79f754b7-f68c-4b4f-8570-d43ed9d16a4b"
+            },
+            "decision": "USER_OMIT"
+          },
+          {
+            "fieldPath": "/unassignedValues/u-43b718c4-294a-41e8-aac0-778bc6559a95",
+            "value": "卓の活動記録",
+            "decision": "USER_OMIT"
+          },
+          {
+            "fieldPath": "/unassignedValues/u-a24ed2d4-32fe-4739-b008-d3d227392892",
+            "value": "消えた時計塔",
+            "decision": "USER_OMIT"
+          },
+          {
+            "fieldPath": "/unassignedValues/u-2a3ad9c0-4ae3-4464-9781-f2630d7d5b4a",
+            "value": "消えた時計塔 記録のみ",
+            "decision": "USER_OMIT"
+          },
+          {
+            "fieldPath": "/unassignedValues/u-b93c2a4f-8240-4088-8b9e-c5bbe019992e",
+            "value": "実施日",
+            "decision": "USER_OMIT"
+          },
+          {
+            "fieldPath": "/unassignedValues/u-c60d4eba-fdbe-49f2-b470-3fc083e92c06",
+            "value": "2026-08-29",
+            "decision": "USER_OMIT"
+          },
+          {
+            "fieldPath": "/unassignedValues/u-7762106b-d259-4a8c-8e1a-da7ff6607fdc",
+            "value": "0名（名簿の記録なし）",
+            "decision": "USER_OMIT"
+          },
+          {
+            "fieldPath": "/unassignedValues/u-0f5d5d2f-c1fc-47d5-ae27-e2db5871c964",
+            "value": "開催履歴だけが保存されている。KP・PL・PCは未記録。",
+            "decision": "USER_OMIT"
+          }
+        ],
+        "error": null
+      }
+    ]
+  }
+}

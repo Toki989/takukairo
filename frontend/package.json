@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {"node": "24.21.0", "npm": "11.19.0"},
-  "scripts": {"dev": "vite --host localhost", "build": "tsc -b && vite build", "typecheck": "tsc --noEmit", "test": "playwright test"},
+  "scripts": {"dev": "vite --host localhost", "dev:demo": "vite --mode demo", "build": "tsc -b && vite build", "build:demo": "tsc -b && vite build --mode demo", "preview:demo": "vite preview --mode demo --host localhost --port 4175 --strictPort", "typecheck": "tsc --noEmit", "test": "playwright test", "test:demo": "playwright test --config playwright.demo.config.ts"},
   "dependencies": {"react": "19.3.0", "react-dom": "19.3.0", "react-router-dom": "7.18.4"},
   "devDependencies": {"typescript": "7.0.2", "vite": "8.3.3", "@vitejs/plugin-react": "6.1.2", "@types/react": "19.2.14", "@types/react-dom": "19.2.3", "@playwright/test": "1.64.0"}
 }

@@ -46,8 +46,10 @@ public class ImportService {
  public Object deleteSource(long id,long sourceId,long expected){var session=locked(id,expected);var source=source(id,sourceId);sourceGate(id,false);invalidate(id);cleanup.schedule(source.temporaryStorageKey);s.remove(source);tick(session);return map("sessionVersion",session.version);}
  public Object reset(long id,Map<String,Object>b){var session=locked(id,requiredLong(b,"expectedSessionVersion"));sourceGate(id,false);invalidate(id);session.currentStep="INPUT";tick(session);return map("sessionVersion",session.version);}
  public Object analyze(long id,Map<String,Object>b){
-  var session=locked(id,requiredLong(b,"expectedSessionVersion"));sourceGate(id,true);invalidate(id);
-  for(var source:sources(id)){String raw=raw(source);for(var parsed:parser.parse(source.originalFileName,raw)){
+  var session=locked(id,requiredLong(b,"expectedSessionVersion"));sourceGate(id,true);var inputs=sources(id);
+  if(inputs.isEmpty())throw ApiException.invalid("/sources","REQUIRED","解析する入力がありません。テキストまたはファイルを追加してください。");
+  invalidate(id);
+  for(var source:inputs){String raw=raw(source);for(var parsed:parser.parse(source.originalFileName,raw)){
    if(unparsed(parsed.data())){int start=((Number)parsed.inference().get("recordStartOffset")).intValue(),end=((Number)parsed.inference().get("recordEndOffset")).intValue();if(start<end&&meaningful(raw.substring(start,end)))saveBlock(id,source.id,raw,start,end,Optional.ofNullable(text(parsed.inference().get("unparsedReason"))).orElse("卓の所属・活動内容を確認してください。"),Boolean.TRUE.equals(parsed.inference().get("quotedEvidence")));continue;}
    saveParsed(id,source.id,parsed);
   }}session.currentStep="REVIEW";tick(session);return map("sessionVersion",session.version);

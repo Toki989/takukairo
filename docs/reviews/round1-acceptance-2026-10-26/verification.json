@@ -1,0 +1,97 @@
+﻿{
+    "recordedAt":  "2026-10-26T10:45:17.8698876+09:00",
+    "timezone":  "Asia/Tokyo",
+    "baseCommit":  "707a638",
+    "scope":  "Provided ZIP: real browser upload, analysis, explicit correction, resolution, confirmation, formal registration, detail display, SQL counts, preserved source bytes",
+    "initialAcceptance":  "NOT_MET: CSV grouping, CSV date list, Markdown association, HTML label/value",
+    "registrationAfterExplicitUiCorrection":  "PASS",
+    "fixturesRegistered":  5,
+    "initialPhase":  "COMPLETED",
+    "registrationPhase":  "COMPLETED",
+    "finalVerificationExitCode":  0,
+    "testDatabase":  "takukairo_round1_20261026_run3",
+    "developmentSeedDisabled":  true,
+    "normalApplicationRestarted":  false,
+    "normalDatabaseWrittenByRunner":  false,
+    "productCodeChangedForThisTest":  false,
+    "archiveSha256":  "EBA40017B050F40182B3FEC458D54151565F34CF816A843F6FA2D2124BBFFAA7",
+    "archiveUnchanged":  true,
+    "originalWorkbookChanged":  false,
+    "sourceHashes":  [
+                         {
+                             "path":  "backend/src/main/java/jp/takukairo/importsession/ImportService.java",
+                             "sha256":  "0CE936CB49AADEDF86900F22D1B217349E8D2256DE365ED31876D43890DFD44A",
+                             "matchesPriorVerification":  true
+                         },
+                         {
+                             "path":  "frontend/src/features/Import.tsx",
+                             "sha256":  "A2DF020303C8D75B0F5061AD8E2BC299DBBCEC31F0DE1C1974C00B65E48017CE",
+                             "matchesPriorVerification":  true
+                         },
+                         {
+                             "path":  "backend/src/test/java/jp/takukairo/ContractIntegrationTest.java",
+                             "sha256":  "738082F6F2C4CEB984F0CF8EAA19F6C00248601E6C33BBB4A1627E2F1E252086",
+                             "matchesPriorVerification":  true
+                         },
+                         {
+                             "path":  "frontend/qa/import-inference.spec.ts",
+                             "sha256":  "B36B2DAFFF3CDF6F84DDE7B0FC2E9B1A1021BF19FE26939B8CCCFD5878A68FC6",
+                             "matchesPriorVerification":  true
+                         },
+                         {
+                             "path":  "backend/src/test/resources/import/round1/01_csv_T01_T02.csv",
+                             "sha256":  "7263311D9C309B5C0C9B0EE07F7902BBD13E42A18BD648A4C64A063301405C37",
+                             "matchesPriorVerification":  true
+                         }
+                     ],
+    "finalCounts":  {
+                        "tables":  5,
+                        "scenarios":  5,
+                        "persons":  11,
+                        "pcs":  5,
+                        "tableDates":  5,
+                        "participations":  10,
+                        "endPcStates":  0
+                    },
+    "newEntityCounts":  {
+                            "tables":  5,
+                            "scenarios":  5,
+                            "persons":  10,
+                            "pcs":  5,
+                            "tableDates":  5,
+                            "participations":  10,
+                            "endPcStates":  0
+                        },
+    "forbiddenLabelEntities":  {
+                                   "people":  0,
+                                   "scenarios":  0,
+                                   "tables":  0
+                               },
+    "finalSourceIntegrity":  [
+                                 {
+                                     "file":  "01_csv_T01_T02.csv",
+                                     "sha256":  "7263311d9c309b5c0c9b0ee07f7902bbd13e42a18bd648a4c64a063301405c37",
+                                     "preserved":  true
+                                 },
+                                 {
+                                     "file":  "02_markdown_T03.md",
+                                     "sha256":  "4fc2e4ec7bd2394a62595d408fbf6a0bc6d82381b1ec863a3af61a2cc148b3b4",
+                                     "preserved":  true
+                                 },
+                                 {
+                                     "file":  "03_html_T04.html",
+                                     "sha256":  "5992ff759c28eddd418d1ed78614ae8b72180dbe910f535880cbab921a2dfa83",
+                                     "preserved":  true
+                                 },
+                                 {
+                                     "file":  "04_text_T05.txt",
+                                     "sha256":  "0faeaa540a93ca1de9c1838ca1b84232a9644857fe736fa511793a35d44bb522",
+                                     "preserved":  true
+                                 }
+                             ],
+    "results":  "results.json",
+    "report":  "テスト結果.txt",
+    "runtimeLogs":  ".runtime/round1-acceptance-2026-10-26/run3",
+    "dedicatedProcessesStopped":  true,
+    "methodologyNote":  "Run3 resumed after runner selector/comparison/encoding corrections; prior automation failures remain in runtime logs. All five registrations were performed in the UI. Full existing unit/integration suite was not rerun."
+}

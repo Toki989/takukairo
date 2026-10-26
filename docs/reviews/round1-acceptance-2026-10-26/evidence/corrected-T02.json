@@ -1,0 +1,206 @@
+{
+  "candidate": {
+    "id": 19,
+    "version": 2,
+    "candidateData": {
+      "tableName": "星屑の回廊 夏季卓",
+      "tableDates": [
+        {
+          "playedOn": "2026-08-16"
+        },
+        {
+          "playedOn": "2026-08-17"
+        }
+      ],
+      "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+      "scenarioName": "星屑の回廊",
+      "gameSystemName": "新クトゥルフ神話TRPG",
+      "participations": [
+        {
+          "role": "KP",
+          "pcName": null,
+          "handout": null,
+          "personName": "しずく",
+          "candidateParticipationKey": "p-56187f3a-478b-4b3b-bcc4-73c16a8273d6"
+        },
+        {
+          "role": "PL",
+          "pcName": "朝霧 灯",
+          "handout": "HO1",
+          "personName": "ゆづき",
+          "candidateParticipationKey": "p-e0f9f4c5-bfe5-4d69-a833-600a856636d5"
+        },
+        {
+          "role": "PL",
+          "pcName": "久遠 澄",
+          "handout": "HO2",
+          "personName": "いと",
+          "candidateParticipationKey": "p-74be6116-edf6-4ff4-b7a1-d72ce81306ce"
+        }
+      ],
+      "unassignedValues": [
+        {
+          "itemKey": "u-3325b878-8ff2-4472-ba14-b67f42267856",
+          "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+          "assignment": {
+            "type": "IGNORE",
+            "candidateParticipationKey": null
+          }
+        },
+        {
+          "itemKey": "u-c6904725-cabb-4064-9d79-c24a52b71667",
+          "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+          "assignment": {
+            "type": "IGNORE",
+            "candidateParticipationKey": null
+          }
+        },
+        {
+          "itemKey": "u-9c076354-2c7c-47d2-ac12-6f86f6da9095",
+          "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+          "assignment": {
+            "type": "IGNORE",
+            "candidateParticipationKey": null
+          }
+        }
+      ]
+    },
+    "effectiveCandidateData": {
+      "tableName": "星屑の回廊 夏季卓",
+      "tableDates": [
+        {
+          "playedOn": "2026-08-16"
+        },
+        {
+          "playedOn": "2026-08-17"
+        }
+      ],
+      "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+      "scenarioName": "星屑の回廊",
+      "gameSystemName": "新クトゥルフ神話TRPG",
+      "participations": [
+        {
+          "role": "KP",
+          "pcName": null,
+          "handout": null,
+          "personName": "しずく",
+          "candidateParticipationKey": "p-56187f3a-478b-4b3b-bcc4-73c16a8273d6"
+        },
+        {
+          "role": "PL",
+          "pcName": "朝霧 灯",
+          "handout": "HO1",
+          "personName": "ゆづき",
+          "candidateParticipationKey": "p-e0f9f4c5-bfe5-4d69-a833-600a856636d5"
+        },
+        {
+          "role": "PL",
+          "pcName": "久遠 澄",
+          "handout": "HO2",
+          "personName": "いと",
+          "candidateParticipationKey": "p-74be6116-edf6-4ff4-b7a1-d72ce81306ce"
+        }
+      ],
+      "unassignedValues": [
+        {
+          "itemKey": "u-3325b878-8ff2-4472-ba14-b67f42267856",
+          "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+          "assignment": {
+            "type": "IGNORE",
+            "candidateParticipationKey": null
+          }
+        },
+        {
+          "itemKey": "u-c6904725-cabb-4064-9d79-c24a52b71667",
+          "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+          "assignment": {
+            "type": "IGNORE",
+            "candidateParticipationKey": null
+          }
+        },
+        {
+          "itemKey": "u-9c076354-2c7c-47d2-ac12-6f86f6da9095",
+          "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+          "assignment": {
+            "type": "IGNORE",
+            "candidateParticipationKey": null
+          }
+        }
+      ]
+    },
+    "status": "NEEDS_REVIEW",
+    "confirmationStatus": "UNCHECKED",
+    "registrationTarget": true,
+    "registrationStatus": "PENDING",
+    "registrationResult": {},
+    "resolutionRefs": {
+      "participations": [
+        {
+          "pcResolutionId": null,
+          "personResolutionId": null,
+          "candidateParticipationKey": "p-56187f3a-478b-4b3b-bcc4-73c16a8273d6"
+        },
+        {
+          "pcResolutionId": null,
+          "personResolutionId": null,
+          "candidateParticipationKey": "p-e0f9f4c5-bfe5-4d69-a833-600a856636d5"
+        },
+        {
+          "pcResolutionId": null,
+          "personResolutionId": null,
+          "candidateParticipationKey": "p-74be6116-edf6-4ff4-b7a1-d72ce81306ce"
+        }
+      ],
+      "scenarioResolutionId": null
+    },
+    "inference": {
+      "boundary": "USER_STRUCTURE_OPERATION",
+      "conflicts": [],
+      "relations": [],
+      "editedFields": [
+        "/table/tableDates",
+        "/table/unassignedValues"
+      ],
+      "omittedItems": [
+        {
+          "value": "実施日: 2026-08-16 / 2026-08-17",
+          "decision": "USER_OMIT",
+          "fieldPath": "/unassignedValues/u-3325b878-8ff2-4472-ba14-b67f42267856"
+        },
+        {
+          "value": "実施日: 2026-08-16 / 2026-08-17",
+          "decision": "USER_OMIT",
+          "fieldPath": "/unassignedValues/u-c6904725-cabb-4064-9d79-c24a52b71667"
+        },
+        {
+          "value": "実施日: 2026-08-16 / 2026-08-17",
+          "decision": "USER_OMIT",
+          "fieldPath": "/unassignedValues/u-9c076354-2c7c-47d2-ac12-6f86f6da9095"
+        }
+      ],
+      "explicitScopes": [],
+      "boundaryAssessments": []
+    }
+  },
+  "operatorActions": [
+    {
+      "field": "tableDates",
+      "from": [],
+      "to": [
+        "2026-08-16",
+        "2026-08-17"
+      ],
+      "reason": "Explicit date correction from input, no parser change"
+    },
+    {
+      "field": "unassignedValues",
+      "action": "IGNORE",
+      "values": [
+        "実施日: 2026-08-16 / 2026-08-17",
+        "実施日: 2026-08-16 / 2026-08-17",
+        "実施日: 2026-08-16 / 2026-08-17"
+      ],
+      "reason": "Dates/names transferred explicitly above; headings, unknown-date text and notes remain in source"
+    }
+  ]
+}

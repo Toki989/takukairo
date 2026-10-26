@@ -1,0 +1,501 @@
+{
+  "s": {
+    "id": 4,
+    "version": 2,
+    "currentStep": "REVIEW",
+    "status": "ACTIVE",
+    "savedAt": "2026-10-26T01:41:53.635Z",
+    "expiresAt": "2026-11-02T01:41:53.635Z",
+    "sources": [
+      {
+        "id": 4,
+        "sourceType": "FILE",
+        "originalFileName": "04_text_T05.txt",
+        "encoding": "AUTO",
+        "rawText": null,
+        "order": 1
+      }
+    ]
+  },
+  "review": {
+    "sessionId": 4,
+    "sessionVersion": 2,
+    "summary": {
+      "total": 1,
+      "registerable": 0,
+      "needsReview": 0,
+      "needsFix": 1,
+      "checked": 0
+    },
+    "unparsedBlocks": [],
+    "items": [
+      {
+        "candidateId": 11,
+        "version": 1,
+        "status": "NEEDS_FIX",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "summary": {
+          "tableName": "9月上旬の臨時卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-09-02"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "すばる",
+              "candidateParticipationKey": "p-25e954ff-7e90-4485-9c1a-bcf531861b38"
+            },
+            {
+              "role": "PL",
+              "pcName": "小夜 千景",
+              "handout": null,
+              "personName": "つばめ",
+              "candidateParticipationKey": "p-35fc26b7-f80f-430e-877e-8dd6a2f3c9c5"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-d2755b4d-50cb-4b46-9469-6bbc49e87418",
+              "rawValue": "【TRPG 卓の活動記録】",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-c5603109-beb4-4b93-9e4f-bdc4d1c8844e",
+              "rawValue": "メモ：シナリオのタイトルを記録し忘れた。",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "rawSummary": {
+          "tableName": "9月上旬の臨時卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-09-02"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "すばる",
+              "candidateParticipationKey": "p-25e954ff-7e90-4485-9c1a-bcf531861b38"
+            },
+            {
+              "role": "PL",
+              "pcName": "小夜 千景",
+              "handout": null,
+              "personName": "つばめ",
+              "candidateParticipationKey": "p-35fc26b7-f80f-430e-877e-8dd6a2f3c9c5"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-d2755b4d-50cb-4b46-9469-6bbc49e87418",
+              "rawValue": "【TRPG 卓の活動記録】",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-c5603109-beb4-4b93-9e4f-bdc4d1c8844e",
+              "rawValue": "メモ：シナリオのタイトルを記録し忘れた。",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "details": [
+    {
+      "candidate": {
+        "id": 11,
+        "version": 1,
+        "candidateData": {
+          "tableName": "9月上旬の臨時卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-09-02"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "すばる",
+              "candidateParticipationKey": "p-25e954ff-7e90-4485-9c1a-bcf531861b38"
+            },
+            {
+              "role": "PL",
+              "pcName": "小夜 千景",
+              "handout": null,
+              "personName": "つばめ",
+              "candidateParticipationKey": "p-35fc26b7-f80f-430e-877e-8dd6a2f3c9c5"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-d2755b4d-50cb-4b46-9469-6bbc49e87418",
+              "rawValue": "【TRPG 卓の活動記録】",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-c5603109-beb4-4b93-9e4f-bdc4d1c8844e",
+              "rawValue": "メモ：シナリオのタイトルを記録し忘れた。",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "effectiveCandidateData": {
+          "tableName": "9月上旬の臨時卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-09-02"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "",
+          "gameSystemName": null,
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "すばる",
+              "candidateParticipationKey": "p-25e954ff-7e90-4485-9c1a-bcf531861b38"
+            },
+            {
+              "role": "PL",
+              "pcName": "小夜 千景",
+              "handout": null,
+              "personName": "つばめ",
+              "candidateParticipationKey": "p-35fc26b7-f80f-430e-877e-8dd6a2f3c9c5"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-d2755b4d-50cb-4b46-9469-6bbc49e87418",
+              "rawValue": "【TRPG 卓の活動記録】",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            },
+            {
+              "itemKey": "u-c5603109-beb4-4b93-9e4f-bdc4d1c8844e",
+              "rawValue": "メモ：シナリオのタイトルを記録し忘れた。",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "status": "NEEDS_FIX",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "registrationResult": {},
+        "resolutionRefs": {
+          "participations": [
+            {
+              "pcResolutionId": null,
+              "personResolutionId": null,
+              "candidateParticipationKey": "p-25e954ff-7e90-4485-9c1a-bcf531861b38"
+            },
+            {
+              "pcResolutionId": null,
+              "personResolutionId": null,
+              "candidateParticipationKey": "p-35fc26b7-f80f-430e-877e-8dd6a2f3c9c5"
+            }
+          ],
+          "scenarioResolutionId": null
+        },
+        "inference": {
+          "format": "TXT",
+          "boundary": "E0",
+          "conflicts": [],
+          "relations": [],
+          "originalData": {
+            "tableName": "9月上旬の臨時卓",
+            "tableDates": [
+              {
+                "playedOn": "2026-09-02"
+              }
+            ],
+            "recordingUrl": null,
+            "scenarioName": "",
+            "gameSystemName": null,
+            "participations": [
+              {
+                "role": "KP",
+                "pcName": null,
+                "handout": null,
+                "personName": "すばる",
+                "candidateParticipationKey": "p-25e954ff-7e90-4485-9c1a-bcf531861b38"
+              },
+              {
+                "role": "PL",
+                "pcName": "小夜 千景",
+                "handout": null,
+                "personName": "つばめ",
+                "candidateParticipationKey": "p-35fc26b7-f80f-430e-877e-8dd6a2f3c9c5"
+              }
+            ],
+            "unassignedValues": [
+              {
+                "itemKey": "u-d2755b4d-50cb-4b46-9469-6bbc49e87418",
+                "rawValue": "【TRPG 卓の活動記録】",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              },
+              {
+                "itemKey": "u-c5603109-beb4-4b93-9e4f-bdc4d1c8844e",
+                "rawValue": "メモ：シナリオのタイトルを記録し忘れた。",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              }
+            ]
+          },
+          "quotedEvidence": false,
+          "recordEndOffset": 91,
+          "scopeEvidenceId": null,
+          "recordStartOffset": 0,
+          "sharedContextEvidenceIds": [],
+          "boundaryAssessments": []
+        }
+      },
+      "resolutions": [],
+      "omittedItems": [],
+      "sourceContexts": [
+        {
+          "sourceId": 4,
+          "sourceType": "FILE",
+          "originalFileName": "04_text_T05.txt",
+          "traces": [
+            {
+              "excerpt": "【TRPG 卓の活動記録】",
+              "lineEnd": 1,
+              "dependsOn": [],
+              "endOffset": 13,
+              "fieldPath": "/unassignedValues/u-d2755b4d-50cb-4b46-9469-6bbc49e87418",
+              "lineStart": 1,
+              "derivation": "DIRECT",
+              "evidenceId": "b-1:0",
+              "startOffset": 0,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 4,
+          "sourceType": "FILE",
+          "originalFileName": "04_text_T05.txt",
+          "traces": [
+            {
+              "excerpt": "卓名：9月上旬の臨時卓",
+              "lineEnd": 2,
+              "dependsOn": [],
+              "endOffset": 25,
+              "fieldPath": "/table/tableName",
+              "lineStart": 2,
+              "derivation": "DIRECT",
+              "evidenceId": "b-2:tableName:14",
+              "startOffset": 14,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 4,
+          "sourceType": "FILE",
+          "originalFileName": "04_text_T05.txt",
+          "traces": [
+            {
+              "excerpt": "シナリオ名：",
+              "lineEnd": 3,
+              "dependsOn": [],
+              "endOffset": 32,
+              "fieldPath": "/inference/missing/scenarioName",
+              "lineStart": 3,
+              "derivation": "DIRECT",
+              "evidenceId": "b-3:scenarioName:26",
+              "startOffset": 26,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 4,
+          "sourceType": "FILE",
+          "originalFileName": "04_text_T05.txt",
+          "traces": [
+            {
+              "excerpt": "実施日：2026-09-02",
+              "lineEnd": 4,
+              "dependsOn": [],
+              "endOffset": 47,
+              "fieldPath": "/table/tableDates",
+              "lineStart": 4,
+              "derivation": "DIRECT",
+              "evidenceId": "b-4:date:33",
+              "startOffset": 33,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 4,
+          "sourceType": "FILE",
+          "originalFileName": "04_text_T05.txt",
+          "traces": [
+            {
+              "excerpt": "KP：すばる",
+              "lineEnd": 5,
+              "dependsOn": [],
+              "endOffset": 54,
+              "fieldPath": "/participations/p-25e954ff-7e90-4485-9c1a-bcf531861b38/personName",
+              "lineStart": 5,
+              "derivation": "DIRECT",
+              "evidenceId": "b-5:KP:48",
+              "startOffset": 48,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 4,
+          "sourceType": "FILE",
+          "originalFileName": "04_text_T05.txt",
+          "traces": [
+            {
+              "excerpt": "KP：すばる",
+              "lineEnd": 5,
+              "dependsOn": [],
+              "endOffset": 54,
+              "fieldPath": "/participations/p-25e954ff-7e90-4485-9c1a-bcf531861b38/role",
+              "lineStart": 5,
+              "derivation": "DIRECT",
+              "evidenceId": "b-5:KP:48",
+              "startOffset": 48,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 4,
+          "sourceType": "FILE",
+          "originalFileName": "04_text_T05.txt",
+          "traces": [
+            {
+              "excerpt": "PL：つばめ",
+              "lineEnd": 6,
+              "dependsOn": [],
+              "endOffset": 61,
+              "fieldPath": "/participations/p-35fc26b7-f80f-430e-877e-8dd6a2f3c9c5/personName",
+              "lineStart": 6,
+              "derivation": "DIRECT",
+              "evidenceId": "b-6:PL:55",
+              "startOffset": 55,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 4,
+          "sourceType": "FILE",
+          "originalFileName": "04_text_T05.txt",
+          "traces": [
+            {
+              "excerpt": "PL：つばめ",
+              "lineEnd": 6,
+              "dependsOn": [],
+              "endOffset": 61,
+              "fieldPath": "/participations/p-35fc26b7-f80f-430e-877e-8dd6a2f3c9c5/role",
+              "lineStart": 6,
+              "derivation": "DIRECT",
+              "evidenceId": "b-6:PL:55",
+              "startOffset": 55,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 4,
+          "sourceType": "FILE",
+          "originalFileName": "04_text_T05.txt",
+          "traces": [
+            {
+              "excerpt": "PC：小夜 千景",
+              "lineEnd": 7,
+              "dependsOn": [],
+              "endOffset": 70,
+              "fieldPath": "/participations/p-35fc26b7-f80f-430e-877e-8dd6a2f3c9c5/pcName",
+              "lineStart": 7,
+              "derivation": "DIRECT",
+              "evidenceId": "b-7:pc:62",
+              "startOffset": 62,
+              "logicalRecord": null
+            }
+          ]
+        },
+        {
+          "sourceId": 4,
+          "sourceType": "FILE",
+          "originalFileName": "04_text_T05.txt",
+          "traces": [
+            {
+              "excerpt": "メモ：シナリオのタイトルを記録し忘れた。",
+              "lineEnd": 8,
+              "dependsOn": [],
+              "endOffset": 91,
+              "fieldPath": "/unassignedValues/u-c5603109-beb4-4b93-9e4f-bdc4d1c8844e",
+              "lineStart": 8,
+              "derivation": "DIRECT",
+              "evidenceId": "b-8:71",
+              "startOffset": 71,
+              "logicalRecord": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

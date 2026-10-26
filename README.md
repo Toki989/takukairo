@@ -1,4 +1,14 @@
-﻿# 卓回廊 — ローカル／テスト実装
+﻿# 卓回廊 — TRPGの作品と、卓の記憶を並べる個人の回廊
+
+## ログイン不要のブラウザ体験版
+
+シナリオ画像19枚・PC画像10枚を使い、回廊の検索、お気に入り、シナリオ・人物・PC・卓の追加と編集、定型CSVの登録を試せる静的サイトを用意しています。操作結果は閲覧者のブラウザ内だけに保存し、バックエンドやアカウントは必要ありません。
+
+Windowsでは **[体験版.cmd](体験版.cmd)** をダブルクリックすると開きます。コマンドではfrontendでnpm ci、npm run dev:demoを実行し、<http://localhost:5175/> を開きます。
+
+GitHub Pages公開用のWorkflowも追加しています。起動・公開手順、体験できる機能、本体との差、素材の由来は **[ブラウザ体験版の説明](docs/BROWSER_DEMO.md)** を参照してください。この作業ではリモートへのpushと公開操作は行っていません。
+
+## 通常版・ローカル実装
 
 実装正本は `卓回廊_Codex実装正本_2026-10-08_R5.1.12_最終Contract補強版.md`。Part Aを優先し、未変更事項はPart B/Cに従います。既存の仕様書・Prototype・参照資料・画像assetsを元の場所に保全しています。実装と実検査の記録は [docs/IMPLEMENTATION_STATUS.md](docs/IMPLEMENTATION_STATUS.md)、API照合は [docs/API_CONTRACT.md](docs/API_CONTRACT.md) にあります。Part D/Eの監査PASSを実装テストのPASSへ転用していません。
 
@@ -129,6 +139,6 @@ Pop-Location
 
 ## Production Deferred・非実装項目
 
-Google実ユーザー認証運用・OAuth verification、Render deploy、R2実Credential、PITRと旧Object保持、Account削除Tombstone、Production log retention、Terms／Privacy正式本文、外部画像のProduction権利判断、vips-ffm最終採用はProduction Deferredです。外部公開・Production deployは行いません。
+Google実ユーザー認証運用・OAuth verification、Render deploy、R2実Credential、PITRと旧Object保持、Account削除Tombstone、Production log retention、Terms／Privacy正式本文、外部画像のProduction権利判断、vips-ffm最終採用はProduction Deferredです。通常版バックエンドの外部公開・Production deployは行いません。上記のブラウザ体験版は、認証・DBを使わない独立した静的ビルドです。
 
 UC15一括編集・UC16卓メモ・UC18共有、Activity Export、Offline編集／Snapshot、Native App、Push／Background Sync、PDF Import、One Tap、Auto Select、Person専用管理画面、SKP Role、PC current値／単一game_system、EndPcState最大値、PL変更内のPC Detach、Undo／Trash、AI Import必須化は追加していません。

@@ -1,8 +1,27 @@
 import {test,expect,type Page,type APIRequestContext} from '@playwright/test';
+import {readFileSync} from 'node:fs';
 async function mutation(request:APIRequestContext,url:string,method:string,data?:unknown){const csrf=await(await request.get('/api/csrf')).json();const r=await request.fetch('/api'+url,{method,data,headers:{[csrf.headerName]:csrf.token}});expect(r.ok(),await r.text()).toBeTruthy();return r.status()===204?null:r.json()}
 async function fresh(page:Page,text:string){await page.goto('/dev-login');await page.getByRole('button',{name:'固定テストユーザーでログイン'}).click();await expect(page.getByRole('heading',{name:'あなたの回廊'})).toBeVisible();const old=await(await page.request.get('/api/import/session/current')).json();if(old)await mutation(page.request,'/import/session/'+old.id+'?expectedSessionVersion='+old.version,'DELETE');await page.goto('/import');await page.getByRole('button',{name:'インポートを始める',exact:true}).click();await page.getByLabel('テキストを貼り付ける').fill(text);await page.getByRole('button',{name:'テキストを追加',exact:true}).click();await expect(page.getByText('貼り付けテキスト',{exact:true})).toBeVisible();await page.getByRole('button',{name:'解析して確認へ'}).click();await expect(page.locator('.review-row')).toHaveCount(Math.min(100,text.split('\n\n').length));return(await page.request.get('/api/import/session/current')).json()}
 async function review(page:Page,sid:number){return(await(await page.request.get('/api/import/session/'+sid+'/review')).json()).items}
 test.beforeEach(async({baseURL})=>{expect(baseURL,'This mutating suite must use the dedicated QA frontend').toBe('http://localhost:5175')});
+
+test('Analyze uploads the selected round-one CSV without a separate Add click and rejects empty input',async({page})=>{
+ await page.goto('/dev-login');await page.getByRole('button',{name:'固定テストユーザーでログイン'}).click();await expect(page.getByRole('heading',{name:'あなたの回廊'})).toBeVisible();
+ const old=await(await page.request.get('/api/import/session/current')).json();if(old)await mutation(page.request,'/import/session/'+old.id+'?expectedSessionVersion='+old.version,'DELETE');
+ await page.goto('/import');await page.getByRole('button',{name:'インポートを始める',exact:true}).click();const analyze=page.getByRole('button',{name:'解析して確認へ',exact:true});await expect(analyze).toBeDisabled();
+ const bytes=readFileSync(new URL('../../backend/src/test/resources/import/round1/01_csv_T01_T02.csv',import.meta.url));
+ await page.getByLabel('記録ファイルを選ぶ').setInputFiles({name:'01_csv_T01_T02.csv',mimeType:'text/csv',buffer:bytes});await expect(analyze).toBeEnabled();await analyze.click();
+ // Intake and extraction only; this is not a PASS for the fixture's two-table expectation.
+ await expect(page.locator('.review-row')).toHaveCount(6);await expect(page.locator('.review-row').filter({hasText:'天野 透'})).toHaveCount(1);await expect(page.locator('.review-row').filter({hasText:'久遠 澄'})).toHaveCount(1);
+ const current=await(await page.request.get('/api/import/session/current')).json();expect(current.sources).toHaveLength(1);expect(current.sources[0].originalFileName).toBe('01_csv_T01_T02.csv');expect(current.currentStep).toBe('REVIEW');
+});
+
+test('Analyze also saves pending pasted text before analysis',async({page})=>{
+ await fresh(page,'シナリオ: 入力済みの確認');await page.getByRole('button',{name:'入力へ戻る',exact:true}).click();
+ await page.getByLabel('テキストを貼り付ける').fill('シナリオ: 直接解析\nPL: 田中');await page.getByRole('button',{name:'解析して確認へ',exact:true}).click();
+ await expect(page.locator('.review-row').filter({hasText:'直接解析'})).toHaveCount(1);await expect(page.locator('.review-row').filter({hasText:'田中'})).toHaveCount(1);
+ const current=await(await page.request.get('/api/import/session/current')).json();expect(current.sources).toHaveLength(2);expect(current.sources[1].rawText).toBe('シナリオ: 直接解析\nPL: 田中');
+});
 
 test('readiness split moves assigned values and selected resolutions with the participant through Formal save',async({page})=>{
  test.setTimeout(60000);

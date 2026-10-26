@@ -1,0 +1,18 @@
+{
+  "id": 7,
+  "version": 9,
+  "currentStep": "REGISTER",
+  "status": "COMPLETED",
+  "savedAt": "2026-10-26T01:43:32.846Z",
+  "expiresAt": "2026-11-02T01:43:32.846Z",
+  "sources": [
+    {
+      "id": 7,
+      "sourceType": "FILE",
+      "originalFileName": "03_html_T04.html",
+      "encoding": "AUTO",
+      "rawText": null,
+      "order": 1
+    }
+  ]
+}

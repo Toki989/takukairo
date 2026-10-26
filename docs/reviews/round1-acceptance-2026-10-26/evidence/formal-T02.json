@@ -1,0 +1,118 @@
+{
+  "id": 2,
+  "version": 2,
+  "scenarioId": 2,
+  "scenario": {
+    "id": 2,
+    "version": 0,
+    "name": "星屑の回廊",
+    "authorName": null,
+    "sourceUrl": null,
+    "gameSystem": "新クトゥルフ神話TRPG",
+    "externalImageUrl": null,
+    "image": null,
+    "createdAt": "2026-10-26T01:42:16.071Z",
+    "updatedAt": "2026-10-26T01:42:16.071Z",
+    "favorite": false,
+    "tableCount": 1
+  },
+  "tableName": "星屑の回廊 夏季卓",
+  "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+  "createdAt": "2026-10-26T01:42:16.089Z",
+  "tableDates": [
+    {
+      "id": 2,
+      "playedOn": "2026-08-16",
+      "version": 0
+    },
+    {
+      "id": 3,
+      "playedOn": "2026-08-17",
+      "version": 0
+    }
+  ],
+  "participations": [
+    {
+      "id": 4,
+      "version": 0,
+      "personId": 5,
+      "person": {
+        "id": 5,
+        "version": 0,
+        "displayName": "しずく"
+      },
+      "pcId": null,
+      "pc": null,
+      "role": "KP",
+      "displayOrder": 1,
+      "ho": null,
+      "displayQuote": null,
+      "spotlightType": null,
+      "endPcState": null
+    },
+    {
+      "id": 5,
+      "version": 0,
+      "personId": 6,
+      "person": {
+        "id": 6,
+        "version": 0,
+        "displayName": "ゆづき"
+      },
+      "pcId": 3,
+      "pc": {
+        "id": 3,
+        "version": 1,
+        "name": "朝霧 灯",
+        "personId": 6,
+        "person": {
+          "id": 6,
+          "version": 0,
+          "displayName": "ゆづき"
+        },
+        "characterSheetUrl": null,
+        "image": null,
+        "createdAt": "2026-10-26T01:42:16.081Z",
+        "systemSettings": []
+      },
+      "role": "PL",
+      "displayOrder": 1,
+      "ho": "HO1",
+      "displayQuote": null,
+      "spotlightType": "HO",
+      "endPcState": null
+    },
+    {
+      "id": 6,
+      "version": 0,
+      "personId": 7,
+      "person": {
+        "id": 7,
+        "version": 0,
+        "displayName": "いと"
+      },
+      "pcId": 4,
+      "pc": {
+        "id": 4,
+        "version": 1,
+        "name": "久遠 澄",
+        "personId": 7,
+        "person": {
+          "id": 7,
+          "version": 0,
+          "displayName": "いと"
+        },
+        "characterSheetUrl": null,
+        "image": null,
+        "createdAt": "2026-10-26T01:42:16.085Z",
+        "systemSettings": []
+      },
+      "role": "PL",
+      "displayOrder": 2,
+      "ho": "HO2",
+      "displayQuote": null,
+      "spotlightType": "HO",
+      "endPcState": null
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": 3,
+  "version": 2,
+  "scenarioId": 3,
+  "scenario": {
+    "id": 3,
+    "version": 0,
+    "name": "深海の郵便局",
+    "authorName": null,
+    "sourceUrl": null,
+    "gameSystem": null,
+    "externalImageUrl": null,
+    "image": null,
+    "createdAt": "2026-10-26T01:42:59.903Z",
+    "updatedAt": "2026-10-26T01:42:59.903Z",
+    "favorite": false,
+    "tableCount": 1
+  },
+  "tableName": "深海の郵便局 夜間卓",
+  "recordingUrl": null,
+  "createdAt": "2026-10-26T01:42:59.914Z",
+  "tableDates": [],
+  "participations": [
+    {
+      "id": 7,
+      "version": 0,
+      "personId": 8,
+      "person": {
+        "id": 8,
+        "version": 0,
+        "displayName": "こはる"
+      },
+      "pcId": null,
+      "pc": null,
+      "role": "KP",
+      "displayOrder": 1,
+      "ho": null,
+      "displayQuote": null,
+      "spotlightType": null,
+      "endPcState": null
+    },
+    {
+      "id": 8,
+      "version": 0,
+      "personId": 9,
+      "person": {
+        "id": 9,
+        "version": 0,
+        "displayName": "ひかり"
+      },
+      "pcId": null,
+      "pc": null,
+      "role": "PL",
+      "displayOrder": 1,
+      "ho": null,
+      "displayQuote": null,
+      "spotlightType": null,
+      "endPcState": null
+    }
+  ]
+}

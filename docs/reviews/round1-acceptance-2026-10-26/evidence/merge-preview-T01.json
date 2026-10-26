@@ -1,0 +1,185 @@
+{
+  "status": 200,
+  "body": {
+    "sessionVersion": 2,
+    "previewRevision": "ffa3314f-905f-4023-93eb-0f7406bd8f69",
+    "boundaryEvaluation": {
+      "candidateIds": [
+        12,
+        13,
+        14
+      ],
+      "evidenceLevel": "E0",
+      "conflict": "C2",
+      "pairAssessments": [
+        {
+          "candidateIds": [
+            12,
+            13
+          ],
+          "evidenceLevel": "E1",
+          "conflict": "C2",
+          "evidenceKinds": [
+            "EXACT_RECORDED_DATES"
+          ],
+          "requiresSameTableConfirmation": false,
+          "automaticMerge": false
+        },
+        {
+          "candidateIds": [
+            12,
+            14
+          ],
+          "evidenceLevel": "E1",
+          "conflict": "C2",
+          "evidenceKinds": [
+            "EXACT_RECORDED_DATES"
+          ],
+          "requiresSameTableConfirmation": false,
+          "automaticMerge": false
+        },
+        {
+          "candidateIds": [
+            13,
+            14
+          ],
+          "evidenceLevel": "E1",
+          "conflict": "C2",
+          "evidenceKinds": [
+            "EXACT_RECORDED_DATES"
+          ],
+          "requiresSameTableConfirmation": false,
+          "automaticMerge": false
+        }
+      ],
+      "counterEvidence": [
+        {
+          "candidateIds": [
+            12,
+            13
+          ],
+          "evidenceLevel": "E1",
+          "conflict": "C2",
+          "evidenceKinds": [
+            "EXACT_RECORDED_DATES"
+          ],
+          "requiresSameTableConfirmation": false,
+          "automaticMerge": false
+        },
+        {
+          "candidateIds": [
+            12,
+            14
+          ],
+          "evidenceLevel": "E1",
+          "conflict": "C2",
+          "evidenceKinds": [
+            "EXACT_RECORDED_DATES"
+          ],
+          "requiresSameTableConfirmation": false,
+          "automaticMerge": false
+        },
+        {
+          "candidateIds": [
+            13,
+            14
+          ],
+          "evidenceLevel": "E1",
+          "conflict": "C2",
+          "evidenceKinds": [
+            "EXACT_RECORDED_DATES"
+          ],
+          "requiresSameTableConfirmation": false,
+          "automaticMerge": false
+        }
+      ],
+      "canMerge": true,
+      "requiresSameTableConfirmation": true,
+      "automaticMerge": false
+    },
+    "sourceVersions": [
+      {
+        "candidateId": 12,
+        "version": 1
+      },
+      {
+        "candidateId": 13,
+        "version": 1
+      },
+      {
+        "candidateId": 14,
+        "version": 1
+      }
+    ],
+    "mergedCandidate": {
+      "candidateData": {
+        "tableName": "月影の書庫 第1卓",
+        "tableDates": [
+          {
+            "playedOn": "2026-07-12"
+          },
+          {
+            "playedOn": "2026-07-12"
+          },
+          {
+            "playedOn": "2026-07-12"
+          }
+        ],
+        "recordingUrl": null,
+        "scenarioName": "月影の書庫",
+        "gameSystemName": "クトゥルフ神話TRPG",
+        "participations": [
+          {
+            "role": "KP",
+            "pcName": null,
+            "handout": null,
+            "personName": "あお",
+            "candidateParticipationKey": "p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b"
+          },
+          {
+            "role": "PL",
+            "pcName": "天野 透",
+            "handout": null,
+            "personName": "みな",
+            "candidateParticipationKey": "p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4"
+          },
+          {
+            "role": "PL",
+            "pcName": "白瀬 渚",
+            "handout": null,
+            "personName": "れん",
+            "candidateParticipationKey": "p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f"
+          }
+        ],
+        "unassignedValues": []
+      },
+      "resolutionRefs": {
+        "scenarioResolutionId": null,
+        "participations": [
+          {
+            "candidateParticipationKey": "p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b",
+            "personResolutionId": null,
+            "pcResolutionId": null
+          },
+          {
+            "candidateParticipationKey": "p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4",
+            "personResolutionId": null,
+            "pcResolutionId": null
+          },
+          {
+            "candidateParticipationKey": "p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f",
+            "personResolutionId": null,
+            "pcResolutionId": null
+          }
+        ]
+      },
+      "resolutions": [],
+      "confirmationStatus": "UNCHECKED",
+      "registrationTarget": true
+    },
+    "resolutionConflicts": [],
+    "unmappedSourceResolutionRefs": [],
+    "registrationTargetConflict": false,
+    "canApply": true
+  }
+}

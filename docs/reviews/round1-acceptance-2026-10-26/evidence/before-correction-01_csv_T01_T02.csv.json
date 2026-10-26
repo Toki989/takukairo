@@ -1,0 +1,2613 @@
+{
+  "s": {
+    "id": 5,
+    "version": 2,
+    "currentStep": "REVIEW",
+    "status": "ACTIVE",
+    "savedAt": "2026-10-26T01:41:57.663Z",
+    "expiresAt": "2026-11-02T01:41:57.663Z",
+    "sources": [
+      {
+        "id": 5,
+        "sourceType": "FILE",
+        "originalFileName": "01_csv_T01_T02.csv",
+        "encoding": "AUTO",
+        "rawText": null,
+        "order": 1
+      }
+    ]
+  },
+  "review": {
+    "sessionId": 5,
+    "sessionVersion": 2,
+    "summary": {
+      "total": 6,
+      "registerable": 0,
+      "needsReview": 6,
+      "needsFix": 0,
+      "checked": 0
+    },
+    "unparsedBlocks": [],
+    "items": [
+      {
+        "candidateId": 12,
+        "version": 1,
+        "status": "NEEDS_REVIEW",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "summary": {
+          "tableName": "月影の書庫 第1卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-07-12"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "月影の書庫",
+          "gameSystemName": "クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "あお",
+              "candidateParticipationKey": "p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b"
+            }
+          ],
+          "unassignedValues": []
+        },
+        "rawSummary": {
+          "tableName": "月影の書庫 第1卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-07-12"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "月影の書庫",
+          "gameSystemName": "クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "あお",
+              "candidateParticipationKey": "p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b"
+            }
+          ],
+          "unassignedValues": []
+        }
+      },
+      {
+        "candidateId": 13,
+        "version": 1,
+        "status": "NEEDS_REVIEW",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "summary": {
+          "tableName": "月影の書庫 第1卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-07-12"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "月影の書庫",
+          "gameSystemName": "クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "天野 透",
+              "handout": null,
+              "personName": "みな",
+              "candidateParticipationKey": "p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4"
+            }
+          ],
+          "unassignedValues": []
+        },
+        "rawSummary": {
+          "tableName": "月影の書庫 第1卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-07-12"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "月影の書庫",
+          "gameSystemName": "クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "天野 透",
+              "handout": null,
+              "personName": "みな",
+              "candidateParticipationKey": "p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4"
+            }
+          ],
+          "unassignedValues": []
+        }
+      },
+      {
+        "candidateId": 14,
+        "version": 1,
+        "status": "NEEDS_REVIEW",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "summary": {
+          "tableName": "月影の書庫 第1卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-07-12"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "月影の書庫",
+          "gameSystemName": "クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "白瀬 渚",
+              "handout": null,
+              "personName": "れん",
+              "candidateParticipationKey": "p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f"
+            }
+          ],
+          "unassignedValues": []
+        },
+        "rawSummary": {
+          "tableName": "月影の書庫 第1卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-07-12"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "月影の書庫",
+          "gameSystemName": "クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "白瀬 渚",
+              "handout": null,
+              "personName": "れん",
+              "candidateParticipationKey": "p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f"
+            }
+          ],
+          "unassignedValues": []
+        }
+      },
+      {
+        "candidateId": 15,
+        "version": 1,
+        "status": "NEEDS_REVIEW",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "summary": {
+          "tableName": "星屑の回廊 夏季卓",
+          "tableDates": [],
+          "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "scenarioName": "星屑の回廊",
+          "gameSystemName": "新クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "しずく",
+              "candidateParticipationKey": "p-56187f3a-478b-4b3b-bcc4-73c16a8273d6"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-3325b878-8ff2-4472-ba14-b67f42267856",
+              "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "rawSummary": {
+          "tableName": "星屑の回廊 夏季卓",
+          "tableDates": [],
+          "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "scenarioName": "星屑の回廊",
+          "gameSystemName": "新クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "しずく",
+              "candidateParticipationKey": "p-56187f3a-478b-4b3b-bcc4-73c16a8273d6"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-3325b878-8ff2-4472-ba14-b67f42267856",
+              "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        }
+      },
+      {
+        "candidateId": 16,
+        "version": 1,
+        "status": "NEEDS_REVIEW",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "summary": {
+          "tableName": "星屑の回廊 夏季卓",
+          "tableDates": [],
+          "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "scenarioName": "星屑の回廊",
+          "gameSystemName": "新クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "朝霧 灯",
+              "handout": "HO1",
+              "personName": "ゆづき",
+              "candidateParticipationKey": "p-e0f9f4c5-bfe5-4d69-a833-600a856636d5"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-c6904725-cabb-4064-9d79-c24a52b71667",
+              "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "rawSummary": {
+          "tableName": "星屑の回廊 夏季卓",
+          "tableDates": [],
+          "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "scenarioName": "星屑の回廊",
+          "gameSystemName": "新クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "朝霧 灯",
+              "handout": "HO1",
+              "personName": "ゆづき",
+              "candidateParticipationKey": "p-e0f9f4c5-bfe5-4d69-a833-600a856636d5"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-c6904725-cabb-4064-9d79-c24a52b71667",
+              "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        }
+      },
+      {
+        "candidateId": 17,
+        "version": 1,
+        "status": "NEEDS_REVIEW",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "summary": {
+          "tableName": "星屑の回廊 夏季卓",
+          "tableDates": [],
+          "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "scenarioName": "星屑の回廊",
+          "gameSystemName": "新クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "久遠 澄",
+              "handout": "HO2",
+              "personName": "いと",
+              "candidateParticipationKey": "p-74be6116-edf6-4ff4-b7a1-d72ce81306ce"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-9c076354-2c7c-47d2-ac12-6f86f6da9095",
+              "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "rawSummary": {
+          "tableName": "星屑の回廊 夏季卓",
+          "tableDates": [],
+          "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "scenarioName": "星屑の回廊",
+          "gameSystemName": "新クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "久遠 澄",
+              "handout": "HO2",
+              "personName": "いと",
+              "candidateParticipationKey": "p-74be6116-edf6-4ff4-b7a1-d72ce81306ce"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-9c076354-2c7c-47d2-ac12-6f86f6da9095",
+              "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "details": [
+    {
+      "candidate": {
+        "id": 12,
+        "version": 1,
+        "candidateData": {
+          "tableName": "月影の書庫 第1卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-07-12"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "月影の書庫",
+          "gameSystemName": "クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "あお",
+              "candidateParticipationKey": "p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b"
+            }
+          ],
+          "unassignedValues": []
+        },
+        "effectiveCandidateData": {
+          "tableName": "月影の書庫 第1卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-07-12"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "月影の書庫",
+          "gameSystemName": "クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "あお",
+              "candidateParticipationKey": "p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b"
+            }
+          ],
+          "unassignedValues": []
+        },
+        "status": "NEEDS_REVIEW",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "registrationResult": {},
+        "resolutionRefs": {
+          "participations": [
+            {
+              "pcResolutionId": null,
+              "personResolutionId": null,
+              "candidateParticipationKey": "p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b"
+            }
+          ],
+          "scenarioResolutionId": null
+        },
+        "inference": {
+          "format": "CSV",
+          "boundary": "E0",
+          "conflicts": [],
+          "relations": [],
+          "originalData": {
+            "tableName": "月影の書庫 第1卓",
+            "tableDates": [
+              {
+                "playedOn": "2026-07-12"
+              }
+            ],
+            "recordingUrl": null,
+            "scenarioName": "月影の書庫",
+            "gameSystemName": "クトゥルフ神話TRPG",
+            "participations": [
+              {
+                "role": "KP",
+                "pcName": null,
+                "handout": null,
+                "personName": "あお",
+                "candidateParticipationKey": "p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b"
+              }
+            ],
+            "unassignedValues": []
+          },
+          "quotedEvidence": false,
+          "recordEndOffset": 89,
+          "scopeEvidenceId": null,
+          "recordStartOffset": 42,
+          "sharedContextEvidenceIds": [],
+          "boundaryAssessments": [
+            {
+              "candidateIds": [
+                12,
+                13
+              ],
+              "evidenceLevel": "E1",
+              "conflict": "C2",
+              "evidenceKinds": [
+                "EXACT_RECORDED_DATES"
+              ],
+              "requiresSameTableConfirmation": false,
+              "automaticMerge": false
+            },
+            {
+              "candidateIds": [
+                12,
+                14
+              ],
+              "evidenceLevel": "E1",
+              "conflict": "C2",
+              "evidenceKinds": [
+                "EXACT_RECORDED_DATES"
+              ],
+              "requiresSameTableConfirmation": false,
+              "automaticMerge": false
+            }
+          ]
+        }
+      },
+      "resolutions": [],
+      "omittedItems": [],
+      "sourceContexts": [
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "月影の書庫 第1卓",
+              "lineEnd": 2,
+              "dependsOn": [],
+              "endOffset": 51,
+              "fieldPath": "/table/tableName",
+              "lineStart": 2,
+              "derivation": "DIRECT",
+              "evidenceId": "r-1:tableName:42",
+              "startOffset": 42,
+              "labelLocation": {
+                "excerpt": "卓名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 2,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:0",
+                "startOffset": 0,
+                "logicalRecord": null
+              },
+              "logicalRecord": 2,
+              "dependsOnLabel": "header:0"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "月影の書庫",
+              "lineEnd": 2,
+              "dependsOn": [],
+              "endOffset": 57,
+              "fieldPath": "/table/scenarioName",
+              "lineStart": 2,
+              "derivation": "DIRECT",
+              "evidenceId": "r-1:scenarioName:52",
+              "startOffset": 52,
+              "labelLocation": {
+                "excerpt": "シナリオ名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 8,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:3",
+                "startOffset": 3,
+                "logicalRecord": null
+              },
+              "logicalRecord": 2,
+              "dependsOnLabel": "header:3"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "2026-07-12",
+              "lineEnd": 2,
+              "dependsOn": [],
+              "endOffset": 68,
+              "fieldPath": "/table/tableDates",
+              "lineStart": 2,
+              "derivation": "DIRECT",
+              "evidenceId": "r-1:date:58",
+              "startOffset": 58,
+              "labelLocation": {
+                "excerpt": "実施日",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 12,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:9",
+                "startOffset": 9,
+                "logicalRecord": null
+              },
+              "logicalRecord": 2,
+              "dependsOnLabel": "header:9"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "クトゥルフ神話TRPG",
+              "lineEnd": 2,
+              "dependsOn": [],
+              "endOffset": 80,
+              "fieldPath": "/table/gameSystemName",
+              "lineStart": 2,
+              "derivation": "DIRECT",
+              "evidenceId": "r-1:gameSystemName:69",
+              "startOffset": 69,
+              "labelLocation": {
+                "excerpt": "ゲームシステム",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 20,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:13",
+                "startOffset": 13,
+                "logicalRecord": null
+              },
+              "logicalRecord": 2,
+              "dependsOnLabel": "header:13"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "あお",
+              "lineEnd": 2,
+              "dependsOn": [],
+              "endOffset": 87,
+              "fieldPath": "/participations/p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b/personName",
+              "lineStart": 2,
+              "derivation": "DIRECT",
+              "evidenceId": "r-1:person:85",
+              "startOffset": 85,
+              "labelLocation": {
+                "excerpt": "人物名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 33,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:30",
+                "startOffset": 30,
+                "logicalRecord": null
+              },
+              "logicalRecord": 2,
+              "dependsOnLabel": "header:30"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "KP",
+              "lineEnd": 2,
+              "dependsOn": [],
+              "endOffset": 84,
+              "fieldPath": "/participations/p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b/role",
+              "lineStart": 2,
+              "derivation": "DIRECT",
+              "evidenceId": "r-1:role:82",
+              "startOffset": 82,
+              "labelLocation": {
+                "excerpt": "役割",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 29,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:27",
+                "startOffset": 27,
+                "logicalRecord": null
+              },
+              "logicalRecord": 2,
+              "dependsOnLabel": "header:27"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "candidate": {
+        "id": 13,
+        "version": 1,
+        "candidateData": {
+          "tableName": "月影の書庫 第1卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-07-12"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "月影の書庫",
+          "gameSystemName": "クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "天野 透",
+              "handout": null,
+              "personName": "みな",
+              "candidateParticipationKey": "p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4"
+            }
+          ],
+          "unassignedValues": []
+        },
+        "effectiveCandidateData": {
+          "tableName": "月影の書庫 第1卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-07-12"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "月影の書庫",
+          "gameSystemName": "クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "天野 透",
+              "handout": null,
+              "personName": "みな",
+              "candidateParticipationKey": "p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4"
+            }
+          ],
+          "unassignedValues": []
+        },
+        "status": "NEEDS_REVIEW",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "registrationResult": {},
+        "resolutionRefs": {
+          "participations": [
+            {
+              "pcResolutionId": null,
+              "personResolutionId": null,
+              "candidateParticipationKey": "p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4"
+            }
+          ],
+          "scenarioResolutionId": null
+        },
+        "inference": {
+          "format": "CSV",
+          "boundary": "E0",
+          "conflicts": [],
+          "relations": [],
+          "originalData": {
+            "tableName": "月影の書庫 第1卓",
+            "tableDates": [
+              {
+                "playedOn": "2026-07-12"
+              }
+            ],
+            "recordingUrl": null,
+            "scenarioName": "月影の書庫",
+            "gameSystemName": "クトゥルフ神話TRPG",
+            "participations": [
+              {
+                "role": "PL",
+                "pcName": "天野 透",
+                "handout": null,
+                "personName": "みな",
+                "candidateParticipationKey": "p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4"
+              }
+            ],
+            "unassignedValues": []
+          },
+          "quotedEvidence": false,
+          "recordEndOffset": 142,
+          "scopeEvidenceId": null,
+          "recordStartOffset": 91,
+          "sharedContextEvidenceIds": [],
+          "boundaryAssessments": [
+            {
+              "candidateIds": [
+                12,
+                13
+              ],
+              "evidenceLevel": "E1",
+              "conflict": "C2",
+              "evidenceKinds": [
+                "EXACT_RECORDED_DATES"
+              ],
+              "requiresSameTableConfirmation": false,
+              "automaticMerge": false
+            },
+            {
+              "candidateIds": [
+                13,
+                14
+              ],
+              "evidenceLevel": "E1",
+              "conflict": "C2",
+              "evidenceKinds": [
+                "EXACT_RECORDED_DATES"
+              ],
+              "requiresSameTableConfirmation": false,
+              "automaticMerge": false
+            }
+          ]
+        }
+      },
+      "resolutions": [],
+      "omittedItems": [],
+      "sourceContexts": [
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "月影の書庫 第1卓",
+              "lineEnd": 3,
+              "dependsOn": [],
+              "endOffset": 100,
+              "fieldPath": "/table/tableName",
+              "lineStart": 3,
+              "derivation": "DIRECT",
+              "evidenceId": "r-2:tableName:91",
+              "startOffset": 91,
+              "labelLocation": {
+                "excerpt": "卓名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 2,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:0",
+                "startOffset": 0,
+                "logicalRecord": null
+              },
+              "logicalRecord": 3,
+              "dependsOnLabel": "header:0"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "月影の書庫",
+              "lineEnd": 3,
+              "dependsOn": [],
+              "endOffset": 106,
+              "fieldPath": "/table/scenarioName",
+              "lineStart": 3,
+              "derivation": "DIRECT",
+              "evidenceId": "r-2:scenarioName:101",
+              "startOffset": 101,
+              "labelLocation": {
+                "excerpt": "シナリオ名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 8,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:3",
+                "startOffset": 3,
+                "logicalRecord": null
+              },
+              "logicalRecord": 3,
+              "dependsOnLabel": "header:3"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "2026-07-12",
+              "lineEnd": 3,
+              "dependsOn": [],
+              "endOffset": 117,
+              "fieldPath": "/table/tableDates",
+              "lineStart": 3,
+              "derivation": "DIRECT",
+              "evidenceId": "r-2:date:107",
+              "startOffset": 107,
+              "labelLocation": {
+                "excerpt": "実施日",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 12,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:9",
+                "startOffset": 9,
+                "logicalRecord": null
+              },
+              "logicalRecord": 3,
+              "dependsOnLabel": "header:9"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "クトゥルフ神話TRPG",
+              "lineEnd": 3,
+              "dependsOn": [],
+              "endOffset": 129,
+              "fieldPath": "/table/gameSystemName",
+              "lineStart": 3,
+              "derivation": "DIRECT",
+              "evidenceId": "r-2:gameSystemName:118",
+              "startOffset": 118,
+              "labelLocation": {
+                "excerpt": "ゲームシステム",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 20,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:13",
+                "startOffset": 13,
+                "logicalRecord": null
+              },
+              "logicalRecord": 3,
+              "dependsOnLabel": "header:13"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "みな",
+              "lineEnd": 3,
+              "dependsOn": [],
+              "endOffset": 136,
+              "fieldPath": "/participations/p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4/personName",
+              "lineStart": 3,
+              "derivation": "DIRECT",
+              "evidenceId": "r-2:person:134",
+              "startOffset": 134,
+              "labelLocation": {
+                "excerpt": "人物名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 33,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:30",
+                "startOffset": 30,
+                "logicalRecord": null
+              },
+              "logicalRecord": 3,
+              "dependsOnLabel": "header:30"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "PL",
+              "lineEnd": 3,
+              "dependsOn": [],
+              "endOffset": 133,
+              "fieldPath": "/participations/p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4/role",
+              "lineStart": 3,
+              "derivation": "DIRECT",
+              "evidenceId": "r-2:role:131",
+              "startOffset": 131,
+              "labelLocation": {
+                "excerpt": "役割",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 29,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:27",
+                "startOffset": 27,
+                "logicalRecord": null
+              },
+              "logicalRecord": 3,
+              "dependsOnLabel": "header:27"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "天野 透",
+              "lineEnd": 3,
+              "dependsOn": [],
+              "endOffset": 141,
+              "fieldPath": "/participations/p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4/pcName",
+              "lineStart": 3,
+              "derivation": "DIRECT",
+              "evidenceId": "r-2:pc:137",
+              "startOffset": 137,
+              "labelLocation": {
+                "excerpt": "PC名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 37,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:34",
+                "startOffset": 34,
+                "logicalRecord": null
+              },
+              "logicalRecord": 3,
+              "dependsOnLabel": "header:34"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "candidate": {
+        "id": 14,
+        "version": 1,
+        "candidateData": {
+          "tableName": "月影の書庫 第1卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-07-12"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "月影の書庫",
+          "gameSystemName": "クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "白瀬 渚",
+              "handout": null,
+              "personName": "れん",
+              "candidateParticipationKey": "p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f"
+            }
+          ],
+          "unassignedValues": []
+        },
+        "effectiveCandidateData": {
+          "tableName": "月影の書庫 第1卓",
+          "tableDates": [
+            {
+              "playedOn": "2026-07-12"
+            }
+          ],
+          "recordingUrl": null,
+          "scenarioName": "月影の書庫",
+          "gameSystemName": "クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "白瀬 渚",
+              "handout": null,
+              "personName": "れん",
+              "candidateParticipationKey": "p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f"
+            }
+          ],
+          "unassignedValues": []
+        },
+        "status": "NEEDS_REVIEW",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "registrationResult": {},
+        "resolutionRefs": {
+          "participations": [
+            {
+              "pcResolutionId": null,
+              "personResolutionId": null,
+              "candidateParticipationKey": "p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f"
+            }
+          ],
+          "scenarioResolutionId": null
+        },
+        "inference": {
+          "format": "CSV",
+          "boundary": "E0",
+          "conflicts": [],
+          "relations": [],
+          "originalData": {
+            "tableName": "月影の書庫 第1卓",
+            "tableDates": [
+              {
+                "playedOn": "2026-07-12"
+              }
+            ],
+            "recordingUrl": null,
+            "scenarioName": "月影の書庫",
+            "gameSystemName": "クトゥルフ神話TRPG",
+            "participations": [
+              {
+                "role": "PL",
+                "pcName": "白瀬 渚",
+                "handout": null,
+                "personName": "れん",
+                "candidateParticipationKey": "p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f"
+              }
+            ],
+            "unassignedValues": []
+          },
+          "quotedEvidence": false,
+          "recordEndOffset": 195,
+          "scopeEvidenceId": null,
+          "recordStartOffset": 144,
+          "sharedContextEvidenceIds": [],
+          "boundaryAssessments": [
+            {
+              "candidateIds": [
+                12,
+                14
+              ],
+              "evidenceLevel": "E1",
+              "conflict": "C2",
+              "evidenceKinds": [
+                "EXACT_RECORDED_DATES"
+              ],
+              "requiresSameTableConfirmation": false,
+              "automaticMerge": false
+            },
+            {
+              "candidateIds": [
+                13,
+                14
+              ],
+              "evidenceLevel": "E1",
+              "conflict": "C2",
+              "evidenceKinds": [
+                "EXACT_RECORDED_DATES"
+              ],
+              "requiresSameTableConfirmation": false,
+              "automaticMerge": false
+            }
+          ]
+        }
+      },
+      "resolutions": [],
+      "omittedItems": [],
+      "sourceContexts": [
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "月影の書庫 第1卓",
+              "lineEnd": 4,
+              "dependsOn": [],
+              "endOffset": 153,
+              "fieldPath": "/table/tableName",
+              "lineStart": 4,
+              "derivation": "DIRECT",
+              "evidenceId": "r-3:tableName:144",
+              "startOffset": 144,
+              "labelLocation": {
+                "excerpt": "卓名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 2,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:0",
+                "startOffset": 0,
+                "logicalRecord": null
+              },
+              "logicalRecord": 4,
+              "dependsOnLabel": "header:0"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "月影の書庫",
+              "lineEnd": 4,
+              "dependsOn": [],
+              "endOffset": 159,
+              "fieldPath": "/table/scenarioName",
+              "lineStart": 4,
+              "derivation": "DIRECT",
+              "evidenceId": "r-3:scenarioName:154",
+              "startOffset": 154,
+              "labelLocation": {
+                "excerpt": "シナリオ名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 8,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:3",
+                "startOffset": 3,
+                "logicalRecord": null
+              },
+              "logicalRecord": 4,
+              "dependsOnLabel": "header:3"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "2026-07-12",
+              "lineEnd": 4,
+              "dependsOn": [],
+              "endOffset": 170,
+              "fieldPath": "/table/tableDates",
+              "lineStart": 4,
+              "derivation": "DIRECT",
+              "evidenceId": "r-3:date:160",
+              "startOffset": 160,
+              "labelLocation": {
+                "excerpt": "実施日",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 12,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:9",
+                "startOffset": 9,
+                "logicalRecord": null
+              },
+              "logicalRecord": 4,
+              "dependsOnLabel": "header:9"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "クトゥルフ神話TRPG",
+              "lineEnd": 4,
+              "dependsOn": [],
+              "endOffset": 182,
+              "fieldPath": "/table/gameSystemName",
+              "lineStart": 4,
+              "derivation": "DIRECT",
+              "evidenceId": "r-3:gameSystemName:171",
+              "startOffset": 171,
+              "labelLocation": {
+                "excerpt": "ゲームシステム",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 20,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:13",
+                "startOffset": 13,
+                "logicalRecord": null
+              },
+              "logicalRecord": 4,
+              "dependsOnLabel": "header:13"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "れん",
+              "lineEnd": 4,
+              "dependsOn": [],
+              "endOffset": 189,
+              "fieldPath": "/participations/p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f/personName",
+              "lineStart": 4,
+              "derivation": "DIRECT",
+              "evidenceId": "r-3:person:187",
+              "startOffset": 187,
+              "labelLocation": {
+                "excerpt": "人物名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 33,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:30",
+                "startOffset": 30,
+                "logicalRecord": null
+              },
+              "logicalRecord": 4,
+              "dependsOnLabel": "header:30"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "PL",
+              "lineEnd": 4,
+              "dependsOn": [],
+              "endOffset": 186,
+              "fieldPath": "/participations/p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f/role",
+              "lineStart": 4,
+              "derivation": "DIRECT",
+              "evidenceId": "r-3:role:184",
+              "startOffset": 184,
+              "labelLocation": {
+                "excerpt": "役割",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 29,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:27",
+                "startOffset": 27,
+                "logicalRecord": null
+              },
+              "logicalRecord": 4,
+              "dependsOnLabel": "header:27"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "白瀬 渚",
+              "lineEnd": 4,
+              "dependsOn": [],
+              "endOffset": 194,
+              "fieldPath": "/participations/p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f/pcName",
+              "lineStart": 4,
+              "derivation": "DIRECT",
+              "evidenceId": "r-3:pc:190",
+              "startOffset": 190,
+              "labelLocation": {
+                "excerpt": "PC名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 37,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:34",
+                "startOffset": 34,
+                "logicalRecord": null
+              },
+              "logicalRecord": 4,
+              "dependsOnLabel": "header:34"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "candidate": {
+        "id": 15,
+        "version": 1,
+        "candidateData": {
+          "tableName": "星屑の回廊 夏季卓",
+          "tableDates": [],
+          "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "scenarioName": "星屑の回廊",
+          "gameSystemName": "新クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "しずく",
+              "candidateParticipationKey": "p-56187f3a-478b-4b3b-bcc4-73c16a8273d6"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-3325b878-8ff2-4472-ba14-b67f42267856",
+              "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "effectiveCandidateData": {
+          "tableName": "星屑の回廊 夏季卓",
+          "tableDates": [],
+          "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "scenarioName": "星屑の回廊",
+          "gameSystemName": "新クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "KP",
+              "pcName": null,
+              "handout": null,
+              "personName": "しずく",
+              "candidateParticipationKey": "p-56187f3a-478b-4b3b-bcc4-73c16a8273d6"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-3325b878-8ff2-4472-ba14-b67f42267856",
+              "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "status": "NEEDS_REVIEW",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "registrationResult": {},
+        "resolutionRefs": {
+          "participations": [
+            {
+              "pcResolutionId": null,
+              "personResolutionId": null,
+              "candidateParticipationKey": "p-56187f3a-478b-4b3b-bcc4-73c16a8273d6"
+            }
+          ],
+          "scenarioResolutionId": null
+        },
+        "inference": {
+          "format": "CSV",
+          "boundary": "E0",
+          "conflicts": [],
+          "relations": [],
+          "originalData": {
+            "tableName": "星屑の回廊 夏季卓",
+            "tableDates": [],
+            "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+            "scenarioName": "星屑の回廊",
+            "gameSystemName": "新クトゥルフ神話TRPG",
+            "participations": [
+              {
+                "role": "KP",
+                "pcName": null,
+                "handout": null,
+                "personName": "しずく",
+                "candidateParticipationKey": "p-56187f3a-478b-4b3b-bcc4-73c16a8273d6"
+              }
+            ],
+            "unassignedValues": [
+              {
+                "itemKey": "u-3325b878-8ff2-4472-ba14-b67f42267856",
+                "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              }
+            ]
+          },
+          "quotedEvidence": false,
+          "recordEndOffset": 311,
+          "scopeEvidenceId": null,
+          "recordStartOffset": 197,
+          "sharedContextEvidenceIds": [],
+          "boundaryAssessments": [
+            {
+              "candidateIds": [
+                15,
+                16
+              ],
+              "evidenceLevel": "E1",
+              "conflict": "C2",
+              "evidenceKinds": [
+                "RECORDING_REFERENCE"
+              ],
+              "requiresSameTableConfirmation": false,
+              "automaticMerge": false
+            },
+            {
+              "candidateIds": [
+                15,
+                17
+              ],
+              "evidenceLevel": "E1",
+              "conflict": "C2",
+              "evidenceKinds": [
+                "RECORDING_REFERENCE"
+              ],
+              "requiresSameTableConfirmation": false,
+              "automaticMerge": false
+            }
+          ]
+        }
+      },
+      "resolutions": [],
+      "omittedItems": [],
+      "sourceContexts": [
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "星屑の回廊 夏季卓",
+              "lineEnd": 5,
+              "dependsOn": [],
+              "endOffset": 206,
+              "fieldPath": "/table/tableName",
+              "lineStart": 5,
+              "derivation": "DIRECT",
+              "evidenceId": "r-4:tableName:197",
+              "startOffset": 197,
+              "labelLocation": {
+                "excerpt": "卓名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 2,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:0",
+                "startOffset": 0,
+                "logicalRecord": null
+              },
+              "logicalRecord": 5,
+              "dependsOnLabel": "header:0"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "星屑の回廊",
+              "lineEnd": 5,
+              "dependsOn": [],
+              "endOffset": 212,
+              "fieldPath": "/table/scenarioName",
+              "lineStart": 5,
+              "derivation": "DIRECT",
+              "evidenceId": "r-4:scenarioName:207",
+              "startOffset": 207,
+              "labelLocation": {
+                "excerpt": "シナリオ名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 8,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:3",
+                "startOffset": 3,
+                "logicalRecord": null
+              },
+              "logicalRecord": 5,
+              "dependsOnLabel": "header:3"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "2026-08-16 / 2026-08-17",
+              "lineEnd": 5,
+              "dependsOn": [],
+              "endOffset": 236,
+              "fieldPath": "/unassignedValues/u-3325b878-8ff2-4472-ba14-b67f42267856",
+              "lineStart": 5,
+              "derivation": "DIRECT",
+              "evidenceId": "r-4:213",
+              "startOffset": 213,
+              "labelLocation": {
+                "excerpt": "実施日",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 12,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:9",
+                "startOffset": 9,
+                "logicalRecord": null
+              },
+              "logicalRecord": 5,
+              "dependsOnLabel": "header:9"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "新クトゥルフ神話TRPG",
+              "lineEnd": 5,
+              "dependsOn": [],
+              "endOffset": 249,
+              "fieldPath": "/table/gameSystemName",
+              "lineStart": 5,
+              "derivation": "DIRECT",
+              "evidenceId": "r-4:gameSystemName:237",
+              "startOffset": 237,
+              "labelLocation": {
+                "excerpt": "ゲームシステム",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 20,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:13",
+                "startOffset": 13,
+                "logicalRecord": null
+              },
+              "logicalRecord": 5,
+              "dependsOnLabel": "header:13"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "https://example.com/trpg/recordings/hoshikuzu-summer",
+              "lineEnd": 5,
+              "dependsOn": [],
+              "endOffset": 302,
+              "fieldPath": "/table/recordingUrl",
+              "lineStart": 5,
+              "derivation": "DIRECT",
+              "evidenceId": "r-4:recordingUrl:250",
+              "startOffset": 250,
+              "labelLocation": {
+                "excerpt": "録画URL",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 26,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:21",
+                "startOffset": 21,
+                "logicalRecord": null
+              },
+              "logicalRecord": 5,
+              "dependsOnLabel": "header:21"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "しずく",
+              "lineEnd": 5,
+              "dependsOn": [],
+              "endOffset": 309,
+              "fieldPath": "/participations/p-56187f3a-478b-4b3b-bcc4-73c16a8273d6/personName",
+              "lineStart": 5,
+              "derivation": "DIRECT",
+              "evidenceId": "r-4:person:306",
+              "startOffset": 306,
+              "labelLocation": {
+                "excerpt": "人物名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 33,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:30",
+                "startOffset": 30,
+                "logicalRecord": null
+              },
+              "logicalRecord": 5,
+              "dependsOnLabel": "header:30"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "KP",
+              "lineEnd": 5,
+              "dependsOn": [],
+              "endOffset": 305,
+              "fieldPath": "/participations/p-56187f3a-478b-4b3b-bcc4-73c16a8273d6/role",
+              "lineStart": 5,
+              "derivation": "DIRECT",
+              "evidenceId": "r-4:role:303",
+              "startOffset": 303,
+              "labelLocation": {
+                "excerpt": "役割",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 29,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:27",
+                "startOffset": 27,
+                "logicalRecord": null
+              },
+              "logicalRecord": 5,
+              "dependsOnLabel": "header:27"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "candidate": {
+        "id": 16,
+        "version": 1,
+        "candidateData": {
+          "tableName": "星屑の回廊 夏季卓",
+          "tableDates": [],
+          "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "scenarioName": "星屑の回廊",
+          "gameSystemName": "新クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "朝霧 灯",
+              "handout": "HO1",
+              "personName": "ゆづき",
+              "candidateParticipationKey": "p-e0f9f4c5-bfe5-4d69-a833-600a856636d5"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-c6904725-cabb-4064-9d79-c24a52b71667",
+              "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "effectiveCandidateData": {
+          "tableName": "星屑の回廊 夏季卓",
+          "tableDates": [],
+          "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "scenarioName": "星屑の回廊",
+          "gameSystemName": "新クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "朝霧 灯",
+              "handout": "HO1",
+              "personName": "ゆづき",
+              "candidateParticipationKey": "p-e0f9f4c5-bfe5-4d69-a833-600a856636d5"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-c6904725-cabb-4064-9d79-c24a52b71667",
+              "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "status": "NEEDS_REVIEW",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "registrationResult": {},
+        "resolutionRefs": {
+          "participations": [
+            {
+              "pcResolutionId": null,
+              "personResolutionId": null,
+              "candidateParticipationKey": "p-e0f9f4c5-bfe5-4d69-a833-600a856636d5"
+            }
+          ],
+          "scenarioResolutionId": null
+        },
+        "inference": {
+          "format": "CSV",
+          "boundary": "E0",
+          "conflicts": [],
+          "relations": [],
+          "originalData": {
+            "tableName": "星屑の回廊 夏季卓",
+            "tableDates": [],
+            "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+            "scenarioName": "星屑の回廊",
+            "gameSystemName": "新クトゥルフ神話TRPG",
+            "participations": [
+              {
+                "role": "PL",
+                "pcName": "朝霧 灯",
+                "handout": "HO1",
+                "personName": "ゆづき",
+                "candidateParticipationKey": "p-e0f9f4c5-bfe5-4d69-a833-600a856636d5"
+              }
+            ],
+            "unassignedValues": [
+              {
+                "itemKey": "u-c6904725-cabb-4064-9d79-c24a52b71667",
+                "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              }
+            ]
+          },
+          "quotedEvidence": false,
+          "recordEndOffset": 434,
+          "scopeEvidenceId": null,
+          "recordStartOffset": 313,
+          "sharedContextEvidenceIds": [],
+          "boundaryAssessments": [
+            {
+              "candidateIds": [
+                15,
+                16
+              ],
+              "evidenceLevel": "E1",
+              "conflict": "C2",
+              "evidenceKinds": [
+                "RECORDING_REFERENCE"
+              ],
+              "requiresSameTableConfirmation": false,
+              "automaticMerge": false
+            },
+            {
+              "candidateIds": [
+                16,
+                17
+              ],
+              "evidenceLevel": "E1",
+              "conflict": "C2",
+              "evidenceKinds": [
+                "RECORDING_REFERENCE"
+              ],
+              "requiresSameTableConfirmation": false,
+              "automaticMerge": false
+            }
+          ]
+        }
+      },
+      "resolutions": [],
+      "omittedItems": [],
+      "sourceContexts": [
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "星屑の回廊 夏季卓",
+              "lineEnd": 6,
+              "dependsOn": [],
+              "endOffset": 322,
+              "fieldPath": "/table/tableName",
+              "lineStart": 6,
+              "derivation": "DIRECT",
+              "evidenceId": "r-5:tableName:313",
+              "startOffset": 313,
+              "labelLocation": {
+                "excerpt": "卓名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 2,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:0",
+                "startOffset": 0,
+                "logicalRecord": null
+              },
+              "logicalRecord": 6,
+              "dependsOnLabel": "header:0"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "星屑の回廊",
+              "lineEnd": 6,
+              "dependsOn": [],
+              "endOffset": 328,
+              "fieldPath": "/table/scenarioName",
+              "lineStart": 6,
+              "derivation": "DIRECT",
+              "evidenceId": "r-5:scenarioName:323",
+              "startOffset": 323,
+              "labelLocation": {
+                "excerpt": "シナリオ名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 8,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:3",
+                "startOffset": 3,
+                "logicalRecord": null
+              },
+              "logicalRecord": 6,
+              "dependsOnLabel": "header:3"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "2026-08-16 / 2026-08-17",
+              "lineEnd": 6,
+              "dependsOn": [],
+              "endOffset": 352,
+              "fieldPath": "/unassignedValues/u-c6904725-cabb-4064-9d79-c24a52b71667",
+              "lineStart": 6,
+              "derivation": "DIRECT",
+              "evidenceId": "r-5:329",
+              "startOffset": 329,
+              "labelLocation": {
+                "excerpt": "実施日",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 12,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:9",
+                "startOffset": 9,
+                "logicalRecord": null
+              },
+              "logicalRecord": 6,
+              "dependsOnLabel": "header:9"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "新クトゥルフ神話TRPG",
+              "lineEnd": 6,
+              "dependsOn": [],
+              "endOffset": 365,
+              "fieldPath": "/table/gameSystemName",
+              "lineStart": 6,
+              "derivation": "DIRECT",
+              "evidenceId": "r-5:gameSystemName:353",
+              "startOffset": 353,
+              "labelLocation": {
+                "excerpt": "ゲームシステム",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 20,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:13",
+                "startOffset": 13,
+                "logicalRecord": null
+              },
+              "logicalRecord": 6,
+              "dependsOnLabel": "header:13"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "https://example.com/trpg/recordings/hoshikuzu-summer",
+              "lineEnd": 6,
+              "dependsOn": [],
+              "endOffset": 418,
+              "fieldPath": "/table/recordingUrl",
+              "lineStart": 6,
+              "derivation": "DIRECT",
+              "evidenceId": "r-5:recordingUrl:366",
+              "startOffset": 366,
+              "labelLocation": {
+                "excerpt": "録画URL",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 26,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:21",
+                "startOffset": 21,
+                "logicalRecord": null
+              },
+              "logicalRecord": 6,
+              "dependsOnLabel": "header:21"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "ゆづき",
+              "lineEnd": 6,
+              "dependsOn": [],
+              "endOffset": 425,
+              "fieldPath": "/participations/p-e0f9f4c5-bfe5-4d69-a833-600a856636d5/personName",
+              "lineStart": 6,
+              "derivation": "DIRECT",
+              "evidenceId": "r-5:person:422",
+              "startOffset": 422,
+              "labelLocation": {
+                "excerpt": "人物名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 33,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:30",
+                "startOffset": 30,
+                "logicalRecord": null
+              },
+              "logicalRecord": 6,
+              "dependsOnLabel": "header:30"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "PL",
+              "lineEnd": 6,
+              "dependsOn": [],
+              "endOffset": 421,
+              "fieldPath": "/participations/p-e0f9f4c5-bfe5-4d69-a833-600a856636d5/role",
+              "lineStart": 6,
+              "derivation": "DIRECT",
+              "evidenceId": "r-5:role:419",
+              "startOffset": 419,
+              "labelLocation": {
+                "excerpt": "役割",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 29,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:27",
+                "startOffset": 27,
+                "logicalRecord": null
+              },
+              "logicalRecord": 6,
+              "dependsOnLabel": "header:27"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "朝霧 灯",
+              "lineEnd": 6,
+              "dependsOn": [],
+              "endOffset": 430,
+              "fieldPath": "/participations/p-e0f9f4c5-bfe5-4d69-a833-600a856636d5/pcName",
+              "lineStart": 6,
+              "derivation": "DIRECT",
+              "evidenceId": "r-5:pc:426",
+              "startOffset": 426,
+              "labelLocation": {
+                "excerpt": "PC名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 37,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:34",
+                "startOffset": 34,
+                "logicalRecord": null
+              },
+              "logicalRecord": 6,
+              "dependsOnLabel": "header:34"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "HO1",
+              "lineEnd": 6,
+              "dependsOn": [],
+              "endOffset": 434,
+              "fieldPath": "/participations/p-e0f9f4c5-bfe5-4d69-a833-600a856636d5/handout",
+              "lineStart": 6,
+              "derivation": "DIRECT",
+              "evidenceId": "r-5:handout:431",
+              "startOffset": 431,
+              "labelLocation": {
+                "excerpt": "HO",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 40,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:38",
+                "startOffset": 38,
+                "logicalRecord": null
+              },
+              "logicalRecord": 6,
+              "dependsOnLabel": "header:38"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "candidate": {
+        "id": 17,
+        "version": 1,
+        "candidateData": {
+          "tableName": "星屑の回廊 夏季卓",
+          "tableDates": [],
+          "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "scenarioName": "星屑の回廊",
+          "gameSystemName": "新クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "久遠 澄",
+              "handout": "HO2",
+              "personName": "いと",
+              "candidateParticipationKey": "p-74be6116-edf6-4ff4-b7a1-d72ce81306ce"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-9c076354-2c7c-47d2-ac12-6f86f6da9095",
+              "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "effectiveCandidateData": {
+          "tableName": "星屑の回廊 夏季卓",
+          "tableDates": [],
+          "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+          "scenarioName": "星屑の回廊",
+          "gameSystemName": "新クトゥルフ神話TRPG",
+          "participations": [
+            {
+              "role": "PL",
+              "pcName": "久遠 澄",
+              "handout": "HO2",
+              "personName": "いと",
+              "candidateParticipationKey": "p-74be6116-edf6-4ff4-b7a1-d72ce81306ce"
+            }
+          ],
+          "unassignedValues": [
+            {
+              "itemKey": "u-9c076354-2c7c-47d2-ac12-6f86f6da9095",
+              "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+              "assignment": {
+                "type": "UNASSIGNED",
+                "candidateParticipationKey": null
+              }
+            }
+          ]
+        },
+        "status": "NEEDS_REVIEW",
+        "confirmationStatus": "UNCHECKED",
+        "registrationTarget": true,
+        "registrationStatus": "PENDING",
+        "registrationResult": {},
+        "resolutionRefs": {
+          "participations": [
+            {
+              "pcResolutionId": null,
+              "personResolutionId": null,
+              "candidateParticipationKey": "p-74be6116-edf6-4ff4-b7a1-d72ce81306ce"
+            }
+          ],
+          "scenarioResolutionId": null
+        },
+        "inference": {
+          "format": "CSV",
+          "boundary": "E0",
+          "conflicts": [],
+          "relations": [],
+          "originalData": {
+            "tableName": "星屑の回廊 夏季卓",
+            "tableDates": [],
+            "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+            "scenarioName": "星屑の回廊",
+            "gameSystemName": "新クトゥルフ神話TRPG",
+            "participations": [
+              {
+                "role": "PL",
+                "pcName": "久遠 澄",
+                "handout": "HO2",
+                "personName": "いと",
+                "candidateParticipationKey": "p-74be6116-edf6-4ff4-b7a1-d72ce81306ce"
+              }
+            ],
+            "unassignedValues": [
+              {
+                "itemKey": "u-9c076354-2c7c-47d2-ac12-6f86f6da9095",
+                "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+                "assignment": {
+                  "type": "UNASSIGNED",
+                  "candidateParticipationKey": null
+                }
+              }
+            ]
+          },
+          "quotedEvidence": false,
+          "recordEndOffset": 556,
+          "scopeEvidenceId": null,
+          "recordStartOffset": 436,
+          "sharedContextEvidenceIds": [],
+          "boundaryAssessments": [
+            {
+              "candidateIds": [
+                15,
+                17
+              ],
+              "evidenceLevel": "E1",
+              "conflict": "C2",
+              "evidenceKinds": [
+                "RECORDING_REFERENCE"
+              ],
+              "requiresSameTableConfirmation": false,
+              "automaticMerge": false
+            },
+            {
+              "candidateIds": [
+                16,
+                17
+              ],
+              "evidenceLevel": "E1",
+              "conflict": "C2",
+              "evidenceKinds": [
+                "RECORDING_REFERENCE"
+              ],
+              "requiresSameTableConfirmation": false,
+              "automaticMerge": false
+            }
+          ]
+        }
+      },
+      "resolutions": [],
+      "omittedItems": [],
+      "sourceContexts": [
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "星屑の回廊 夏季卓",
+              "lineEnd": 7,
+              "dependsOn": [],
+              "endOffset": 445,
+              "fieldPath": "/table/tableName",
+              "lineStart": 7,
+              "derivation": "DIRECT",
+              "evidenceId": "r-6:tableName:436",
+              "startOffset": 436,
+              "labelLocation": {
+                "excerpt": "卓名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 2,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:0",
+                "startOffset": 0,
+                "logicalRecord": null
+              },
+              "logicalRecord": 7,
+              "dependsOnLabel": "header:0"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "星屑の回廊",
+              "lineEnd": 7,
+              "dependsOn": [],
+              "endOffset": 451,
+              "fieldPath": "/table/scenarioName",
+              "lineStart": 7,
+              "derivation": "DIRECT",
+              "evidenceId": "r-6:scenarioName:446",
+              "startOffset": 446,
+              "labelLocation": {
+                "excerpt": "シナリオ名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 8,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:3",
+                "startOffset": 3,
+                "logicalRecord": null
+              },
+              "logicalRecord": 7,
+              "dependsOnLabel": "header:3"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "2026-08-16 / 2026-08-17",
+              "lineEnd": 7,
+              "dependsOn": [],
+              "endOffset": 475,
+              "fieldPath": "/unassignedValues/u-9c076354-2c7c-47d2-ac12-6f86f6da9095",
+              "lineStart": 7,
+              "derivation": "DIRECT",
+              "evidenceId": "r-6:452",
+              "startOffset": 452,
+              "labelLocation": {
+                "excerpt": "実施日",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 12,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:9",
+                "startOffset": 9,
+                "logicalRecord": null
+              },
+              "logicalRecord": 7,
+              "dependsOnLabel": "header:9"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "新クトゥルフ神話TRPG",
+              "lineEnd": 7,
+              "dependsOn": [],
+              "endOffset": 488,
+              "fieldPath": "/table/gameSystemName",
+              "lineStart": 7,
+              "derivation": "DIRECT",
+              "evidenceId": "r-6:gameSystemName:476",
+              "startOffset": 476,
+              "labelLocation": {
+                "excerpt": "ゲームシステム",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 20,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:13",
+                "startOffset": 13,
+                "logicalRecord": null
+              },
+              "logicalRecord": 7,
+              "dependsOnLabel": "header:13"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "https://example.com/trpg/recordings/hoshikuzu-summer",
+              "lineEnd": 7,
+              "dependsOn": [],
+              "endOffset": 541,
+              "fieldPath": "/table/recordingUrl",
+              "lineStart": 7,
+              "derivation": "DIRECT",
+              "evidenceId": "r-6:recordingUrl:489",
+              "startOffset": 489,
+              "labelLocation": {
+                "excerpt": "録画URL",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 26,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:21",
+                "startOffset": 21,
+                "logicalRecord": null
+              },
+              "logicalRecord": 7,
+              "dependsOnLabel": "header:21"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "いと",
+              "lineEnd": 7,
+              "dependsOn": [],
+              "endOffset": 547,
+              "fieldPath": "/participations/p-74be6116-edf6-4ff4-b7a1-d72ce81306ce/personName",
+              "lineStart": 7,
+              "derivation": "DIRECT",
+              "evidenceId": "r-6:person:545",
+              "startOffset": 545,
+              "labelLocation": {
+                "excerpt": "人物名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 33,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:30",
+                "startOffset": 30,
+                "logicalRecord": null
+              },
+              "logicalRecord": 7,
+              "dependsOnLabel": "header:30"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "PL",
+              "lineEnd": 7,
+              "dependsOn": [],
+              "endOffset": 544,
+              "fieldPath": "/participations/p-74be6116-edf6-4ff4-b7a1-d72ce81306ce/role",
+              "lineStart": 7,
+              "derivation": "DIRECT",
+              "evidenceId": "r-6:role:542",
+              "startOffset": 542,
+              "labelLocation": {
+                "excerpt": "役割",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 29,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:27",
+                "startOffset": 27,
+                "logicalRecord": null
+              },
+              "logicalRecord": 7,
+              "dependsOnLabel": "header:27"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "久遠 澄",
+              "lineEnd": 7,
+              "dependsOn": [],
+              "endOffset": 552,
+              "fieldPath": "/participations/p-74be6116-edf6-4ff4-b7a1-d72ce81306ce/pcName",
+              "lineStart": 7,
+              "derivation": "DIRECT",
+              "evidenceId": "r-6:pc:548",
+              "startOffset": 548,
+              "labelLocation": {
+                "excerpt": "PC名",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 37,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:34",
+                "startOffset": 34,
+                "logicalRecord": null
+              },
+              "logicalRecord": 7,
+              "dependsOnLabel": "header:34"
+            }
+          ]
+        },
+        {
+          "sourceId": 5,
+          "sourceType": "FILE",
+          "originalFileName": "01_csv_T01_T02.csv",
+          "traces": [
+            {
+              "excerpt": "HO2",
+              "lineEnd": 7,
+              "dependsOn": [],
+              "endOffset": 556,
+              "fieldPath": "/participations/p-74be6116-edf6-4ff4-b7a1-d72ce81306ce/handout",
+              "lineStart": 7,
+              "derivation": "DIRECT",
+              "evidenceId": "r-6:handout:553",
+              "startOffset": 553,
+              "labelLocation": {
+                "excerpt": "HO",
+                "lineEnd": 1,
+                "dependsOn": [],
+                "endOffset": 40,
+                "fieldPath": "/structure/columnLabel",
+                "lineStart": 1,
+                "derivation": "DIRECT",
+                "evidenceId": "header:38",
+                "startOffset": 38,
+                "logicalRecord": null
+              },
+              "logicalRecord": 7,
+              "dependsOnLabel": "header:38"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

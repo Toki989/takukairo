@@ -1,0 +1,18 @@
+{
+  "id": 6,
+  "version": 12,
+  "currentStep": "REGISTER",
+  "status": "COMPLETED",
+  "savedAt": "2026-10-26T01:43:01.584Z",
+  "expiresAt": "2026-11-02T01:43:01.584Z",
+  "sources": [
+    {
+      "id": 6,
+      "sourceType": "FILE",
+      "originalFileName": "02_markdown_T03.md",
+      "encoding": "AUTO",
+      "rawText": null,
+      "order": 1
+    }
+  ]
+}

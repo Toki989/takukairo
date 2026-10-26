@@ -1,0 +1,30 @@
+{
+  "id": 4,
+  "version": 1,
+  "scenarioId": 4,
+  "scenario": {
+    "id": 4,
+    "version": 0,
+    "name": "消えた時計塔",
+    "authorName": null,
+    "sourceUrl": null,
+    "gameSystem": null,
+    "externalImageUrl": null,
+    "image": null,
+    "createdAt": "2026-10-26T01:43:30.905Z",
+    "updatedAt": "2026-10-26T01:43:30.905Z",
+    "favorite": false,
+    "tableCount": 1
+  },
+  "tableName": "消えた時計塔 記録のみ",
+  "recordingUrl": null,
+  "createdAt": "2026-10-26T01:43:30.914Z",
+  "tableDates": [
+    {
+      "id": 4,
+      "playedOn": "2026-08-29",
+      "version": 0
+    }
+  ],
+  "participations": []
+}

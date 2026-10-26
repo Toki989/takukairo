@@ -1,0 +1,846 @@
+{
+  "candidate": {
+    "id": 18,
+    "version": 9,
+    "candidateData": {
+      "tableName": "月影の書庫 第1卓",
+      "tableDates": [
+        {
+          "playedOn": "2026-07-12"
+        }
+      ],
+      "recordingUrl": null,
+      "scenarioName": "月影の書庫",
+      "gameSystemName": "クトゥルフ神話TRPG",
+      "participations": [
+        {
+          "role": "KP",
+          "pcName": null,
+          "handout": null,
+          "personName": "あお",
+          "candidateParticipationKey": "p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b"
+        },
+        {
+          "role": "PL",
+          "pcName": "天野 透",
+          "handout": null,
+          "personName": "みな",
+          "candidateParticipationKey": "p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4"
+        },
+        {
+          "role": "PL",
+          "pcName": "白瀬 渚",
+          "handout": null,
+          "personName": "れん",
+          "candidateParticipationKey": "p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f"
+        }
+      ],
+      "unassignedValues": []
+    },
+    "effectiveCandidateData": {
+      "tableName": "月影の書庫 第1卓",
+      "tableDates": [
+        {
+          "playedOn": "2026-07-12"
+        }
+      ],
+      "recordingUrl": null,
+      "scenarioName": "月影の書庫",
+      "gameSystemName": "クトゥルフ神話TRPG",
+      "participations": [
+        {
+          "role": "KP",
+          "pcName": null,
+          "handout": null,
+          "personName": "あお",
+          "candidateParticipationKey": "p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b"
+        },
+        {
+          "role": "PL",
+          "pcName": "天野 透",
+          "handout": null,
+          "personName": "みな",
+          "candidateParticipationKey": "p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4"
+        },
+        {
+          "role": "PL",
+          "pcName": "白瀬 渚",
+          "handout": null,
+          "personName": "れん",
+          "candidateParticipationKey": "p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f"
+        }
+      ],
+      "unassignedValues": []
+    },
+    "status": "REGISTERABLE",
+    "confirmationStatus": "CHECKED",
+    "registrationTarget": true,
+    "registrationStatus": "PENDING",
+    "registrationResult": {},
+    "resolutionRefs": {
+      "participations": [
+        {
+          "pcResolutionId": null,
+          "personResolutionId": 2,
+          "candidateParticipationKey": "p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b"
+        },
+        {
+          "pcResolutionId": 4,
+          "personResolutionId": 3,
+          "candidateParticipationKey": "p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4"
+        },
+        {
+          "pcResolutionId": 6,
+          "personResolutionId": 5,
+          "candidateParticipationKey": "p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f"
+        }
+      ],
+      "scenarioResolutionId": 1
+    },
+    "inference": {
+      "boundary": "USER_STRUCTURE_OPERATION",
+      "conflicts": [],
+      "relations": [],
+      "editedFields": [
+        "/table/tableDates"
+      ],
+      "omittedItems": [],
+      "explicitScopes": [],
+      "boundaryAssessments": []
+    }
+  },
+  "resolutions": [
+    {
+      "id": 1,
+      "version": 0,
+      "entityType": "SCENARIO",
+      "decision": "CREATE_NEW",
+      "existingEntityId": null,
+      "createdEntityId": null,
+      "draftData": {
+        "name": "月影の書庫",
+        "sourceUrl": null,
+        "authorName": null,
+        "gameSystem": "クトゥルフ神話TRPG"
+      }
+    },
+    {
+      "id": 2,
+      "version": 0,
+      "entityType": "PERSON",
+      "decision": "CREATE_NEW",
+      "existingEntityId": null,
+      "createdEntityId": null,
+      "draftData": {
+        "displayName": "あお"
+      }
+    },
+    {
+      "id": 3,
+      "version": 0,
+      "entityType": "PERSON",
+      "decision": "CREATE_NEW",
+      "existingEntityId": null,
+      "createdEntityId": null,
+      "draftData": {
+        "displayName": "みな"
+      }
+    },
+    {
+      "id": 4,
+      "version": 0,
+      "entityType": "PC",
+      "decision": "CREATE_NEW",
+      "existingEntityId": null,
+      "createdEntityId": null,
+      "draftData": {
+        "name": "天野 透"
+      }
+    },
+    {
+      "id": 5,
+      "version": 0,
+      "entityType": "PERSON",
+      "decision": "CREATE_NEW",
+      "existingEntityId": null,
+      "createdEntityId": null,
+      "draftData": {
+        "displayName": "れん"
+      }
+    },
+    {
+      "id": 6,
+      "version": 0,
+      "entityType": "PC",
+      "decision": "CREATE_NEW",
+      "existingEntityId": null,
+      "createdEntityId": null,
+      "draftData": {
+        "name": "白瀬 渚"
+      }
+    }
+  ],
+  "omittedItems": [],
+  "sourceContexts": [
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "月影の書庫 第1卓",
+          "lineEnd": 2,
+          "dependsOn": [],
+          "endOffset": 51,
+          "fieldPath": "/table/tableName",
+          "lineStart": 2,
+          "derivation": "DIRECT",
+          "evidenceId": "r-1:tableName:42",
+          "association": "ACTIVE",
+          "startOffset": 42,
+          "labelLocation": {
+            "excerpt": "卓名",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 2,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:0",
+            "startOffset": 0,
+            "logicalRecord": null
+          },
+          "logicalRecord": 2,
+          "dependsOnLabel": "header:0"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "月影の書庫",
+          "lineEnd": 2,
+          "dependsOn": [],
+          "endOffset": 57,
+          "fieldPath": "/table/scenarioName",
+          "lineStart": 2,
+          "derivation": "DIRECT",
+          "evidenceId": "r-1:scenarioName:52",
+          "association": "ACTIVE",
+          "startOffset": 52,
+          "labelLocation": {
+            "excerpt": "シナリオ名",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 8,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:3",
+            "startOffset": 3,
+            "logicalRecord": null
+          },
+          "logicalRecord": 2,
+          "dependsOnLabel": "header:3"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "2026-07-12",
+          "lineEnd": 2,
+          "dependsOn": [],
+          "endOffset": 68,
+          "fieldPath": "/table/tableDates",
+          "lineStart": 2,
+          "derivation": "DIRECT",
+          "evidenceId": "r-1:date:58",
+          "association": "ALTERNATIVE",
+          "startOffset": 58,
+          "labelLocation": {
+            "excerpt": "実施日",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 12,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:9",
+            "startOffset": 9,
+            "logicalRecord": null
+          },
+          "logicalRecord": 2,
+          "dependsOnLabel": "header:9"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "クトゥルフ神話TRPG",
+          "lineEnd": 2,
+          "dependsOn": [],
+          "endOffset": 80,
+          "fieldPath": "/table/gameSystemName",
+          "lineStart": 2,
+          "derivation": "DIRECT",
+          "evidenceId": "r-1:gameSystemName:69",
+          "association": "ACTIVE",
+          "startOffset": 69,
+          "labelLocation": {
+            "excerpt": "ゲームシステム",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 20,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:13",
+            "startOffset": 13,
+            "logicalRecord": null
+          },
+          "logicalRecord": 2,
+          "dependsOnLabel": "header:13"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "あお",
+          "lineEnd": 2,
+          "dependsOn": [],
+          "endOffset": 87,
+          "fieldPath": "/participations/p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b/personName",
+          "lineStart": 2,
+          "derivation": "DIRECT",
+          "evidenceId": "r-1:person:85",
+          "association": "ACTIVE",
+          "startOffset": 85,
+          "labelLocation": {
+            "excerpt": "人物名",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 33,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:30",
+            "startOffset": 30,
+            "logicalRecord": null
+          },
+          "logicalRecord": 2,
+          "dependsOnLabel": "header:30"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "KP",
+          "lineEnd": 2,
+          "dependsOn": [],
+          "endOffset": 84,
+          "fieldPath": "/participations/p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b/role",
+          "lineStart": 2,
+          "derivation": "DIRECT",
+          "evidenceId": "r-1:role:82",
+          "association": "ACTIVE",
+          "startOffset": 82,
+          "labelLocation": {
+            "excerpt": "役割",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 29,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:27",
+            "startOffset": 27,
+            "logicalRecord": null
+          },
+          "logicalRecord": 2,
+          "dependsOnLabel": "header:27"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "月影の書庫 第1卓",
+          "lineEnd": 3,
+          "dependsOn": [],
+          "endOffset": 100,
+          "fieldPath": "/table/tableName",
+          "lineStart": 3,
+          "derivation": "DIRECT",
+          "evidenceId": "r-2:tableName:91",
+          "association": "ACTIVE",
+          "startOffset": 91,
+          "labelLocation": {
+            "excerpt": "卓名",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 2,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:0",
+            "startOffset": 0,
+            "logicalRecord": null
+          },
+          "logicalRecord": 3,
+          "dependsOnLabel": "header:0"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "月影の書庫",
+          "lineEnd": 3,
+          "dependsOn": [],
+          "endOffset": 106,
+          "fieldPath": "/table/scenarioName",
+          "lineStart": 3,
+          "derivation": "DIRECT",
+          "evidenceId": "r-2:scenarioName:101",
+          "association": "ACTIVE",
+          "startOffset": 101,
+          "labelLocation": {
+            "excerpt": "シナリオ名",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 8,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:3",
+            "startOffset": 3,
+            "logicalRecord": null
+          },
+          "logicalRecord": 3,
+          "dependsOnLabel": "header:3"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "2026-07-12",
+          "lineEnd": 3,
+          "dependsOn": [],
+          "endOffset": 117,
+          "fieldPath": "/table/tableDates",
+          "lineStart": 3,
+          "derivation": "DIRECT",
+          "evidenceId": "r-2:date:107",
+          "association": "ALTERNATIVE",
+          "startOffset": 107,
+          "labelLocation": {
+            "excerpt": "実施日",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 12,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:9",
+            "startOffset": 9,
+            "logicalRecord": null
+          },
+          "logicalRecord": 3,
+          "dependsOnLabel": "header:9"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "クトゥルフ神話TRPG",
+          "lineEnd": 3,
+          "dependsOn": [],
+          "endOffset": 129,
+          "fieldPath": "/table/gameSystemName",
+          "lineStart": 3,
+          "derivation": "DIRECT",
+          "evidenceId": "r-2:gameSystemName:118",
+          "association": "ACTIVE",
+          "startOffset": 118,
+          "labelLocation": {
+            "excerpt": "ゲームシステム",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 20,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:13",
+            "startOffset": 13,
+            "logicalRecord": null
+          },
+          "logicalRecord": 3,
+          "dependsOnLabel": "header:13"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "みな",
+          "lineEnd": 3,
+          "dependsOn": [],
+          "endOffset": 136,
+          "fieldPath": "/participations/p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4/personName",
+          "lineStart": 3,
+          "derivation": "DIRECT",
+          "evidenceId": "r-2:person:134",
+          "association": "ACTIVE",
+          "startOffset": 134,
+          "labelLocation": {
+            "excerpt": "人物名",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 33,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:30",
+            "startOffset": 30,
+            "logicalRecord": null
+          },
+          "logicalRecord": 3,
+          "dependsOnLabel": "header:30"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "PL",
+          "lineEnd": 3,
+          "dependsOn": [],
+          "endOffset": 133,
+          "fieldPath": "/participations/p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4/role",
+          "lineStart": 3,
+          "derivation": "DIRECT",
+          "evidenceId": "r-2:role:131",
+          "association": "ACTIVE",
+          "startOffset": 131,
+          "labelLocation": {
+            "excerpt": "役割",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 29,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:27",
+            "startOffset": 27,
+            "logicalRecord": null
+          },
+          "logicalRecord": 3,
+          "dependsOnLabel": "header:27"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "天野 透",
+          "lineEnd": 3,
+          "dependsOn": [],
+          "endOffset": 141,
+          "fieldPath": "/participations/p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4/pcName",
+          "lineStart": 3,
+          "derivation": "DIRECT",
+          "evidenceId": "r-2:pc:137",
+          "association": "ACTIVE",
+          "startOffset": 137,
+          "labelLocation": {
+            "excerpt": "PC名",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 37,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:34",
+            "startOffset": 34,
+            "logicalRecord": null
+          },
+          "logicalRecord": 3,
+          "dependsOnLabel": "header:34"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "月影の書庫 第1卓",
+          "lineEnd": 4,
+          "dependsOn": [],
+          "endOffset": 153,
+          "fieldPath": "/table/tableName",
+          "lineStart": 4,
+          "derivation": "DIRECT",
+          "evidenceId": "r-3:tableName:144",
+          "association": "ACTIVE",
+          "startOffset": 144,
+          "labelLocation": {
+            "excerpt": "卓名",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 2,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:0",
+            "startOffset": 0,
+            "logicalRecord": null
+          },
+          "logicalRecord": 4,
+          "dependsOnLabel": "header:0"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "月影の書庫",
+          "lineEnd": 4,
+          "dependsOn": [],
+          "endOffset": 159,
+          "fieldPath": "/table/scenarioName",
+          "lineStart": 4,
+          "derivation": "DIRECT",
+          "evidenceId": "r-3:scenarioName:154",
+          "association": "ACTIVE",
+          "startOffset": 154,
+          "labelLocation": {
+            "excerpt": "シナリオ名",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 8,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:3",
+            "startOffset": 3,
+            "logicalRecord": null
+          },
+          "logicalRecord": 4,
+          "dependsOnLabel": "header:3"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "2026-07-12",
+          "lineEnd": 4,
+          "dependsOn": [],
+          "endOffset": 170,
+          "fieldPath": "/table/tableDates",
+          "lineStart": 4,
+          "derivation": "DIRECT",
+          "evidenceId": "r-3:date:160",
+          "association": "ALTERNATIVE",
+          "startOffset": 160,
+          "labelLocation": {
+            "excerpt": "実施日",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 12,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:9",
+            "startOffset": 9,
+            "logicalRecord": null
+          },
+          "logicalRecord": 4,
+          "dependsOnLabel": "header:9"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "クトゥルフ神話TRPG",
+          "lineEnd": 4,
+          "dependsOn": [],
+          "endOffset": 182,
+          "fieldPath": "/table/gameSystemName",
+          "lineStart": 4,
+          "derivation": "DIRECT",
+          "evidenceId": "r-3:gameSystemName:171",
+          "association": "ACTIVE",
+          "startOffset": 171,
+          "labelLocation": {
+            "excerpt": "ゲームシステム",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 20,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:13",
+            "startOffset": 13,
+            "logicalRecord": null
+          },
+          "logicalRecord": 4,
+          "dependsOnLabel": "header:13"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "れん",
+          "lineEnd": 4,
+          "dependsOn": [],
+          "endOffset": 189,
+          "fieldPath": "/participations/p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f/personName",
+          "lineStart": 4,
+          "derivation": "DIRECT",
+          "evidenceId": "r-3:person:187",
+          "association": "ACTIVE",
+          "startOffset": 187,
+          "labelLocation": {
+            "excerpt": "人物名",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 33,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:30",
+            "startOffset": 30,
+            "logicalRecord": null
+          },
+          "logicalRecord": 4,
+          "dependsOnLabel": "header:30"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "PL",
+          "lineEnd": 4,
+          "dependsOn": [],
+          "endOffset": 186,
+          "fieldPath": "/participations/p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f/role",
+          "lineStart": 4,
+          "derivation": "DIRECT",
+          "evidenceId": "r-3:role:184",
+          "association": "ACTIVE",
+          "startOffset": 184,
+          "labelLocation": {
+            "excerpt": "役割",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 29,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:27",
+            "startOffset": 27,
+            "logicalRecord": null
+          },
+          "logicalRecord": 4,
+          "dependsOnLabel": "header:27"
+        }
+      ]
+    },
+    {
+      "sourceId": 5,
+      "sourceType": "FILE",
+      "originalFileName": "01_csv_T01_T02.csv",
+      "traces": [
+        {
+          "excerpt": "白瀬 渚",
+          "lineEnd": 4,
+          "dependsOn": [],
+          "endOffset": 194,
+          "fieldPath": "/participations/p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f/pcName",
+          "lineStart": 4,
+          "derivation": "DIRECT",
+          "evidenceId": "r-3:pc:190",
+          "association": "ACTIVE",
+          "startOffset": 190,
+          "labelLocation": {
+            "excerpt": "PC名",
+            "lineEnd": 1,
+            "dependsOn": [],
+            "endOffset": 37,
+            "fieldPath": "/structure/columnLabel",
+            "lineStart": 1,
+            "derivation": "DIRECT",
+            "evidenceId": "header:34",
+            "startOffset": 34,
+            "logicalRecord": null
+          },
+          "logicalRecord": 4,
+          "dependsOnLabel": "header:34"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "status": 200,
+  "body": {
+    "sessionId": 8,
+    "sessionVersion": 10,
+    "results": [
+      {
+        "candidateId": 25,
+        "requestedVersion": 7,
+        "outcome": "REGISTERED",
+        "candidateVersion": 8,
+        "registrationStatus": "REGISTERED",
+        "registeredTableId": 5,
+        "omittedItems": [
+          {
+            "fieldPath": "/unassignedValues/u-75095109-df33-4f94-8266-2564b0c143cd",
+            "value": "【TRPG 卓の活動記録】",
+            "decision": "USER_OMIT"
+          },
+          {
+            "fieldPath": "/unassignedValues/u-4f43033a-7526-4777-b263-ce94608de1f7",
+            "value": "メモ：シナリオのタイトルを記録し忘れた。",
+            "decision": "USER_OMIT"
+          }
+        ],
+        "error": null
+      }
+    ]
+  }
+}

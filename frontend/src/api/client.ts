@@ -1,9 +1,11 @@
 import type {ErrorBody} from './types';
+import {isDemo} from '../demo/mode';
 export class ApiError extends Error {constructor(public status:number,public body:ErrorBody){super(body.message)}get unknownOutcome(){return this.status===0||this.status>=500||this.body.code==='PARSE_ERROR'}}
 let csrf:{token:string;headerName:string;parameterName:string}|null=null;
 export async function freshCsrf(){csrf=await apiClient<typeof csrf>('/csrf');return csrf}
 export function clearCsrf(){csrf=null}
 export async function apiClient<T>(path:string,options:RequestInit={}):Promise<T>{
+ if(isDemo){const {demoRequest}=await import('../demo/api');return demoRequest<T>(path,options)}
  const method=options.method??'GET';const headers=new Headers(options.headers);if(options.body&&!(options.body instanceof FormData))headers.set('Content-Type','application/json');if(!['GET','HEAD','OPTIONS'].includes(method)){if(!csrf)await freshCsrf();if(csrf)headers.set(csrf.headerName,csrf.token)}
  const controller=new AbortController();let timedOut=false;const timer=setTimeout(()=>{timedOut=true;controller.abort()},45000);const cancelled=()=>controller.abort();options.signal?.addEventListener('abort',cancelled,{once:true});
  try{

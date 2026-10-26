@@ -1,0 +1,18 @@
+{
+  "id": 8,
+  "version": 11,
+  "currentStep": "REGISTER",
+  "status": "COMPLETED",
+  "savedAt": "2026-10-26T01:43:42.376Z",
+  "expiresAt": "2026-11-02T01:43:42.376Z",
+  "sources": [
+    {
+      "id": 8,
+      "sourceType": "FILE",
+      "originalFileName": "04_text_T05.txt",
+      "encoding": "AUTO",
+      "rawText": null,
+      "order": 1
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "candidate": {
+    "id": 18,
+    "version": 2,
+    "candidateData": {
+      "tableName": "月影の書庫 第1卓",
+      "tableDates": [
+        {
+          "playedOn": "2026-07-12"
+        }
+      ],
+      "recordingUrl": null,
+      "scenarioName": "月影の書庫",
+      "gameSystemName": "クトゥルフ神話TRPG",
+      "participations": [
+        {
+          "role": "KP",
+          "pcName": null,
+          "handout": null,
+          "personName": "あお",
+          "candidateParticipationKey": "p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b"
+        },
+        {
+          "role": "PL",
+          "pcName": "天野 透",
+          "handout": null,
+          "personName": "みな",
+          "candidateParticipationKey": "p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4"
+        },
+        {
+          "role": "PL",
+          "pcName": "白瀬 渚",
+          "handout": null,
+          "personName": "れん",
+          "candidateParticipationKey": "p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f"
+        }
+      ],
+      "unassignedValues": []
+    },
+    "effectiveCandidateData": {
+      "tableName": "月影の書庫 第1卓",
+      "tableDates": [
+        {
+          "playedOn": "2026-07-12"
+        }
+      ],
+      "recordingUrl": null,
+      "scenarioName": "月影の書庫",
+      "gameSystemName": "クトゥルフ神話TRPG",
+      "participations": [
+        {
+          "role": "KP",
+          "pcName": null,
+          "handout": null,
+          "personName": "あお",
+          "candidateParticipationKey": "p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b"
+        },
+        {
+          "role": "PL",
+          "pcName": "天野 透",
+          "handout": null,
+          "personName": "みな",
+          "candidateParticipationKey": "p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4"
+        },
+        {
+          "role": "PL",
+          "pcName": "白瀬 渚",
+          "handout": null,
+          "personName": "れん",
+          "candidateParticipationKey": "p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f"
+        }
+      ],
+      "unassignedValues": []
+    },
+    "status": "NEEDS_REVIEW",
+    "confirmationStatus": "UNCHECKED",
+    "registrationTarget": true,
+    "registrationStatus": "PENDING",
+    "registrationResult": {},
+    "resolutionRefs": {
+      "participations": [
+        {
+          "pcResolutionId": null,
+          "personResolutionId": null,
+          "candidateParticipationKey": "p-19725e0f-bc36-4db5-abdc-c4b4bdd4649b"
+        },
+        {
+          "pcResolutionId": null,
+          "personResolutionId": null,
+          "candidateParticipationKey": "p-6ca9483a-dd6f-4787-af26-26b6b0bbd5e4"
+        },
+        {
+          "pcResolutionId": null,
+          "personResolutionId": null,
+          "candidateParticipationKey": "p-10b406ec-d4f0-4b47-aa7a-16acd2c4662f"
+        }
+      ],
+      "scenarioResolutionId": null
+    },
+    "inference": {
+      "boundary": "USER_STRUCTURE_OPERATION",
+      "conflicts": [],
+      "relations": [],
+      "editedFields": [
+        "/table/tableDates"
+      ],
+      "omittedItems": [],
+      "explicitScopes": [],
+      "boundaryAssessments": []
+    }
+  },
+  "operatorActions": [
+    {
+      "field": "tableDates",
+      "from": [
+        {
+          "playedOn": "2026-07-12"
+        },
+        {
+          "playedOn": "2026-07-12"
+        },
+        {
+          "playedOn": "2026-07-12"
+        }
+      ],
+      "to": [
+        "2026-07-12"
+      ],
+      "reason": "Explicit date correction from input, no parser change"
+    }
+  ]
+}

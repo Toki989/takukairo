@@ -1,0 +1,508 @@
+{
+    "recordedAt":  "2026-10-26T10:27:07.2927102+09:00",
+    "archiveSha256":  "EBA40017B050F40182B3FEC458D54151565F34CF816A843F6FA2D2124BBFFAA7",
+    "method":  "ImportParser.decode(Files.readAllBytes(path)); ImportParser.parse(filename, raw)",
+    "scope":  "Parser diagnosis only; UI correction and formal registration not executed",
+    "archiveChanged":  false,
+    "normalDatabaseMutated":  false,
+    "fixtures":  [
+                     {
+                         "file":  "01_csv_T01_T02.csv",
+                         "inputSha256":  "7263311D9C309B5C0C9B0EE07F7902BBD13E42A18BD648A4C64A063301405C37",
+                         "parserFragments":  6,
+                         "rows":  [
+                                      {
+                                          "data":  {
+                                                       "scenarioName":  "月影の書庫",
+                                                       "gameSystemName":  "クトゥルフ神話TRPG",
+                                                       "tableName":  "月影の書庫 第1卓",
+                                                       "tableDates":  [
+                                                                          {
+                                                                              "playedOn":  "2026-07-12"
+                                                                          }
+                                                                      ],
+                                                       "recordingUrl":  null,
+                                                       "participations":  [
+                                                                              {
+                                                                                  "candidateParticipationKey":  "p-de9bf690-15ac-4850-92ce-0daa528cdf6b",
+                                                                                  "personName":  "あお",
+                                                                                  "role":  "KP",
+                                                                                  "pcName":  null,
+                                                                                  "handout":  null
+                                                                              }
+                                                                          ],
+                                                       "unassignedValues":  [
+
+                                                                            ]
+                                                   },
+                                          "lineStart":  2,
+                                          "lineEnd":  2
+                                      },
+                                      {
+                                          "data":  {
+                                                       "scenarioName":  "月影の書庫",
+                                                       "gameSystemName":  "クトゥルフ神話TRPG",
+                                                       "tableName":  "月影の書庫 第1卓",
+                                                       "tableDates":  [
+                                                                          {
+                                                                              "playedOn":  "2026-07-12"
+                                                                          }
+                                                                      ],
+                                                       "recordingUrl":  null,
+                                                       "participations":  [
+                                                                              {
+                                                                                  "candidateParticipationKey":  "p-0f41c7fb-91b5-4b62-88b5-ba9e7ccdbfb6",
+                                                                                  "personName":  "みな",
+                                                                                  "role":  "PL",
+                                                                                  "pcName":  "天野 透",
+                                                                                  "handout":  null
+                                                                              }
+                                                                          ],
+                                                       "unassignedValues":  [
+
+                                                                            ]
+                                                   },
+                                          "lineStart":  3,
+                                          "lineEnd":  3
+                                      },
+                                      {
+                                          "data":  {
+                                                       "scenarioName":  "月影の書庫",
+                                                       "gameSystemName":  "クトゥルフ神話TRPG",
+                                                       "tableName":  "月影の書庫 第1卓",
+                                                       "tableDates":  [
+                                                                          {
+                                                                              "playedOn":  "2026-07-12"
+                                                                          }
+                                                                      ],
+                                                       "recordingUrl":  null,
+                                                       "participations":  [
+                                                                              {
+                                                                                  "candidateParticipationKey":  "p-67387cb4-85dd-40e3-9baf-bc5207e24738",
+                                                                                  "personName":  "れん",
+                                                                                  "role":  "PL",
+                                                                                  "pcName":  "白瀬 渚",
+                                                                                  "handout":  null
+                                                                              }
+                                                                          ],
+                                                       "unassignedValues":  [
+
+                                                                            ]
+                                                   },
+                                          "lineStart":  4,
+                                          "lineEnd":  4
+                                      },
+                                      {
+                                          "data":  {
+                                                       "scenarioName":  "星屑の回廊",
+                                                       "gameSystemName":  "新クトゥルフ神話TRPG",
+                                                       "tableName":  "星屑の回廊 夏季卓",
+                                                       "tableDates":  [
+
+                                                                      ],
+                                                       "recordingUrl":  "https://example.com/trpg/recordings/hoshikuzu-summer",
+                                                       "participations":  [
+                                                                              {
+                                                                                  "candidateParticipationKey":  "p-e5f0fbbe-c299-4691-9638-54360fe6f7d0",
+                                                                                  "personName":  "しずく",
+                                                                                  "role":  "KP",
+                                                                                  "pcName":  null,
+                                                                                  "handout":  null
+                                                                              }
+                                                                          ],
+                                                       "unassignedValues":  [
+                                                                                {
+                                                                                    "itemKey":  "u-874e23a7-4d46-4b58-a5cc-1315fc848a6b",
+                                                                                    "rawValue":  "実施日: 2026-08-16 / 2026-08-17",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                }
+                                                                            ]
+                                                   },
+                                          "lineStart":  5,
+                                          "lineEnd":  5
+                                      },
+                                      {
+                                          "data":  {
+                                                       "scenarioName":  "星屑の回廊",
+                                                       "gameSystemName":  "新クトゥルフ神話TRPG",
+                                                       "tableName":  "星屑の回廊 夏季卓",
+                                                       "tableDates":  [
+
+                                                                      ],
+                                                       "recordingUrl":  "https://example.com/trpg/recordings/hoshikuzu-summer",
+                                                       "participations":  [
+                                                                              {
+                                                                                  "candidateParticipationKey":  "p-5c17caf4-f4f7-42f2-bc74-be4a224ddd6a",
+                                                                                  "personName":  "ゆづき",
+                                                                                  "role":  "PL",
+                                                                                  "pcName":  "朝霧 灯",
+                                                                                  "handout":  "HO1"
+                                                                              }
+                                                                          ],
+                                                       "unassignedValues":  [
+                                                                                {
+                                                                                    "itemKey":  "u-95c3c72e-9bf7-4236-b2aa-588b858438cb",
+                                                                                    "rawValue":  "実施日: 2026-08-16 / 2026-08-17",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                }
+                                                                            ]
+                                                   },
+                                          "lineStart":  6,
+                                          "lineEnd":  6
+                                      },
+                                      {
+                                          "data":  {
+                                                       "scenarioName":  "星屑の回廊",
+                                                       "gameSystemName":  "新クトゥルフ神話TRPG",
+                                                       "tableName":  "星屑の回廊 夏季卓",
+                                                       "tableDates":  [
+
+                                                                      ],
+                                                       "recordingUrl":  "https://example.com/trpg/recordings/hoshikuzu-summer",
+                                                       "participations":  [
+                                                                              {
+                                                                                  "candidateParticipationKey":  "p-308674b3-7f2d-4142-953f-83393834e0aa",
+                                                                                  "personName":  "いと",
+                                                                                  "role":  "PL",
+                                                                                  "pcName":  "久遠 澄",
+                                                                                  "handout":  "HO2"
+                                                                              }
+                                                                          ],
+                                                       "unassignedValues":  [
+                                                                                {
+                                                                                    "itemKey":  "u-fb1855d6-a820-4e83-97eb-7df7016abdb5",
+                                                                                    "rawValue":  "実施日: 2026-08-16 / 2026-08-17",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                }
+                                                                            ]
+                                                   },
+                                          "lineStart":  7,
+                                          "lineEnd":  7
+                                      }
+                                  ]
+                     },
+                     {
+                         "file":  "02_markdown_T03.md",
+                         "inputSha256":  "4FC2E4EC7BD2394A62595D408FBF6A0BC6D82381B1EC863A3AF61A2CC148B3B4",
+                         "parserFragments":  4,
+                         "rows":  [
+                                      {
+                                          "data":  {
+                                                       "scenarioName":  "深海の郵便局",
+                                                       "gameSystemName":  null,
+                                                       "tableName":  "深海の郵便局 夜間卓",
+                                                       "tableDates":  [
+
+                                                                      ],
+                                                       "recordingUrl":  null,
+                                                       "participations":  [
+
+                                                                          ],
+                                                       "unassignedValues":  [
+                                                                                {
+                                                                                    "itemKey":  "u-882976c8-1893-40f9-83a0-4cb47ce9ffd7",
+                                                                                    "rawValue":  "TRPG活動記録",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                },
+                                                                                {
+                                                                                    "itemKey":  "u-05274b89-bd8f-4b37-a86a-0920bad764b9",
+                                                                                    "rawValue":  "卓：深海の郵便局 夜間卓",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                },
+                                                                                {
+                                                                                    "itemKey":  "u-842528f0-ec7a-4bad-aa95-9c3f74849fbd",
+                                                                                    "rawValue":  "実施日：不明",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                }
+                                                                            ]
+                                                   },
+                                          "lineStart":  5,
+                                          "lineEnd":  7
+                                      },
+                                      {
+                                          "data":  {
+                                                       "scenarioName":  "",
+                                                       "gameSystemName":  null,
+                                                       "tableName":  null,
+                                                       "tableDates":  [
+
+                                                                      ],
+                                                       "recordingUrl":  null,
+                                                       "participations":  [
+                                                                              {
+                                                                                  "candidateParticipationKey":  "p-06131071-9991-4c77-99e4-9323f28aecb4",
+                                                                                  "personName":  "こはる",
+                                                                                  "role":  "KP",
+                                                                                  "pcName":  null,
+                                                                                  "handout":  null
+                                                                              }
+                                                                          ],
+                                                       "unassignedValues":  [
+                                                                                {
+                                                                                    "itemKey":  "u-4dd4525a-d757-4686-a51d-5234ebaf9de2",
+                                                                                    "rawValue":  "TRPG活動記録",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                },
+                                                                                {
+                                                                                    "itemKey":  "u-177d70b1-1dbd-456a-9cb1-d9681852da25",
+                                                                                    "rawValue":  "卓：深海の郵便局 夜間卓",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                }
+                                                                            ]
+                                                   },
+                                          "lineStart":  13,
+                                          "lineEnd":  13
+                                      },
+                                      {
+                                          "data":  {
+                                                       "scenarioName":  "",
+                                                       "gameSystemName":  null,
+                                                       "tableName":  null,
+                                                       "tableDates":  [
+
+                                                                      ],
+                                                       "recordingUrl":  null,
+                                                       "participations":  [
+                                                                              {
+                                                                                  "candidateParticipationKey":  "p-cd007392-b838-45ca-b95a-425e6148a4d3",
+                                                                                  "personName":  "ひかり",
+                                                                                  "role":  "PL",
+                                                                                  "pcName":  null,
+                                                                                  "handout":  null
+                                                                              }
+                                                                          ],
+                                                       "unassignedValues":  [
+                                                                                {
+                                                                                    "itemKey":  "u-b101ebf9-6135-44d0-996b-512a5da7484c",
+                                                                                    "rawValue":  "TRPG活動記録",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                },
+                                                                                {
+                                                                                    "itemKey":  "u-4dfa92e4-6ee8-45c7-a95d-6159d882de74",
+                                                                                    "rawValue":  "卓：深海の郵便局 夜間卓",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                }
+                                                                            ]
+                                                   },
+                                          "lineStart":  14,
+                                          "lineEnd":  14
+                                      },
+                                      {
+                                          "data":  {
+                                                       "scenarioName":  "",
+                                                       "gameSystemName":  null,
+                                                       "tableName":  null,
+                                                       "tableDates":  [
+
+                                                                      ],
+                                                       "recordingUrl":  null,
+                                                       "participations":  [
+
+                                                                          ],
+                                                       "unassignedValues":  [
+                                                                                {
+                                                                                    "itemKey":  "u-546d261b-15a1-47b6-a960-d3c2fb170f66",
+                                                                                    "rawValue":  "TRPG活動記録",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                },
+                                                                                {
+                                                                                    "itemKey":  "u-bf6d71fb-dae7-45d8-9f64-b22aa3109dbc",
+                                                                                    "rawValue":  "卓：深海の郵便局 夜間卓",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                },
+                                                                                {
+                                                                                    "itemKey":  "u-e2e90687-335f-46a8-b680-1dae4c1ac004",
+                                                                                    "rawValue":  "※この記録には実施日とPLのPC名が残っていない。",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                }
+                                                                            ]
+                                                   },
+                                          "lineStart":  16,
+                                          "lineEnd":  16
+                                      }
+                                  ]
+                     },
+                     {
+                         "file":  "03_html_T04.html",
+                         "inputSha256":  "5992FF759C28EDDD418D1ED78614AE8B72180DBE910F535880CBAB921A2DFA83",
+                         "parserFragments":  1,
+                         "rows":  [
+                                      {
+                                          "data":  {
+                                                       "scenarioName":  "シナリオ名",
+                                                       "gameSystemName":  null,
+                                                       "tableName":  "卓名",
+                                                       "tableDates":  [
+
+                                                                      ],
+                                                       "recordingUrl":  null,
+                                                       "participations":  [
+                                                                              {
+                                                                                  "candidateParticipationKey":  "p-38ece440-3814-4527-a2ec-b56d49589117",
+                                                                                  "personName":  "参加者",
+                                                                                  "role":  null,
+                                                                                  "pcName":  null,
+                                                                                  "handout":  null
+                                                                              }
+                                                                          ],
+                                                       "unassignedValues":  [
+                                                                                {
+                                                                                    "itemKey":  "u-a77b1c0c-9796-499a-be2b-bf77e90deb90",
+                                                                                    "rawValue":  "卓の活動記録",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                },
+                                                                                {
+                                                                                    "itemKey":  "u-b8caf4a0-78c9-48b7-ac49-912effbe8c88",
+                                                                                    "rawValue":  "消えた時計塔",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                },
+                                                                                {
+                                                                                    "itemKey":  "u-65b13cc1-2b5b-42c3-b25e-e074881e72e1",
+                                                                                    "rawValue":  "消えた時計塔 記録のみ",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                },
+                                                                                {
+                                                                                    "itemKey":  "u-a897532b-03f3-4884-92dc-142043838573",
+                                                                                    "rawValue":  "実施日",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                },
+                                                                                {
+                                                                                    "itemKey":  "u-9b90e894-7723-4886-86af-db4eff48ff02",
+                                                                                    "rawValue":  "2026-08-29",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                },
+                                                                                {
+                                                                                    "itemKey":  "u-9c5497b1-4268-449e-84ee-d8803d66f4f9",
+                                                                                    "rawValue":  "0名（名簿の記録なし）",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                },
+                                                                                {
+                                                                                    "itemKey":  "u-f6371b24-d6e9-408b-b141-b5f3816f77ea",
+                                                                                    "rawValue":  "開催履歴だけが保存されている。KP・PL・PCは未記録。",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                }
+                                                                            ]
+                                                   },
+                                          "lineStart":  12,
+                                          "lineEnd":  17
+                                      }
+                                  ]
+                     },
+                     {
+                         "file":  "04_text_T05.txt",
+                         "inputSha256":  "0FAEAA540A93CA1DE9C1838CA1B84232A9644857FE736FA511793A35D44BB522",
+                         "parserFragments":  1,
+                         "rows":  [
+                                      {
+                                          "data":  {
+                                                       "scenarioName":  "",
+                                                       "gameSystemName":  null,
+                                                       "tableName":  "9月上旬の臨時卓",
+                                                       "tableDates":  [
+                                                                          {
+                                                                              "playedOn":  "2026-09-02"
+                                                                          }
+                                                                      ],
+                                                       "recordingUrl":  null,
+                                                       "participations":  [
+                                                                              {
+                                                                                  "candidateParticipationKey":  "p-0b92de3d-965c-4727-8160-a6afb3f2cd73",
+                                                                                  "personName":  "すばる",
+                                                                                  "role":  "KP",
+                                                                                  "pcName":  null,
+                                                                                  "handout":  null
+                                                                              },
+                                                                              {
+                                                                                  "candidateParticipationKey":  "p-970c9d5b-0642-4044-a93e-4ada3f492ca0",
+                                                                                  "personName":  "つばめ",
+                                                                                  "role":  "PL",
+                                                                                  "pcName":  "小夜 千景",
+                                                                                  "handout":  null
+                                                                              }
+                                                                          ],
+                                                       "unassignedValues":  [
+                                                                                {
+                                                                                    "itemKey":  "u-835fd65a-29bb-4dbc-ac17-7bd6e3c43809",
+                                                                                    "rawValue":  "【TRPG 卓の活動記録】",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                },
+                                                                                {
+                                                                                    "itemKey":  "u-d113274b-824d-4306-b3ee-cb00ca43a460",
+                                                                                    "rawValue":  "メモ：シナリオのタイトルを記録し忘れた。",
+                                                                                    "assignment":  {
+                                                                                                       "type":  "UNASSIGNED",
+                                                                                                       "candidateParticipationKey":  null
+                                                                                                   }
+                                                                                }
+                                                                            ]
+                                                   },
+                                          "lineStart":  1,
+                                          "lineEnd":  8
+                                      }
+                                  ]
+                     }
+                 ]
+}

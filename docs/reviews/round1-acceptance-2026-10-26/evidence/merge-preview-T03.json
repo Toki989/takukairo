@@ -1,0 +1,168 @@
+{
+  "status": 200,
+  "body": {
+    "sessionVersion": 2,
+    "previewRevision": "7668da74-b9a5-4c53-bc27-a7fbe49c33de",
+    "boundaryEvaluation": {
+      "candidateIds": [
+        20,
+        21,
+        22
+      ],
+      "evidenceLevel": "E0",
+      "conflict": "C2",
+      "pairAssessments": [],
+      "counterEvidence": [
+        {
+          "candidateIds": [
+            20,
+            21
+          ],
+          "evidenceLevel": "E0",
+          "conflict": null,
+          "evidenceKinds": []
+        },
+        {
+          "candidateIds": [
+            20,
+            22
+          ],
+          "evidenceLevel": "E0",
+          "conflict": null,
+          "evidenceKinds": []
+        },
+        {
+          "candidateIds": [
+            21,
+            22
+          ],
+          "evidenceLevel": "E0",
+          "conflict": null,
+          "evidenceKinds": []
+        }
+      ],
+      "canMerge": true,
+      "requiresSameTableConfirmation": true,
+      "automaticMerge": false
+    },
+    "sourceVersions": [
+      {
+        "candidateId": 20,
+        "version": 1
+      },
+      {
+        "candidateId": 21,
+        "version": 1
+      },
+      {
+        "candidateId": 22,
+        "version": 1
+      }
+    ],
+    "mergedCandidate": {
+      "candidateData": {
+        "tableName": "深海の郵便局 夜間卓",
+        "tableDates": [],
+        "recordingUrl": null,
+        "scenarioName": "深海の郵便局",
+        "gameSystemName": null,
+        "participations": [
+          {
+            "role": "KP",
+            "pcName": null,
+            "handout": null,
+            "personName": "こはる",
+            "candidateParticipationKey": "p-567b4259-540f-469f-9f95-27a64116dada"
+          },
+          {
+            "role": "PL",
+            "pcName": null,
+            "handout": null,
+            "personName": "ひかり",
+            "candidateParticipationKey": "p-1b6d4167-6e72-468f-b0b7-b2e4d5e81988"
+          }
+        ],
+        "unassignedValues": [
+          {
+            "itemKey": "u-8eaeb87f-fca9-448d-92be-ab2834ff1b5c",
+            "rawValue": "TRPG活動記録",
+            "assignment": {
+              "type": "UNASSIGNED",
+              "candidateParticipationKey": null
+            }
+          },
+          {
+            "itemKey": "u-2044dd24-38bf-4ae4-8c5e-6aa41092b282",
+            "rawValue": "卓：深海の郵便局 夜間卓",
+            "assignment": {
+              "type": "UNASSIGNED",
+              "candidateParticipationKey": null
+            }
+          },
+          {
+            "itemKey": "u-0f9d32fc-9226-4232-8550-31bf5b50fb1a",
+            "rawValue": "実施日：不明",
+            "assignment": {
+              "type": "UNASSIGNED",
+              "candidateParticipationKey": null
+            }
+          },
+          {
+            "itemKey": "u-43718ea6-0b58-4a29-9835-aafa705d9863",
+            "rawValue": "TRPG活動記録",
+            "assignment": {
+              "type": "UNASSIGNED",
+              "candidateParticipationKey": null
+            }
+          },
+          {
+            "itemKey": "u-479223a2-80a3-497b-9294-ad9b3de9df22",
+            "rawValue": "卓：深海の郵便局 夜間卓",
+            "assignment": {
+              "type": "UNASSIGNED",
+              "candidateParticipationKey": null
+            }
+          },
+          {
+            "itemKey": "u-5e0513dd-703e-40be-ab55-23690daf8d9d",
+            "rawValue": "TRPG活動記録",
+            "assignment": {
+              "type": "UNASSIGNED",
+              "candidateParticipationKey": null
+            }
+          },
+          {
+            "itemKey": "u-a15a44ae-e1f6-48e9-8f38-da09aad3c52c",
+            "rawValue": "卓：深海の郵便局 夜間卓",
+            "assignment": {
+              "type": "UNASSIGNED",
+              "candidateParticipationKey": null
+            }
+          }
+        ]
+      },
+      "resolutionRefs": {
+        "scenarioResolutionId": null,
+        "participations": [
+          {
+            "candidateParticipationKey": "p-567b4259-540f-469f-9f95-27a64116dada",
+            "personResolutionId": null,
+            "pcResolutionId": null
+          },
+          {
+            "candidateParticipationKey": "p-1b6d4167-6e72-468f-b0b7-b2e4d5e81988",
+            "personResolutionId": null,
+            "pcResolutionId": null
+          }
+        ]
+      },
+      "resolutions": [],
+      "confirmationStatus": "UNCHECKED",
+      "registrationTarget": true
+    },
+    "resolutionConflicts": [],
+    "unmappedSourceResolutionRefs": [],
+    "registrationTargetConflict": false,
+    "canApply": true
+  }
+}

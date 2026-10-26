@@ -1,0 +1,200 @@
+{
+  "status": 200,
+  "body": {
+    "sessionVersion": 3,
+    "previewRevision": "5d162e7a-216f-4ed5-ae9b-4a5d8b567188",
+    "boundaryEvaluation": {
+      "candidateIds": [
+        15,
+        16,
+        17
+      ],
+      "evidenceLevel": "E0",
+      "conflict": "C2",
+      "pairAssessments": [
+        {
+          "candidateIds": [
+            15,
+            16
+          ],
+          "evidenceLevel": "E1",
+          "conflict": "C2",
+          "evidenceKinds": [
+            "RECORDING_REFERENCE"
+          ],
+          "requiresSameTableConfirmation": false,
+          "automaticMerge": false
+        },
+        {
+          "candidateIds": [
+            15,
+            17
+          ],
+          "evidenceLevel": "E1",
+          "conflict": "C2",
+          "evidenceKinds": [
+            "RECORDING_REFERENCE"
+          ],
+          "requiresSameTableConfirmation": false,
+          "automaticMerge": false
+        },
+        {
+          "candidateIds": [
+            16,
+            17
+          ],
+          "evidenceLevel": "E1",
+          "conflict": "C2",
+          "evidenceKinds": [
+            "RECORDING_REFERENCE"
+          ],
+          "requiresSameTableConfirmation": false,
+          "automaticMerge": false
+        }
+      ],
+      "counterEvidence": [
+        {
+          "candidateIds": [
+            15,
+            16
+          ],
+          "evidenceLevel": "E1",
+          "conflict": "C2",
+          "evidenceKinds": [
+            "RECORDING_REFERENCE"
+          ],
+          "requiresSameTableConfirmation": false,
+          "automaticMerge": false
+        },
+        {
+          "candidateIds": [
+            15,
+            17
+          ],
+          "evidenceLevel": "E1",
+          "conflict": "C2",
+          "evidenceKinds": [
+            "RECORDING_REFERENCE"
+          ],
+          "requiresSameTableConfirmation": false,
+          "automaticMerge": false
+        },
+        {
+          "candidateIds": [
+            16,
+            17
+          ],
+          "evidenceLevel": "E1",
+          "conflict": "C2",
+          "evidenceKinds": [
+            "RECORDING_REFERENCE"
+          ],
+          "requiresSameTableConfirmation": false,
+          "automaticMerge": false
+        }
+      ],
+      "canMerge": true,
+      "requiresSameTableConfirmation": true,
+      "automaticMerge": false
+    },
+    "sourceVersions": [
+      {
+        "candidateId": 15,
+        "version": 1
+      },
+      {
+        "candidateId": 16,
+        "version": 1
+      },
+      {
+        "candidateId": 17,
+        "version": 1
+      }
+    ],
+    "mergedCandidate": {
+      "candidateData": {
+        "tableName": "星屑の回廊 夏季卓",
+        "tableDates": [],
+        "recordingUrl": "https://example.com/trpg/recordings/hoshikuzu-summer",
+        "scenarioName": "星屑の回廊",
+        "gameSystemName": "新クトゥルフ神話TRPG",
+        "participations": [
+          {
+            "role": "KP",
+            "pcName": null,
+            "handout": null,
+            "personName": "しずく",
+            "candidateParticipationKey": "p-56187f3a-478b-4b3b-bcc4-73c16a8273d6"
+          },
+          {
+            "role": "PL",
+            "pcName": "朝霧 灯",
+            "handout": "HO1",
+            "personName": "ゆづき",
+            "candidateParticipationKey": "p-e0f9f4c5-bfe5-4d69-a833-600a856636d5"
+          },
+          {
+            "role": "PL",
+            "pcName": "久遠 澄",
+            "handout": "HO2",
+            "personName": "いと",
+            "candidateParticipationKey": "p-74be6116-edf6-4ff4-b7a1-d72ce81306ce"
+          }
+        ],
+        "unassignedValues": [
+          {
+            "itemKey": "u-3325b878-8ff2-4472-ba14-b67f42267856",
+            "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+            "assignment": {
+              "type": "UNASSIGNED",
+              "candidateParticipationKey": null
+            }
+          },
+          {
+            "itemKey": "u-c6904725-cabb-4064-9d79-c24a52b71667",
+            "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+            "assignment": {
+              "type": "UNASSIGNED",
+              "candidateParticipationKey": null
+            }
+          },
+          {
+            "itemKey": "u-9c076354-2c7c-47d2-ac12-6f86f6da9095",
+            "rawValue": "実施日: 2026-08-16 / 2026-08-17",
+            "assignment": {
+              "type": "UNASSIGNED",
+              "candidateParticipationKey": null
+            }
+          }
+        ]
+      },
+      "resolutionRefs": {
+        "scenarioResolutionId": null,
+        "participations": [
+          {
+            "candidateParticipationKey": "p-56187f3a-478b-4b3b-bcc4-73c16a8273d6",
+            "personResolutionId": null,
+            "pcResolutionId": null
+          },
+          {
+            "candidateParticipationKey": "p-e0f9f4c5-bfe5-4d69-a833-600a856636d5",
+            "personResolutionId": null,
+            "pcResolutionId": null
+          },
+          {
+            "candidateParticipationKey": "p-74be6116-edf6-4ff4-b7a1-d72ce81306ce",
+            "personResolutionId": null,
+            "pcResolutionId": null
+          }
+        ]
+      },
+      "resolutions": [],
+      "confirmationStatus": "UNCHECKED",
+      "registrationTarget": true
+    },
+    "resolutionConflicts": [],
+    "unmappedSourceResolutionRefs": [],
+    "registrationTargetConflict": false,
+    "canApply": true
+  }
+}
