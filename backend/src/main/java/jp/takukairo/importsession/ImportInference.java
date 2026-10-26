@@ -7,6 +7,10 @@ import static jp.takukairo.importsession.ImportStructure.*;
 /** One inference path for all formats. No string-identity or transitive table union. */
 public final class ImportInference {
  private static final Set<String> PARTICIPANT_FIELDS=Set.of("pc","role","handout","displayQuote","spotlightType","characterSheetUrl","stateSan","stateHp","stateMp","stateGrowth","stateOutcome","stateAftereffects");
+ private enum ActivityContext { ACTUAL, NOT_ACTUAL, UNCERTAIN, UNCLASSIFIED }
+ private static final Pattern NON_ACTUAL_CONTEXT=Pattern.compile("予定|候補|未実施|未完了|未プレイ|未通過|募集|連絡|日程調整|主催|作者|投稿者|引用|NPC|ない|なかった|なく|ません|とは言え|とはいえ|\\b(?:planned|candidate|tentative|quote|uncompleted|unplayed|recruiting|not|never|no|neither|without|cannot)\\b|\\b\\w+n['’]t\\b",Pattern.CASE_INSENSITIVE|Pattern.UNICODE_CASE);
+ private static final Pattern UNCERTAIN_CONTEXT=Pattern.compile("未確認|不明|不確実|かもしれ|かどうか|とは限ら|ですか(?:[。！]|$)|[?？]|\\b(?:unknown|uncertain|unconfirmed|maybe|perhaps|possibly)\\b",Pattern.CASE_INSENSITIVE|Pattern.UNICODE_CASE);
+ private static final Pattern ACTUAL_CONTEXT=Pattern.compile("実施済|プレイ済|通過済|\\b(?:completed|played)\\b",Pattern.CASE_INSENSITIVE|Pattern.UNICODE_CASE);
  private record Context(String field,String value,Block block) {}
  private static final class Draft {
   final Map<String,Object> data=map("scenarioName","","gameSystemName",null,"tableName",null,"tableDates",new ArrayList<>(),"recordingUrl",null,"participations",new ArrayList<>(),"unassignedValues",new ArrayList<>());
@@ -34,7 +38,7 @@ public final class ImportInference {
    if(b.kind()==Kind.RECORD&&!current.explicitTable){
     if(tableContext==null&&list(current.data.get("participations")).isEmpty()&&current.populated())tableContext=current;
     boolean sharedOnly=tableContext==current;if(!sharedOnly)emit(current,results,doc.format());current=new Draft();
-    if(tableContext!=null){inherit(current,contexts,completion,explicit);current.completed=tableContext.completed;current.contextExcluded=tableContext.contextExcluded;current.usedContext.addAll(tableContext.usedContext);for(String field:List.of("scenarioName","gameSystemName","tableName","authorName","sourceUrl","recordingUrl"))if(tableContext.data.get(field)!=null)current.data.put(field,tableContext.data.get(field));for(var t:tableContext.traces)if("/inference/context".equals(t.get("fieldPath"))||text(t.get("fieldPath")).startsWith("/table/")){var inherited=new LinkedHashMap<>(t);inherited.put("derivation","INHERITED");inherited.put("dependsOn",List.of(t.get("evidenceId")));current.traces.add(inherited);}if(sharedOnly){list(current.data.get("unassignedValues")).addAll(list(tableContext.data.get("unassignedValues")));for(var t:tableContext.traces)if(text(t.get("fieldPath")).startsWith("/unassignedValues/"))current.traces.add(new LinkedHashMap<>(t));}}
+    if(tableContext!=null){inherit(current,contexts,completion,explicit);inheritTableContext(current,tableContext,sharedOnly);}
    }
    if(b.kind()!=Kind.RECORD){tableContext=null;if(previous==Kind.RECORD&&!current.explicitTable){emit(current,results,doc.format());current=new Draft();}}
    previous=b.kind();
@@ -66,9 +70,27 @@ public final class ImportInference {
   for(var piece:pieces){String scope=text(piece.inference().get("scopeEvidenceId"));if(scope==null||!explicit.containsKey(scope)){if(scope!=null)explicit.put(scope,result.size());result.add(piece);continue;}
    int index=explicit.get(scope);var first=result.get(index);var data=object(write(first.data()));var traces=new ArrayList<>(first.traces());traces.addAll(piece.traces());var metadata=object(write(first.inference()));var conflicts=new ArrayList<>(list(metadata.get("conflicts")));conflicts.addAll(list(piece.inference().get("conflicts")));
    for(String field:List.of("scenarioName","gameSystemName","tableName","recordingUrl","authorName","sourceUrl")){Object a=data.get(field),b=piece.data().get(field);if(a==null||a.equals(""))data.put(field,b);else if(b!=null&&!b.equals("")&&!Objects.equals(a,b)){String item="u-"+UUID.randomUUID();list(data.get("unassignedValues")).add(map("itemKey",item,"rawValue",field+": "+b,"assignment",map("type","UNASSIGNED","candidateParticipationKey",null)));conflicts.add(map("kind","C3","fieldPath","/table/"+field,"values",List.of(a,b),"scopeEvidenceId",scope));}}
-   for(String field:List.of("tableDates","participations","unassignedValues"))list(data.get(field)).addAll(list(piece.data().get(field)));var relations=new ArrayList<>(list(metadata.get("relations")));relations.addAll(list(piece.inference().get("relations")));metadata.put("relations",relations);metadata.put("conflicts",conflicts);result.set(index,new ImportParser.Parsed(data,Math.min(first.lineStart(),piece.lineStart()),Math.max(first.lineEnd(),piece.lineEnd()),first.excerpt()+"\n"+piece.excerpt(),traces,metadata));
+   for(String field:List.of("tableDates","participations","unassignedValues"))list(data.get(field)).addAll(list(piece.data().get(field)));var relations=new ArrayList<>(list(metadata.get("relations")));relations.addAll(list(piece.inference().get("relations")));metadata.put("relations",relations);metadata.put("conflicts",conflicts);
+   metadata.put("recordStartOffset",Math.min(((Number)metadata.get("recordStartOffset")).intValue(),((Number)piece.inference().get("recordStartOffset")).intValue()));
+   metadata.put("recordEndOffset",Math.max(((Number)metadata.get("recordEndOffset")).intValue(),((Number)piece.inference().get("recordEndOffset")).intValue()));
+   var contextIds=new LinkedHashSet<Object>((Collection<?>)metadata.get("sharedContextEvidenceIds"));contextIds.addAll((Collection<?>)piece.inference().get("sharedContextEvidenceIds"));metadata.put("sharedContextEvidenceIds",contextIds);
+   metadata.put("quotedEvidence",Boolean.TRUE.equals(metadata.get("quotedEvidence"))||Boolean.TRUE.equals(piece.inference().get("quotedEvidence")));
+   result.set(index,new ImportParser.Parsed(data,Math.min(first.lineStart(),piece.lineStart()),Math.max(first.lineEnd(),piece.lineEnd()),first.excerpt()+"\n"+piece.excerpt(),traces,metadata));
   }
+  // Only E3 pieces were joined. Re-evaluate SKP after all participants in that scope exist.
+  for(var p:result)resolveKnownSkp(p.data(),list(p.inference().get("relations")),p.traces());
   return result;
+ }
+ private void inheritTableContext(Draft d,Draft context,boolean consumeUnassigned){
+  d.completed=context.completed;d.contextExcluded=context.contextExcluded;d.usedContext.addAll(context.usedContext);
+  for(String field:List.of("scenarioName","gameSystemName","tableName","authorName","sourceUrl","recordingUrl"))if(context.data.get(field)!=null)d.data.put(field,context.data.get(field));
+  // Dates belong to the same immediately preceding table context as its scalar fields.
+  // Each row gets its own list; the adapter's next-table/blank boundary ends inheritance.
+  for(var date:list(context.data.get("tableDates")))list(d.data.get("tableDates")).add(new LinkedHashMap<>(date));
+  for(var trace:context.traces)if("/inference/context".equals(trace.get("fieldPath"))||text(trace.get("fieldPath")).startsWith("/table/")){
+   var inherited=new LinkedHashMap<>(trace);inherited.put("derivation","INHERITED");inherited.put("dependsOn",List.of(trace.get("evidenceId")));d.traces.add(inherited);d.usedContext.add(text(trace.get("evidenceId")));
+  }
+  if(consumeUnassigned){list(d.data.get("unassignedValues")).addAll(list(context.data.get("unassignedValues")));for(var trace:context.traces)if(text(trace.get("fieldPath")).startsWith("/unassignedValues/"))d.traces.add(new LinkedHashMap<>(trace));}
  }
  private void inherit(Draft d,TreeMap<Integer,List<Context>> contexts,TreeMap<Integer,Boolean> completion,TreeMap<Integer,Boolean> explicit) {
   d.completed=!completion.isEmpty()&&completion.lastEntry().getValue();d.contextExcluded=!completion.isEmpty()&&!completion.lastEntry().getValue();d.explicitTable=explicit.values().stream().anyMatch(Boolean.TRUE::equals);
@@ -154,10 +176,31 @@ public final class ImportInference {
    if(p.get("role")==null&&p.get("pcName")!=null&&d.recordCompleted.getOrDefault(key,d.completed)&&!excluded&&d.pcRanges.containsKey(key)){p.put("role","PL");var deps=new ArrayList<String>(d.recordEvidence.getOrDefault(key,new ArrayList<>(d.usedContext)));if(d.personEvidence.get(key)!=null)deps.add(d.personEvidence.get(key));deps.add(d.pcEvidence.get(key));d.relations.add(map("candidateParticipationKey",key,"state","PROVISIONAL","role","PL","reason","実施済み参加者と使用PCの明示対応","evidenceIds",deps));d.traces.add(d.pcRanges.get(key).trace("/participations/"+key+"/role",d.pcBlocks.get(key).logicalRecord(),d.pcEvidence.get(key)+":role","INFERRED",deps));}
   }
  }
- private void resolveKnownSkp(Draft d){boolean main=list(d.data.get("participations")).stream().anyMatch(p->"KP".equals(p.get("role"))&&d.relations.stream().noneMatch(r->Objects.equals(r.get("candidateParticipationKey"),p.get("candidateParticipationKey"))&&"SKP".equals(r.get("originalRole"))));if(!main)return;var skpKeys=new HashSet<String>();for(var r:d.relations)if("SKP".equals(r.get("originalRole"))&&!Boolean.FALSE.equals(r.get("eligibleActualParticipation"))){r.put("hasMainKp",true);r.put("state","PROVISIONAL");skpKeys.add(text(r.get("candidateParticipationKey")));}var parts=list(d.data.get("participations"));for(var p:parts)if(skpKeys.contains(text(p.get("candidateParticipationKey"))))p.put("role","KP");parts.sort(Comparator.comparingInt(p->skpKeys.contains(text(p.get("candidateParticipationKey")))?1:0));}
- private boolean excludedContext(String s){return s.matches("(?is).*(予定|候補|未実施|未完了|未プレイ|未通過|未確認|不明|不確実|かもしれ|かどうか|募集|連絡|日程調整|主催|作者|投稿者|引用|NPC|(?:実施済み?|完了|プレイ済み?|通過済み?)(?:では(?:あり)?ません|で(?:は)?ない|ではなく|していない)|[?？]|\\b(?:planned|candidate|tentative|quote|uncompleted|unplayed|unknown|uncertain|recruiting|unconfirmed)\\b|\\b(?:not|never)\\s+(?:yet\\s+)?(?:completed|played)\\b).*")||s.strip().matches("(?s)^(?:\".*\"|“.*”|「.*」|『.*』)$");}
- private boolean actualContext(String s){return !excludedContext(s)&&s.matches("(?is).*(実施済|プレイ済|通過済|\\bcompleted\\b|\\bplayed\\b).*");}
- private boolean completed(String s){return actualContext(s)&&!excludedContext(s);}
+ private void resolveKnownSkp(Map<String,Object> data,List<Map<String,Object>> relations,List<Map<String,Object>> traces){
+  var parts=list(data.get("participations"));var mainKeys=new HashSet<String>();
+  for(var p:parts)if("KP".equals(p.get("role"))&&relations.stream().noneMatch(r->Objects.equals(r.get("candidateParticipationKey"),p.get("candidateParticipationKey"))&&"SKP".equals(r.get("originalRole"))))mainKeys.add(text(p.get("candidateParticipationKey")));
+  if(mainKeys.isEmpty())return;
+  var mainEvidence=new LinkedHashSet<String>();for(var trace:traces)for(String key:mainKeys)if(("/participations/"+key+"/role").equals(trace.get("fieldPath")))mainEvidence.add(text(trace.get("evidenceId")));
+  var skpKeys=new HashSet<String>();
+  for(var r:relations)if("SKP".equals(r.get("originalRole"))&&!Boolean.FALSE.equals(r.get("eligibleActualParticipation"))){
+   r.put("hasMainKp",true);r.put("state","PROVISIONAL");String key=text(r.get("candidateParticipationKey"));skpKeys.add(key);
+   var dependencies=new LinkedHashSet<Object>((Collection<?>)r.get("evidenceIds"));dependencies.addAll(mainEvidence);r.put("evidenceIds",new ArrayList<>(dependencies));
+   for(var trace:traces)if(("/participations/"+key+"/role").equals(trace.get("fieldPath"))){trace.put("derivation","INFERRED");trace.put("dependsOn",new ArrayList<>(dependencies));}
+  }
+  for(var p:parts)if(skpKeys.contains(text(p.get("candidateParticipationKey"))))p.put("role","KP");
+  parts.sort(Comparator.comparingInt(p->skpKeys.contains(text(p.get("candidateParticipationKey")))?1:0));
+ }
+ private ActivityContext activityContext(String s){
+  String normalized=java.text.Normalizer.normalize(s.strip(),java.text.Normalizer.Form.NFKC);
+  // Negation/uncertainty invalidates a positive word even with intervening adverbs.
+  // Double negatives remain unresolved rather than inventing affirmative evidence.
+  if(UNCERTAIN_CONTEXT.matcher(normalized).find())return ActivityContext.UNCERTAIN;
+  if(NON_ACTUAL_CONTEXT.matcher(normalized).find()||normalized.matches("(?s)^(?:\".*\"|“.*”|「.*」|『.*』)$"))return ActivityContext.NOT_ACTUAL;
+  return ACTUAL_CONTEXT.matcher(normalized).find()?ActivityContext.ACTUAL:ActivityContext.UNCLASSIFIED;
+ }
+ private boolean excludedContext(String s){var context=activityContext(s);return context==ActivityContext.NOT_ACTUAL||context==ActivityContext.UNCERTAIN;}
+ private boolean actualContext(String s){return activityContext(s)==ActivityContext.ACTUAL;}
+ private boolean completed(String s){return actualContext(s);}
  private boolean harmlessHeading(String s){return s.codePoints().noneMatch(Character::isLetterOrDigit)||s.strip().matches("(?i)(?:概要|目次|参加者|参加者一覧|その他|メモ|Overview|Contents)");}
  private void inline(Draft d,Block b){
   var segments=roleSegments(b.text());if(segments.size()>1){for(String segment:segments)inlineFields(d,new Block(b.id(),b.kind(),b.level(),b.parentId(),segment,b.cells(),b.range(),b.logicalRecord(),b.quoted()));return;}inlineFields(d,b);
@@ -191,7 +234,7 @@ public final class ImportInference {
   if(value.isBlank())return;String item="u-"+UUID.randomUUID();list(d.data.get("unassignedValues")).add(map("itemKey",item,"rawValue",value,"assignment",map("type","UNASSIGNED","candidateParticipationKey",null)));d.traces.add(r.trace("/unassignedValues/"+item,b.logicalRecord(),b.id()+":"+r.startOffset(),"DIRECT",List.of()));
  }
  private void emit(Draft d,List<ImportParser.Parsed> out,String format) {
-  if(!d.populated())return;finalizeRoles(d);resolveKnownSkp(d);ImportDrafts.normalizeSpotlight(d.data);
+  if(!d.populated())return;finalizeRoles(d);resolveKnownSkp(d.data,d.relations,d.traces);ImportDrafts.normalizeSpotlight(d.data);
   for(var p:list(d.data.get("participations")))if(p.get("role")==null&&d.relations.stream().noneMatch(x->Objects.equals(x.get("candidateParticipationKey"),p.get("candidateParticipationKey"))))d.relations.add(map("candidateParticipationKey",p.get("candidateParticipationKey"),"state","UNDETERMINED","evidenceIds",List.of()));
   out.add(new ImportParser.Parsed(d.data,d.start==Integer.MAX_VALUE?1:d.start,Math.max(1,d.end),d.excerpt.toString(),d.traces,map("format",format,"recordStartOffset",d.recordStart,"recordEndOffset",d.recordEnd,"scopeEvidenceId",d.scopeEvidenceId,"relations",d.relations,"conflicts",d.conflicts,"boundary",d.explicitTable?"E3":"E0","sharedContextEvidenceIds",d.usedContext,"quotedEvidence",d.quotedEvidence)));
  }

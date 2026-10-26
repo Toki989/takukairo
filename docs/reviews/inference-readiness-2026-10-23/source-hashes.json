@@ -1,0 +1,18 @@
+﻿[
+    {
+        "path":  "C:\\Src\\takukairo\\backend\\src\\main\\java\\jp\\takukairo\\importsession\\ImportInference.java",
+        "sha256":  "95340865CB9CF749A4CC17FF13ABC788044CB6C1E9BD9E21B60F2DD6791FBAEA"
+    },
+    {
+        "path":  "C:\\Src\\takukairo\\backend\\src\\main\\java\\jp\\takukairo\\importsession\\ImportService.java",
+        "sha256":  "CD403EA8B01A06699E1E786FC90FF90F88811769C3CE129AC6EFE1608A837CD8"
+    },
+    {
+        "path":  "C:\\Src\\takukairo\\backend\\src\\main\\java\\jp\\takukairo\\importsession\\ImportStructureParser.java",
+        "sha256":  "B3C2DD6962B7E6C82D9DE517F13B1AC3190D5052F4777A4A586DFB6DDBAC98E6"
+    },
+    {
+        "path":  "C:\\Src\\takukairo\\frontend\\src\\features\\Import.tsx",
+        "sha256":  "8FA99FC4A1C17F190DD8D5C122B785F2088C91300E762B244B25078CA3C91679"
+    }
+]

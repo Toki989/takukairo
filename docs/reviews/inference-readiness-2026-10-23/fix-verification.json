@@ -1,0 +1,211 @@
+﻿{
+    "updatedDate":  "2026-10-26",
+    "timezone":  "Asia/Tokyo",
+    "baselineCommit":  "908d7935cb3fd0d46946d86e75af0d1ad0616735",
+    "status":  "FIXED_INTERNAL_PASS_ACCEPTANCE_WAITING",
+    "findings":  [
+                     {
+                         "verified":  "Five-format dates and traces, table context termination, Formal TableDate save",
+                         "status":  "FIXED",
+                         "id":  "R01"
+                     },
+                     {
+                         "verified":  "Negative and uncertain contexts with positive controls, local context scope, registration rejection",
+                         "status":  "FIXED",
+                         "id":  "R02"
+                     },
+                     {
+                         "verified":  "Person/PC/HO assignments, selected bindings, stable trace, Split, resume, confirmation, Formal save",
+                         "status":  "FIXED",
+                         "id":  "R03"
+                     },
+                     {
+                         "verified":  "E3 assembly, both main/SKP orders, excluded context, separate tables, trace dependencies, Formal save",
+                         "status":  "FIXED",
+                         "id":  "R04"
+                     }
+                 ],
+    "backendFull":  {
+                        "failures":  0,
+                        "errors":  0,
+                        "skipped":  0,
+                        "tests":  263,
+                        "date":  "2026-10-23",
+                        "evidence":  "backend-full-2026-10-23.log",
+                        "suites":  {
+                                       "value":  [
+                                                     {
+                                                         "name":  "jp.takukairo.ContractIntegrationTest",
+                                                         "tests":  141,
+                                                         "failures":  0,
+                                                         "errors":  0,
+                                                         "skipped":  0
+                                                     },
+                                                     {
+                                                         "name":  "jp.takukairo.DevProfileGuardTest",
+                                                         "tests":  1,
+                                                         "failures":  0,
+                                                         "errors":  0,
+                                                         "skipped":  0
+                                                     },
+                                                     {
+                                                         "name":  "jp.takukairo.ImportBoundaryTest",
+                                                         "tests":  12,
+                                                         "failures":  0,
+                                                         "errors":  0,
+                                                         "skipped":  0
+                                                     },
+                                                     {
+                                                         "name":  "jp.takukairo.ImportCurrentDefectsTest",
+                                                         "tests":  10,
+                                                         "failures":  0,
+                                                         "errors":  0,
+                                                         "skipped":  0
+                                                     },
+                                                     {
+                                                         "name":  "jp.takukairo.ImportFiveDefectsTest",
+                                                         "tests":  3,
+                                                         "failures":  0,
+                                                         "errors":  0,
+                                                         "skipped":  0
+                                                     },
+                                                     {
+                                                         "name":  "jp.takukairo.ImportInferenceTest",
+                                                         "tests":  23,
+                                                         "failures":  0,
+                                                         "errors":  0,
+                                                         "skipped":  0
+                                                     },
+                                                     {
+                                                         "name":  "jp.takukairo.ImportOctoberReviewTest",
+                                                         "tests":  33,
+                                                         "failures":  0,
+                                                         "errors":  0,
+                                                         "skipped":  0
+                                                     },
+                                                     {
+                                                         "name":  "jp.takukairo.ImportReadinessRegressionTest",
+                                                         "tests":  17,
+                                                         "failures":  0,
+                                                         "errors":  0,
+                                                         "skipped":  0
+                                                     },
+                                                     {
+                                                         "name":  "jp.takukairo.ImportReviewRegressionTest",
+                                                         "tests":  10,
+                                                         "failures":  0,
+                                                         "errors":  0,
+                                                         "skipped":  0
+                                                     },
+                                                     {
+                                                         "name":  "jp.takukairo.LimitsParserImageTest",
+                                                         "tests":  9,
+                                                         "failures":  0,
+                                                         "errors":  0,
+                                                         "skipped":  0
+                                                     },
+                                                     {
+                                                         "name":  "jp.takukairo.RateLimitTest",
+                                                         "tests":  3,
+                                                         "failures":  0,
+                                                         "errors":  0,
+                                                         "skipped":  0
+                                                     },
+                                                     {
+                                                         "name":  "jp.takukairo.ResolverConfigTest",
+                                                         "tests":  1,
+                                                         "failures":  0,
+                                                         "errors":  0,
+                                                         "skipped":  0
+                                                     }
+                                                 ],
+                                       "Count":  12
+                                   },
+                        "note":  "Backend stages passed. This earlier whole run later failed one new Browser locator; that failure was resolved in the resumed run."
+                    },
+    "resumedRun":  {
+                       "frontendState":  {
+                                             "tests":  8,
+                                             "failed":  0,
+                                             "passed":  8
+                                         },
+                       "evidence":  "fixed-suite.log",
+                       "tscBuild":  "PASS",
+                       "backendRegression":  {
+                                                 "skipped":  0,
+                                                 "errors":  0,
+                                                 "tests":  17,
+                                                 "failures":  0
+                                             },
+                       "command":  "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/qa-import-inference.ps1 -BackendTests ImportReadinessRegressionTest",
+                       "backendPackage":  "PASS",
+                       "browser":  {
+                                       "startTime":  "2026-10-26T01:00:09.385Z",
+                                       "duration":  159082.6,
+                                       "expected":  28,
+                                       "skipped":  0,
+                                       "unexpected":  0,
+                                       "flaky":  0
+                                   },
+                       "date":  "2026-10-26",
+                       "typecheck":  "PASS",
+                       "exitCode":  0,
+                       "viteBuild":  "PASS"
+                   },
+    "redGreen":  {
+                     "beforeFixFailures":  9,
+                     "afterFixFailures":  0,
+                     "additionalRegressionTests":  17
+                 },
+    "applicationSourceUnchangedSinceBackendFull":  true,
+    "applicationSourceComparison":  {
+                                        "value":  [
+                                                      {
+                                                          "path":  "C:\\Src\\takukairo\\backend\\src\\main\\java\\jp\\takukairo\\importsession\\ImportInference.java",
+                                                          "recordedSha256":  "23D600EA9ED492D864D401F7501BACEA97DB5AAC7C3D0139F16202EE2C9F18BC",
+                                                          "currentSha256":  "23D600EA9ED492D864D401F7501BACEA97DB5AAC7C3D0139F16202EE2C9F18BC",
+                                                          "unchanged":  true
+                                                      },
+                                                      {
+                                                          "path":  "C:\\Src\\takukairo\\backend\\src\\main\\java\\jp\\takukairo\\importsession\\ImportService.java",
+                                                          "recordedSha256":  "BE69EA03B0C8409B9EC105397D3F533403FFC775FA074F2740983CF8CD69A2D1",
+                                                          "currentSha256":  "BE69EA03B0C8409B9EC105397D3F533403FFC775FA074F2740983CF8CD69A2D1",
+                                                          "unchanged":  true
+                                                      },
+                                                      {
+                                                          "path":  "C:\\Src\\takukairo\\frontend\\src\\features\\Import.tsx",
+                                                          "recordedSha256":  "93833BA519D368A5AD35C85D8FBCB54DE57AF0B289C0E6DDF6EFD84D94BA92CD",
+                                                          "currentSha256":  "93833BA519D368A5AD35C85D8FBCB54DE57AF0B289C0E6DDF6EFD84D94BA92CD",
+                                                          "unchanged":  true
+                                                      },
+                                                      {
+                                                          "path":  "C:\\Src\\takukairo\\frontend\\src\\features\\import-state.ts",
+                                                          "recordedSha256":  "1E344EE6CDD489A6FD37C4D61DD1C96AE0CC7C6DAE805FDE9AA7F45E76181D24",
+                                                          "currentSha256":  "1E344EE6CDD489A6FD37C4D61DD1C96AE0CC7C6DAE805FDE9AA7F45E76181D24",
+                                                          "unchanged":  true
+                                                      }
+                                                  ],
+                                        "Count":  4
+                                    },
+    "environment":  {
+                        "integrationDatabase":  "takukairo_import_qa",
+                        "dedicatedProcessesStopped":  true,
+                        "frontendPort":  5175,
+                        "browserDatabase":  "takukairo_import_browser_qa",
+                        "normalDataTargeted":  false,
+                        "backendPort":  8082,
+                        "postgresPort":  55432
+                    },
+    "officialAcceptance":  false,
+    "T01T24OriginalInputs":  "NOT_PROVIDED",
+    "limitations":  [
+                        "Natural-language context classification remains rule-based.",
+                        "Existing saved Import data was not automatically rewritten; fixes apply to new analysis and new Split previews."
+                    ],
+    "staticChecks":  {
+                         "dependencyVersionsUnchanged":  true,
+                         "formalContractsUnchanged":  true,
+                         "migrationsUnchanged":  true,
+                         "gitDiffCheck":  "PASS"
+                     }
+}

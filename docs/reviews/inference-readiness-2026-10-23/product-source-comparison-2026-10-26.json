@@ -1,0 +1,26 @@
+﻿[
+    {
+        "path":  "C:\\Src\\takukairo\\backend\\src\\main\\java\\jp\\takukairo\\importsession\\ImportInference.java",
+        "recordedSha256":  "23D600EA9ED492D864D401F7501BACEA97DB5AAC7C3D0139F16202EE2C9F18BC",
+        "currentSha256":  "23D600EA9ED492D864D401F7501BACEA97DB5AAC7C3D0139F16202EE2C9F18BC",
+        "unchanged":  true
+    },
+    {
+        "path":  "C:\\Src\\takukairo\\backend\\src\\main\\java\\jp\\takukairo\\importsession\\ImportService.java",
+        "recordedSha256":  "BE69EA03B0C8409B9EC105397D3F533403FFC775FA074F2740983CF8CD69A2D1",
+        "currentSha256":  "BE69EA03B0C8409B9EC105397D3F533403FFC775FA074F2740983CF8CD69A2D1",
+        "unchanged":  true
+    },
+    {
+        "path":  "C:\\Src\\takukairo\\frontend\\src\\features\\Import.tsx",
+        "recordedSha256":  "93833BA519D368A5AD35C85D8FBCB54DE57AF0B289C0E6DDF6EFD84D94BA92CD",
+        "currentSha256":  "93833BA519D368A5AD35C85D8FBCB54DE57AF0B289C0E6DDF6EFD84D94BA92CD",
+        "unchanged":  true
+    },
+    {
+        "path":  "C:\\Src\\takukairo\\frontend\\src\\features\\import-state.ts",
+        "recordedSha256":  "1E344EE6CDD489A6FD37C4D61DD1C96AE0CC7C6DAE805FDE9AA7F45E76181D24",
+        "currentSha256":  "1E344EE6CDD489A6FD37C4D61DD1C96AE0CC7C6DAE805FDE9AA7F45E76181D24",
+        "unchanged":  true
+    }
+]

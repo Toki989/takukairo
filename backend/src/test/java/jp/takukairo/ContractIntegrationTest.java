@@ -19,6 +19,48 @@ import static jp.takukairo.common.Json.*;
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 class ContractIntegrationTest {
+ @Test void readinessSharedDatesReachFormalTableDates()throws Exception{
+  long sid=number(session().get("id"));String raw="シナリオ: 日付保全\n日付: 2026-10-01\n日付: 2026-10-02\n\n|PL|PC|\n|---|---|\n|田中|青い月|";
+  assertEquals(201,multipart("POST","/import/session/"+sid+"/sources/files","files",List.of(new Upload("dates.md",raw.getBytes(StandardCharsets.UTF_8))),version(sid)).status);
+  assertEquals(200,post("/import/session/"+sid+"/analyze",map("expectedSessionVersion",version(sid))).status);
+  long cid=number(list(get("/import/session/"+sid+"/review").body.get("items")).getFirst().get("candidateId"));
+  assertEquals(2,list(obj(candidate(sid,cid).get("candidateData")).get("tableDates")).size());bindSupplement(sid,cid);candidatePatch(sid,cid,map("confirmationStatus","CHECKED"));
+  var result=list(registerOne(sid,cid).body.get("results")).getFirst();assertEquals("REGISTERED",result.get("outcome"));
+  assertEquals(List.of("2026-10-01","2026-10-02"),list(table(number(result.get("registeredTableId"))).get("tableDates")).stream().map(d->d.get("playedOn")).toList());
+ }
+
+ @Test void readinessNegativeContextCannotRegisterWhilePositiveSiblingCan()throws Exception{
+  long sid=number(session().get("id"));String raw="シナリオ名,記録,氏名,PC\n否定,プレイ済みではなかった,田中,青い月\n不確実,実施済みとは限らない,佐藤,赤い星\n英語否定,not actually played,高橋,黒い海\n肯定,実施済み,鈴木,白い雲";
+  multipart("POST","/import/session/"+sid+"/sources/files","files",List.of(new Upload("contexts.csv",raw.getBytes(StandardCharsets.UTF_8))),version(sid));post("/import/session/"+sid+"/analyze",map("expectedSessionVersion",version(sid)));
+  for(var row:list(get("/import/session/"+sid+"/review").body.get("items"))){long cid=number(row.get("candidateId"));boolean positive="肯定".equals(obj(candidate(sid,cid).get("candidateData")).get("scenarioName"));bindSupplement(sid,cid);candidatePatch(sid,cid,map("confirmationStatus","CHECKED"));assertEquals(positive?"REGISTERABLE":"NEEDS_FIX",candidate(sid,cid).get("status"));assertEquals(positive?"REGISTERED":"FAILED",list(registerOne(sid,cid).body.get("results")).getFirst().get("outcome"));}
+  assertEquals(1,jdbc.queryForObject("select count(*) from scenario where name in ('否定','不確実','英語否定','肯定')",Integer.class));
+ }
+
+ @Test void readinessSplitMovesAssignmentsWithIdentityTraceAndExplicitResolutions()throws Exception{
+  long sid=number(session().get("id")),cid=number(analyze(sid,"シナリオ: 分割割当\nPL: 元人物\nPC: 元PC\nHO: 元HO\n新人物\n新PC\n新HO").getFirst().get("candidateId"));
+  var d=obj(candidate(sid,cid).get("candidateData"));String key=text(list(d.get("participations")).getFirst().get("candidateParticipationKey"));var extras=list(d.get("unassignedValues"));
+  for(int i=0;i<3;i++)extras.get(i).put("assignment",map("type",List.of("PARTICIPATION_PERSON","PARTICIPATION_PC","PARTICIPATION_HANDOUT").get(i),"candidateParticipationKey",key));
+  assertEquals(200,candidatePatch(sid,cid,map("candidateData",d,"confirmationStatus","CHECKED","resolutionChanges",List.of(map("slot",map("type","SCENARIO"),"decision","CREATE_NEW","draftData",map("name","分割割当")),map("slot",map("type","PERSON","candidateParticipationKey",key),"decision","CREATE_NEW","draftData",map("displayName","新人物")),map("slot",map("type","PC","candidateParticipationKey",key),"decision","CREATE_NEW","draftData",map("name","新PC"))))).status);
+  var refs=obj(candidate(sid,cid).get("resolutionRefs"));var personRefs=list(refs.get("participations")).getFirst();var bindings=List.of(map("slot",map("type","SCENARIO"),"resolutionId",refs.get("scenarioResolutionId")),map("slot",map("type","PERSON","candidateParticipationKey",key),"resolutionId",personRefs.get("personResolutionId")),map("slot",map("type","PC","candidateParticipationKey",key),"resolutionId",personRefs.get("pcResolutionId")));
+  var left=object(write(d));left.put("participations",List.of());var right=object(write(d));right.put("unassignedValues",List.of());
+  var b=map("expectedSessionVersion",version(sid),"expectedVersion",candidate(sid,cid).get("version"),"parts",List.of(map("clientPartKey","left","candidateData",left),map("clientPartKey","right","candidateData",right,"resolutionBindings",bindings)));String path="/import/session/"+sid+"/candidates/"+cid+"/split";
+  var preview=post(path+"-preview",b);assertEquals(200,preview.status,preview.raw);var parts=list(preview.body.get("resultingCandidates"));assertTrue(list(obj(parts.getFirst().get("candidateData")).get("unassignedValues")).isEmpty());assertEquals(3,list(obj(parts.getLast().get("candidateData")).get("unassignedValues")).size());b.put("previewRevision",preview.body.get("previewRevision"));assertEquals(200,post(path,b).status);
+  var moved=list(get("/import/session/"+sid+"/review").body.get("items")).stream().filter(r->!list(obj(r.get("rawSummary")).get("participations")).isEmpty()).findFirst().orElseThrow();long next=number(moved.get("candidateId"));assertEquals("UNCHECKED",moved.get("confirmationStatus"));assertEquals("REGISTERABLE",moved.get("status"));
+  var detail=get("/import/session/"+sid+"/candidates/"+next).body;var effective=list(obj(obj(detail.get("candidate")).get("effectiveCandidateData")).get("participations")).getFirst();assertEquals("新人物",effective.get("personName"));assertEquals("新PC",effective.get("pcName"));assertEquals("新HO",effective.get("handout"));
+  assertEquals(3,list(detail.get("sourceContexts")).stream().flatMap(s->list(s.get("traces")).stream()).filter(t->"USER_ASSIGNMENT".equals(t.get("derivation"))&&!"DETACHED".equals(t.get("association"))).count());
+  candidatePatch(sid,next,map("confirmationStatus","CHECKED"));var result=list(registerOne(sid,next).body.get("results")).getFirst();assertEquals("REGISTERED",result.get("outcome"));var saved=list(table(number(result.get("registeredTableId"))).get("participations")).getFirst();assertEquals("新PC",obj(saved.get("pc")).get("name"));assertEquals("新HO",saved.get("ho"));
+ }
+
+ @Test void readinessSplitRejectsDanglingAssignmentWithoutChangingSession()throws Exception{
+  long sid=number(session().get("id")),cid=number(analyze(sid,"シナリオ: 参照確認\nPL: 田中\n未割当").getFirst().get("candidateId"));var d=obj(candidate(sid,cid).get("candidateData"));list(d.get("unassignedValues")).getFirst().put("assignment",map("type","PARTICIPATION_PC","candidateParticipationKey","missing"));
+  long before=version(sid);var b=map("expectedSessionVersion",before,"expectedVersion",candidate(sid,cid).get("version"),"parts",List.of(map("clientPartKey","a","candidateData",d),map("clientPartKey","b","candidateData",draft("参照確認"))));var result=post("/import/session/"+sid+"/candidates/"+cid+"/split-preview",b);code(result,400,"VALIDATION_ERROR");assertEquals("INVALID_ASSIGNMENT",list(result.body.get("fieldErrors")).getFirst().get("code"));assertEquals(before,version(sid));assertNotNull(candidate(sid,cid));
+ }
+
+ @Test void readinessAssembledSkpSavesAfterExplicitConfirmationWithMainFirst()throws Exception{
+  long sid=number(session().get("id"));String raw="# シナリオ: 組立KP\n## 卓名: T\n### 参加者\nSKP: 補助\n### その他\nKP: 主担当";
+  multipart("POST","/import/session/"+sid+"/sources/files","files",List.of(new Upload("roles.md",raw.getBytes(StandardCharsets.UTF_8))),version(sid));post("/import/session/"+sid+"/analyze",map("expectedSessionVersion",version(sid)));long cid=number(list(get("/import/session/"+sid+"/review").body.get("items")).getFirst().get("candidateId"));var c=candidate(sid,cid);assertEquals("UNCHECKED",c.get("confirmationStatus"));assertEquals(List.of("主担当","補助"),list(obj(c.get("candidateData")).get("participations")).stream().map(p->p.get("personName")).toList());bindSupplement(sid,cid);candidatePatch(sid,cid,map("confirmationStatus","CHECKED"));assertEquals("REGISTERABLE",candidate(sid,cid).get("status"));var result=list(registerOne(sid,cid).body.get("results")).getFirst();assertEquals("REGISTERED",result.get("outcome"));assertEquals(List.of("KP","KP"),list(table(number(result.get("registeredTableId"))).get("participations")).stream().map(p->p.get("role")).toList());
+ }
+
  @Test void octoberStructureOperationDoesNotNormalizeOrUncheckUnrelatedCandidate()throws Exception{
   long sid=number(session().get("id"));var rows=analyze(sid,"シナリオ: 操作対象\n\nシナリオ: 無関係\nSKP: 補助");long target=number(rows.getFirst().get("candidateId")),other=number(rows.getLast().get("candidateId"));var d=obj(candidate(sid,other).get("candidateData"));list(d.get("participations")).getFirst().put("role","KP");var metadata=obj(candidate(sid,other).get("inference"));list(metadata.get("relations")).getFirst().put("hasMainKp",true);jdbc.update("update import_candidate set candidate_data=?::jsonb,inference_data=?::jsonb,confirmation_status='CHECKED' where id=?",write(d),write(metadata),other);
   var before=jdbc.queryForMap("select candidate_data::text,inference_data::text,confirmation_status,version from import_candidate where id=?",other);String path="/import/session/"+sid+"/candidates/"+target+"/split";var b=map("expectedSessionVersion",version(sid),"expectedVersion",candidate(sid,target).get("version"),"parts",List.of(map("clientPartKey","a","candidateData",draft("分割A")),map("clientPartKey","b","candidateData",draft("分割B"))));var preview=post(path+"-preview",b);assertEquals(200,preview.status,preview.raw);b.put("previewRevision",preview.body.get("previewRevision"));assertEquals(200,post(path,b).status);assertEquals(before,jdbc.queryForMap("select candidate_data::text,inference_data::text,confirmation_status,version from import_candidate where id=?",other));

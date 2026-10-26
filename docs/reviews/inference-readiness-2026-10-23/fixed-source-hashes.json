@@ -1,0 +1,34 @@
+﻿[
+    {
+        "path":  "C:\\Src\\takukairo\\backend\\src\\main\\java\\jp\\takukairo\\importsession\\ImportInference.java",
+        "sha256":  "23D600EA9ED492D864D401F7501BACEA97DB5AAC7C3D0139F16202EE2C9F18BC"
+    },
+    {
+        "path":  "C:\\Src\\takukairo\\backend\\src\\main\\java\\jp\\takukairo\\importsession\\ImportService.java",
+        "sha256":  "BE69EA03B0C8409B9EC105397D3F533403FFC775FA074F2740983CF8CD69A2D1"
+    },
+    {
+        "path":  "C:\\Src\\takukairo\\frontend\\src\\features\\Import.tsx",
+        "sha256":  "93833BA519D368A5AD35C85D8FBCB54DE57AF0B289C0E6DDF6EFD84D94BA92CD"
+    },
+    {
+        "path":  "C:\\Src\\takukairo\\frontend\\src\\features\\import-state.ts",
+        "sha256":  "1E344EE6CDD489A6FD37C4D61DD1C96AE0CC7C6DAE805FDE9AA7F45E76181D24"
+    },
+    {
+        "path":  "C:\\Src\\takukairo\\backend\\src\\test\\java\\jp\\takukairo\\ImportReadinessRegressionTest.java",
+        "sha256":  "EAC9A13C064B007F4CCFF92FEB90CEF138233FAD4C4C0FF00D6FF9B7322D01E1"
+    },
+    {
+        "path":  "C:\\Src\\takukairo\\backend\\src\\test\\java\\jp\\takukairo\\ContractIntegrationTest.java",
+        "sha256":  "5A72984597AC2A6F05D170330F114D51993E5899CC14AF6E9221D720D0E03C2A"
+    },
+    {
+        "path":  "C:\\Src\\takukairo\\frontend\\qa\\import-inference.spec.ts",
+        "sha256":  "3D9B68F6C69FB8A7AF097D2957539D07395348F8742902C857CC1ED28E18FA6C"
+    },
+    {
+        "path":  "C:\\Src\\takukairo\\frontend\\qa\\import-state.test.mjs",
+        "sha256":  "EB2C9A2FFA26106E7826F5DBB29D8207CC2445865AD96CAE99D033C582475B6F"
+    }
+]

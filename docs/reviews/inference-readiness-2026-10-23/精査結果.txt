@@ -1,0 +1,131 @@
+卓回廊 Import推論システム　本格実装前の精査
+2026-10-23 / Asia/Tokyo
+対象: 908d7935cb3fd0d46946d86e75af0d1ad0616735
+
+判断
+
+実データで探索テストを始めるための基盤は整っている。ただし、推論結果と編集後のデータを本格実装の基準として固定する前に、下記R01〜R03を修正する必要がある。R04も入力構造の違いによる不整合として回帰対象にする。
+既存の修正済み11件を未解決として再掲してはいない。今回の反例は現行実装で新たに確認したもので、R02は過去R03の文脈判定に残る追加表現、R03は過去R10の割当とSplitの組合せ、R04は同卓組立後のRole処理に関する不足である。
+業務コード・既存テスト・正式仕様は変更していない。追加物はこの精査記録と再現資料だけ。
+
+確認した構成
+
+・形式別構造解析: ImportStructureParser → ImportStructure
+・共通推論: ImportInference → Candidateデータ、Relation、Conflict、項目別Trace
+・卓境界: ImportBoundary。E3による同じ明示範囲の組立と、E2等による既存候補の比較・明示Mergeを分離
+・編集／判定／保存: ImportService、ImportDrafts、Resolution、正式保存サービス
+・画面: Import.tsx、import-state.ts、ImportDecisions.tsx
+
+現行は構造Parserとルールに基づく推論であり、LLMの推論APIや学習モデルを呼ぶ実装ではない。したがって、正規表現の単語一致、文脈の適用範囲、組立の順序、編集時のIdentity／割当の維持を個別に検証する必要がある。
+初期UNCHECKED、明示Resolution、Backend側の登録検証、Candidate単位の原子性、登録後Source Lock、未解析ブロックを残したComplete拒否等の防御は既存テストで検証されている。今回の追加反例が自動正式登録されたことを意味しない。
+
+再実行した既存検証
+
+Backend: 241件、Failure 0、Error 0、Skip 0。専用PostgreSQLでのContractIntegrationTest 136件を含む。
+Frontend状態: 7件成功。
+Browser: 27件成功、Failure 0、Skip 0、Flaky 0。
+Backend package、TypeScript typecheck、tsc project build、Vite build: 成功。
+実行経路: scripts/qa-import-inference.ps1
+既存専用環境: PostgreSQL 55432、Backend 8082、Frontend 5175。
+
+新規反例の確認
+
+Parserの直接実行に加え、別の専用PostgreSQL 55433、Backend 8083、Frontend 5176で実APIの応答・保存済みImportデータを確認した。
+R03は割当、参加者移動、Preview、Applyまで通常画面から操作して再現した。R01／R02／R04は実ファイルUpload→Analyze→Review／DetailのAPI応答でも再現した。
+新規反例の正式登録は実行していない。元の受入T01〜T24の代替入力や合格判定には使用していない。
+追加環境のDB・Storageは.runtime/inference-review-2026-10-23に保全。通常アプリのDB・画像・途中保存は対象にしていない。専用プロセスはfinallyで停止した。
+
+注意: 外側PowerShellのログ一括リダイレクトではnative stderrがNativeCommandErrorとして扱われ、呼出元の終了コードは1だった。テスト件数はSurefire XML、Playwright JSONと最終出力に基づく。コマンド全体の終了コード成功を主張していない。新規initdbにはrestricted-token警告もあったが、その後初期化・起動・実API検証は完了した。CI導入時はプロセス終了コードをstderr警告と分離して取得すること。
+
+R01 [HIGH] 表の直前にある実施日が候補から消える
+
+該当: backend/src/main/java/jp/takukairo/importsession/ImportInference.java:33〜36
+入力例:
+  シナリオ: A
+  日付: 2026-10-01
+
+  |PL|PC|
+  |---|---|
+  |田中|青い月|
+
+実測: Candidateは1件、Scenario=A、田中／青い月は抽出されるが、tableDates=[]となる。日付は未割当値にも未解析ブロックにも残らない。一方、/table/tableDatesのTraceには元の日付行がINHERITEDとして残る。
+同じ意味のHTML（直前のp＋table）とTXT（直前の日付行＋タブ表）でも日付が空。表を使わない貼付の対照例では2026-10-01を保持した。Markdownは実Upload／DB経由でも再現。
+原因: tableContextからコピーする対象がscalar属性だけで、tableDatesをコピーしない。元のDraftは共有文脈として吸収され、そのまま結果から外れる。
+影響: 解析エラーにならず、候補の実施日が欠ける。画面と正式保存へ渡す値と原文Traceも一致しない。
+修正: 文脈として継承する情報は値と根拠を一体で扱う。卓の所属が不確実なら原情報を未解析／未割当として残し、無告知で消さない。複数行へ日付を無条件複製する修正は避け、適用範囲を明示する。
+必要テスト: 同内容の5形式比較、空行あり／なし、複数日付、表内日付との競合、後続の別表への継承停止、Reviewと正式TableDateの一致。
+証拠: probes.jsonlのdate-before-md-table／date-before-html-table／date-before-txt-table／date-inline-control、browser-probes.jsonのdate-before-md-table。
+
+R02 [HIGH] 明確な否定・不確実な記録でもPLを仮入力する
+
+該当: backend/src/main/java/jp/takukairo/importsession/ImportInference.java:158〜160、147〜155
+入力例:
+  シナリオ名,記録,氏名,PC
+  A,プレイ済みではなかった,田中,青い月
+
+実測: role=PL。実施済みとは限らない、not actually playedでもPLになる。未割当として確認を求めることもない。not yet playedおよび実施済みではありませんでしたの対照例はRole未判定を維持する。
+原因: actualContextは肯定語の部分一致。excludedContextに列挙した否定表現から外れると、否定文の中の「プレイ済」「played」を肯定として扱う。
+影響: 実施済みを条件とするROLE-C05の前提を満たさない参加記録へPLを提示する。原文が否定でも肯定の候補として確認・登録へ進め得る。自動CHECKEDや自動正式登録が発生したという指摘ではない。
+修正: 肯定・否定・不確実／不明を区別し、Role推論に利用できる文脈を明確にする。今回の文字列を追加するだけで終わらず、上位継承、行局所の上書き、遅い状態記述を同じ規則で確認する。
+必要テスト: 日本語の現在／過去否定、敬体、二重否定、不確実表現、英語の副詞を挟む否定、CSV列順、見出し／段落／表、直接PLラベルと推論PL／進行KPの区別。
+証拠: probes.jsonlのcontext-*、browser-probes.jsonのnegative-context。
+
+R03 [HIGH] 分割で参加者を移すと、割当済みPCが移動元に取り残される
+
+該当: frontend/src/features/Import.tsx:29、backend/src/main/java/jp/takukairo/importsession/ImportService.java:88〜89、118、124
+通常画面での手順:
+  1. シナリオ: 分割割当検証／PL: 田中／PC: 元PC／未割当行: 新PCを解析。
+  2. 新PCを田中のPCに割り当て、PC表示が新PCになった状態を保存。
+  3. 候補の分割を開き、田中を「次の分割先へ移す」。
+  4. 変更後を確認し、適用する。
+
+実測: Previewは両候補canApply=true。Apply後、移動先の田中の実効PC名は元PCに戻る。移動元には田中を指す「新PC」の割当が残り、参加者不在のためNEEDS_FIX。移動先はNEEDS_REVIEW。実際のブラウザ操作と実DBのDetail応答で確認した。
+原因: 画面の参加者移動はparticipationsのみを移す。関連するunassignedValuesを移さない。BackendのpreserveUnassignedもitemKeyがどこかに残っていれば所属先を検証・再関連付けしない。Previewの構造検証は割当参照先を保証しない。
+影響: ユーザーが確認した実効PCと分割後の実効PCが変わり、別候補に取り残された修正作業も発生する。原文の永久消失は確認していない。
+修正: 参加者移動に伴い、その人に対する割当・関連Trace・照合Slotを整合させる。移動できない競合はPreviewに示す。修復途中の候補を許す場合も、未解決Role／必須値の不足と、操作が新しく作った参照切れを分けて扱う。
+必要テスト: Person／PC／HO割当、A→B→A移動、OMIT／HOLD、共有Resolution、割当解除、Split後Merge、再開、実保存先と表示値とTraceの一致。
+証拠: browser-probes.jsonのsplit-assigned-person-moved-browser、split-after.png。probes.jsonlのsplit-assigned-person-moved-*はMemoryStoreによる独立再現も含む。
+
+R04 [MEDIUM] 同じ卓の下位見出しをまたぐと、明示主KPがあってもSKPが未判定のままになる
+
+該当: backend/src/main/java/jp/takukairo/importsession/ImportInference.java:62〜71、157、194
+入力例:
+  # シナリオ: A
+  ## 卓名: T
+  ### 参加者
+  KP: 佐藤
+  ### その他
+  SKP: 田中
+
+実測: E3として同じCandidateへ組み立てられ、佐藤=KP、田中=role:nullとなる。原文では主KPが明示されているが、SKPのRelationにhasMainKp=trueが付かずNEEDS_FIXになる。参加者／その他は無害見出しとして処理され、未知の見出しによる競合ではない。実Upload／DBでも再現。
+原因: resolveKnownSkpはemit時の断片単位で実行される。その後assembleが同じ明示卓の断片を結合するが、結合後の主KPとSKPの関係を再評価しない。
+影響: 同じ意味でも見出しの配置によって不要な役割解決が必要になる。SKP-onlyを勝手にKP化する問題とは区別し、同卓範囲内の明示主KPがある場合の追補規則へ接続する。
+修正: 同卓の組立後に、元の除外文脈・明示判断・主KPの所属を保ったままRole関係を再評価する。別卓の主KPを流用しない。
+必要テスト: 同一行／別行／下位見出し／複数表の意味同等性、主KPが後出、別卓、主KPのOMIT／HOLD、引用・予定由来のSKP、Traceと表示順。
+証拠: probes.jsonlのmain-and-skp-harmless-subheadings、browser-probes.jsonのmain-skp-subheadings。
+
+追加の設計上の確認事項（上記4件には算入しない）
+
+1. SplitでauthorName:nullを全分割先へ渡すと、元作者の保全や明示未保存がなくてもApplyできる。Mergeで元候補の一方の日付をmergedCandidateDataから省く場合も保全されない。probes.jsonlのsplit-dropped-scalars／split-applied／merge-dropped-dateでAPIロジックの動作を確認したが、これらはMemoryStoreによるPreview／Applyで、実DB正式保存は未検証。完全指定Payloadでの明示修正をどこまで許すかと、操作が情報を落とした場合の保全規則を区別して整理する必要がある。通常画面のMergeは日付を連結しており、このAPI反例だけから通常画面のMergeで日付が消えるとは言わない。
+2. 同一明示卓をassembleした際、recordEndOffsetやsharedContextEvidenceIdsは先頭断片のmetadataのまま。ただし項目別TraceとlineEndには後続断片が残る。現在の実害は特定していない。範囲metadataを消費管理へ再利用する変更時に、先頭範囲だけを候補全体と誤認しないこと。
+
+本格実装へ向けた検証の進め方
+
+1. R01〜R03を先に修正し、今回の最小反例を回帰テストへ追加する。R04も組立後Role処理のテストへ追加する。
+2. 同一内容をCSV／Markdown／HTML／TXT／貼付へ変換し、候補数だけでなく、全フィールド、Person–PC–Roleの所属、未割当／未解析として残る値を照合する。
+3. 見出し階層・空行・列順・否定文の変形で意味が変わらないかを見る。原文位置の保持と、現在値が原文／推論／ユーザー編集のいずれかも確認する。
+4. 編集→割当→照合→Split／Merge→再確認→部分登録→再開→Completeを通して、画面の実効値と正式保存先の値を比較する。正常ルートに加え、割当済み参加者の移動を含める。
+5. ユーザーのT01〜T24元入力と期待結果が揃った時点で、元ケースとして受入判定する。それまで内部合成反例を元ケース合格に置き換えない。
+
+評価では抽出率だけでなく、誤った卓・人物への所属、原文情報の無告知欠落、確認済み内容と保存値の不一致、手修正数を別々に記録する。未判定として安全に残った値と、誤って確定した値を同じ失敗数へまとめない。
+大容量・多数候補・同時ユーザー負荷は今回再測定していない。既存資料の1,500候補／容量上限の測定結果を、高密度最大入力や本番SLAの保証として流用しない。
+
+資料と再実行
+
+verification.json: 今回の実行結果・環境・終了コードの注意。
+existing-suite.log: 既存Suiteの今回の出力。
+browser-probes.json: 新規4反例の実API／DB応答、分割のBrowser結果。
+browser-probe.mjs、run-browser-probes.ps1: 追加実環境反例の実行コード。
+CurrentProbe.java、probes.jsonl: Parser／Service内部の追加観察。Service用MemoryStoreは../import-inference-2026-10-21/DeepProbe.javaの補助クラスを使用する。
+
+Browser反例の再実行は、既存Suiteで最新JARを作成後、browser-probe.mjsとrun-browser-probes.ps1を.runtime/inference-review-2026-10-23へ置き、PowerShellで後者を実行する。55433／8083／5176は専用。修正後には反例が再現しなくなるため、観測値を確認した上で期待結果の回帰テストへ書き換える。

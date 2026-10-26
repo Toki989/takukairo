@@ -1,0 +1,125 @@
+﻿{
+    "date":  "2026-10-23",
+    "timezone":  "Asia/Tokyo",
+    "commit":  "908d7935cb3fd0d46946d86e75af0d1ad0616735",
+    "officialAcceptance":  false,
+    "userT01T24Inputs":  "NOT_PROVIDED",
+    "backendSuites":  [
+                          {
+                              "name":  "jp.takukairo.ContractIntegrationTest",
+                              "tests":  136,
+                              "failures":  0,
+                              "errors":  0,
+                              "skipped":  0
+                          },
+                          {
+                              "name":  "jp.takukairo.DevProfileGuardTest",
+                              "tests":  1,
+                              "failures":  0,
+                              "errors":  0,
+                              "skipped":  0
+                          },
+                          {
+                              "name":  "jp.takukairo.ImportBoundaryTest",
+                              "tests":  12,
+                              "failures":  0,
+                              "errors":  0,
+                              "skipped":  0
+                          },
+                          {
+                              "name":  "jp.takukairo.ImportCurrentDefectsTest",
+                              "tests":  10,
+                              "failures":  0,
+                              "errors":  0,
+                              "skipped":  0
+                          },
+                          {
+                              "name":  "jp.takukairo.ImportFiveDefectsTest",
+                              "tests":  3,
+                              "failures":  0,
+                              "errors":  0,
+                              "skipped":  0
+                          },
+                          {
+                              "name":  "jp.takukairo.ImportInferenceTest",
+                              "tests":  23,
+                              "failures":  0,
+                              "errors":  0,
+                              "skipped":  0
+                          },
+                          {
+                              "name":  "jp.takukairo.ImportOctoberReviewTest",
+                              "tests":  33,
+                              "failures":  0,
+                              "errors":  0,
+                              "skipped":  0
+                          },
+                          {
+                              "name":  "jp.takukairo.ImportReviewRegressionTest",
+                              "tests":  10,
+                              "failures":  0,
+                              "errors":  0,
+                              "skipped":  0
+                          },
+                          {
+                              "name":  "jp.takukairo.LimitsParserImageTest",
+                              "tests":  9,
+                              "failures":  0,
+                              "errors":  0,
+                              "skipped":  0
+                          },
+                          {
+                              "name":  "jp.takukairo.RateLimitTest",
+                              "tests":  3,
+                              "failures":  0,
+                              "errors":  0,
+                              "skipped":  0
+                          },
+                          {
+                              "name":  "jp.takukairo.ResolverConfigTest",
+                              "tests":  1,
+                              "failures":  0,
+                              "errors":  0,
+                              "skipped":  0
+                          }
+                      ],
+    "frontendState":  {
+                          "fail":  0,
+                          "pass":  7,
+                          "tests":  7
+                      },
+    "browser":  {
+                    "startTime":  "2026-10-23T01:30:54.804Z",
+                    "duration":  148892.12,
+                    "expected":  27,
+                    "skipped":  0,
+                    "unexpected":  0,
+                    "flaky":  0
+                },
+    "addedCounterexamples":  [
+                                 {
+                                     "id":  "date-before-md-table",
+                                     "reproduced":  true
+                                 },
+                                 {
+                                     "id":  "negative-context",
+                                     "reproduced":  true
+                                 },
+                                 {
+                                     "id":  "main-skp-subheadings",
+                                     "reproduced":  true
+                                 },
+                                 {
+                                     "id":  "split-assigned-person-moved-browser",
+                                     "reproduced":  true
+                                 }
+                             ],
+    "builds":  {
+                   "tscProjectBuild":  "PASS",
+                   "viteBuild":  "PASS",
+                   "typecheck":  "PASS",
+                   "backendPackage":  "PASS"
+               },
+    "executionNote":  "Outer PowerShell invocations reported exit 1 after native stderr was redirected. Case-level reports and final suite output show the results above; whole-command exit success is not claimed. initdb emitted restricted-token warnings and then completed initialization. Both dedicated servers were stopped in finally.",
+    "applicationSourceChanged":  false
+}

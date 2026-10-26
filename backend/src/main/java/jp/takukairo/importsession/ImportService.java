@@ -87,6 +87,21 @@ public class ImportService {
  }
  private void preserveUnassigned(List<ImportCandidate> sources,List<Map<String,Object>> results){
   for(var source:sources)for(var u:list(object(source.candidateData).get("unassignedValues"))){if(results.stream().flatMap(d->list(d.get("unassignedValues")).stream()).anyMatch(x->Objects.equals(x.get("itemKey"),u.get("itemKey"))))continue;Object key=obj(u.get("assignment")).get("candidateParticipationKey");var target=results.stream().filter(d->key!=null&&list(d.get("participations")).stream().anyMatch(p->Objects.equals(p.get("candidateParticipationKey"),key))).findFirst().orElse(results.getFirst());var values=new ArrayList<>(list(target.get("unassignedValues")));values.add(u);target.put("unassignedValues",values);}
+  // Split may move a participation without moving its assigned source value.
+  // Canonicalize that reference before binding resolutions and storing the preview.
+  for(var result:results)result.put("unassignedValues",new ArrayList<>(list(result.get("unassignedValues"))));
+  for(var result:results)for(var value:new ArrayList<>(list(result.get("unassignedValues")))){
+   var assignment=obj(value.get("assignment"));String type=text(assignment.get("type"));
+   if(type==null||!type.startsWith("PARTICIPATION_"))continue;
+   Object key=assignment.get("candidateParticipationKey");
+   if(list(result.get("participations")).stream().anyMatch(p->Objects.equals(p.get("candidateParticipationKey"),key)))continue;
+   var destinations=results.stream().filter(d->list(d.get("participations")).stream().anyMatch(p->Objects.equals(p.get("candidateParticipationKey"),key))).toList();
+   if(destinations.size()!=1)throw ApiException.invalid("/parts/candidateData/unassignedValues","INVALID_ASSIGNMENT","割当先の参加者を一意に指定してください。割当値も同じ分割先へ移動するか、割当を明示して解除してください。");
+   var targetValues=list(destinations.getFirst().get("unassignedValues"));var duplicates=targetValues.stream().filter(v->Objects.equals(v.get("itemKey"),value.get("itemKey"))).toList();
+   if(duplicates.stream().anyMatch(v->!v.equals(value)))throw ApiException.invalid("/parts/candidateData/unassignedValues","CONFLICTING_ASSIGNMENTS","同じ原文項目に異なる判断があります。分割先の割当を確認してください。");
+   if(duplicates.isEmpty())targetValues.add(value);
+   list(result.get("unassignedValues")).remove(value);
+  }
  }
  private void preserveSplitScalars(ImportCandidate source,List<Map<String,Object>> results){
   var original=object(source.candidateData);for(String field:List.of("gameSystemName","recordingUrl","authorName","sourceUrl")){Object value=original.get(field);if(optional(value)==null||results.stream().anyMatch(d->d.containsKey(field)))continue;var first=results.getFirst();first.put(field,value);if(ImportDrafts.omitted(original,field)){var omitted=new ArrayList<String>();if(first.get("omittedFields") instanceof List<?> fields)fields.forEach(f->omitted.add(String.valueOf(f)));if(!omitted.contains(field))omitted.add(field);first.put("omittedFields",omitted);}}

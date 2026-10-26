@@ -10,6 +10,15 @@ export function editAssignedField(raw:CandidateData,key:string,field:'personName
  const type=field==='personName'?'PARTICIPATION_PERSON':field==='pcName'?'PARTICIPATION_PC':'PARTICIPATION_HANDOUT';
  return {...raw,participations:raw.participations.map(p=>p.candidateParticipationKey===key?{...p,[field]:value}:p),unassignedValues:raw.unassignedValues.map(u=>u.assignment.type===type&&u.assignment.candidateParticipationKey===key?{...u,assignment:{type:'UNASSIGNED',candidateParticipationKey:null}}:u)};
 }
+export function moveSplitParticipant<T extends {data:CandidateData}>(parts:T[],from:number,key:string):T[] {
+ if(parts.length<2)return parts;
+ const source=parts[from],participant=source.data.participations.find(p=>p.candidateParticipationKey===key);
+ if(!participant)return parts;
+ const to=(from+1)%parts.length;
+ const follows=(value:CandidateData['unassignedValues'][number])=>value.assignment.type.startsWith('PARTICIPATION_')&&value.assignment.candidateParticipationKey===key;
+ const values=source.data.unassignedValues.filter(follows);
+ return parts.map((part,index)=>index===from?{...part,data:{...part.data,participations:part.data.participations.filter(p=>p.candidateParticipationKey!==key),unassignedValues:part.data.unassignedValues.filter(v=>!follows(v))}}:index===to?{...part,data:{...part.data,participations:[...part.data.participations,participant],unassignedValues:[...part.data.unassignedValues,...values]}}:part);
+}
 export function resolutionName(r:Resolution):string {
  return r.decision==='CREATE_NEW'?String(r.draftData?.name??r.draftData?.displayName??''):String(r.createdEntityId??r.existingEntityId??'');
 }

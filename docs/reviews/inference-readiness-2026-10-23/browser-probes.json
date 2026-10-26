@@ -1,0 +1,1465 @@
+{
+  "officialAcceptance": false,
+  "scope": "Isolated real HTTP/PostgreSQL and browser; counterexamples, not acceptance cases",
+  "evidence": [
+    {
+      "id": "date-before-md-table",
+      "reproduced": true,
+      "input": "シナリオ: A\n日付: 2026-10-01\n\n|PL|PC|\n|---|---|\n|田中|青い月|",
+      "review": {
+        "sessionId": 1,
+        "sessionVersion": 2,
+        "summary": {
+          "total": 1,
+          "registerable": 0,
+          "needsReview": 1,
+          "needsFix": 0,
+          "checked": 0
+        },
+        "unparsedBlocks": [],
+        "items": [
+          {
+            "candidateId": 1,
+            "version": 1,
+            "status": "NEEDS_REVIEW",
+            "confirmationStatus": "UNCHECKED",
+            "registrationTarget": true,
+            "registrationStatus": "PENDING",
+            "summary": {
+              "tableName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "A",
+              "gameSystemName": null,
+              "participations": [
+                {
+                  "role": "PL",
+                  "pcName": "青い月",
+                  "handout": null,
+                  "personName": "田中",
+                  "candidateParticipationKey": "p-63a9189e-2ebe-4f69-9162-8a7e875d9d2d"
+                }
+              ],
+              "unassignedValues": []
+            },
+            "rawSummary": {
+              "tableName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "A",
+              "gameSystemName": null,
+              "participations": [
+                {
+                  "role": "PL",
+                  "pcName": "青い月",
+                  "handout": null,
+                  "personName": "田中",
+                  "candidateParticipationKey": "p-63a9189e-2ebe-4f69-9162-8a7e875d9d2d"
+                }
+              ],
+              "unassignedValues": []
+            }
+          }
+        ]
+      },
+      "detail": {
+        "candidate": {
+          "id": 1,
+          "version": 1,
+          "candidateData": {
+            "tableName": null,
+            "tableDates": [],
+            "recordingUrl": null,
+            "scenarioName": "A",
+            "gameSystemName": null,
+            "participations": [
+              {
+                "role": "PL",
+                "pcName": "青い月",
+                "handout": null,
+                "personName": "田中",
+                "candidateParticipationKey": "p-63a9189e-2ebe-4f69-9162-8a7e875d9d2d"
+              }
+            ],
+            "unassignedValues": []
+          },
+          "effectiveCandidateData": {
+            "tableName": null,
+            "tableDates": [],
+            "recordingUrl": null,
+            "scenarioName": "A",
+            "gameSystemName": null,
+            "participations": [
+              {
+                "role": "PL",
+                "pcName": "青い月",
+                "handout": null,
+                "personName": "田中",
+                "candidateParticipationKey": "p-63a9189e-2ebe-4f69-9162-8a7e875d9d2d"
+              }
+            ],
+            "unassignedValues": []
+          },
+          "status": "NEEDS_REVIEW",
+          "confirmationStatus": "UNCHECKED",
+          "registrationTarget": true,
+          "registrationStatus": "PENDING",
+          "registrationResult": {},
+          "resolutionRefs": {
+            "participations": [
+              {
+                "pcResolutionId": null,
+                "personResolutionId": null,
+                "candidateParticipationKey": "p-63a9189e-2ebe-4f69-9162-8a7e875d9d2d"
+              }
+            ],
+            "scenarioResolutionId": null
+          },
+          "inference": {
+            "format": "MARKDOWN",
+            "boundary": "E0",
+            "conflicts": [],
+            "relations": [],
+            "originalData": {
+              "tableName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "A",
+              "gameSystemName": null,
+              "participations": [
+                {
+                  "role": "PL",
+                  "pcName": "青い月",
+                  "handout": null,
+                  "personName": "田中",
+                  "candidateParticipationKey": "p-63a9189e-2ebe-4f69-9162-8a7e875d9d2d"
+                }
+              ],
+              "unassignedValues": []
+            },
+            "quotedEvidence": false,
+            "recordEndOffset": 50,
+            "scopeEvidenceId": null,
+            "recordStartOffset": 42,
+            "sharedContextEvidenceIds": [],
+            "boundaryAssessments": []
+          }
+        },
+        "resolutions": [],
+        "omittedItems": [],
+        "sourceContexts": [
+          {
+            "sourceId": 1,
+            "sourceType": "FILE",
+            "originalFileName": "review.md",
+            "traces": [
+              {
+                "excerpt": "シナリオ: A",
+                "lineEnd": 1,
+                "dependsOn": [
+                  "b-1:scenarioName:0"
+                ],
+                "endOffset": 7,
+                "fieldPath": "/table/scenarioName",
+                "lineStart": 1,
+                "derivation": "INHERITED",
+                "evidenceId": "b-1:scenarioName:0",
+                "startOffset": 0,
+                "logicalRecord": null
+              }
+            ]
+          },
+          {
+            "sourceId": 1,
+            "sourceType": "FILE",
+            "originalFileName": "review.md",
+            "traces": [
+              {
+                "excerpt": "日付: 2026-10-01",
+                "lineEnd": 2,
+                "dependsOn": [
+                  "b-2:date:8"
+                ],
+                "endOffset": 22,
+                "fieldPath": "/table/tableDates",
+                "lineStart": 2,
+                "derivation": "INHERITED",
+                "evidenceId": "b-2:date:8",
+                "startOffset": 8,
+                "logicalRecord": null
+              }
+            ]
+          },
+          {
+            "sourceId": 1,
+            "sourceType": "FILE",
+            "originalFileName": "review.md",
+            "traces": [
+              {
+                "excerpt": "田中",
+                "lineEnd": 6,
+                "dependsOn": [],
+                "endOffset": 45,
+                "fieldPath": "/participations/p-63a9189e-2ebe-4f69-9162-8a7e875d9d2d/personName",
+                "lineStart": 6,
+                "derivation": "DIRECT",
+                "evidenceId": "b-6:PL:43",
+                "startOffset": 43,
+                "labelLocation": {
+                  "excerpt": "PL",
+                  "lineEnd": 4,
+                  "dependsOn": [],
+                  "endOffset": 27,
+                  "fieldPath": "/structure/columnLabel",
+                  "lineStart": 4,
+                  "derivation": "DIRECT",
+                  "evidenceId": "header:25",
+                  "startOffset": 25,
+                  "logicalRecord": null
+                },
+                "logicalRecord": null,
+                "dependsOnLabel": "header:25"
+              }
+            ]
+          },
+          {
+            "sourceId": 1,
+            "sourceType": "FILE",
+            "originalFileName": "review.md",
+            "traces": [
+              {
+                "excerpt": "田中",
+                "lineEnd": 6,
+                "dependsOn": [],
+                "endOffset": 45,
+                "fieldPath": "/participations/p-63a9189e-2ebe-4f69-9162-8a7e875d9d2d/role",
+                "lineStart": 6,
+                "derivation": "DIRECT",
+                "evidenceId": "b-6:PL:43",
+                "startOffset": 43,
+                "labelLocation": {
+                  "excerpt": "PL",
+                  "lineEnd": 4,
+                  "dependsOn": [],
+                  "endOffset": 27,
+                  "fieldPath": "/structure/columnLabel",
+                  "lineStart": 4,
+                  "derivation": "DIRECT",
+                  "evidenceId": "header:25",
+                  "startOffset": 25,
+                  "logicalRecord": null
+                },
+                "logicalRecord": null,
+                "dependsOnLabel": "header:25"
+              }
+            ]
+          },
+          {
+            "sourceId": 1,
+            "sourceType": "FILE",
+            "originalFileName": "review.md",
+            "traces": [
+              {
+                "excerpt": "青い月",
+                "lineEnd": 6,
+                "dependsOn": [],
+                "endOffset": 49,
+                "fieldPath": "/participations/p-63a9189e-2ebe-4f69-9162-8a7e875d9d2d/pcName",
+                "lineStart": 6,
+                "derivation": "DIRECT",
+                "evidenceId": "b-6:pc:46",
+                "startOffset": 46,
+                "labelLocation": {
+                  "excerpt": "PC",
+                  "lineEnd": 4,
+                  "dependsOn": [],
+                  "endOffset": 30,
+                  "fieldPath": "/structure/columnLabel",
+                  "lineStart": 4,
+                  "derivation": "DIRECT",
+                  "evidenceId": "header:28",
+                  "startOffset": 28,
+                  "logicalRecord": null
+                },
+                "logicalRecord": null,
+                "dependsOnLabel": "header:28"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "negative-context",
+      "reproduced": true,
+      "input": "シナリオ名,記録,氏名,PC\nA,プレイ済みではなかった,田中,青い月",
+      "review": {
+        "sessionId": 2,
+        "sessionVersion": 2,
+        "summary": {
+          "total": 1,
+          "registerable": 0,
+          "needsReview": 1,
+          "needsFix": 0,
+          "checked": 0
+        },
+        "unparsedBlocks": [],
+        "items": [
+          {
+            "candidateId": 2,
+            "version": 1,
+            "status": "NEEDS_REVIEW",
+            "confirmationStatus": "UNCHECKED",
+            "registrationTarget": true,
+            "registrationStatus": "PENDING",
+            "summary": {
+              "tableName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "A",
+              "gameSystemName": null,
+              "participations": [
+                {
+                  "role": "PL",
+                  "pcName": "青い月",
+                  "handout": null,
+                  "personName": "田中",
+                  "candidateParticipationKey": "p-2573b986-ae5e-4744-b6d1-6570c8e42733"
+                }
+              ],
+              "unassignedValues": []
+            },
+            "rawSummary": {
+              "tableName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "A",
+              "gameSystemName": null,
+              "participations": [
+                {
+                  "role": "PL",
+                  "pcName": "青い月",
+                  "handout": null,
+                  "personName": "田中",
+                  "candidateParticipationKey": "p-2573b986-ae5e-4744-b6d1-6570c8e42733"
+                }
+              ],
+              "unassignedValues": []
+            }
+          }
+        ]
+      },
+      "detail": {
+        "candidate": {
+          "id": 2,
+          "version": 1,
+          "candidateData": {
+            "tableName": null,
+            "tableDates": [],
+            "recordingUrl": null,
+            "scenarioName": "A",
+            "gameSystemName": null,
+            "participations": [
+              {
+                "role": "PL",
+                "pcName": "青い月",
+                "handout": null,
+                "personName": "田中",
+                "candidateParticipationKey": "p-2573b986-ae5e-4744-b6d1-6570c8e42733"
+              }
+            ],
+            "unassignedValues": []
+          },
+          "effectiveCandidateData": {
+            "tableName": null,
+            "tableDates": [],
+            "recordingUrl": null,
+            "scenarioName": "A",
+            "gameSystemName": null,
+            "participations": [
+              {
+                "role": "PL",
+                "pcName": "青い月",
+                "handout": null,
+                "personName": "田中",
+                "candidateParticipationKey": "p-2573b986-ae5e-4744-b6d1-6570c8e42733"
+              }
+            ],
+            "unassignedValues": []
+          },
+          "status": "NEEDS_REVIEW",
+          "confirmationStatus": "UNCHECKED",
+          "registrationTarget": true,
+          "registrationStatus": "PENDING",
+          "registrationResult": {},
+          "resolutionRefs": {
+            "participations": [
+              {
+                "pcResolutionId": null,
+                "personResolutionId": null,
+                "candidateParticipationKey": "p-2573b986-ae5e-4744-b6d1-6570c8e42733"
+              }
+            ],
+            "scenarioResolutionId": null
+          },
+          "inference": {
+            "format": "CSV",
+            "boundary": "E0",
+            "conflicts": [],
+            "relations": [
+              {
+                "role": "PL",
+                "state": "PROVISIONAL",
+                "reason": "実施済み参加者と使用PCの明示対応",
+                "evidenceIds": [
+                  "r-1:context:17",
+                  "r-1:person:29",
+                  "r-1:pc:32"
+                ],
+                "candidateParticipationKey": "p-2573b986-ae5e-4744-b6d1-6570c8e42733"
+              }
+            ],
+            "originalData": {
+              "tableName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "A",
+              "gameSystemName": null,
+              "participations": [
+                {
+                  "role": "PL",
+                  "pcName": "青い月",
+                  "handout": null,
+                  "personName": "田中",
+                  "candidateParticipationKey": "p-2573b986-ae5e-4744-b6d1-6570c8e42733"
+                }
+              ],
+              "unassignedValues": []
+            },
+            "quotedEvidence": false,
+            "recordEndOffset": 35,
+            "scopeEvidenceId": null,
+            "recordStartOffset": 15,
+            "sharedContextEvidenceIds": [],
+            "boundaryAssessments": []
+          }
+        },
+        "resolutions": [],
+        "omittedItems": [],
+        "sourceContexts": [
+          {
+            "sourceId": 2,
+            "sourceType": "FILE",
+            "originalFileName": "review.csv",
+            "traces": [
+              {
+                "excerpt": "プレイ済みではなかった",
+                "lineEnd": 2,
+                "dependsOn": [],
+                "endOffset": 28,
+                "fieldPath": "/inference/context",
+                "lineStart": 2,
+                "derivation": "DIRECT",
+                "evidenceId": "r-1:context:17",
+                "startOffset": 17,
+                "labelLocation": {
+                  "excerpt": "記録",
+                  "lineEnd": 1,
+                  "dependsOn": [],
+                  "endOffset": 8,
+                  "fieldPath": "/structure/columnLabel",
+                  "lineStart": 1,
+                  "derivation": "DIRECT",
+                  "evidenceId": "header:6",
+                  "startOffset": 6,
+                  "logicalRecord": null
+                },
+                "logicalRecord": 2,
+                "dependsOnLabel": "header:6"
+              }
+            ]
+          },
+          {
+            "sourceId": 2,
+            "sourceType": "FILE",
+            "originalFileName": "review.csv",
+            "traces": [
+              {
+                "excerpt": "A",
+                "lineEnd": 2,
+                "dependsOn": [],
+                "endOffset": 16,
+                "fieldPath": "/table/scenarioName",
+                "lineStart": 2,
+                "derivation": "DIRECT",
+                "evidenceId": "r-1:scenarioName:15",
+                "startOffset": 15,
+                "labelLocation": {
+                  "excerpt": "シナリオ名",
+                  "lineEnd": 1,
+                  "dependsOn": [],
+                  "endOffset": 5,
+                  "fieldPath": "/structure/columnLabel",
+                  "lineStart": 1,
+                  "derivation": "DIRECT",
+                  "evidenceId": "header:0",
+                  "startOffset": 0,
+                  "logicalRecord": null
+                },
+                "logicalRecord": 2,
+                "dependsOnLabel": "header:0"
+              }
+            ]
+          },
+          {
+            "sourceId": 2,
+            "sourceType": "FILE",
+            "originalFileName": "review.csv",
+            "traces": [
+              {
+                "excerpt": "田中",
+                "lineEnd": 2,
+                "dependsOn": [],
+                "endOffset": 31,
+                "fieldPath": "/participations/p-2573b986-ae5e-4744-b6d1-6570c8e42733/personName",
+                "lineStart": 2,
+                "derivation": "DIRECT",
+                "evidenceId": "r-1:person:29",
+                "startOffset": 29,
+                "labelLocation": {
+                  "excerpt": "氏名",
+                  "lineEnd": 1,
+                  "dependsOn": [],
+                  "endOffset": 11,
+                  "fieldPath": "/structure/columnLabel",
+                  "lineStart": 1,
+                  "derivation": "DIRECT",
+                  "evidenceId": "header:9",
+                  "startOffset": 9,
+                  "logicalRecord": null
+                },
+                "logicalRecord": 2,
+                "dependsOnLabel": "header:9"
+              }
+            ]
+          },
+          {
+            "sourceId": 2,
+            "sourceType": "FILE",
+            "originalFileName": "review.csv",
+            "traces": [
+              {
+                "excerpt": "青い月",
+                "lineEnd": 2,
+                "dependsOn": [],
+                "endOffset": 35,
+                "fieldPath": "/participations/p-2573b986-ae5e-4744-b6d1-6570c8e42733/pcName",
+                "lineStart": 2,
+                "derivation": "DIRECT",
+                "evidenceId": "r-1:pc:32",
+                "startOffset": 32,
+                "labelLocation": {
+                  "excerpt": "PC",
+                  "lineEnd": 1,
+                  "dependsOn": [],
+                  "endOffset": 14,
+                  "fieldPath": "/structure/columnLabel",
+                  "lineStart": 1,
+                  "derivation": "DIRECT",
+                  "evidenceId": "header:12",
+                  "startOffset": 12,
+                  "logicalRecord": null
+                },
+                "logicalRecord": 2,
+                "dependsOnLabel": "header:12"
+              }
+            ]
+          },
+          {
+            "sourceId": 2,
+            "sourceType": "FILE",
+            "originalFileName": "review.csv",
+            "traces": [
+              {
+                "excerpt": "青い月",
+                "lineEnd": 2,
+                "dependsOn": [
+                  "r-1:context:17",
+                  "r-1:person:29",
+                  "r-1:pc:32"
+                ],
+                "endOffset": 35,
+                "fieldPath": "/participations/p-2573b986-ae5e-4744-b6d1-6570c8e42733/role",
+                "lineStart": 2,
+                "derivation": "INFERRED",
+                "evidenceId": "r-1:pc:32:role",
+                "startOffset": 32,
+                "logicalRecord": 2
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "main-skp-subheadings",
+      "reproduced": true,
+      "input": "# シナリオ: A\n## 卓名: T\n### 参加者\nKP: 佐藤\n### その他\nSKP: 田中",
+      "review": {
+        "sessionId": 3,
+        "sessionVersion": 2,
+        "summary": {
+          "total": 1,
+          "registerable": 0,
+          "needsReview": 0,
+          "needsFix": 1,
+          "checked": 0
+        },
+        "unparsedBlocks": [],
+        "items": [
+          {
+            "candidateId": 3,
+            "version": 1,
+            "status": "NEEDS_FIX",
+            "confirmationStatus": "UNCHECKED",
+            "registrationTarget": true,
+            "registrationStatus": "PENDING",
+            "summary": {
+              "sourceUrl": null,
+              "tableName": "T",
+              "authorName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "A",
+              "gameSystemName": null,
+              "participations": [
+                {
+                  "role": "KP",
+                  "pcName": null,
+                  "handout": null,
+                  "personName": "佐藤",
+                  "candidateParticipationKey": "p-58855307-f56c-48c0-88b2-69ffb6e42109"
+                },
+                {
+                  "role": null,
+                  "pcName": null,
+                  "handout": null,
+                  "personName": "田中",
+                  "candidateParticipationKey": "p-ead75424-68b9-4a95-971a-8ab29943e533"
+                }
+              ],
+              "unassignedValues": []
+            },
+            "rawSummary": {
+              "sourceUrl": null,
+              "tableName": "T",
+              "authorName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "A",
+              "gameSystemName": null,
+              "participations": [
+                {
+                  "role": "KP",
+                  "pcName": null,
+                  "handout": null,
+                  "personName": "佐藤",
+                  "candidateParticipationKey": "p-58855307-f56c-48c0-88b2-69ffb6e42109"
+                },
+                {
+                  "role": null,
+                  "pcName": null,
+                  "handout": null,
+                  "personName": "田中",
+                  "candidateParticipationKey": "p-ead75424-68b9-4a95-971a-8ab29943e533"
+                }
+              ],
+              "unassignedValues": []
+            }
+          }
+        ]
+      },
+      "detail": {
+        "candidate": {
+          "id": 3,
+          "version": 1,
+          "candidateData": {
+            "sourceUrl": null,
+            "tableName": "T",
+            "authorName": null,
+            "tableDates": [],
+            "recordingUrl": null,
+            "scenarioName": "A",
+            "gameSystemName": null,
+            "participations": [
+              {
+                "role": "KP",
+                "pcName": null,
+                "handout": null,
+                "personName": "佐藤",
+                "candidateParticipationKey": "p-58855307-f56c-48c0-88b2-69ffb6e42109"
+              },
+              {
+                "role": null,
+                "pcName": null,
+                "handout": null,
+                "personName": "田中",
+                "candidateParticipationKey": "p-ead75424-68b9-4a95-971a-8ab29943e533"
+              }
+            ],
+            "unassignedValues": []
+          },
+          "effectiveCandidateData": {
+            "sourceUrl": null,
+            "tableName": "T",
+            "authorName": null,
+            "tableDates": [],
+            "recordingUrl": null,
+            "scenarioName": "A",
+            "gameSystemName": null,
+            "participations": [
+              {
+                "role": "KP",
+                "pcName": null,
+                "handout": null,
+                "personName": "佐藤",
+                "candidateParticipationKey": "p-58855307-f56c-48c0-88b2-69ffb6e42109"
+              },
+              {
+                "role": null,
+                "pcName": null,
+                "handout": null,
+                "personName": "田中",
+                "candidateParticipationKey": "p-ead75424-68b9-4a95-971a-8ab29943e533"
+              }
+            ],
+            "unassignedValues": []
+          },
+          "status": "NEEDS_FIX",
+          "confirmationStatus": "UNCHECKED",
+          "registrationTarget": true,
+          "registrationStatus": "PENDING",
+          "registrationResult": {},
+          "resolutionRefs": {
+            "participations": [
+              {
+                "pcResolutionId": null,
+                "personResolutionId": null,
+                "candidateParticipationKey": "p-58855307-f56c-48c0-88b2-69ffb6e42109"
+              },
+              {
+                "pcResolutionId": null,
+                "personResolutionId": null,
+                "candidateParticipationKey": "p-ead75424-68b9-4a95-971a-8ab29943e533"
+              }
+            ],
+            "scenarioResolutionId": null
+          },
+          "inference": {
+            "format": "MARKDOWN",
+            "boundary": "E3",
+            "conflicts": [],
+            "relations": [
+              {
+                "state": "UNDETERMINED",
+                "evidenceIds": [
+                  "b-6:SKP:42"
+                ],
+                "originalRole": "SKP",
+                "candidateParticipationKey": "p-ead75424-68b9-4a95-971a-8ab29943e533"
+              }
+            ],
+            "originalData": {
+              "sourceUrl": null,
+              "tableName": "T",
+              "authorName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "A",
+              "gameSystemName": null,
+              "participations": [
+                {
+                  "role": "KP",
+                  "pcName": null,
+                  "handout": null,
+                  "personName": "佐藤",
+                  "candidateParticipationKey": "p-58855307-f56c-48c0-88b2-69ffb6e42109"
+                },
+                {
+                  "role": null,
+                  "pcName": null,
+                  "handout": null,
+                  "personName": "田中",
+                  "candidateParticipationKey": "p-ead75424-68b9-4a95-971a-8ab29943e533"
+                }
+              ],
+              "unassignedValues": []
+            },
+            "explicitScopes": [
+              {
+                "sourceId": 3,
+                "scopeEvidenceId": "b-2"
+              }
+            ],
+            "quotedEvidence": false,
+            "recordEndOffset": 33,
+            "scopeEvidenceId": "b-2",
+            "recordStartOffset": 27,
+            "sharedContextEvidenceIds": [
+              "b-1:scenarioName",
+              "b-2:tableName"
+            ],
+            "boundaryAssessments": []
+          }
+        },
+        "resolutions": [],
+        "omittedItems": [],
+        "sourceContexts": [
+          {
+            "sourceId": 3,
+            "sourceType": "FILE",
+            "originalFileName": "review.md",
+            "traces": [
+              {
+                "excerpt": "# シナリオ: A",
+                "lineEnd": 1,
+                "dependsOn": [
+                  "b-1:scenarioName"
+                ],
+                "endOffset": 9,
+                "fieldPath": "/table/scenarioName",
+                "lineStart": 1,
+                "derivation": "INHERITED",
+                "evidenceId": "b-1:scenarioName",
+                "startOffset": 0,
+                "logicalRecord": null
+              }
+            ]
+          },
+          {
+            "sourceId": 3,
+            "sourceType": "FILE",
+            "originalFileName": "review.md",
+            "traces": [
+              {
+                "excerpt": "## 卓名: T",
+                "lineEnd": 2,
+                "dependsOn": [
+                  "b-2:tableName"
+                ],
+                "endOffset": 18,
+                "fieldPath": "/table/tableName",
+                "lineStart": 2,
+                "derivation": "INHERITED",
+                "evidenceId": "b-2:tableName",
+                "startOffset": 10,
+                "logicalRecord": null
+              }
+            ]
+          },
+          {
+            "sourceId": 3,
+            "sourceType": "FILE",
+            "originalFileName": "review.md",
+            "traces": [
+              {
+                "excerpt": "KP: 佐藤",
+                "lineEnd": 4,
+                "dependsOn": [],
+                "endOffset": 33,
+                "fieldPath": "/participations/p-58855307-f56c-48c0-88b2-69ffb6e42109/personName",
+                "lineStart": 4,
+                "derivation": "DIRECT",
+                "evidenceId": "b-4:KP:27",
+                "startOffset": 27,
+                "logicalRecord": null
+              }
+            ]
+          },
+          {
+            "sourceId": 3,
+            "sourceType": "FILE",
+            "originalFileName": "review.md",
+            "traces": [
+              {
+                "excerpt": "KP: 佐藤",
+                "lineEnd": 4,
+                "dependsOn": [],
+                "endOffset": 33,
+                "fieldPath": "/participations/p-58855307-f56c-48c0-88b2-69ffb6e42109/role",
+                "lineStart": 4,
+                "derivation": "DIRECT",
+                "evidenceId": "b-4:KP:27",
+                "startOffset": 27,
+                "logicalRecord": null
+              }
+            ]
+          },
+          {
+            "sourceId": 3,
+            "sourceType": "FILE",
+            "originalFileName": "review.md",
+            "traces": [
+              {
+                "excerpt": "# シナリオ: A",
+                "lineEnd": 1,
+                "dependsOn": [
+                  "b-1:scenarioName"
+                ],
+                "endOffset": 9,
+                "fieldPath": "/table/scenarioName",
+                "lineStart": 1,
+                "derivation": "INHERITED",
+                "evidenceId": "b-1:scenarioName",
+                "startOffset": 0,
+                "logicalRecord": null
+              }
+            ]
+          },
+          {
+            "sourceId": 3,
+            "sourceType": "FILE",
+            "originalFileName": "review.md",
+            "traces": [
+              {
+                "excerpt": "## 卓名: T",
+                "lineEnd": 2,
+                "dependsOn": [
+                  "b-2:tableName"
+                ],
+                "endOffset": 18,
+                "fieldPath": "/table/tableName",
+                "lineStart": 2,
+                "derivation": "INHERITED",
+                "evidenceId": "b-2:tableName",
+                "startOffset": 10,
+                "logicalRecord": null
+              }
+            ]
+          },
+          {
+            "sourceId": 3,
+            "sourceType": "FILE",
+            "originalFileName": "review.md",
+            "traces": [
+              {
+                "excerpt": "SKP: 田中",
+                "lineEnd": 6,
+                "dependsOn": [],
+                "endOffset": 49,
+                "fieldPath": "/participations/p-ead75424-68b9-4a95-971a-8ab29943e533/personName",
+                "lineStart": 6,
+                "derivation": "DIRECT",
+                "evidenceId": "b-6:SKP:42",
+                "startOffset": 42,
+                "logicalRecord": null
+              }
+            ]
+          },
+          {
+            "sourceId": 3,
+            "sourceType": "FILE",
+            "originalFileName": "review.md",
+            "traces": [
+              {
+                "excerpt": "SKP: 田中",
+                "lineEnd": 6,
+                "dependsOn": [],
+                "endOffset": 49,
+                "fieldPath": "/participations/p-ead75424-68b9-4a95-971a-8ab29943e533/role",
+                "lineStart": 6,
+                "derivation": "UNRESOLVED",
+                "evidenceId": "b-6:SKP:42",
+                "startOffset": 42,
+                "logicalRecord": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "split-assigned-person-moved-browser",
+      "reproduced": true,
+      "review": {
+        "sessionId": 4,
+        "sessionVersion": 4,
+        "summary": {
+          "total": 2,
+          "registerable": 0,
+          "needsReview": 1,
+          "needsFix": 1,
+          "checked": 0
+        },
+        "unparsedBlocks": [],
+        "items": [
+          {
+            "candidateId": 5,
+            "version": 1,
+            "status": "NEEDS_FIX",
+            "confirmationStatus": "UNCHECKED",
+            "registrationTarget": true,
+            "registrationStatus": "PENDING",
+            "summary": {
+              "tableName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "分割割当検証",
+              "gameSystemName": null,
+              "participations": [],
+              "unassignedValues": [
+                {
+                  "itemKey": "u-fc7d5f88-fd3e-4bd2-b6e4-d527ac4c4e4f",
+                  "rawValue": "新PC",
+                  "assignment": {
+                    "type": "PARTICIPATION_PC",
+                    "candidateParticipationKey": "p-6b0d2599-11bb-4e05-895c-631709fc8bde"
+                  }
+                }
+              ]
+            },
+            "rawSummary": {
+              "tableName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "分割割当検証",
+              "gameSystemName": null,
+              "participations": [],
+              "unassignedValues": [
+                {
+                  "itemKey": "u-fc7d5f88-fd3e-4bd2-b6e4-d527ac4c4e4f",
+                  "rawValue": "新PC",
+                  "assignment": {
+                    "type": "PARTICIPATION_PC",
+                    "candidateParticipationKey": "p-6b0d2599-11bb-4e05-895c-631709fc8bde"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "candidateId": 6,
+            "version": 1,
+            "status": "NEEDS_REVIEW",
+            "confirmationStatus": "UNCHECKED",
+            "registrationTarget": true,
+            "registrationStatus": "PENDING",
+            "summary": {
+              "tableName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "分割割当検証",
+              "gameSystemName": null,
+              "participations": [
+                {
+                  "role": "PL",
+                  "pcName": "元PC",
+                  "handout": null,
+                  "personName": "田中",
+                  "candidateParticipationKey": "p-6b0d2599-11bb-4e05-895c-631709fc8bde"
+                }
+              ],
+              "unassignedValues": []
+            },
+            "rawSummary": {
+              "tableName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "分割割当検証",
+              "gameSystemName": null,
+              "participations": [
+                {
+                  "role": "PL",
+                  "pcName": "元PC",
+                  "handout": null,
+                  "personName": "田中",
+                  "candidateParticipationKey": "p-6b0d2599-11bb-4e05-895c-631709fc8bde"
+                }
+              ],
+              "unassignedValues": []
+            }
+          }
+        ]
+      },
+      "details": [
+        {
+          "candidate": {
+            "id": 5,
+            "version": 1,
+            "candidateData": {
+              "tableName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "分割割当検証",
+              "gameSystemName": null,
+              "participations": [],
+              "unassignedValues": [
+                {
+                  "itemKey": "u-fc7d5f88-fd3e-4bd2-b6e4-d527ac4c4e4f",
+                  "rawValue": "新PC",
+                  "assignment": {
+                    "type": "PARTICIPATION_PC",
+                    "candidateParticipationKey": "p-6b0d2599-11bb-4e05-895c-631709fc8bde"
+                  }
+                }
+              ]
+            },
+            "effectiveCandidateData": {
+              "tableName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "分割割当検証",
+              "gameSystemName": null,
+              "participations": [],
+              "unassignedValues": [
+                {
+                  "itemKey": "u-fc7d5f88-fd3e-4bd2-b6e4-d527ac4c4e4f",
+                  "rawValue": "新PC",
+                  "assignment": {
+                    "type": "PARTICIPATION_PC",
+                    "candidateParticipationKey": "p-6b0d2599-11bb-4e05-895c-631709fc8bde"
+                  }
+                }
+              ]
+            },
+            "status": "NEEDS_FIX",
+            "confirmationStatus": "UNCHECKED",
+            "registrationTarget": true,
+            "registrationStatus": "PENDING",
+            "registrationResult": {},
+            "resolutionRefs": {
+              "participations": [],
+              "scenarioResolutionId": null
+            },
+            "inference": {
+              "boundary": "USER_STRUCTURE_OPERATION",
+              "conflicts": [],
+              "relations": [],
+              "editedFields": [
+                "/table/unassignedValues",
+                "/participations/p-6b0d2599-11bb-4e05-895c-631709fc8bde/pcName",
+                "/participations/p-6b0d2599-11bb-4e05-895c-631709fc8bde"
+              ],
+              "explicitScopes": [],
+              "boundaryAssessments": [
+                {
+                  "candidateIds": [
+                    5,
+                    6
+                  ],
+                  "evidenceLevel": "E1",
+                  "conflict": "C2",
+                  "evidenceKinds": [],
+                  "requiresSameTableConfirmation": false,
+                  "automaticMerge": false
+                }
+              ]
+            }
+          },
+          "resolutions": [],
+          "omittedItems": [],
+          "sourceContexts": [
+            {
+              "sourceId": 4,
+              "sourceType": "PASTED_TEXT",
+              "originalFileName": null,
+              "traces": [
+                {
+                  "excerpt": "シナリオ: 分割割当検証",
+                  "lineEnd": 1,
+                  "dependsOn": [],
+                  "endOffset": 12,
+                  "fieldPath": "/table/scenarioName",
+                  "lineStart": 1,
+                  "derivation": "DIRECT",
+                  "evidenceId": "b-1:scenarioName:0",
+                  "association": "ACTIVE",
+                  "startOffset": 0,
+                  "logicalRecord": null
+                }
+              ]
+            },
+            {
+              "sourceId": 4,
+              "sourceType": "PASTED_TEXT",
+              "originalFileName": null,
+              "traces": [
+                {
+                  "excerpt": "PL: 田中",
+                  "lineEnd": 2,
+                  "dependsOn": [],
+                  "endOffset": 19,
+                  "fieldPath": "/participations/p-6b0d2599-11bb-4e05-895c-631709fc8bde/personName",
+                  "lineStart": 2,
+                  "derivation": "DIRECT",
+                  "evidenceId": "b-2:PL:13",
+                  "association": "DETACHED",
+                  "startOffset": 13,
+                  "logicalRecord": null
+                }
+              ]
+            },
+            {
+              "sourceId": 4,
+              "sourceType": "PASTED_TEXT",
+              "originalFileName": null,
+              "traces": [
+                {
+                  "excerpt": "PL: 田中",
+                  "lineEnd": 2,
+                  "dependsOn": [],
+                  "endOffset": 19,
+                  "fieldPath": "/participations/p-6b0d2599-11bb-4e05-895c-631709fc8bde/role",
+                  "lineStart": 2,
+                  "derivation": "DIRECT",
+                  "evidenceId": "b-2:PL:13",
+                  "association": "DETACHED",
+                  "startOffset": 13,
+                  "logicalRecord": null
+                }
+              ]
+            },
+            {
+              "sourceId": 4,
+              "sourceType": "PASTED_TEXT",
+              "originalFileName": null,
+              "traces": [
+                {
+                  "excerpt": "PC: 元PC",
+                  "lineEnd": 3,
+                  "dependsOn": [],
+                  "endOffset": 27,
+                  "fieldPath": "/participations/p-6b0d2599-11bb-4e05-895c-631709fc8bde/pcName",
+                  "lineStart": 3,
+                  "derivation": "DIRECT",
+                  "evidenceId": "b-3:pc:20",
+                  "association": "DETACHED",
+                  "startOffset": 20,
+                  "logicalRecord": null
+                }
+              ]
+            },
+            {
+              "sourceId": 4,
+              "sourceType": "PASTED_TEXT",
+              "originalFileName": null,
+              "traces": [
+                {
+                  "excerpt": "新PC",
+                  "lineEnd": 4,
+                  "dependsOn": [],
+                  "endOffset": 31,
+                  "fieldPath": "/unassignedValues/u-fc7d5f88-fd3e-4bd2-b6e4-d527ac4c4e4f",
+                  "lineStart": 4,
+                  "derivation": "DIRECT",
+                  "evidenceId": "b-4:28",
+                  "association": "ACTIVE",
+                  "startOffset": 28,
+                  "logicalRecord": null
+                },
+                {
+                  "excerpt": "新PC",
+                  "lineEnd": 4,
+                  "dependsOn": [
+                    "b-4:28"
+                  ],
+                  "endOffset": 31,
+                  "fieldPath": "/participations/p-6b0d2599-11bb-4e05-895c-631709fc8bde/pcName",
+                  "lineStart": 4,
+                  "derivation": "USER_ASSIGNMENT",
+                  "evidenceId": "b-4:28",
+                  "association": "ACTIVE",
+                  "startOffset": 28,
+                  "logicalRecord": null,
+                  "assignedFromFieldPath": "/unassignedValues/u-fc7d5f88-fd3e-4bd2-b6e4-d527ac4c4e4f"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "candidate": {
+            "id": 6,
+            "version": 1,
+            "candidateData": {
+              "tableName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "分割割当検証",
+              "gameSystemName": null,
+              "participations": [
+                {
+                  "role": "PL",
+                  "pcName": "元PC",
+                  "handout": null,
+                  "personName": "田中",
+                  "candidateParticipationKey": "p-6b0d2599-11bb-4e05-895c-631709fc8bde"
+                }
+              ],
+              "unassignedValues": []
+            },
+            "effectiveCandidateData": {
+              "tableName": null,
+              "tableDates": [],
+              "recordingUrl": null,
+              "scenarioName": "分割割当検証",
+              "gameSystemName": null,
+              "participations": [
+                {
+                  "role": "PL",
+                  "pcName": "元PC",
+                  "handout": null,
+                  "personName": "田中",
+                  "candidateParticipationKey": "p-6b0d2599-11bb-4e05-895c-631709fc8bde"
+                }
+              ],
+              "unassignedValues": []
+            },
+            "status": "NEEDS_REVIEW",
+            "confirmationStatus": "UNCHECKED",
+            "registrationTarget": true,
+            "registrationStatus": "PENDING",
+            "registrationResult": {},
+            "resolutionRefs": {
+              "participations": [
+                {
+                  "pcResolutionId": null,
+                  "personResolutionId": null,
+                  "candidateParticipationKey": "p-6b0d2599-11bb-4e05-895c-631709fc8bde"
+                }
+              ],
+              "scenarioResolutionId": null
+            },
+            "inference": {
+              "boundary": "USER_STRUCTURE_OPERATION",
+              "conflicts": [],
+              "relations": [],
+              "editedFields": [
+                "/table/unassignedValues",
+                "/participations/p-6b0d2599-11bb-4e05-895c-631709fc8bde/pcName"
+              ],
+              "explicitScopes": [],
+              "boundaryAssessments": [
+                {
+                  "candidateIds": [
+                    5,
+                    6
+                  ],
+                  "evidenceLevel": "E1",
+                  "conflict": "C2",
+                  "evidenceKinds": [],
+                  "requiresSameTableConfirmation": false,
+                  "automaticMerge": false
+                }
+              ]
+            }
+          },
+          "resolutions": [],
+          "omittedItems": [],
+          "sourceContexts": [
+            {
+              "sourceId": 4,
+              "sourceType": "PASTED_TEXT",
+              "originalFileName": null,
+              "traces": [
+                {
+                  "excerpt": "シナリオ: 分割割当検証",
+                  "lineEnd": 1,
+                  "dependsOn": [],
+                  "endOffset": 12,
+                  "fieldPath": "/table/scenarioName",
+                  "lineStart": 1,
+                  "derivation": "DIRECT",
+                  "evidenceId": "b-1:scenarioName:0",
+                  "association": "ACTIVE",
+                  "startOffset": 0,
+                  "logicalRecord": null
+                }
+              ]
+            },
+            {
+              "sourceId": 4,
+              "sourceType": "PASTED_TEXT",
+              "originalFileName": null,
+              "traces": [
+                {
+                  "excerpt": "PL: 田中",
+                  "lineEnd": 2,
+                  "dependsOn": [],
+                  "endOffset": 19,
+                  "fieldPath": "/participations/p-6b0d2599-11bb-4e05-895c-631709fc8bde/personName",
+                  "lineStart": 2,
+                  "derivation": "DIRECT",
+                  "evidenceId": "b-2:PL:13",
+                  "association": "ACTIVE",
+                  "startOffset": 13,
+                  "logicalRecord": null
+                }
+              ]
+            },
+            {
+              "sourceId": 4,
+              "sourceType": "PASTED_TEXT",
+              "originalFileName": null,
+              "traces": [
+                {
+                  "excerpt": "PL: 田中",
+                  "lineEnd": 2,
+                  "dependsOn": [],
+                  "endOffset": 19,
+                  "fieldPath": "/participations/p-6b0d2599-11bb-4e05-895c-631709fc8bde/role",
+                  "lineStart": 2,
+                  "derivation": "DIRECT",
+                  "evidenceId": "b-2:PL:13",
+                  "association": "ACTIVE",
+                  "startOffset": 13,
+                  "logicalRecord": null
+                }
+              ]
+            },
+            {
+              "sourceId": 4,
+              "sourceType": "PASTED_TEXT",
+              "originalFileName": null,
+              "traces": [
+                {
+                  "excerpt": "PC: 元PC",
+                  "lineEnd": 3,
+                  "dependsOn": [],
+                  "endOffset": 27,
+                  "fieldPath": "/participations/p-6b0d2599-11bb-4e05-895c-631709fc8bde/pcName",
+                  "lineStart": 3,
+                  "derivation": "DIRECT",
+                  "evidenceId": "b-3:pc:20",
+                  "association": "ACTIVE",
+                  "startOffset": 20,
+                  "logicalRecord": null
+                }
+              ]
+            },
+            {
+              "sourceId": 4,
+              "sourceType": "PASTED_TEXT",
+              "originalFileName": null,
+              "traces": [
+                {
+                  "excerpt": "新PC",
+                  "lineEnd": 4,
+                  "dependsOn": [],
+                  "endOffset": 31,
+                  "fieldPath": "/unassignedValues/u-fc7d5f88-fd3e-4bd2-b6e4-d527ac4c4e4f",
+                  "lineStart": 4,
+                  "derivation": "DIRECT",
+                  "evidenceId": "b-4:28",
+                  "association": "DETACHED",
+                  "startOffset": 28,
+                  "logicalRecord": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
