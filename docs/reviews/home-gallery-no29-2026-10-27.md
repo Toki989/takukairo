@@ -28,3 +28,17 @@
 - 既存の画像比率、Sort順、Hover / Focus、Touch、Reduced Motion、保存・編集・CSV等の検査も成功。
 
 画面: `.runtime/no29-two-works-desktop.png`。ブラウザの実データと追加資料の原文は変更していない。GitHub Pagesへのpush・公開操作は実施していない。
+
+## GitHub ActionsでのFilter操作失敗への対応
+
+公開処理#4（コミット`474792a`）はビルド成功後、No.29の複合検査でPlaywrightの `check()` が失敗し、deployがスキップされた。ユーザー提供のログでは、18件中17件が成功し、失敗は「クリック直後にCheckboxが切り替わらない」という判定だった。
+
+ChromiumのCPUスロットリング倍率を6にした独立ブラウザで同じ失敗を再現した。失敗直後の状態を確認すると、URLは `favorite=true`、Checkboxはcheckedになっていた。URLクエリから制御する表示状態の反映より、Playwrightの即時確認が先に走っていた。
+
+テストを次のように修正した。アプリの配置・Filter処理・No.29仕様は変更していない。
+
+- 各Sort操作の後、URL、Selectの値、表示された全作品の順序、読み込み完了を待ってから中央配置を検査する。
+- Checkboxは通常のClick後、再試行可能な `toBeChecked()` / `not.toBeChecked()` で実際の反映を待つ。URLのFilter条件と3件 / 19件という結果件数も検査する。
+- 同じNo.29テスト自体をCPU6倍の条件で実行し、遅い描画環境でも結果を確認する。固定時間のsleepやforce操作、失敗を通すためのretry追加は使用しない。
+
+修正後のNo.29テストは、CPUスロットリング倍率6の条件で3回連続成功した。その後、同条件を含む全18件も成功（49.3秒）。TypeScript検査・体験版ビルドも成功。GitHub上での再実行結果は、修正をpushした後に別途確認する。

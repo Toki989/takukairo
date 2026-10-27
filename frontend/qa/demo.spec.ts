@@ -87,20 +87,43 @@ test('secondary gallery information is quiet until pointer or keyboard focus, wi
   } finally { await touch.close(); }
 });
 
-test('No29 centers every row after sorting, filtering and viewport changes', async ({page}) => {
+test('No29 centers every row after sorting, filtering and viewport changes', async ({page, context}) => {
+  // Reproduce CI's delayed controlled-input updates instead of relying on a fast renderer.
+  test.setTimeout(60000);
+  const renderer = await context.newCDPSession(page);
+  await renderer.send('Emulation.setCPUThrottlingRate', {rate: 6});
+  const names = createSeed().scenarios.map(scenario => scenario.name);
+  const expectedNames = {
+    NAME: [...names].sort((a, b) => a.localeCompare(b, 'ja')),
+    CREATED_ASC: names,
+    CREATED_DESC: [...names].reverse(),
+    RECENT_PLAYED: [...names.slice(0, 12), ...names.slice(12).reverse()],
+  };
   await page.goto('./');
   await expect.poll(() => page.locator('.scenario-gallery img').evaluateAll(images => images.length === 19 && images.every(image => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0))).toBe(true);
   for (const width of [1440, 1200, 1199, 768, 767, 375]) {
     await page.setViewportSize({width, height: 1000});
-    for (const sort of ['NAME', 'CREATED_ASC', 'CREATED_DESC', 'RECENT_PLAYED']) {
+    for (const sort of ['NAME', 'CREATED_ASC', 'CREATED_DESC', 'RECENT_PLAYED'] as const) {
       await page.getByLabel('並び順', {exact: true}).selectOption(sort);
+      await expect(page).toHaveURL(url => new URLSearchParams(url.hash.split('?')[1]).get('sort') === sort);
+      await expect(page.getByLabel('並び順', {exact: true})).toHaveValue(sort);
+      await expect(page.locator('.scenario-gallery h2')).toHaveText(expectedNames[sort]);
+      await expect(page.locator('.scenario-gallery')).toHaveAttribute('aria-busy', 'false');
       await expectCenteredGalleryRows(page);
     }
   }
-  await page.getByLabel('お気に入り', {exact: true}).check();
+  const filter = page.getByLabel('お気に入り', {exact: true});
+  await expect(filter).not.toBeChecked();
+  // check()/uncheck() assert immediately after the click; query-backed state commits later.
+  await filter.click();
+  await expect(filter).toBeChecked();
+  await expect(page).toHaveURL(url => new URLSearchParams(url.hash.split('?')[1]).get('favorite') === 'true');
   await expect(page.locator('.scenario-gallery .gallery-item')).toHaveCount(3);
   await expectCenteredGalleryRows(page);
-  await page.getByLabel('お気に入り', {exact: true}).uncheck();
+  await filter.click();
+  await expect(filter).not.toBeChecked();
+  await expect(page).toHaveURL(url => !new URLSearchParams(url.hash.split('?')[1]).has('favorite'));
+  await expect(page.locator('.scenario-gallery .gallery-item')).toHaveCount(19);
   await page.getByLabel('シナリオ・作者・PL・PCを検索', {exact: true}).fill('灯台は夢を見るか');
   await expect(page.locator('.scenario-gallery .gallery-item')).toHaveCount(1);
   await expectCenteredGalleryRows(page);
