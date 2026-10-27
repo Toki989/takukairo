@@ -71,6 +71,51 @@ test('secondary gallery information is quiet until pointer or keyboard focus, wi
   } finally { await touch.close(); }
 });
 
+test('short works do not inherit a tall neighboring work\'s blank row', async ({page}) => {
+  await page.goto('./');
+  await expect.poll(() => page.locator('.scenario-gallery img').evaluateAll(images => images.length === 19 && images.every(image => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0))).toBe(true);
+  await expect.poll(() => page.locator('.scenario-gallery .gallery-item').evaluateAll(items => items[3].getBoundingClientRect().top - items[2].getBoundingClientRect().bottom)).toBeLessThan(29);
+  const desktopGap = await page.locator('.scenario-gallery .gallery-item').evaluateAll(items => items[3].getBoundingClientRect().top - items[2].getBoundingClientRect().bottom);
+  expect(desktopGap).toBeGreaterThanOrEqual(24);
+  for (const width of [1199, 768, 767, 375, 1440]) {
+    await page.setViewportSize({width, height: 1000});
+    await expect.poll(() => page.locator('.scenario-gallery .gallery-item').evaluateAll(items => {
+      const rects = items.map(item => item.getBoundingClientRect());
+      return rects.every((rect, i) => rects.slice(i + 1).every(other => Math.min(rect.right, other.right) - Math.max(rect.left, other.left) <= 1 || Math.min(rect.bottom, other.bottom) - Math.max(rect.top, other.top) <= 1));
+    })).toBe(true);
+  }
+});
+
+test('hover fades supplemental controls without layout shifts and supports reduced motion', async ({page}) => {
+  await page.goto('./');
+  const work = page.locator('.scenario-gallery .gallery-item').filter({has: page.getByRole('heading', {name: '灯台は夢を見るか', exact: true})});
+  const count = work.getByText('1 卓', {exact: true});
+  const favorite = work.getByRole('button', {name: '灯台は夢を見るかのお気に入り', exact: true});
+  await work.locator('img').waitFor();
+  await expect(count).toHaveCSS('opacity', '0');
+  await expect(count).toHaveCSS('transition-duration', '0.26s');
+  await work.scrollIntoViewIfNeeded();
+  const originalHeight = await work.evaluate(element => element.getBoundingClientRect().height);
+  await work.getByRole('link').hover();
+  await expect(count).toHaveCSS('opacity', '1');
+  await expect(favorite).toHaveCSS('opacity', '1');
+  await expect(work.getByRole('heading')).toHaveCSS('color', 'rgb(63, 125, 121)');
+  expect(await work.evaluate(element => element.getBoundingClientRect().height)).toBe(originalHeight);
+  const href = page.url();
+  await count.click();
+  expect(page.url()).toBe(href);
+  await page.mouse.move(0, 0);
+  await work.getByRole('link').focus();
+  await expect(work.getByRole('heading')).toHaveCSS('color', 'rgb(63, 125, 121)');
+  await expect(count).toHaveCSS('opacity', '1');
+  await page.emulateMedia({reducedMotion: 'reduce'});
+  await expect(count).toHaveCSS('transition-duration', '0s');
+  await page.keyboard.press('Tab');
+  await expect(favorite).toBeFocused();
+  await page.keyboard.press('Space');
+  await expect(favorite).toHaveAttribute('aria-pressed', 'true');
+});
+
 test('favorite, search, persistence and reset preserve unrelated browser data', async ({page}) => {
   await page.goto('./');
   const favorite = page.getByRole('button', {name: '硝子温室の残響のお気に入り', exact: true});

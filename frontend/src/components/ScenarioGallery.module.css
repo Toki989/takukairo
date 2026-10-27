@@ -1,9 +1,13 @@
 /* Part C §17.5: a curated gallery, with the artwork's own proportions. */
 :global(.scenario-gallery).gallery {
+  --work-gap: 24px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: start;
-  gap: 32px 24px;
+  column-gap: 24px;
+  row-gap: 0;
+  grid-auto-rows: 4px;
+  /* Content height plus --work-gap determines each work's row span. */
   /* Keep the selected sort order in both visual and keyboard reading order. */
   grid-auto-flow: row;
 }
@@ -25,18 +29,18 @@
   aspect-ratio: 3 / 4;
 }
 .gallery .metadata { position: relative; padding-top: 12px; }
-.gallery .metadata h2 {
+.gallery .work .metadata h2 {
   margin: 0 0 6px;
   font-size: 20px;
   line-height: 1.5;
   overflow-wrap: anywhere;
+  color: var(--text);
+  transition: color 260ms cubic-bezier(.2,.7,.2,1);
 }
-.gallery .author { margin: 0; padding-right: 44px; font-size: 13px; line-height: 1.7; color: var(--sub); }
-.gallery .supplement { display: block; margin-top: 8px; padding-right: 44px; font-size: 12px; opacity: 0; }
+.gallery .author { margin: 0; font-size: 13px; line-height: 1.7; color: var(--sub); }
+.gallery .actions { display: flex; align-items: center; justify-content: space-between; min-height: 44px; }
+.gallery .supplement { display: block; font-size: 12px; opacity: 0; transition: opacity 260ms cubic-bezier(.2,.7,.2,1); }
 .gallery .favorite {
-  position: absolute;
-  right: 0;
-  bottom: 0;
   min-width: 44px;
   min-height: 44px;
   padding: 8px;
@@ -45,22 +49,27 @@
   color: var(--sub);
   font-size: 20px;
   opacity: 0;
+  pointer-events: none;
+  transition: opacity 260ms cubic-bezier(.2,.7,.2,1), color 260ms cubic-bezier(.2,.7,.2,1);
 }
-.gallery .favorite[aria-pressed='true'] { opacity: 1; color: #886000; }
+.gallery .favorite[aria-pressed='true'] { opacity: 1; pointer-events: auto; color: #886000; }
 .gallery .work:hover .supplement,
 .gallery .work:focus-within .supplement,
 .gallery .work:hover .favorite,
-.gallery .work:focus-within .favorite { opacity: 1; }
-.gallery .link:hover h2 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.gallery .work:focus-within .favorite { opacity: 1; pointer-events: auto; }
+.gallery .link:is(:hover,:focus-visible) h2 { color: var(--teal); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 @media (min-width: 768px) and (max-width: 1199px) {
   :global(.scenario-gallery).gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (max-width: 767px) {
-  :global(.scenario-gallery).gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; }
+  :global(.scenario-gallery).gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; }
   .gallery .metadata { padding-top: 12px; }
   .gallery .metadata h2 { font-size: 18px; }
 }
 /* Touch has no hover: keep secondary actions available without a hidden first tap. */
 @media (hover: none) {
-  .gallery .supplement, .gallery .favorite { opacity: 1; }
+  .gallery .supplement, .gallery .favorite { opacity: 1; pointer-events: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gallery .work .metadata h2, .gallery .supplement, .gallery .favorite { transition: none; }
 }
