@@ -10,6 +10,8 @@ GitHub Pages公開用のWorkflowも追加しています。起動・公開手順
 
 ## 通常版・ローカル実装
 
+Home Scenario Galleryの配置には、追加された[No.29確定事項まとめ](卓回廊_HomeGallery_左右余白と並び替え時の空白対策_No29確定事項まとめ.md)も適用します。Flexboxによる行ごとの中央配置と、残余空間の左右均等分配が採用済みです。
+
 実装正本は `卓回廊_Codex実装正本_2026-10-08_R5.1.12_最終Contract補強版.md`。Part Aを優先し、未変更事項はPart B/Cに従います。既存の仕様書・Prototype・参照資料・画像assetsを元の場所に保全しています。実装と実検査の記録は [docs/IMPLEMENTATION_STATUS.md](docs/IMPLEMENTATION_STATUS.md)、API照合は [docs/API_CONTRACT.md](docs/API_CONTRACT.md) にあります。Part D/Eの監査PASSを実装テストのPASSへ転用していません。
 
 ## 固定Version・環境要件

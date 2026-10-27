@@ -1,0 +1,29 @@
+{
+  "viewport": 1440,
+  "gallery": {
+    "left": 40,
+    "right": 1400,
+    "width": 1360
+  },
+  "gridColumns": "322px 322px 322px 322px",
+  "gridAutoFlow": "row",
+  "unoccupiedRightWidth": 346,
+  "items": [
+    {
+      "name": "失われた遊園地",
+      "shape": "landscape",
+      "columns": "auto",
+      "x": 40,
+      "right": 708,
+      "width": 668
+    },
+    {
+      "name": "硝子温室の残響",
+      "shape": "portrait",
+      "columns": "auto",
+      "x": 732,
+      "right": 1054,
+      "width": 322
+    }
+  ]
+}

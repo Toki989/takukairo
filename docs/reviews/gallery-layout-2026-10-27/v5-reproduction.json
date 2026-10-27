@@ -1,0 +1,22 @@
+{
+  "fixture": "Unmodified v5 source; two-item browser-only fixture",
+  "gridAutoFlow": "row",
+  "galleryWidth": 1376,
+  "unoccupiedRightWidth": 349.5,
+  "items": [
+    {
+      "name": "ORBITAL ASH",
+      "shape": "landscape",
+      "gridColumnStart": "span 6",
+      "width": 677,
+      "right": 709
+    },
+    {
+      "name": "夏の終わりに",
+      "shape": "portrait",
+      "gridColumnStart": "span 3",
+      "width": 327.5,
+      "right": 1058.5
+    }
+  ]
+}

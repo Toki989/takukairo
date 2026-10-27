@@ -1,4 +1,20 @@
-import {test, expect} from '@playwright/test';
+import {test, expect, type Page} from '@playwright/test';
+import {createSeed, DEMO_KEY} from '../src/demo/store';
+
+async function expectCenteredGalleryRows(page: Page) {
+  await expect(page.locator('.scenario-gallery')).toHaveCSS('display', 'flex');
+  await expect.poll(() => page.locator('.scenario-gallery').evaluate(gallery => {
+    const bounds = gallery.getBoundingClientRect();
+    const rows: {top: number; left: number; right: number}[] = [];
+    for (const item of Array.from(gallery.children)) {
+      const rect = item.getBoundingClientRect();
+      const row = rows.at(-1);
+      if (row && Math.abs(rect.top - row.top) < 1) row.right = rect.right;
+      else rows.push({top: rect.top, left: rect.left, right: rect.right});
+    }
+    return rows.length > 0 && rows.every(row => Math.abs((row.left - bounds.left) - (bounds.right - row.right)) < 1);
+  })).toBe(true);
+}
 
 test('a static subpath opens without login, with all trailers and no API calls', async ({page, context}) => {
   const errors: string[] = [], requests: string[] = [];
@@ -71,18 +87,48 @@ test('secondary gallery information is quiet until pointer or keyboard focus, wi
   } finally { await touch.close(); }
 });
 
-test('short works do not inherit a tall neighboring work\'s blank row', async ({page}) => {
+test('No29 centers every row after sorting, filtering and viewport changes', async ({page}) => {
   await page.goto('./');
   await expect.poll(() => page.locator('.scenario-gallery img').evaluateAll(images => images.length === 19 && images.every(image => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0))).toBe(true);
-  await expect.poll(() => page.locator('.scenario-gallery .gallery-item').evaluateAll(items => items[3].getBoundingClientRect().top - items[2].getBoundingClientRect().bottom)).toBeLessThan(29);
-  const desktopGap = await page.locator('.scenario-gallery .gallery-item').evaluateAll(items => items[3].getBoundingClientRect().top - items[2].getBoundingClientRect().bottom);
-  expect(desktopGap).toBeGreaterThanOrEqual(24);
-  for (const width of [1199, 768, 767, 375, 1440]) {
+  for (const width of [1440, 1200, 1199, 768, 767, 375]) {
     await page.setViewportSize({width, height: 1000});
-    await expect.poll(() => page.locator('.scenario-gallery .gallery-item').evaluateAll(items => {
-      const rects = items.map(item => item.getBoundingClientRect());
-      return rects.every((rect, i) => rects.slice(i + 1).every(other => Math.min(rect.right, other.right) - Math.max(rect.left, other.left) <= 1 || Math.min(rect.bottom, other.bottom) - Math.max(rect.top, other.top) <= 1));
-    })).toBe(true);
+    for (const sort of ['NAME', 'CREATED_ASC', 'CREATED_DESC', 'RECENT_PLAYED']) {
+      await page.getByLabel('並び順', {exact: true}).selectOption(sort);
+      await expectCenteredGalleryRows(page);
+    }
+  }
+  await page.getByLabel('お気に入り', {exact: true}).check();
+  await expect(page.locator('.scenario-gallery .gallery-item')).toHaveCount(3);
+  await expectCenteredGalleryRows(page);
+  await page.getByLabel('お気に入り', {exact: true}).uncheck();
+  await page.getByLabel('シナリオ・作者・PL・PCを検索', {exact: true}).fill('灯台は夢を見るか');
+  await expect(page.locator('.scenario-gallery .gallery-item')).toHaveCount(1);
+  await expectCenteredGalleryRows(page);
+});
+
+test('No29 splits unused space equally for the reported landscape and portrait pair', async ({page}) => {
+  const data = createSeed();
+  data.scenarios = data.scenarios.filter(scenario => [1, 15].includes(scenario.id));
+  data.tables = data.tables.filter(table => [1, 15].includes(table.scenarioId));
+  await page.addInitScript(({key, data}) => localStorage.setItem(key, JSON.stringify(data)), {key: DEMO_KEY, data});
+  await page.goto('./#/?sort=NAME');
+  await expect(page.locator('.scenario-gallery .gallery-item')).toHaveCount(2);
+  await expect.poll(() => page.locator('.scenario-gallery img').evaluateAll(images => images.length === 2 && images.every(image => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0))).toBe(true);
+  for (const width of [1440, 1199, 768, 767, 375]) {
+    await page.setViewportSize({width, height: 1000});
+    await expectCenteredGalleryRows(page);
+    await expect(page.locator('.scenario-gallery h2')).toHaveText(['失われた遊園地', '硝子温室の残響']);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    if (width === 1440) {
+      const margins = await page.locator('.scenario-gallery').evaluate(gallery => {
+        const bounds = gallery.getBoundingClientRect();
+        const items = Array.from(gallery.children).map(item => item.getBoundingClientRect());
+        return {left: items[0].left - bounds.left, right: bounds.right - items[1].right};
+      });
+      expect(margins.left).toBeGreaterThan(100);
+      expect(Math.abs(margins.left - margins.right)).toBeLessThan(1);
+      await page.screenshot({path: '../.runtime/no29-two-works-desktop.png', fullPage: true});
+    }
   }
 });
 
