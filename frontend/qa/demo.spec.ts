@@ -5,12 +5,13 @@ async function expectCenteredGalleryRows(page: Page) {
   await expect(page.locator('.scenario-gallery')).toHaveCSS('display', 'flex');
   await expect.poll(() => page.locator('.scenario-gallery').evaluate(gallery => {
     const bounds = gallery.getBoundingClientRect();
-    const rows: {top: number; left: number; right: number}[] = [];
+    const rows: {center: number; left: number; right: number}[] = [];
     for (const item of Array.from(gallery.children)) {
       const rect = item.getBoundingClientRect();
       const row = rows.at(-1);
-      if (row && Math.abs(rect.top - row.top) < 1) row.right = rect.right;
-      else rows.push({top: rect.top, left: rect.left, right: rect.right});
+      const center = rect.top + rect.height / 2;
+      if (row && Math.abs(center - row.center) < 1) row.right = rect.right;
+      else rows.push({center, left: rect.left, right: rect.right});
     }
     return rows.length > 0 && rows.every(row => Math.abs((row.left - bounds.left) - (bounds.right - row.right)) < 1);
   })).toBe(true);
@@ -42,18 +43,23 @@ test('gallery honors artwork proportions, gives wide art more space and preserve
       const image = item.querySelector('img')!;
       const rect = image.getBoundingClientRect();
       const art = image.parentElement!.getBoundingClientRect();
-      return {shape: item.getAttribute('data-shape'), width: rect.width, height: rect.height, naturalRatio: image.naturalWidth / image.naturalHeight, artHeight: art.height, x: rect.x, y: rect.y};
+      const work = item.getBoundingClientRect();
+      const title = item.querySelector('h2')!.getBoundingClientRect();
+      const favorite = item.querySelector('button')!.getBoundingClientRect();
+      return {shape: item.getAttribute('data-shape'), width: rect.width, height: rect.height, naturalRatio: image.naturalWidth / image.naturalHeight, artHeight: art.height, x: rect.x, rowCenter: work.top + work.height / 2, titleBottom: title.bottom, favoriteTop: favorite.top};
     }));
     for (const image of geometry) {
       expect(Math.abs(image.width / image.height - image.naturalRatio)).toBeLessThan(0.01);
       expect(Math.abs(image.artHeight - image.height)).toBeLessThan(1);
+      expect(image.titleBottom).toBeLessThanOrEqual(image.favoriteTop + 1);
     }
     expect(geometry[0].shape).toBe('portrait');
     expect(geometry[0].height).toBeGreaterThan(geometry[0].width * 1.5);
     expect(geometry[1].shape).toBe('landscape');
     expect(geometry[1].width).toBeGreaterThan(geometry[0].width * 1.9);
     expect(geometry[2].shape).toBe('square');
-    for (let i = 1; i < geometry.length; i++) expect(geometry[i].y >= geometry[i - 1].y - 1 && (geometry[i].y > geometry[i - 1].y + 1 || geometry[i].x > geometry[i - 1].x)).toBe(true);
+    // Read each centered exhibition row from left to right, then move to the next row.
+    for (let i = 1; i < geometry.length; i++) expect(geometry[i].rowCenter >= geometry[i - 1].rowCenter - 1 && (geometry[i].rowCenter > geometry[i - 1].rowCenter + 1 || geometry[i].x > geometry[i - 1].x)).toBe(true);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   }
   await page.getByLabel('並び順', {exact: true}).selectOption('NAME');

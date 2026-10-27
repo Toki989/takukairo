@@ -6,7 +6,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-start;
+  /* Balance the space above and below shorter works in the same exhibition row. */
+  align-items: center;
   gap: var(--work-gap);
 }
 .gallery .work { flex: 0 0 var(--unit-width); min-width: 0; position: relative; }
@@ -26,7 +27,7 @@
   min-height: 0;
   aspect-ratio: 3 / 4;
 }
-.gallery .metadata { position: relative; padding-top: 12px; }
+.gallery .metadata { position: relative; padding: 12px 0 22px; }
 .gallery .work .metadata h2 {
   margin: 0 0 6px;
   font-size: 20px;
@@ -35,9 +36,12 @@
   color: var(--text);
   transition: color 260ms cubic-bezier(.2,.7,.2,1);
 }
-.gallery .author { margin: 0; font-size: 13px; line-height: 1.7; color: var(--sub); }
-.gallery .actions { display: flex; align-items: center; justify-content: space-between; min-height: 44px; }
-.gallery .supplement { display: block; font-size: 12px; opacity: 0; transition: opacity 260ms cubic-bezier(.2,.7,.2,1); }
+/* Leave the same space for actions when an author is absent. */
+.gallery .metadata h2:last-child { margin-bottom: 22px; }
+.gallery .author { margin: 0; padding-right: 52px; font-size: 13px; line-height: 1.7; color: var(--sub); }
+/* Share the metadata area instead of adding a detached, empty 44px footer. */
+.gallery .actions { position: absolute; inset: auto 0 0; display: flex; align-items: flex-end; justify-content: space-between; height: 44px; pointer-events: none; }
+.gallery .supplement { display: block; font-size: 12px; line-height: 22px; opacity: 0; transition: opacity 260ms cubic-bezier(.2,.7,.2,1); }
 .gallery .favorite {
   min-width: 44px;
   min-height: 44px;

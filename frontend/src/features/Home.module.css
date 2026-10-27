@@ -1,0 +1,11 @@
+/* Home's introduction stays secondary to the collection (N-02A / N-05). */
+.page { padding-top: 32px; }
+.page :global(.page-heading) { margin-bottom: 16px; }
+.page :global(.kicker) { margin: 0 0 8px; }
+.page :global(.page-heading h1) { margin: 0; font-size: 32px; }
+.page :global(.summary-line) { padding: 8px 0 16px; }
+.page :global(.summary-line strong) { font-size: 28px; }
+.page :global(.toolbar) { margin: 24px 0; }
+@media (max-width: 767px) {
+  .page :global(.page-heading h1) { font-size: 28px; }
+}
