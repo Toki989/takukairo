@@ -17,3 +17,10 @@
 @media(max-width:767px){.review-inline{padding-left:0}.review-row{gap:12px}.import-page .page-heading{flex-wrap:wrap}.review-inline form button{width:100%;margin-right:0}}
 
 .import-name{min-height:44px;line-height:1.5;resize:vertical;white-space:pre-wrap}.review-row>button{white-space:pre-wrap}
+/* BOOTH candidates remain separate from the scenario draft until explicitly applied. */
+.booth-assistance { margin-block: 16px 24px; }
+.booth-assistance summary { cursor: pointer; padding-block: 12px; }
+.booth-assistance section { margin-block: 20px; padding: 16px; border: 1px solid #26373530; }
+.booth-candidate { display: flex; align-items: flex-start; gap: 12px; padding-block: 10px; overflow-wrap: anywhere; }
+.booth-candidate input[type="checkbox"] { width: 20px; height: 20px; flex: 0 0 20px; margin-block-start: 4px; }
+.booth-image-candidate { display: block; width: 100%; max-width: 360px; max-height: 320px; object-fit: contain; margin-block: 12px; }

@@ -2,6 +2,8 @@
 
 正本: `卓回廊_Codex実装正本_2026-10-08_R5.1.12_最終Contract補強版.md`。Part A > B/C。D/EのPASSは実装テストのPASSではない。
 
+2026-10-28追記: Mac用の起動・停止・体験版ランチャー、Apple Silicon対応WebPライブラリ、編集フォームの初期読込待ち、Mac CI構成を追加。手順は[MAC.md](MAC.md)、実行結果と未検証範囲は[Mac対応の検証記録](reviews/mac-compatibility-2026-10-28.md)を参照。過去のWindows検証をMac実機でのPASSへ転用しない。
+
 初期状態: 既存アプリコードなし、Git差分なし。参照資料、Prototype、画像assetsは保全。適用AGENTS.mdなし（workspace配下およびC:/、C:/Srcで確認）。
 
 ## 作業チェックリスト
@@ -30,6 +32,12 @@
 チェックはローカル／テスト実装範囲についての記録。実機・Production・未実行検査の範囲は末尾で区別する。MVP UC14件の実装経路とMethod / Path / DTO / Error / Versionの照合は [API_CONTRACT.md](API_CONTRACT.md)。Formal Entity9件とSupport Structureの内訳・固定Version・操作手順は [README](../README.md)。
 
 ## 実行した検査と証拠
+
+### 2026-10-27 ローカル版のBOOTH実取得
+
+2026-10-28追記：依存関係の再準備と起動時の再利用処理を整備し、通常Devの起動を復旧。`http://localhost:5173/` の実画面からBOOTH候補の実取得を確認した。通常DBのシナリオ一覧は取得前後で一致し、確認用の業務データ登録は行っていない。証拠はBOOTH実取得記録の末尾を参照。
+
+ユーザーの「費用ゼロ・明日までにローカル版を完成」の方針と、BOOTHの商品URLからシナリオ情報を取得したい依頼に従い、実取得Adapterを追加した。通常Devは実取得、testはMock。取得候補の選択反映と既存入力の保持を追加。画像はユーザーの指定どおり外部の埋め込みURLのみ保存し、画像ファイルをStorageへ複製しない。指定URLから実取得・候補確認・シナリオ保存・外部参照表示を専用DBと独立ブラウザで確認した。画像Key0件、Storageファイル0件。詳細は [BOOTH実取得記録](reviews/booth-live-fetch-2026-10-27.md)。本番公開・課金サービスの作成は行っていない。これだけでローカル版全体の完成・HomeのVisual承認とはしない。
 
 ### 2026-10-09 ローカルファイルからの確認用入口
 
@@ -92,7 +100,7 @@ PL0〜8、first/middle/last、画像・EndPcStateなし、空／1件Collection�
 - ローカル／テスト対象について既知の未実装機能はない。Tekey／Udonariumは仕様上のStubであり、Concrete Parser実装済みとは表示しない。
 - iOS／Android物理端末、Safari／Firefox、実Screen Readerでの読み上げは未実行。このWindows環境に対象端末・Browser／支援技術がないため、ChromiumでのViewport／Touch／ARIA／Focus確認と区別する。対象端末から同等のローカルテスト環境を開き、仕様§47のKeyboard・Touch・Focus Return・Reduced Motionと上記Viewportを再確認する。
 - Production CookieのSecure／Prefixは構成・Security Testの対象。HTTP Dev BrowserでProduction認証・HTTPS運用を実行したとは扱わない。
-- Google実認証、R2、Render、実BOOTH接続、Productionの負荷・運用・権利判断は実行していない。ユーザー指定に従って外部公開しない。
+- Google実認証、R2、Render、Productionの負荷・運用・権利判断は実行していない。ユーザー指定に従って外部公開しない。BOOTHは2026-10-27にローカル実取得を追加し、指定された公開商品URLで確認した（上の更新参照）。
 - 正本§61.4の旧R1原文の完全一致照合は非Blockerの資料履歴残件。解消済みの6系統TODOをHOLDへ戻していない。
 
 再検証の具体コマンド・環境変数・専用DB・Dev Login・起動停止はREADMEの「検査」「初回セットアップ・起動」に記載。自動検査は固定Dev UserにテストDataを追加するため、必要な途中保存がある場合は別DBで実行する。

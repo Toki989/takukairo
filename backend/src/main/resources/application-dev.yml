@@ -2,3 +2,7 @@ spring:
   flyway:
     out-of-order: true
     locations: classpath:db/migration,classpath:db/dev
+
+app:
+  booth:
+    live-fetch: ${BOOTH_LIVE_FETCH:true}

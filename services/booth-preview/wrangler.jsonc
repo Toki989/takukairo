@@ -1,0 +1,12 @@
+{
+  "name": "takukairo-booth-preview",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-28",
+  "workers_dev": true,
+  "vars": {
+    "ALLOWED_ORIGINS": "https://toki989.github.io"
+  },
+  "observability": {
+    "enabled": false
+  }
+}

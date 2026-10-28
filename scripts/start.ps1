@@ -15,7 +15,14 @@ if($PortablePostgres){
 & mvn.cmd -B -ntp -f backend/pom.xml "-Dmaven.repo.local=$Workspace/.tools/m2" -DskipTests package
 if($LASTEXITCODE){throw 'Backend build failed'}
 Push-Location "$Workspace/frontend"
-try{& npm.cmd ci; if($LASTEXITCODE){throw 'npm ci failed'}}finally{Pop-Location}
+try{
+ $FrontendDependencyStamp=Join-Path $Workspace '.runtime/frontend-dependencies.sha256'
+ $FrontendDependencyHash=((Get-FileHash package.json,package-lock.json -Algorithm SHA256).Hash -join ':')
+ $FrontendDependenciesReady=(Test-Path $FrontendDependencyStamp) -and ((Get-Content $FrontendDependencyStamp -Raw).Trim() -eq $FrontendDependencyHash)
+ foreach($FrontendEntry in @('node_modules/vite/bin/vite.js','node_modules/typescript/bin/tsc','node_modules/react/index.js','node_modules/react-dom/client.js')){if(!(Test-Path $FrontendEntry)){$FrontendDependenciesReady=$false}}
+ if(!$FrontendDependenciesReady){& npm.cmd ci; if($LASTEXITCODE){throw 'npm ci failed'};Set-Content -LiteralPath $FrontendDependencyStamp -Value $FrontendDependencyHash -Encoding utf8}
+ else{Write-Host 'Frontend dependencies are up to date.'}
+}finally{Pop-Location}
 $AppProfiles=if($Qa){'dev,test'}else{'dev'}
 $Backend=Start-Process -FilePath "$env:JAVA_HOME/bin/java.exe" -ArgumentList '--enable-native-access=ALL-UNNAMED','-jar',('"'+$Workspace+'/backend/target/takukairo-0.1.0.jar"'),"--spring.profiles.active=$AppProfiles" -WorkingDirectory "$Workspace/backend" -WindowStyle Hidden -RedirectStandardOutput "$Workspace/.runtime/backend.log" -RedirectStandardError "$Workspace/.runtime/backend-error.log" -PassThru
 $NodePath=(Get-Command node.exe).Source

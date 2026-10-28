@@ -2,11 +2,15 @@
 
 ## ログイン不要のブラウザ体験版
 
+**GitHub Pages版（操作体験用）：[卓回廊 ブラウザ体験版](https://toki989.github.io/takukairo/)**
+
+本リポジトリの本体は、Reactのフロントエンドと **Spring Boot＋PostgreSQL** を使用するWebアプリケーションです。GitHub Pages版は画面や操作を試すための静的な体験版で、本体のバックエンド・データベースには接続しません。
+
 シナリオ画像19枚・PC画像10枚を使い、回廊の検索、お気に入り、シナリオ・人物・PC・卓の追加と編集、定型CSVの登録を試せる静的サイトを用意しています。操作結果は閲覧者のブラウザ内だけに保存し、バックエンドやアカウントは必要ありません。
 
-Windowsでは **[体験版.cmd](体験版.cmd)** をダブルクリックすると開きます。コマンドではfrontendでnpm ci、npm run dev:demoを実行し、<http://localhost:5175/> を開きます。
+Windowsでは **[体験版.cmd](体験版.cmd)**、Macでは **[体験版.command](体験版.command)** をダブルクリックすると開きます。Macの初回準備は **[Macでの使い方](docs/MAC.md)** を参照してください。コマンドではfrontendでnpm ci、npm run dev:demoを実行し、<http://localhost:5175/> を開きます。
 
-GitHub Pages公開用のWorkflowも追加しています。起動・公開手順、体験できる機能、本体との差、素材の由来は **[ブラウザ体験版の説明](docs/BROWSER_DEMO.md)** を参照してください。この作業ではリモートへのpushと公開操作は行っていません。
+GitHub Pages公開用のWorkflowも用意しています。起動・公開手順、体験できる機能、本体との差、素材の由来は **[ブラウザ体験版の説明](docs/BROWSER_DEMO.md)** を参照してください。
 
 ## 通常版・ローカル実装
 
@@ -32,6 +36,8 @@ Java 25とJAVA_HOME、Node 24、Docker Desktop（DBテスト用）が必要で�
 Stable系列の具体Versionは公式配布metadataで照合しました。作業環境内の照合元は `.tools/jdk-index.json`、`.tools/node-index.json`、`.tools/maven-index.xml`、実行Versionは検証記録に残しています。
 
 ## 初回セットアップ・起動
+
+**Mac（Apple Silicon / Intel）の通常版は [Macでの使い方](docs/MAC.md) に沿って準備し、`起動.command` / `停止.command` を使います。** Node.js 24・JDK 25・起動済みDocker Desktopが必要です。Mavenは同梱Wrapperで準備します。以下はWindowsでの手順です。
 
 Windowsで手動確認する場合は、フォルダー直下の `index.html` をダブルクリックして入口を開けます。同じフォルダーの `起動.cmd` をダブルクリックすると、ローカルアプリを起動して既定ブラウザを開きます。すでに同じアプリが起動済みなら二重起動せず、その画面を開きます。ログイン画面では「固定テストユーザーでログイン」を選びます。
 
@@ -68,6 +74,8 @@ node qa/seed-images.mjs
 Pop-Location
 ```
 
+フロントエンドの依存パッケージは初回と`package.json`／`package-lock.json`の変更時に準備します。同じ依存設定で必要なパッケージが揃っている場合は再利用するため、通常起動のたびに`npm ci`で入れ直しません。依存パッケージが欠けている場合は再準備します。
+
 ## 停止・保存場所
 
 ```powershell
@@ -83,7 +91,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/stop.ps1
 
 Formal Entityは User / Scenario / Person / PC / Table / TableDate / Participation / EndPcState / ScenarioFavorite の9件。`PcSystemSetting`、`ImportSession / ImportSource / ImportCandidate / ImportResolution / ImportCandidateSourceTrace / ImportPreview`、`StorageDeleteTask`、Spring Session JDBCはSupport Structureで、Formal EntityやUCを増やしません。Game System Profile・Resolver・CCFOLIA MappingはVersioned Application Configです。初期Resolver Aliasは空です。
 
-BOOTHはMock Adapter、画像はLocal Storage Adapter。CCFOLIA駒JSONは任意の入力補助で、RawをFormal Dataへ保存しません。Tekey／Udonariumは未対応を返すExtension PointのStubです。CCFOLIAを使わず手入力のみでもPC・卓・終了時状態を登録できます。
+ローカル通常起動では、シナリオ追加・編集画面の「BOOTHから入力を補助」から公開商品ページの情報を取得できます。商品名・作者（記載がなければショップ名）・明示されたゲームシステム・商品URLを候補として表示し、選択した項目だけを入力欄へ反映します。取得中も手入力でき、入力済みの値を上書きするときは確認します。取得や候補反映では自動保存しません。
+
+BOOTH画像は「この画像を使用」を明示選択し、シナリオ保存時に外部画像URLとして記録します。表示時に配信元へアクセスし、画像ファイルをLocal Storageへ複製しません。初回保存時の外部画像利用の説明・同意と、アップロード画像の優先を維持します。ページが非公開・取得失敗の場合は手入力で続けられます。`.env`に`BOOTH_LIVE_FETCH=false`を指定するとMock Adapterへ戻せます。検査Profileでは通常Mockを使い、実取得確認時だけ明示して切り替えます。詳細は [BOOTH実取得の記録](docs/reviews/booth-live-fetch-2026-10-27.md)。
+
+手動アップロード画像はLocal Storage Adapterで保存します。CCFOLIA駒JSONは任意の入力補助で、RawをFormal Dataへ保存しません。Tekey／Udonariumは未対応を返すExtension PointのStubです。CCFOLIAを使わず手入力のみでもPC・卓・終了時状態を登録できます。
 
 ## 検査
 

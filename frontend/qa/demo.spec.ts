@@ -17,6 +17,34 @@ async function expectCenteredGalleryRows(page: Page) {
   })).toBe(true);
 }
 
+test('BOOTH candidates require explicit adoption and persist only an external image URL',async({page})=>{
+ const candidate={name:'BOOTH取得確認用シナリオ',authorName:'作者候補',gameSystem:'クトゥルフ神話TRPG 6版',sourceUrl:'https://booth.pm/ja/items/3403696',externalImageUrl:'https://booth.pximg.net/test/i/3403696/cover.png'};
+ await page.route(/\/(?:__)?booth\/preview\?/,route=>route.fulfill({status:200,contentType:'application/json',headers:{'Access-Control-Allow-Origin':'*'},body:JSON.stringify(candidate)}));
+ await page.route(candidate.externalImageUrl,route=>route.fulfill({status:200,contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600"><rect width="400" height="600" fill="#3f7d79"/></svg>'}));
+ await page.goto('./#/scenarios/new');
+ await page.getByText('BOOTHから入力を補助',{exact:true}).click();
+ await page.getByLabel('BOOTHの商品URL',{exact:true}).fill(candidate.sourceUrl);
+ await page.getByRole('button',{name:'情報を取得',exact:true}).click();
+ await expect(page.getByRole('region',{name:'BOOTHの商品情報候補'})).toBeVisible();
+ await expect(page.getByLabel('シナリオ名',{exact:true})).toHaveValue('');await expect(page.getByLabel('外部画像URL',{exact:true})).toHaveValue('');
+ expect(await page.evaluate(()=>localStorage.getItem('takukairo-demo-v1'))).toBeNull();
+ await page.getByRole('button',{name:'選択した情報を入力欄へ反映',exact:true}).click();
+ await page.getByText('商品画像の候補を確認',{exact:true}).click();await page.getByRole('button',{name:'この画像を使用',exact:true}).click();
+ await expect(page.getByLabel('外部画像URL',{exact:true})).toHaveValue(candidate.externalImageUrl);
+ await page.getByRole('button',{name:'保存',exact:true}).click();await expect(page.getByRole('dialog')).toContainText('外部画像');await page.getByRole('dialog').getByRole('button',{name:'続ける',exact:true}).click();
+ await expect(page.getByRole('heading',{name:candidate.name,exact:true})).toBeVisible();
+ let stored=await page.evaluate(()=>JSON.parse(localStorage.getItem('takukairo-demo-v1')!));let saved=stored.scenarios.find((item:{name:string})=>item.name===candidate.name);
+ expect(saved.externalImageUrl).toBe(candidate.externalImageUrl);expect(saved.image).toBeNull();expect(stored.images['scenarios/'+saved.id]).toBeUndefined();expect(stored.externalImageConsentGiven).toBe(true);
+ await page.reload();await expect(page.getByRole('img',{name:candidate.name,exact:true})).toHaveAttribute('src',candidate.externalImageUrl);
+ stored=await page.evaluate(()=>JSON.parse(localStorage.getItem('takukairo-demo-v1')!));saved=stored.scenarios.find((item:{name:string})=>item.name===candidate.name);expect(saved.externalImageUrl).toBe(candidate.externalImageUrl);
+});
+
+test('BOOTH retrieval failure preserves manual input in the demo',async({page})=>{
+ await page.route(/\/(?:__)?booth\/preview\?/,route=>route.fulfill({status:502,contentType:'application/json',headers:{'Access-Control-Allow-Origin':'*'},body:JSON.stringify({code:'BOOTH_FETCH_FAILED',message:'商品情報を取得できませんでした。',fieldErrors:[]})}));
+ await page.goto('./#/scenarios/new');await page.getByLabel('シナリオ名',{exact:true}).fill('手入力の作品');await page.getByText('BOOTHから入力を補助',{exact:true}).click();await page.getByLabel('BOOTHの商品URL',{exact:true}).fill('https://booth.pm/ja/items/3403696');await page.getByRole('button',{name:'情報を取得',exact:true}).click();
+ await expect(page.getByRole('alert')).toContainText('商品情報を取得できませんでした。');await expect(page.getByLabel('シナリオ名',{exact:true})).toHaveValue('手入力の作品');expect(await page.evaluate(()=>localStorage.getItem('takukairo-demo-v1'))).toBeNull();
+});
+
 test('a static subpath opens without login, with all trailers and no API calls', async ({page, context}) => {
   const errors: string[] = [], requests: string[] = [];
   page.on('pageerror', e => errors.push(e.message));
@@ -93,11 +121,13 @@ test('secondary gallery information is quiet until pointer or keyboard focus, wi
   } finally { await touch.close(); }
 });
 
-test('No29 centers every row after sorting, filtering and viewport changes', async ({page, context}) => {
+test('No29 centers every row after sorting, filtering and viewport changes', async ({page, context, browserName}) => {
   // Reproduce CI's delayed controlled-input updates instead of relying on a fast renderer.
   test.setTimeout(60000);
-  const renderer = await context.newCDPSession(page);
-  await renderer.send('Emulation.setCPUThrottlingRate', {rate: 6});
+  if (browserName === 'chromium') {
+    const renderer = await context.newCDPSession(page);
+    await renderer.send('Emulation.setCPUThrottlingRate', {rate: 6});
+  }
   const names = createSeed().scenarios.map(scenario => scenario.name);
   const expectedNames = {
     NAME: [...names].sort((a, b) => a.localeCompare(b, 'ja')),

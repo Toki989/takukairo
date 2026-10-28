@@ -3,6 +3,7 @@ import {Link, NavLink, Outlet} from 'react-router-dom';
 import {mutate} from '../api/client';
 import {ConfirmContext, Dialog, ErrorPanel, useErrors} from '../components/common';
 import {storageNotice} from './store';
+import {demoBoothEndpoint} from './booth';
 
 export function DemoChrome() {
   const [about, setAbout] = useState(false), [busy, setBusy] = useState(false);
@@ -17,7 +18,7 @@ export function DemoChrome() {
     <aside className="demo-banner" aria-label="ブラウザ体験版"><div><strong>卓回廊 <span>BROWSER DEMO</span></strong><p>ログイン不要。あなただけのブラウザで、TRPGの記憶を並べる体験を。</p></div><div className="demo-actions"><button className="quiet" onClick={() => setAbout(true)}>体験版について</button><button disabled={busy} onClick={() => void reset()}>サンプルに戻す</button></div></aside>
     {storageNotice && <p className="demo-storage" role="status">{storageNotice}</p>}
     <ErrorPanel error={error}/>
-    {about && <Dialog title="卓回廊のブラウザ体験版" onClose={() => setAbout(false)}><p>TRPGのシナリオ、遊んだ卓、PCをつなぎ、物語の記憶を振り返る個人のギャラリーです。</p><ul><li>アカウント作成・ログインは不要です。</li><li>検索、お気に入り、シナリオ・PC・人物・卓の追加と編集、定型CSVの登録を試せます。</li><li>変更はこの端末・ブラウザの保存領域に保存します。サーバーへのデータ送信や、ほかの閲覧者との共有はありません。</li><li>「サンプルに戻す」で体験データを初期化できます。ブラウザのサイトデータを消した場合も変更は失われます。</li><li>画像の追加はPNG・JPEG・WebPの1.5MB以下に対応します。</li><li>外部サービスの自動取得、本体のIMPORT推論、実ユーザー認証は体験版の対象外です。</li></ul><p><a href="https://github.com/Toki989/takukairo" target="_blank" rel="noopener noreferrer">GitHubでソースコードを見る ↗</a></p><button className="primary" onClick={() => setAbout(false)}>体験を続ける</button></Dialog>}
+    {about && <Dialog title="卓回廊のブラウザ体験版" onClose={() => setAbout(false)}><p>TRPGのシナリオ、遊んだ卓、PCをつなぎ、物語の記憶を振り返る個人のギャラリーです。</p><ul><li>アカウント作成・ログインは不要です。</li><li>検索、お気に入り、シナリオ・PC・人物・卓の追加と編集、定型CSVの登録を試せます。</li><li>追加・編集した記録はこの端末・ブラウザの保存領域に保存します。ほかの閲覧者とは共有しません。</li>{demoBoothEndpoint()&&<li>BOOTHの商品URLからシナリオ情報を取得できます。取得時は商品URLを情報取得用の処理へ送信します。シナリオの記録や追加画像は送信しません。</li>}<li>外部画像は埋め込みURLだけを保存し、表示時に画像配信元へ通信します。</li><li>「サンプルに戻す」で体験データを初期化できます。ブラウザのサイトデータを消した場合も変更は失われます。</li><li>画像のアップロードはPNG・JPEG・WebPの1.5MB以下に対応します。</li><li>本体のIMPORT推論、実ユーザー認証は体験版の対象外です。</li></ul><p><a href="https://github.com/Toki989/takukairo" target="_blank" rel="noopener noreferrer">GitHubでソースコードを見る ↗</a></p><button className="primary" onClick={() => setAbout(false)}>体験を続ける</button></Dialog>}
   </>;
 }
 

@@ -3,6 +3,7 @@ import type {Pc, Person, Profile, Scenario, TableDto} from '../api/types';
 import {readStore, writeStore, resetDemo, type DemoData} from './store';
 import profileData from './profiles.json';
 import type {ImportRow} from './csv';
+import {demoBoothPreview} from './booth';
 
 const profiles = profileData as Profile[];
 type Body = Record<string, any>;
@@ -42,10 +43,18 @@ function resolve(input: unknown) {
 function validateUrl(value: unknown, path: string) {
   const text = nullable(value);
   if (text) {
-    try { if (!['http:', 'https:'].includes(new URL(text).protocol)) throw new Error(); }
+    try { const url = new URL(text); if (text.length > 2048 || !['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw new Error(); }
     catch { fail(422, 'http または https のURLを入力してください。', path); }
   }
   return text;
+}
+function externalImage(db: DemoData, body: Body, previous: string | null = null) {
+  const url = validateUrl(body.externalImageUrl, '/externalImageUrl');
+  if (url && url !== previous && !db.externalImageConsentGiven) {
+    if (body.externalImageConsentAccepted !== true) fail(422, '外部画像の利用について確認してください。', '/externalImageConsentAccepted');
+    db.externalImageConsentGiven = true;
+  }
+  return url;
 }
 function tablePayload(db: DemoData, body: Body, scenarioId: number, existing?: TableDto): TableDto {
   const scenario = find(db.scenarios, scenarioId);
@@ -83,7 +92,7 @@ async function request(path: string, options: RequestInit): Promise<unknown> {
     return structuredClone(result);
   };
   if (path === '/csrf') return {token: 'browser-demo', headerName: 'X-DEMO', parameterName: '_csrf'};
-  if (path === '/session') return {authenticated: true, user: {id: 1, selfPerson: find(db.persons, db.selfPersonId), externalImageConsentGiven: false}};
+  if (path === '/session') return {authenticated: true, user: {id: 1, selfPerson: find(db.persons, db.selfPersonId), externalImageConsentGiven: !!db.externalImageConsentGiven}};
   if (path === '/demo/reset' && method === 'POST') { resetDemo(); return {}; }
   if (path === '/activity/summary') return {scenarioCount: db.scenarios.length, tableCount: db.tables.length,
     plParticipationCount: db.tables.flatMap(t => t.participations).filter(p => p.personId === db.selfPersonId && p.role === 'PL').length,
@@ -133,7 +142,7 @@ async function request(path: string, options: RequestInit): Promise<unknown> {
       }
       const name = required(body.name, '/name', kind === 'pcs' ? 'PC名' : 'シナリオ名');
       if (kind === 'scenarios') {
-        const scenario: Scenario = {id: db.nextId++, version: 0, name, authorName: nullable(body.authorName), sourceUrl: validateUrl(body.sourceUrl, '/sourceUrl'), gameSystem: nullable(body.gameSystem), externalImageUrl: null, image: null, favorite: false, tableCount: 0, createdAt: new Date().toISOString()};
+        const scenario: Scenario = {id: db.nextId++, version: 0, name, authorName: nullable(body.authorName), sourceUrl: validateUrl(body.sourceUrl, '/sourceUrl'), gameSystem: nullable(body.gameSystem), externalImageUrl: externalImage(db, body), image: null, favorite: false, tableCount: 0, createdAt: new Date().toISOString()};
         db.scenarios.push(scenario); return save(scenario);
       }
       if (!body.personId) fail(422, '現在PLを選んでください。', '/personId');
@@ -186,7 +195,7 @@ async function request(path: string, options: RequestInit): Promise<unknown> {
     if (method === 'PATCH') {
       version(item, body.version); item.name = required(body.name, '/name', kind === 'pcs' ? 'PC名' : 'シナリオ名');
       if (kind === 'pcs') { const pc = item as Pc; pc.characterSheetUrl = validateUrl(body.characterSheetUrl, '/characterSheetUrl'); pc.systemSettings = body.systemSettings ?? []; }
-      else { const s = item as Scenario; s.authorName = nullable(body.authorName); s.gameSystem = nullable(body.gameSystem); s.sourceUrl = validateUrl(body.sourceUrl, '/sourceUrl'); }
+      else { const s = item as Scenario; s.authorName = nullable(body.authorName); s.gameSystem = nullable(body.gameSystem); s.sourceUrl = validateUrl(body.sourceUrl, '/sourceUrl'); if (Object.hasOwn(body, 'externalImageUrl')) s.externalImageUrl = externalImage(db, body, s.externalImageUrl); }
       item.version++; return save(pack(item));
     }
     return pack(item);
@@ -240,6 +249,11 @@ async function request(path: string, options: RequestInit): Promise<unknown> {
 // Serialize local read/modify/write operations, including image reads.
 let pending: Promise<unknown> = Promise.resolve();
 export function demoRequest<T>(path: string, options: RequestInit): Promise<T> {
+  // Metadata retrieval never holds the local data mutation queue while waiting for the network.
+  if (path === '/booth/preview' && options.method === 'POST') {
+    const body = typeof options.body === 'string' ? JSON.parse(options.body) : {};
+    return demoBoothPreview(body.url, options.signal ?? undefined) as Promise<T>;
+  }
   const next = pending.then(() => request(path, options));
   pending = next.catch(() => undefined);
   return next.then(value => structuredClone(value) as T);

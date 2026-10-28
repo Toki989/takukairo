@@ -1,0 +1,68 @@
+name: Mac compatibility
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mac:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: '24.21.0'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '25'
+      - name: Launcher and native image codec tests
+        run: |
+          uname -m
+          node --test scripts/mac-local.test.mjs
+          sh backend/mvnw -B -ntp -f backend/pom.xml -Dtest=LimitsParserImageTest test
+      - name: Create isolated local PostgreSQL for launcher smoke
+        run: |
+          brew install postgresql@18
+          mkdir -p .runtime
+          PG_BIN="$(brew --prefix postgresql@18)/bin"
+          "$PG_BIN/initdb" -D "$PWD/.runtime/mac-ci-pgdata" -U takukairo -A trust --encoding=UTF8 --locale=C
+          "$PG_BIN/pg_ctl" -D "$PWD/.runtime/mac-ci-pgdata" -l "$PWD/.runtime/mac-ci-postgres.log" -o '-h 127.0.0.1 -p 55432' -w start
+          "$PG_BIN/createdb" -h 127.0.0.1 -p 55432 -U takukairo takukairo
+      - name: Start, reopen, verify, and stop the full application
+        env:
+          DB_URL: jdbc:postgresql://127.0.0.1:55432/takukairo
+          BOOTH_LIVE_FETCH: 'false'
+        run: |
+          node scripts/mac-local.mjs start --external-db --no-browser
+          cp .runtime/mac-processes.json .runtime/mac-processes-before-reopen.json
+          node scripts/mac-local.mjs start --external-db --no-browser
+          cmp .runtime/mac-processes-before-reopen.json .runtime/mac-processes.json
+          curl --fail http://localhost:5173/api/session
+          node scripts/mac-local.mjs stop
+          node scripts/mac-local.mjs stop
+      - name: WebKit and Chromium demo checks
+        working-directory: frontend
+        run: |
+          npm run typecheck
+          npm run build:demo
+          npx playwright install webkit chromium
+          npx playwright test --config playwright.mac.config.ts
+          node ../scripts/mac-local.mjs demo --check-only
+      - name: Cleanup
+        if: always()
+        run: |
+          node scripts/mac-local.mjs stop
+          PG_BIN="$(brew --prefix postgresql@18)/bin"
+          if [ -f .runtime/mac-ci-pgdata/PG_VERSION ]; then
+            "$PG_BIN/pg_ctl" -D "$PWD/.runtime/mac-ci-pgdata" -m fast -w stop
+          fi

@@ -1,4 +1,6 @@
 app:
+  booth:
+    live-fetch: false
   rate-limit: false
   scheduling:
     enabled: false

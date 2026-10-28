@@ -6,6 +6,7 @@ export interface DemoData {
   schemaVersion: 1;
   nextId: number;
   selfPersonId: number;
+  externalImageConsentGiven?: boolean;
   persons: Person[];
   scenarios: Scenario[];
   pcs: Pc[];
